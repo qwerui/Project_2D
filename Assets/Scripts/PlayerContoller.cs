@@ -27,7 +27,7 @@ public class PlayerContoller : MonoBehaviour
     private BoxCollider2D hitBox;
     [SerializeField] private float slopeCheckDistance;
     [SerializeField] private LayerMask groundLayer;
-    private PlayerStatus stat = new PlayerStatus();
+    public PlayerStatus stat = new PlayerStatus();
 
     //플레이어 이동 관련 수치(Inspector에서 조정)
     [SerializeField] private float moveSpeed = 5.0f;
@@ -115,7 +115,6 @@ public class PlayerContoller : MonoBehaviour
                 else
                     rigid.velocity = new Vector2(rigid.velocity.x,rigid.velocity.y);
             }
-            Debug.Log(isDamaged);
     }
 
     //점프 기능
@@ -194,7 +193,7 @@ public class PlayerContoller : MonoBehaviour
     //대쉬 기능
     private void Dash()
     {
-        if(Input.GetKeyDown(KeyCode.C))
+        if(Input.GetKeyDown(KeyCode.C)&&!isDash)
         {
             currentDashTimer = startDashTimer;
             rigid.velocity = Vector2.zero;
@@ -204,9 +203,11 @@ public class PlayerContoller : MonoBehaviour
         {
             rigid.velocity = transform.right * moveDirection * dashSpeed;
             currentDashTimer -= Time.deltaTime;
+            Physics2D.IgnoreLayerCollision(13,14, true);
             if(currentDashTimer <= 0)
             {
                 rigid.velocity = Vector2.zero;
+                Physics2D.IgnoreLayerCollision(13,14, false);
                 isDash=false;
             }
         }
@@ -285,6 +286,8 @@ public class PlayerContoller : MonoBehaviour
         int count = 0;
         while(count < 10)
         {
+            if(count >= 5)
+                isDamaged = false;
             yield return new WaitForSeconds(stat.NoDamage);
             count++;
         }
