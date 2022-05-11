@@ -155,7 +155,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  hitbox: {fileID: 0}
+  hitbox: {fileID: 1810556453}
 --- !u!95 &2168992160295121765
 Animator:
   serializedVersion: 3

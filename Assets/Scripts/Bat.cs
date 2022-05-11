@@ -22,9 +22,21 @@ public class Bat : EnemyClass
     {
 
     }
+    public override void Think()
+    {
+
+    }
     public override void Move()
     {
         rigid.velocity= new Vector2(moveSpeed, 0);
         ani.SetBool("Run", true);
+    }
+    public override void Chase()
+    {
+
+    }
+    public override IEnumerator PosDiff()
+    {
+        yield return null;
     }
 }
