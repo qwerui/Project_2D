@@ -18,7 +18,7 @@ TagManager:
   - 
   - 
   - 
-  - ChaseCircle
+  - 
   - Enemy
   - Player
   - 
@@ -36,7 +36,7 @@ TagManager:
   - 
   - 
   - 
-  - Camera
+  - 
   - 
   m_SortingLayers:
   - name: Default

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Rat : EnemyClass
 {
+    private int nextMove;
+
     private void Awake() {
         Think();
-        StartCoroutine("PosDiff");
     }
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -21,17 +22,12 @@ public class Rat : EnemyClass
     }
     private void FixedUpdate() {
         PlatformCheck();
-        WallCheck();
-        if(SetOnChase(4.0f))
-            Chase();
-        else
-            Move();
+        Move();    
     }
     public override void Attack()
     {
 
     }
-    
     public override void Move()
     {
         if(nextMove != 0)
@@ -46,29 +42,20 @@ public class Rat : EnemyClass
         rigid.velocity= new Vector2(moveSpeed*nextMove, 0);
         ani.SetBool("Run", isMoving);
     }
-    public override void Think()
-    {
+    void Think(){
         nextMove = Random.Range(-1,2);
         float time = Random.Range(2f, 5f);
-        Invoke("Think", time);
+        Invoke("Think", time); //매개변수로 받은 함수를 time초의 딜레이를 부여하여 재실행 
     }
-    public override void Chase()
+    void PlatformCheck()
     {
-        isMoving = true;
-        if(posDiff<0)
-            nextMove = 1;
-        else
-            nextMove = -1;
-        transform.localScale = new Vector3(nextMove,1,1);
-        rigid.velocity= new Vector2(moveSpeed*nextMove, 0);
-        ani.SetBool("Run", isMoving);
-    }
-    public override IEnumerator PosDiff()
-    {
-        while(true)
-        {
-            posDiff = transform.position.x - player.transform.position.x;
-            yield return new WaitForSeconds(1f);
+        Vector2 frontVec = new Vector2(rigid.position.x + nextMove, rigid.position.y);
+        Debug.DrawRay(frontVec, Vector3.down*1.5f, new Color(0,1,0));
+        RaycastHit2D raycast = Physics2D.Raycast(frontVec, Vector3.down,1.5f,groundLayer);
+        if(raycast.collider == null){
+            nextMove= nextMove*(-1); 
+            CancelInvoke(); //think를 잠시 멈춘 후 재실행
+            Invoke("Think",5); 
         }
-    }
+    }       
 } 
