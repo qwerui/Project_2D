@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Rat : EnemyClass
 {
-    private void Awake() {
+    private void Awake() 
+    {
         Think();
         StartCoroutine("PosDiff");
     }
     // Start is called before the first frame update
     void Start()
     {
-
+        EnemyInit();
     }
 
     // Update is called once per frame
@@ -19,7 +20,8 @@ public class Rat : EnemyClass
     {
 
     }
-    private void FixedUpdate() {
+    private void FixedUpdate() 
+    {
         PlatformCheck();
         WallCheck();
         if(SetOnChase(4.0f))
@@ -27,12 +29,19 @@ public class Rat : EnemyClass
         else
             Move();
     }
-    public override void Attack()
+    protected override void EnemyInit()
+    {
+        hp = 10;
+        atk = 10;
+        def = 0;
+        moveSpeed = 3.0f;
+    }
+    protected override void Attack()
     {
 
     }
     
-    public override void Move()
+    protected override void Move()
     {
         if(nextMove != 0)
         {
@@ -46,13 +55,13 @@ public class Rat : EnemyClass
         rigid.velocity= new Vector2(moveSpeed*nextMove, 0);
         ani.SetBool("Run", isMoving);
     }
-    public override void Think()
+    protected override void Think()
     {
         nextMove = Random.Range(-1,2);
         float time = Random.Range(2f, 5f);
         Invoke("Think", time);
     }
-    public override void Chase()
+    protected override void Chase()
     {
         isMoving = true;
         if(posDiff<0)
@@ -63,7 +72,7 @@ public class Rat : EnemyClass
         rigid.velocity= new Vector2(moveSpeed*nextMove, 0);
         ani.SetBool("Run", isMoving);
     }
-    public override IEnumerator PosDiff()
+    protected override IEnumerator PosDiff()
     {
         while(true)
         {

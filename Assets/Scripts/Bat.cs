@@ -7,7 +7,7 @@ public class Bat : EnemyClass
     // Start is called before the first frame update
     void Start()
     {
-
+        EnemyInit();
     }
 
     // Update is called once per frame
@@ -15,27 +15,35 @@ public class Bat : EnemyClass
     {
         
     }
-    private void FixedUpdate() {
+    private void FixedUpdate() 
+    {
         Move();    
     }
-    public override void Attack()
+    protected override void EnemyInit()
+    {
+        hp = 10;
+        atk = 100;
+        def = 0;
+        moveSpeed = 3.0f;
+    }
+    protected override void Attack()
     {
 
     }
-    public override void Think()
+    protected override void Think()
     {
 
     }
-    public override void Move()
+    protected override void Move()
     {
         rigid.velocity= new Vector2(moveSpeed, 0);
         ani.SetBool("Run", true);
     }
-    public override void Chase()
+    protected override void Chase()
     {
 
     }
-    public override IEnumerator PosDiff()
+    protected override IEnumerator PosDiff()
     {
         yield return null;
     }

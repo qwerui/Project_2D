@@ -4,39 +4,41 @@ using UnityEngine;
 
 public abstract class EnemyClass : MonoBehaviour
 {
-    public int hp;
-    public int atk;
-    public int def;
-    public float moveSpeed;
-    public Animator ani;
-    public Rigidbody2D rigid;
-    public LayerMask groundLayer;
-    public BoxCollider2D hitbox;
-    public GameObject player;
+    [SerializeField] protected int hp;
+    [SerializeField] protected int atk;
+    [SerializeField] protected int def;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected Animator ani;
+    [SerializeField] protected Rigidbody2D rigid;
+    [SerializeField] protected LayerMask groundLayer;
+    [SerializeField] protected BoxCollider2D hitbox;
+    [SerializeField] protected GameObject player;
 
     protected int nextMove;
     protected float posDiff;
 
     protected bool isMoving;
 
-    public abstract void Move();
-    public abstract void Attack();
-    public abstract void Think();
-    public abstract void Chase();
-    public abstract IEnumerator PosDiff();
+    protected abstract void EnemyInit();
+    protected abstract void Move(); //적 이동
+    protected abstract void Attack(); //적 공격
+    protected abstract void Think(); //적 이동 AI
+    protected abstract void Chase(); //적 추적
+    protected abstract IEnumerator PosDiff(); //적 추적시 방향 전환 속도 조절 (적과 캐릭터의 좌표 차이)
 
-    public void Hit()
+    protected void Hit()
     {
         ani.SetTrigger("Hit");
     }
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision) 
+    {
         
         if(collision.gameObject.tag == "Player"){
-            player.GetComponent<PlayerContoller>().Damaged(this.transform.position);
+            player.GetComponent<PlayerContoller>().Damaged(this.transform.position, this.atk);
         }
 
     }
-    public bool SetOnChase(float radius)
+    protected bool SetOnChase(float radius)
     {
         if(Physics2D.OverlapCircle((Vector2)transform.position + hitbox.offset,radius,LayerMask.GetMask("Player")))
             return true;
@@ -44,7 +46,7 @@ public abstract class EnemyClass : MonoBehaviour
             return false;
     }
     
-    public void PlatformCheck()
+    protected void PlatformCheck()
     {
         Vector2 frontVec = new Vector2(rigid.position.x + nextMove, rigid.position.y);
         Debug.DrawRay(frontVec, Vector3.down*(hitbox.size.y+0.5f), new Color(0,1,0));
@@ -55,7 +57,7 @@ public abstract class EnemyClass : MonoBehaviour
             Invoke("Think",2); 
         }
     }
-    public void WallCheck()
+    protected void WallCheck()
     {
         Vector2 frontVec = hitbox.bounds.center;
         Debug.DrawRay(frontVec,new Vector2(nextMove, 0) * hitbox.size , new Color(0,1,0));
