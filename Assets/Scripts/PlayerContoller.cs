@@ -1,23 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerStatus
-{
-    //플레이어 상태 초기화
-    int hp = 100;
-    int hunger = 100;
-    int atk = 0;
-    int def = 0;
-    int gold = 0;
-    int redBall = 0;
-    int blueBall = 0;
-    int yellowBall = 0;
-    float noDamage = 0.1f;
-
-    //Setter, Getter
-    public float NoDamage{ get { return noDamage; } }
-}
+using UnityEngine.SceneManagement;
 
 public class PlayerContoller : MonoBehaviour
 {
@@ -25,9 +9,10 @@ public class PlayerContoller : MonoBehaviour
     private Animator ani;
     private Rigidbody2D rigid;
     private BoxCollider2D hitBox;
+    private SpriteRenderer spriteRenderer;
     [SerializeField] private float slopeCheckDistance;
     [SerializeField] private LayerMask groundLayer;
-    public PlayerStatus stat = new PlayerStatus();
+    PlayerStatus stat;
 
     //플레이어 이동 관련 수치(Inspector에서 조정)
     [SerializeField] private float moveSpeed = 5.0f;
@@ -55,9 +40,11 @@ public class PlayerContoller : MonoBehaviour
     private bool isMoving = false;
     private bool isOnSlope = false;
     private bool isDamaged = false;
+    private bool isDead = false;
 
-    private void Awake() {
-
+    private void Awake() 
+    {
+        stat  = new PlayerStatus();
     }
 
     private void Start()
@@ -65,18 +52,47 @@ public class PlayerContoller : MonoBehaviour
         ani = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         hitBox = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        PlayerInit();
+        StartCoroutine("Hungry");
+        StartCoroutine("DeadCheck");
     }
 
     private void Update()
     {
+        if(isDead)
+            return;
         Move();
         Jump();
         Crouch();
         Attack();    
     }
-    private void FixedUpdate() {
+    private void FixedUpdate() 
+    {
         SlopeCheck();
         onGround();
+    }
+
+    //플레이어 상태 변수 초기화
+    private void PlayerInit()
+    {
+        stat.setMaxHp(100);
+        stat.setHp(100);
+        stat.setAtk(0);
+        stat.setDef(0);
+        stat.setMaxHunger(100);
+        stat.setHunger(100);
+        stat.setGold(0);
+        stat.setRedBall(0);
+        stat.setBlueBall(0);
+        stat.setYellowBall(0);
+        stat.setNoDamage(0.1f);
+    }
+
+    //플레이어 상태 전달 (주로 UI에 사용 ex: 체력 바 등)
+    public PlayerStatus GetStat()
+    {
+        return stat;
     }
 
     //이동 기능
@@ -198,6 +214,9 @@ public class PlayerContoller : MonoBehaviour
             currentDashTimer = startDashTimer;
             rigid.velocity = Vector2.zero;
             isDash = true;
+
+            //대쉬 하면 공복치 감소
+            stat.setHunger(stat.getHunger()-5);
         }
         if(isDash)
         {
@@ -213,6 +232,7 @@ public class PlayerContoller : MonoBehaviour
         }
         ani.SetBool("Dash", isDash);
     }
+
     //경사로 체크
     private void SlopeCheck()
     {
@@ -267,17 +287,32 @@ public class PlayerContoller : MonoBehaviour
     }
 
     //피격 판정
-    public void Damaged(Vector2 enemyPosition)
+    public void Damaged(Vector2 enemyPosition, int damage)
     {
-        ani.SetTrigger("Damaged");
-        isDamaged = true;
-        rigid.velocity = Vector2.zero;
-        if(enemyPosition.x > transform.position.x)
-            rigid.AddForce(new Vector2(-5.0f,10.0f), ForceMode2D.Impulse);
+        if(!isDead) //플레이어가 죽어도 피격되는 현상 제거
+        {
+            ani.SetTrigger("Damaged"); //피격 애니메이션 트리거
+            isDamaged = true; //피격 동작 중 (조작 불능)
+
+            //체력 감소
+            int finalDamage = stat.getHp() - (damage - stat.getDef());
+            stat.setHp(finalDamage);
+
+            //넉백
+            rigid.velocity = Vector2.zero;
+            if(enemyPosition.x > transform.position.x)
+                rigid.AddForce(new Vector2(-5.0f,10.0f), ForceMode2D.Impulse);
+            else
+                rigid.AddForce(new Vector2(5.0f,10.0f), ForceMode2D.Impulse);
+        
+            //적과 충돌 방지로 무적 구현
+            Physics2D.IgnoreLayerCollision(13,14, true);
+            StartCoroutine("Unbeatable");
+        }
         else
-            rigid.AddForce(new Vector2(5.0f,10.0f), ForceMode2D.Impulse);
-        Physics2D.IgnoreLayerCollision(13,14, true);
-        StartCoroutine("Unbeatable");
+        {
+            Physics2D.IgnoreLayerCollision(13,14, true); //플레이어가 죽었을 때 적과 충돌 방지
+        }
     }
 
     //무적 판정
@@ -286,12 +321,53 @@ public class PlayerContoller : MonoBehaviour
         int count = 0;
         while(count < 10)
         {
+            //무적 시간의 반 만큼 조작 가능(count의 2분의 1)
             if(count >= 5)
                 isDamaged = false;
-            yield return new WaitForSeconds(stat.NoDamage);
+            
+            //무적 시간중 깜빡거림
+            if(count % 2 == 0)
+                spriteRenderer.color = new Color32(255,255,255,90);
+            else
+                spriteRenderer.color = new Color32(255,255,255,255);
+
+            yield return new WaitForSeconds(stat.getNoDamage()); // 무적시간은 noDamage의 10배
             count++;
         }
-        Physics2D.IgnoreLayerCollision(13,14, false);
+        spriteRenderer.color = new Color32(255,255,255,255); //투명도 원상 복귀
+        Physics2D.IgnoreLayerCollision(13,14, false); //피격 가능
         yield return null;
+    }
+
+    // 공복치 감소
+    private IEnumerator Hungry()
+    {
+        while(true)
+        {
+            stat.setHunger(stat.getHunger()-1);
+            yield return new WaitForSeconds(10.0f); // 공복치 감소 주기
+        }
+    }
+
+    // 플레이어 죽음
+    private IEnumerator DeadCheck()
+    {
+        while(true)
+        {
+            if(stat.getHp() <= 0 || stat.getHunger() <= 0)
+            {
+                isDead = true;
+                isCrouch = false;
+                isJumping = false;
+                isMoving = false;
+                
+                rigid.velocity = Vector2.zero;
+                ani.SetTrigger("Dead");
+                yield return new WaitForSeconds(2);
+                GameObject.Find("GameDirector").GetComponent<GameDirector>().GameOver();
+                yield break;
+            }
+            yield return new WaitForEndOfFrame();
+        }
     }
 }
