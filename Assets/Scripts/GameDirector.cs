@@ -13,8 +13,24 @@ public class GameDirector : MonoBehaviour
     Image hungerBar;
     RectTransform gameOverScreenPos;
 
+    Text redBall;
+    Text blueBall;
+    Text yellowBall;
+    Text atk;
+    Text def;
+    Text gold;
+
+    private void Awake() {
+        redBall = GameObject.Find("redCount").GetComponent<Text>();
+        blueBall = GameObject.Find("blueCount").GetComponent<Text>();
+        yellowBall = GameObject.Find("yellowCount").GetComponent<Text>();
+        atk = GameObject.Find("Atk").GetComponent<Text>();
+        def = GameObject.Find("Def").GetComponent<Text>();
+        gold = GameObject.Find("goldCount").GetComponent<Text>();
+    }
     private void Start() 
     {
+        GameObject.Find("Inventory").SetActive(false);
         player = GameObject.Find("Player").GetComponent<PlayerContoller>().GetStat();
         healthText = GameObject.Find("HealthText").GetComponent<Text>();
         hpBar = GameObject.Find("HealthBar").GetComponent<Image>();
@@ -25,6 +41,7 @@ public class GameDirector : MonoBehaviour
 
     private void LateUpdate() {
         StatusController();
+        InventoryTextController();
     }
 
     // 체력, 공복치 막대 업데이트
@@ -55,6 +72,7 @@ public class GameDirector : MonoBehaviour
     {
         StartCoroutine("ScreenDown");
     }
+
     public IEnumerator ScreenDown()
     {
         while(gameOverScreenPos.anchoredPosition.y > -180)
@@ -65,5 +83,15 @@ public class GameDirector : MonoBehaviour
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("GameOverScene");
         yield return null;
+    }
+
+    public void InventoryTextController()
+    {
+        redBall.text = player.getRedBall().ToString();
+        blueBall.text = player.getBlueBall().ToString();
+        yellowBall.text = player.getYellowBall().ToString();
+        gold.text = player.getGold().ToString();
+        atk.text = "ATK : "+player.getAtk().ToString();
+        def.text = "DEF : "+player.getDef().ToString();
     }
 }
