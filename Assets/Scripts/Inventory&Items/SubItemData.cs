@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "SubItemData", menuName = "Project_2D/SubItemData", order = 3)]
 public class SubItemData : ItemData {
-      // 효과량(회복량 등)
-    public float Value => _value;
-    [SerializeField] private float _value;
-    public override Item CreateItem()
+    public override Item CreateItem(UnityEvent itemEvent)
     {
-        return new SubItem(this);
+        return new SubItem(this, itemEvent);
     }
 }

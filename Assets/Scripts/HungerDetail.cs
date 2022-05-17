@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class HungerDetail : MonoBehaviour
 {
     PlayerStatus player;
+    [SerializeField]GameObject playerObject;
     Text hungerDetail;
     private void Start() {
-        player = GameObject.Find("Player").GetComponent<PlayerContoller>().GetStat();
+        player = playerObject.GetComponent<PlayerContoller>().GetStat();
         hungerDetail = GetComponent<Text>();
     }
     private void LateUpdate() {

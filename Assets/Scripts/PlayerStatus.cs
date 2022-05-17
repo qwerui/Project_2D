@@ -15,6 +15,8 @@ public class PlayerStatus
     int redBall;
     int blueBall;
     int yellowBall;
+	int level;
+	int experience;
     float noDamage;
 
     //Getter, Setter
@@ -25,7 +27,7 @@ public class PlayerStatus
 
 	public void setHp(int hp) 
     {
-		this.hp = hp;
+		this.hp = Mathf.Clamp(hp, 0, this.maxHp);
 	}
 
 	public int getMaxHp() 
@@ -45,7 +47,7 @@ public class PlayerStatus
 
 	public void setHunger(int hunger) 
     {
-		this.hunger = hunger;
+		this.hunger = Mathf.Clamp(hunger, 0, this.maxHunger);
 	}
 
     public int getMaxHunger() 
@@ -126,5 +128,20 @@ public class PlayerStatus
 	public void setNoDamage(float noDamage) 
     {
 		this.noDamage = noDamage;
+	}
+	public int getLevel() {
+		return this.level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getExperience() {
+		return this.experience;
+	}
+
+	public void setExperience(int experience) {
+		this.experience = experience;
 	}
 }

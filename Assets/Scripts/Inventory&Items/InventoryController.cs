@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InventoryController : MonoBehaviour
 {
@@ -119,7 +120,7 @@ public class InventoryController : MonoBehaviour
     }
 
     // 아이템 획득
-    public int Add(ItemData itemData, int amount = 1)
+    public int Add(ItemData itemData, UnityEvent itemEvent, int amount = 1)
     {
         int index;
 
@@ -164,7 +165,7 @@ public class InventoryController : MonoBehaviour
                     else
                     {
                         // 새로운 아이템 생성
-                        SubItem ci = ciData.CreateItem() as SubItem;
+                        SubItem ci = ciData.CreateItem(itemEvent) as SubItem;
                         ci.SetAmount(amount);
                         // 슬롯에 추가
                         _items[index] = ci;
@@ -184,7 +185,7 @@ public class InventoryController : MonoBehaviour
                 if (index != -1)
                 {
                     // 아이템을 생성하여 슬롯에 추가
-                    _items[index] = itemData.CreateItem();
+                    _items[index] = itemData.CreateItem(itemEvent);
                     amount = 0;
 
                     UpdateSlot(index);
@@ -205,7 +206,7 @@ public class InventoryController : MonoBehaviour
                 }
 
                 // 아이템을 생성하여 슬롯에 추가
-                _items[index] = itemData.CreateItem();
+                _items[index] = itemData.CreateItem(itemEvent);
 
                 UpdateSlot(index);
             }
@@ -276,5 +277,10 @@ public class InventoryController : MonoBehaviour
         {
             UpdateSlot(index);
         }
+    }
+
+    public Item ReturnItem(int index)
+    {
+        return _items[index];
     }
 }
