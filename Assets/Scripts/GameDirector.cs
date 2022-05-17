@@ -20,22 +20,33 @@ public class GameDirector : MonoBehaviour
     Text def;
     Text gold;
 
+    [SerializeField] GameObject[] Objects;
+    /*
+        0~2  빨, 파, 노 구슬
+        3~4  공격력, 방어력
+        5    골드 숫자
+        6    인벤토리
+        7    플레이어
+        8~10 상태창 (체력 숫자, 체력 바, 공복치 바)
+        11   게임오버 화면 전환을 위한 이미지
+    */
+
     private void Awake() {
-        redBall = GameObject.Find("redCount").GetComponent<Text>();
-        blueBall = GameObject.Find("blueCount").GetComponent<Text>();
-        yellowBall = GameObject.Find("yellowCount").GetComponent<Text>();
-        atk = GameObject.Find("Atk").GetComponent<Text>();
-        def = GameObject.Find("Def").GetComponent<Text>();
-        gold = GameObject.Find("goldCount").GetComponent<Text>();
+        redBall = Objects[0].GetComponent<Text>();
+        blueBall = Objects[1].GetComponent<Text>();
+        yellowBall = Objects[2].GetComponent<Text>();
+        atk = Objects[3].GetComponent<Text>();
+        def = Objects[4].GetComponent<Text>();
+        gold = Objects[5].GetComponent<Text>();
     }
     private void Start() 
     {
-        GameObject.Find("Inventory").SetActive(false);
-        player = GameObject.Find("Player").GetComponent<PlayerContoller>().GetStat();
-        healthText = GameObject.Find("HealthText").GetComponent<Text>();
-        hpBar = GameObject.Find("HealthBar").GetComponent<Image>();
-        hungerBar = GameObject.Find("HungerBar").GetComponent<Image>();
-        gameOverScreenPos = GameObject.Find("GameOverScreen").GetComponent<Image>().GetComponent<RectTransform>();
+        Objects[6].SetActive(false);
+        player = Objects[7].GetComponent<PlayerContoller>().GetStat();
+        healthText = Objects[8].GetComponent<Text>();
+        hpBar = Objects[9].GetComponent<Image>();
+        hungerBar = Objects[10].GetComponent<Image>();
+        gameOverScreenPos = Objects[11].GetComponent<Image>().GetComponent<RectTransform>();
         StartCoroutine("HealthTextController");
     }
 
@@ -70,6 +81,7 @@ public class GameDirector : MonoBehaviour
     
     public void GameOver()
     {
+        Objects[11].SetActive(true); //게임 오버 스크린 활성화
         StartCoroutine("ScreenDown");
     }
 

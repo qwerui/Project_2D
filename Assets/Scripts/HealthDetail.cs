@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class HealthDetail : MonoBehaviour
 {
     PlayerStatus player;
+    [SerializeField] GameObject playerObject;
     Text healthDetail;
     private void Start() {
-        player = GameObject.Find("Player").GetComponent<PlayerContoller>().GetStat();
+        player = playerObject.GetComponent<PlayerContoller>().GetStat();
         healthDetail = GetComponent<Text>();
     }
     private void LateUpdate() {

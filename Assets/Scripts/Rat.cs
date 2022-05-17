@@ -34,6 +34,7 @@ public class Rat : EnemyClass
         hp = 10;
         atk = 10;
         def = 0;
+        experience = 1;
         moveSpeed = 3.0f;
     }
     protected override void Attack()

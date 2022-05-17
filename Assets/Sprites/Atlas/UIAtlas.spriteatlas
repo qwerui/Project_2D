@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: InventoryAtlas
+  m_Name: UIAtlas
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -20,28 +20,31 @@ SpriteAtlas:
       readable: 0
       crunchedCompression: 0
       sRGB: 1
-    platformSettings: []
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 0
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
     packingSettings:
       serializedVersion: 2
       padding: 4
       blockOffset: 1
       allowAlphaSplitting: 0
-      enableRotation: 1
-      enableTightPacking: 1
+      enableRotation: 0
+      enableTightPacking: 0
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
-    - {fileID: 2800000, guid: 072967cf8d5b6d144a26749d7cf650b7, type: 3}
-    - {fileID: 2800000, guid: a107c5d6d51615b44b652391ccff5576, type: 3}
-    - {fileID: 2800000, guid: ae02891a989e5f04b9fbf2d07c4ddf14, type: 3}
-    - {fileID: 2800000, guid: 853edf63d95fe614a9d77387e1e5204f, type: 3}
-    - {fileID: 2800000, guid: 5fa4b9b8a58580046badc9131daf2bba, type: 3}
-    - {fileID: 2800000, guid: d7cf9c6f7d16fc640ae7a7a7cd4afd15, type: 3}
-    - {fileID: 2800000, guid: ed9947fe98d77094ca465d43d202a6c6, type: 3}
-    - {fileID: 2800000, guid: ae02891a989e5f04b9fbf2d07c4ddf14, type: 3}
-    - {fileID: 2800000, guid: 562c782317dea244b9de6d4c9915b1e8, type: 3}
-    - {fileID: 2800000, guid: b93ad659505c40541bf204f86cd7f22b, type: 3}
+    - {fileID: 102900000, guid: f80da8429ca4aa34b9ea511ae19f498b, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -49,23 +52,37 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 562c782317dea244b9de6d4c9915b1e8, type: 3}
   - {fileID: 21300000, guid: 853edf63d95fe614a9d77387e1e5204f, type: 3}
+  - {fileID: 21300000, guid: 6b8de4253c7c8f649bfaed456e0cc28d, type: 3}
+  - {fileID: 21300000, guid: 60d3daa52b2aa174b97913e2e3db05ca, type: 3}
   - {fileID: 21300000, guid: a107c5d6d51615b44b652391ccff5576, type: 3}
+  - {fileID: 21300000, guid: e5630bf6042f89e47bb4ed1d21af8043, type: 3}
   - {fileID: 21300000, guid: 5fa4b9b8a58580046badc9131daf2bba, type: 3}
   - {fileID: 21300000, guid: b93ad659505c40541bf204f86cd7f22b, type: 3}
   - {fileID: 21300000, guid: ae02891a989e5f04b9fbf2d07c4ddf14, type: 3}
+  - {fileID: 21300000, guid: 08e77aca7712e054482ac39fd9a9cf8b, type: 3}
+  - {fileID: 21300000, guid: 5f698fab9c809644c835ef276bbd45e4, type: 3}
+  - {fileID: 21300000, guid: 0f744decdc51c6b44ae4f04812d3b1d0, type: 3}
   - {fileID: 21300000, guid: ed9947fe98d77094ca465d43d202a6c6, type: 3}
+  - {fileID: 21300000, guid: 2d6a3b5f877a6dc41a17bc59f7fe5f82, type: 3}
   - {fileID: 21300000, guid: d7cf9c6f7d16fc640ae7a7a7cd4afd15, type: 3}
   - {fileID: 21300000, guid: 072967cf8d5b6d144a26749d7cf650b7, type: 3}
   m_PackedSpriteNamesToIndex:
   - slot
   - exitButton
+  - healthBar
+  - statBar
   - armor
+  - goldSlot
   - blueBall
   - weapon
   - InventoryBackground
+  - MenuButton
+  - arrow
+  - hungerBar
   - yellowBall
+  - quickSlot
   - redBall
   - accessory
   m_RenderDataMap: {}
-  m_Tag: InventoryAtlas
+  m_Tag: UIAtlas
   m_IsVariant: 0

@@ -12,6 +12,7 @@ public class PlayerContoller : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     [SerializeField] private float slopeCheckDistance;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private GameObject GameDirector;
     PlayerStatus stat;
 
     //플레이어 이동 관련 수치(Inspector에서 조정)
@@ -345,7 +346,7 @@ public class PlayerContoller : MonoBehaviour
         while(true)
         {
             stat.setHunger(stat.getHunger()-1);
-            yield return new WaitForSeconds(10.0f); // 공복치 감소 주기
+            yield return new WaitForSeconds(5.0f); // 공복치 감소 주기
         }
     }
 
@@ -364,7 +365,7 @@ public class PlayerContoller : MonoBehaviour
                 rigid.velocity = Vector2.zero;
                 ani.SetTrigger("Dead");
                 yield return new WaitForSeconds(2);
-                GameObject.Find("GameDirector").GetComponent<GameDirector>().GameOver();
+                GameDirector.GetComponent<GameDirector>().GameOver();
                 yield break;
             }
             yield return new WaitForEndOfFrame();

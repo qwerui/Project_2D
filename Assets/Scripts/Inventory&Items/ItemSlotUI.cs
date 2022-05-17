@@ -12,12 +12,10 @@ public class ItemSlotUI : MonoBehaviour
     public bool HasItem => _iconImage.sprite != null;
     public bool IsAccessible => _isAccessibleSlot && _isAccessibleItem;
 
-    private InventoryUI _inventoryUI;
+    private InventoryPopupUI _inventoryPopupUI;
 
     private GameObject _iconGo;
     private GameObject _textGo;
-
-    private Image _slotImage;
 
     private bool _isAccessibleSlot = true; // 슬롯 접근가능 여부
     private bool _isAccessibleItem = true; // 아이템 접근가능 여부
@@ -36,13 +34,11 @@ public class ItemSlotUI : MonoBehaviour
 
     private void InitComponents()
     {
-        _inventoryUI = GetComponentInParent<InventoryUI>();
+        _inventoryPopupUI = GameObject.Find("ItemPopup").GetComponent<InventoryPopupUI>();
 
         // Game Objects
         _iconGo = transform.GetChild(0).gameObject;
         _textGo = _iconGo.transform.GetChild(0).gameObject;
-        // Images
-        _slotImage = GetComponent<Image>();
 
         // Deactive Icon
         HideIcon();
@@ -76,5 +72,11 @@ public class ItemSlotUI : MonoBehaviour
         _iconImage.sprite = null;
         HideIcon();
         HideText();
+    }
+
+    public void OpenItemPopup()
+    {
+        _inventoryPopupUI.ShowPanel();
+        _inventoryPopupUI.SetPopupItem(Index);
     }
 }

@@ -8,6 +8,7 @@ public abstract class EnemyClass : MonoBehaviour
     [SerializeField] protected int atk;
     [SerializeField] protected int def;
     [SerializeField] protected float moveSpeed;
+    [SerializeField] protected int experience;
     [SerializeField] protected Animator ani;
     [SerializeField] protected Rigidbody2D rigid;
     [SerializeField] protected LayerMask groundLayer;
