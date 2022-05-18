@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SubItemPrefab : MonoBehaviour
+public class ItemPrefab : MonoBehaviour
 {
     public ItemData data;
     public InventoryController inventory;
@@ -26,8 +26,18 @@ public class SubItemPrefab : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="Player")
         {
-            inventory.Add(data, itemEvent,amount);
-            Destroy(gameObject);
+            if(data.ItemType == ItemType.Passive)
+            {
+                itemEvent.Invoke();
+                Destroy(gameObject);
+            }
+            else
+            {
+                int remain = inventory.Add(data, itemEvent,amount);
+                if(remain == 0)
+                    Destroy(gameObject);
+            }
+            
         }
     }
 }

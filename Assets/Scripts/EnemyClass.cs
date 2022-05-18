@@ -35,7 +35,7 @@ public abstract class EnemyClass : MonoBehaviour
     {
         
         if(collision.gameObject.tag == "Player"){
-            player.GetComponent<PlayerContoller>().Damaged(this.transform.position, this.atk);
+            player.GetComponent<PlayerController>().Damaged(this.transform.position, this.atk);
         }
 
     }

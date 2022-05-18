@@ -9,7 +9,7 @@ public class HungerDetail : MonoBehaviour
     [SerializeField]GameObject playerObject;
     Text hungerDetail;
     private void Start() {
-        player = playerObject.GetComponent<PlayerContoller>().GetStat();
+        player = playerObject.GetComponent<PlayerController>().GetStat();
         hungerDetail = GetComponent<Text>();
     }
     private void LateUpdate() {

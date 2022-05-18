@@ -9,7 +9,7 @@ public class HealthDetail : MonoBehaviour
     [SerializeField] GameObject playerObject;
     Text healthDetail;
     private void Start() {
-        player = playerObject.GetComponent<PlayerContoller>().GetStat();
+        player = playerObject.GetComponent<PlayerController>().GetStat();
         healthDetail = GetComponent<Text>();
     }
     private void LateUpdate() {
