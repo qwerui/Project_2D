@@ -42,7 +42,7 @@ public class GameDirector : MonoBehaviour
     private void Start() 
     {
         Objects[6].SetActive(false);
-        player = Objects[7].GetComponent<PlayerContoller>().GetStat();
+        player = Objects[7].GetComponent<PlayerController>().GetStat();
         healthText = Objects[8].GetComponent<Text>();
         hpBar = Objects[9].GetComponent<Image>();
         hungerBar = Objects[10].GetComponent<Image>();

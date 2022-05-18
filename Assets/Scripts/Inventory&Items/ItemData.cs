@@ -29,6 +29,7 @@ public enum ItemType
     Armor,
     Accesory,
     Potion,
-    Subweapon
+    Subweapon,
+    Passive
 }
 

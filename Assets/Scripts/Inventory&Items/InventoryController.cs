@@ -283,4 +283,18 @@ public class InventoryController : MonoBehaviour
     {
         return _items[index];
     }
+    public void SetItem(int index, Item item)
+    {
+        _items[index] = item;
+    }
+    public bool AddUnequipItem(Item item)
+    {
+        int index = -1;
+        index = FindEmptySlotIndex(index + 1);
+        if(index == -1)
+            return false;
+        _items[index] = item;
+        UpdateSlot(index);
+        return true;
+    }
 }

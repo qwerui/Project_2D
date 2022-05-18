@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class InventoryPopupUI : MonoBehaviour
 {
     Item item;
+    ItemType itemType;
     InventoryController inventory;
 
     Image PopupImage;
@@ -13,12 +14,17 @@ public class InventoryPopupUI : MonoBehaviour
     Text PopupItemName;
     Text UseButtonText;
     GameObject SlotButton;
+    GameObject DropButton;
     QuickSlotUI quickSlot;
+    EquipSlotUI equipSlot;
 
     [SerializeField] GameObject _inventory;
     [SerializeField] GameObject player;
     [SerializeField] GameObject _quickSlotPotion;
     [SerializeField] GameObject _quickSlotWeapon;
+    [SerializeField] GameObject weaponSlot;
+    [SerializeField] GameObject armorSlot;
+    [SerializeField] GameObject acessorySlot;
 
     int Index;
 
@@ -30,6 +36,7 @@ public class InventoryPopupUI : MonoBehaviour
         PopupImage = transform.GetChild(0).gameObject.GetComponent<Image>();
         PopupText = transform.GetChild(1).gameObject.GetComponent<Text>();
         PopupItemName = transform.GetChild(2).gameObject.GetComponent<Text>();
+        DropButton = transform.GetChild(3).gameObject;
         SlotButton = transform.GetChild(4).gameObject;
         UseButtonText = transform.GetChild(5).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
     }
@@ -45,7 +52,9 @@ public class InventoryPopupUI : MonoBehaviour
         Index = index;
         item = inventory.ReturnItem(index);
         PopupImage.sprite = item.Data.IconSprite;
+        UseButtonText.fontSize = 14;
         PopupText.text = item.Data.Tooltip;
+        DropButton.SetActive(true);
         if(item is SubItem)
         {
             PopupItemName.text = item.Data.Name+"  (Stock : "+(item as SubItem).Amount+" )";
@@ -62,10 +71,49 @@ public class InventoryPopupUI : MonoBehaviour
 
     public void UseItem()
     {
+        if(Index == -1)
+        {
+            bool successfulAdd;
+            if(itemType == ItemType.Weapon)
+                equipSlot = weaponSlot.GetComponent<EquipSlotUI>();
+            else if(itemType == ItemType.Armor)
+                equipSlot = armorSlot.GetComponent<EquipSlotUI>();
+            else if(itemType == ItemType.Accesory)
+                equipSlot = acessorySlot.GetComponent<EquipSlotUI>();
+            successfulAdd = inventory.AddUnequipItem(item);
+            if(successfulAdd)
+                equipSlot.RemoveItem();
+            HidePanel();
+            return;
+        }
         if(item is SubItem)
         {
             (item as SubItem).Use();
         }
+        else
+        {
+            bool equipping = false;
+            if(item.Data.ItemType == ItemType.Weapon)
+            {
+                equipSlot = weaponSlot.GetComponent<EquipSlotUI>();
+
+            }
+            else if(item.Data.ItemType == ItemType.Armor)
+            {
+                equipSlot = armorSlot.GetComponent<EquipSlotUI>();
+            }
+            else if(item.Data.ItemType == ItemType.Accesory)
+            {
+                equipSlot = acessorySlot.GetComponent<EquipSlotUI>();
+            }
+            equipping = equipSlot.SetItem(item);
+            if(equipping)
+            {
+                item = equipSlot.SwapItem(item);
+                inventory.SetItem(Index,item);
+            }
+        }
+        inventory.Remove(Index);
         HidePanel();
         inventory.UpdateSlot(Index);
     }
@@ -77,9 +125,15 @@ public class InventoryPopupUI : MonoBehaviour
             SubItem tempItem = item as SubItem;
             GameObject prefab = Instantiate(tempItem.subItemData.DropItemPrefab) as GameObject;
             prefab.transform.position = (Vector2)player.transform.position + new Vector2(player.transform.localScale.x*1.2f,1.0f);
-            prefab.GetComponent<SubItemPrefab>().SetDrop(tempItem.Amount);
-            tempItem.SetAmount(0);
+            prefab.GetComponent<ItemPrefab>().SetDrop(tempItem.Amount);
         }
+        else
+        {
+            EquipItem tempItem = item as EquipItem;
+            GameObject prefab = Instantiate(tempItem.equipItemData.DropItemPrefab) as GameObject;
+            prefab.transform.position = (Vector2)player.transform.position + new Vector2(player.transform.localScale.x*1.2f,1.0f);
+        }
+        inventory.Remove(Index);
         HidePanel();
         inventory.UpdateSlot(Index);
     }
@@ -88,13 +142,25 @@ public class InventoryPopupUI : MonoBehaviour
         if(item.Data.ItemType == ItemType.Potion)
         {
             quickSlot = _quickSlotPotion.GetComponent<QuickSlotUI>();
-            quickSlot.SetQuickSlot(Index);
         }
         else
         {
             quickSlot = _quickSlotWeapon.GetComponent<QuickSlotUI>();
-            quickSlot.SetQuickSlot(Index);
         }
+        quickSlot.SetQuickSlot(Index);
         HidePanel();
+    }
+    public void ViewEquipItem(Item equippedItem, ItemType type)
+    {
+        Index = -1;
+        item = equippedItem;
+        itemType = type;
+        PopupImage.sprite = item.Data.IconSprite;
+        PopupText.text = item.Data.Tooltip;
+        PopupItemName.text = item.Data.Name;
+        UseButtonText.fontSize = 13;
+        UseButtonText.text = "UNEQUIP";
+        SlotButton.SetActive(false);
+        DropButton.SetActive(false);
     }
 }

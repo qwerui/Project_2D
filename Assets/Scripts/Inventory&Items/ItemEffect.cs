@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubItemEffect : MonoBehaviour
+public class ItemEffect : MonoBehaviour
 {
     PlayerStatus stat;
 
@@ -12,7 +12,7 @@ public class SubItemEffect : MonoBehaviour
     private void LinkPlayer()
     {
         if(stat==null)
-            stat = GameObject.Find("Player").GetComponent<PlayerContoller>().GetStat();
+            stat = GameObject.Find("Player").GetComponent<PlayerController>().GetStat();
     }
 
     public void RecoverHunger(int value)
