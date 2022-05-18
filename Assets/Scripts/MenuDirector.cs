@@ -11,8 +11,23 @@ public class MenuDirector : MonoBehaviour
         
     }
 
+
+
+
     public void StartBtnDown()
     {
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void SetBtnDown()
+    {
+        SceneManager.LoadScene("SettingScene");
+
+    }
+
+    public void RecBtnDown()
+    {
+        SceneManager.LoadScene("RecordScene");
+
     }
 }
