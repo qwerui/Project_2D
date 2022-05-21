@@ -52,7 +52,7 @@ public class InventoryPopupUI : MonoBehaviour
         Index = index;
         item = inventory.ReturnItem(index);
         PopupImage.sprite = item.Data.IconSprite;
-        UseButtonText.fontSize = 14;
+        UseButtonText.fontSize = 20;
         PopupText.text = item.Data.Tooltip;
         DropButton.SetActive(true);
         if(item is SubItem)

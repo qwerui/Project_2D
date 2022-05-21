@@ -102,7 +102,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -150,12 +150,14 @@ MonoBehaviour:
   atk: 0
   def: 0
   moveSpeed: 3
+  experience: 0
   ani: {fileID: 2168992160295121765}
   rigid: {fileID: 1810556454}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
   hitbox: {fileID: 1810556453}
+  player: {fileID: 0}
 --- !u!95 &2168992160295121765
 Animator:
   serializedVersion: 3

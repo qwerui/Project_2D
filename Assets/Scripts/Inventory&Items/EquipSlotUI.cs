@@ -51,8 +51,15 @@ public class EquipSlotUI : MonoBehaviour
         _iconImage.sprite = newItem.Data.IconSprite;
         return tempItem;
     }
-    public void WeaponAttack()
+    public EquipItem GetItem()
     {
-        Instantiate(item.equipItemData.WeaponEffect);
+<<<<<<< Updated upstream
+        return item as EquipItem;
+=======
+        if(item != null)
+        {
+            Instantiate(item.equipItemData.WeaponEffect);
+        }
+>>>>>>> Stashed changes
     }
 }

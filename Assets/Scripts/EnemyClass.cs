@@ -19,6 +19,7 @@ public abstract class EnemyClass : MonoBehaviour
     protected float posDiff;
 
     protected bool isMoving;
+    protected bool isDead = false;
 
     protected abstract void EnemyInit();
     protected abstract void Move(); //적 이동
@@ -27,9 +28,21 @@ public abstract class EnemyClass : MonoBehaviour
     protected abstract void Chase(); //적 추적
     protected abstract IEnumerator PosDiff(); //적 추적시 방향 전환 속도 조절 (적과 캐릭터의 좌표 차이)
 
-    protected void Hit()
+    protected void Hit(int damage)
     {
-        ani.SetTrigger("Hit");
+        hp -= damage - def;
+        if(hp<=0)
+            StartCoroutine("Dead");
+    }
+    protected IEnumerator Dead()
+    {
+        ani.SetTrigger("Death");
+        isDead = true;
+        moveSpeed = 0;
+        Destroy(GetComponent<BoxCollider2D>());
+        Destroy(GetComponent<Rigidbody2D>());
+        yield return new WaitForSeconds(1.0f);
+        Destroy(gameObject);
     }
     private void OnCollisionEnter2D(Collision2D collision) 
     {

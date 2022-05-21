@@ -169,9 +169,11 @@ MonoBehaviour:
   atk: 0
   def: 0
   moveSpeed: 3
+  experience: 0
   ani: {fileID: 26268950}
   rigid: {fileID: 26268953}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
-  hitbox: {fileID: 0}
+    m_Bits: 256
+  hitbox: {fileID: 26268955}
+  player: {fileID: 0}

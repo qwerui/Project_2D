@@ -22,4 +22,5 @@ MonoBehaviour:
   _red: 0
   _blue: 0
   _yellow: 0
-  _weaponEffect: {fileID: 3527242976177669466, guid: 588bd8f58cdb57348a4a523e8d79de8a, type: 3}
+  _weaponEffect: {fileID: 2737840414567516762, guid: c240f731f6faa7340972a0dbb9d2f2e0, type: 3}
+  _weaponHitSize: {x: 1.5, y: 0.5}

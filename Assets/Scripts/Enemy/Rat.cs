@@ -22,12 +22,15 @@ public class Rat : EnemyClass
     }
     private void FixedUpdate() 
     {
-        PlatformCheck();
-        WallCheck();
-        if(SetOnChase(4.0f))
-            Chase();
-        else
-            Move();
+        if(!isDead)
+        {
+            PlatformCheck();
+            WallCheck();
+            if(SetOnChase(4.0f))
+                Chase();
+            else
+                Move();
+        }
     }
     protected override void EnemyInit()
     {
@@ -35,7 +38,7 @@ public class Rat : EnemyClass
         atk = 10;
         def = 0;
         experience = 1;
-        moveSpeed = 3.0f;
+        moveSpeed = 2.0f;
     }
     protected override void Attack()
     {

@@ -10,10 +10,17 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigid;
     private BoxCollider2D hitBox;
     private SpriteRenderer spriteRenderer;
+    private EquipItem WeaponItem;
     [SerializeField] private float slopeCheckDistance;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private GameObject GameDirector;
+<<<<<<< Updated upstream
+    [SerializeField] private GameObject Weapon;
+=======
+>>>>>>> Stashed changes
+    [SerializeField] private GameObject WeaponSlot;
     PlayerStatus stat;
+    GameObject weaponRoot; //손의 위치
 
     //플레이어 이동 관련 수치(Inspector에서 조정)
     [SerializeField] private float moveSpeed = 5.0f;
@@ -54,6 +61,7 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         hitBox = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        weaponRoot = transform.GetChild(0).gameObject;
         PlayerInit();
         StartCoroutine("Hungry");
         StartCoroutine("DeadCheck");
@@ -158,8 +166,20 @@ public class PlayerController : MonoBehaviour
     //공격 기능
     private void Attack()
     {
+        if(WeaponSlot.GetComponent<EquipSlotUI>().GetItem() != null)
+        {
         if(Input.GetKeyDown(KeyCode.Z)&&!isAttacking)
+        {
+<<<<<<< Updated upstream
+            WeaponItem = WeaponSlot.GetComponent<EquipSlotUI>().GetItem();
+            Weapon.GetComponent<SpriteRenderer>().sprite = WeaponItem.equipItemData.WeaponEffect;
+            Weapon.GetComponent<BoxCollider2D>().size = WeaponItem.equipItemData.WeaponHitSize;
             ani.SetTrigger("Attack");
+=======
+            ani.SetTrigger("Attack");
+            WeaponSlot.GetComponent<EquipSlotUI>().WeaponAttack();
+>>>>>>> Stashed changes
+        }
         if(ani.GetCurrentAnimatorStateInfo(0).IsName("attack")) // 공격 출력 중
             isAttacking=true;
         else if(ani.GetCurrentAnimatorStateInfo(0).IsName("jumpAtk")) // 점프 공격 출력 중
@@ -168,12 +188,36 @@ public class PlayerController : MonoBehaviour
             isAttacking=true;
         else
             isAttacking=false;
+<<<<<<< Updated upstream
+
+        if(isCrouch)
+        {
+            Weapon.transform.localPosition = new Vector3(1.1f,0.75f,0);
+        }
+        else if(isJumping)
+        {
+            Weapon.transform.localPosition = new Vector3(1.1f,1.75f,0);
+        }
+        else
+        {
+            Weapon.transform.localPosition = new Vector3(1.1f,1.7f,0);
+        }
+=======
+        if(isCrouch)
+        {
+            weaponRoot.transform.localPosition = new Vector3(1,0.7f,0);
+        }
+        else
+        {
+            weaponRoot.transform.localPosition = new Vector3(1, 1.7f, 0);
+>>>>>>> Stashed changes
+        }
     }
 
     //앉기 기능
     private void Crouch()
     {
-        if(!isJumping){
+        if(!isJumping&&!isAttacking){
             if(Input.GetKey(KeyCode.DownArrow))
             {   
                 moveSpeed = 0.0f; // 이동 속도 0, 방향 전환 가능 하도록 함

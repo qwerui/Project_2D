@@ -17,7 +17,10 @@ public class Bat : EnemyClass
     }
     private void FixedUpdate() 
     {
-        Move();    
+        if(!isDead)
+        {
+            Move();
+        }    
     }
     protected override void EnemyInit()
     {
