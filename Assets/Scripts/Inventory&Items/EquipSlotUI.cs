@@ -51,4 +51,8 @@ public class EquipSlotUI : MonoBehaviour
         _iconImage.sprite = newItem.Data.IconSprite;
         return tempItem;
     }
+    public void WeaponAttack()
+    {
+        Instantiate(item.equipItemData.WeaponEffect);
+    }
 }

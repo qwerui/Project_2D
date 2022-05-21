@@ -223,11 +223,11 @@ public class PlayerController : MonoBehaviour
         {
             rigid.velocity = transform.right * moveDirection * dashSpeed;
             currentDashTimer -= Time.deltaTime;
-            Physics2D.IgnoreLayerCollision(13,14, true);
+            Physics2D.IgnoreLayerCollision(13,25, true);
             if(currentDashTimer <= 0)
             {
                 rigid.velocity = Vector2.zero;
-                Physics2D.IgnoreLayerCollision(13,14, false);
+                Physics2D.IgnoreLayerCollision(13,25, false);
                 isDash=false;
             }
         }
@@ -307,12 +307,12 @@ public class PlayerController : MonoBehaviour
                 rigid.AddForce(new Vector2(5.0f,10.0f), ForceMode2D.Impulse);
         
             //적과 충돌 방지로 무적 구현
-            Physics2D.IgnoreLayerCollision(13,14, true);
+            Physics2D.IgnoreLayerCollision(13,25, true);
             StartCoroutine("Unbeatable");
         }
         else
         {
-            Physics2D.IgnoreLayerCollision(13,14, true); //플레이어가 죽었을 때 적과 충돌 방지
+            Physics2D.IgnoreLayerCollision(13,25, true); //플레이어가 죽었을 때 적과 충돌 방지
         }
     }
 
@@ -336,7 +336,7 @@ public class PlayerController : MonoBehaviour
             count++;
         }
         spriteRenderer.color = new Color32(255,255,255,255); //투명도 원상 복귀
-        Physics2D.IgnoreLayerCollision(13,14, false); //피격 가능
+        Physics2D.IgnoreLayerCollision(13,25, false); //피격 가능
         yield return null;
     }
 
