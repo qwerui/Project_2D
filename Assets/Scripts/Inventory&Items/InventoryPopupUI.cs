@@ -82,7 +82,9 @@ public class InventoryPopupUI : MonoBehaviour
                 equipSlot = acessorySlot.GetComponent<EquipSlotUI>();
             successfulAdd = inventory.AddUnequipItem(item);
             if(successfulAdd)
+            {
                 equipSlot.RemoveItem();
+            }
             HidePanel();
             return;
         }
@@ -112,8 +114,12 @@ public class InventoryPopupUI : MonoBehaviour
                 item = equipSlot.SwapItem(item);
                 inventory.SetItem(Index,item);
             }
+            else
+            {
+                inventory.Remove(Index);
+            }
         }
-        inventory.Remove(Index);
+        
         HidePanel();
         inventory.UpdateSlot(Index);
     }

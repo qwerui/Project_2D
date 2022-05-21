@@ -14,8 +14,25 @@ public class EquipItem : Item
         equipItemData = data;
     }
 
+
+    //UnityEvent에 increase 메소드는 앞에 decrease 메소드는 뒤에 넣어야함
     public bool Equip()
     {
+        for(int i=0;i<itemEvent.GetPersistentEventCount()/2;i++)
+        {
+            itemEvent.SetPersistentListenerState(i, UnityEventCallState.RuntimeOnly);
+            itemEvent.SetPersistentListenerState(itemEvent.GetPersistentEventCount()-(i+1), UnityEventCallState.Off);
+        }
+        itemEvent.Invoke();
+        return true;
+    }
+    public bool UnEquip()
+    {
+        for(int i=0;i<itemEvent.GetPersistentEventCount()/2;i++)
+        {
+            itemEvent.SetPersistentListenerState(i, UnityEventCallState.Off);
+            itemEvent.SetPersistentListenerState(itemEvent.GetPersistentEventCount()-(i+1), UnityEventCallState.RuntimeOnly);
+        }
         itemEvent.Invoke();
         return true;
     }

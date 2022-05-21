@@ -20,4 +20,15 @@ public class ItemEffect : MonoBehaviour
         LinkPlayer();
         stat.setHunger(stat.getHunger() + value);
     }
+
+    public void AtkIncrease(int value)
+    {
+        LinkPlayer();
+        stat.setAtk(stat.getAtk() + value);
+    }
+    public void AtkDecrease(int value)
+    {
+        LinkPlayer();
+        stat.setAtk(stat.getAtk() - value);
+    }
 }
