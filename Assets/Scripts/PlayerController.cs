@@ -14,10 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float slopeCheckDistance;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private GameObject GameDirector;
-<<<<<<< Updated upstream
     [SerializeField] private GameObject Weapon;
-=======
->>>>>>> Stashed changes
     [SerializeField] private GameObject WeaponSlot;
     PlayerStatus stat;
     GameObject weaponRoot; //손의 위치
@@ -170,15 +167,10 @@ public class PlayerController : MonoBehaviour
         {
         if(Input.GetKeyDown(KeyCode.Z)&&!isAttacking)
         {
-<<<<<<< Updated upstream
             WeaponItem = WeaponSlot.GetComponent<EquipSlotUI>().GetItem();
             Weapon.GetComponent<SpriteRenderer>().sprite = WeaponItem.equipItemData.WeaponEffect;
             Weapon.GetComponent<BoxCollider2D>().size = WeaponItem.equipItemData.WeaponHitSize;
             ani.SetTrigger("Attack");
-=======
-            ani.SetTrigger("Attack");
-            WeaponSlot.GetComponent<EquipSlotUI>().WeaponAttack();
->>>>>>> Stashed changes
         }
         if(ani.GetCurrentAnimatorStateInfo(0).IsName("attack")) // 공격 출력 중
             isAttacking=true;
@@ -188,7 +180,6 @@ public class PlayerController : MonoBehaviour
             isAttacking=true;
         else
             isAttacking=false;
-<<<<<<< Updated upstream
 
         if(isCrouch)
         {
@@ -202,15 +193,6 @@ public class PlayerController : MonoBehaviour
         {
             Weapon.transform.localPosition = new Vector3(1.1f,1.7f,0);
         }
-=======
-        if(isCrouch)
-        {
-            weaponRoot.transform.localPosition = new Vector3(1,0.7f,0);
-        }
-        else
-        {
-            weaponRoot.transform.localPosition = new Vector3(1, 1.7f, 0);
->>>>>>> Stashed changes
         }
     }
 

@@ -53,13 +53,6 @@ public class EquipSlotUI : MonoBehaviour
     }
     public EquipItem GetItem()
     {
-<<<<<<< Updated upstream
         return item as EquipItem;
-=======
-        if(item != null)
-        {
-            Instantiate(item.equipItemData.WeaponEffect);
-        }
->>>>>>> Stashed changes
     }
 }
