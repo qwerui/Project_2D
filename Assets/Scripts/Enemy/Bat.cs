@@ -8,6 +8,7 @@ public class Bat : EnemyClass
     void Start()
     {
         EnemyInit();
+        CreateItem();
     }
 
     // Update is called once per frame

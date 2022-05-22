@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bde740442a9816a40b71dd33f34b90ff, type: 3}
-  m_Name: SubItem_Bread
+  m_Name: Resource_RedBall
   m_EditorClassIdentifier: 
-  _id: 200
-  _name: Bread
-  _tooltip: It is a tasteless bread with no taste
-  _iconSprite: {fileID: -1867991094099903975, guid: ca9717e69fd0c4e4fb86ecaee01cf859, type: 3}
-  _itemType: 3
-  _dropItemPrefab: {fileID: 3044962466300960756, guid: c832f2eadeb712e4ab0a6ed1b67590d4, type: 3}
+  _id: 0
+  _name: RedBall
+  _tooltip: RedBall Resource
+  _iconSprite: {fileID: 21300000, guid: d7cf9c6f7d16fc640ae7a7a7cd4afd15, type: 3}
+  _itemType: 5
+  _dropItemPrefab: {fileID: 1426103074529681367, guid: 1f34711d1b94d9b40bd7c51d9b92b80d, type: 3}

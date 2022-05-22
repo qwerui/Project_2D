@@ -177,3 +177,14 @@ MonoBehaviour:
     m_Bits: 256
   hitbox: {fileID: 26268955}
   player: {fileID: 0}
+  dropItem:
+  - {fileID: 3044962466300960756, guid: c832f2eadeb712e4ab0a6ed1b67590d4, type: 3}
+  dropChance:
+  - 100
+  resourceItem: {fileID: 11400000, guid: 116620f2abad9c141b1f4a16f0b32126, type: 2}
+  rangeOfResource: 0000000000000000000000000000000000000000000000000000000000000000
+  chanceOfResource:
+  - 0
+  - 0
+  - 0
+  - 0

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bde740442a9816a40b71dd33f34b90ff, type: 3}
-  m_Name: SubItem_Bread
+  m_Name: Resource_Gold
   m_EditorClassIdentifier: 
-  _id: 200
-  _name: Bread
-  _tooltip: It is a tasteless bread with no taste
-  _iconSprite: {fileID: -1867991094099903975, guid: ca9717e69fd0c4e4fb86ecaee01cf859, type: 3}
-  _itemType: 3
-  _dropItemPrefab: {fileID: 3044962466300960756, guid: c832f2eadeb712e4ab0a6ed1b67590d4, type: 3}
+  _id: 3
+  _name: Gold
+  _tooltip: Resource Gold
+  _iconSprite: {fileID: 21300000, guid: 660d6c305798dd249b47a112f535ae63, type: 3}
+  _itemType: 5
+  _dropItemPrefab: {fileID: 571018063848305265, guid: 221b52bf272f0024d84115c164aa4b6c, type: 3}

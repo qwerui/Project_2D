@@ -20,7 +20,7 @@ public abstract class ItemData : ScriptableObject{
     [SerializeField] private GameObject _dropItemPrefab; // 바닥에 떨어질 때 생성할 프리팹
 
     /// 타입에 맞는 새로운 아이템 생성
-    public abstract Item CreateItem(UnityEvent itemEvent);
+    public abstract Item CreateItem();
     
 }
 public enum ItemType

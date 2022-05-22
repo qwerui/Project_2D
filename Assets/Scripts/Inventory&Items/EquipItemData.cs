@@ -20,8 +20,8 @@ public class EquipItemData : ItemData
     [SerializeField] private Sprite _weaponEffect;
     [SerializeField] private Vector2 _weaponHitSize;
     
-    public override Item CreateItem(UnityEvent itemEvent)
+    public override Item CreateItem()
     {
-        return new EquipItem(this, itemEvent);
+        return new EquipItem(this);
     }
 }

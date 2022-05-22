@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class SubItem : Item
 {
     public SubItemData subItemData { get; private set; }
-    public UnityEvent itemEvent;
-
     // 현재 아이템 개수
     public int Amount { get; protected set; }
 
@@ -15,9 +12,8 @@ public class SubItem : Item
     public bool IsEmpty => Amount <= 0;
 
 
-    public SubItem(SubItemData data, UnityEvent eventFunc = null, int amount = 1) : base(data)
+    public SubItem(SubItemData data, int amount = 1) : base(data)
     {
-        itemEvent = eventFunc;
         subItemData = data;
         SetAmount(amount);
     }
@@ -39,7 +35,7 @@ public class SubItem : Item
     public bool Use()
     {
         Amount--;
-        itemEvent.Invoke();
+        subItemData.DropItemPrefab.GetComponent<ItemPrefab>().ItemEffect();
         return true;
     }
 }

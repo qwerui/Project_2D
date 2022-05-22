@@ -15,8 +15,18 @@ public abstract class EnemyClass : MonoBehaviour
     [SerializeField] protected BoxCollider2D hitbox;
     [SerializeField] protected GameObject player;
 
+    //아이템 확률 입력은 백분율로 입력, 최소 1e-07 (0.00000001), 최대 100
+    [SerializeField] protected GameObject[] dropItem; //아이템 객체
+    [SerializeField] protected float[] dropChance; //아이템 드랍 확률 입력
+    [SerializeField] protected ResourceItemGroup resourceItem; //자원 객체
+    [Tooltip("0: 빨강최소, 1: 빨강최대, 2: 파랑최소, 3: 파랑최대, 4: 노랑최소, 5: 노랑최대, 6: 골드최소, 7: 골드최대")]
+    [SerializeField] protected int[] rangeOfResource = new int[8]; //골드 등의 자원 드랍 개수
+    [Tooltip("0: 빨강, 1: 파랑, 2: 노랑, 3: 골드")]
+    [SerializeField] protected float[] chanceOfResource = new float[4]; //자원 드랍 확률 입력
+
     protected int nextMove;
     protected float posDiff;
+    protected GameObject item;
 
     protected bool isMoving;
     protected bool isDead = false;
@@ -42,6 +52,7 @@ public abstract class EnemyClass : MonoBehaviour
         Destroy(GetComponent<BoxCollider2D>());
         Destroy(GetComponent<Rigidbody2D>());
         yield return new WaitForSeconds(1.0f);
+        DropItem();
         Destroy(gameObject);
     }
     private void OnCollisionEnter2D(Collision2D collision) 
@@ -80,5 +91,55 @@ public abstract class EnemyClass : MonoBehaviour
             nextMove= nextMove*(-1); 
             CancelInvoke();
         }
+    }
+    protected virtual void CreateItem()
+    {
+        BallAndGold();
+        for(int i=0;i<dropItem.Length;i++)
+        {
+            if(Chance(dropChance[i]))
+            {
+                item = Instantiate(dropItem[i]).gameObject;
+                item.transform.localPosition = transform.position;
+                item.SetActive(false);
+                item.transform.SetParent(transform);
+            }
+        }
+    }
+    bool Chance(float chance)
+    {
+        int chanceInt = (int)Mathf.Round(chance * 10000000);
+        if(Random.Range(1,1000000000)<=chanceInt)
+            return true;
+        else
+            return false;
+    }
+    void BallAndGold()
+    {
+        int resourceAmount;
+        for(int i=0;i<4;i++)
+        {
+            if(Chance(chanceOfResource[i]))
+            {
+                resourceAmount = Random.Range(rangeOfResource[i],rangeOfResource[i+1]+1);
+                if(resourceAmount!=0)
+                {
+                    item = Instantiate(resourceItem.GetResource(i)).gameObject;
+                    item.GetComponent<ItemPrefab>().SetDrop(resourceAmount);
+                    item.transform.localPosition = transform.position;
+                    item.SetActive(false);
+                    item.transform.SetParent(transform);
+                }
+            }
+        }
+    }
+    void DropItem()
+    {
+        for(int i=0;i<transform.childCount;i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(true);
+            transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-2.0f,2.0f),10.0f),ForceMode2D.Impulse);
+        }
+        transform.DetachChildren();
     }
 }

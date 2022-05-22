@@ -50,6 +50,7 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 660d6c305798dd249b47a112f535ae63, type: 3}
   - {fileID: 21300000, guid: 562c782317dea244b9de6d4c9915b1e8, type: 3}
   - {fileID: 21300000, guid: 853edf63d95fe614a9d77387e1e5204f, type: 3}
   - {fileID: 21300000, guid: 6b8de4253c7c8f649bfaed456e0cc28d, type: 3}
@@ -67,6 +68,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d7cf9c6f7d16fc640ae7a7a7cd4afd15, type: 3}
   - {fileID: 21300000, guid: 072967cf8d5b6d144a26749d7cf650b7, type: 3}
   m_PackedSpriteNamesToIndex:
+  - gold
   - slot
   - exitButton
   - healthBar
