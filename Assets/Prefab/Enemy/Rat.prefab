@@ -146,11 +146,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39293446b8c233944a241f1ca14d1073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
-  atk: 0
+  hp: 10
+  atk: 10
   def: 0
-  moveSpeed: 3
-  experience: 0
+  moveSpeed: 2
+  experience: 1
   ani: {fileID: 2168992160295121765}
   rigid: {fileID: 1810556454}
   groundLayer:
@@ -163,12 +163,12 @@ MonoBehaviour:
   dropChance:
   - 1
   resourceItem: {fileID: 11400000, guid: 116620f2abad9c141b1f4a16f0b32126, type: 2}
-  rangeOfResource: 0000000000000000000000000000000000000000000000000000000000000000
+  rangeOfResource: 0000000003000000000000000300000000000000030000000000000003000000
   chanceOfResource:
-  - 0
-  - 0
-  - 0
-  - 0
+  - 50
+  - 50
+  - 50
+  - 50
 --- !u!95 &2168992160295121765
 Animator:
   serializedVersion: 3

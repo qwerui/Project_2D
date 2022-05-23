@@ -8,7 +8,6 @@ public class Bat : EnemyClass
     void Start()
     {
         EnemyInit();
-        CreateItem();
     }
 
     // Update is called once per frame
@@ -23,14 +22,7 @@ public class Bat : EnemyClass
             Move();
         }    
     }
-    protected override void EnemyInit()
-    {
-        hp = 10;
-        atk = 100;
-        def = 0;
-        moveSpeed = 3.0f;
-        experience = 1;
-    }
+
     protected override void Attack()
     {
 

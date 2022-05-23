@@ -12,7 +12,6 @@ public class Rat : EnemyClass
     // Start is called before the first frame update
     void Start()
     {
-        CreateItem();
         EnemyInit();
     }
 
@@ -33,14 +32,7 @@ public class Rat : EnemyClass
                 Move();
         }
     }
-    protected override void EnemyInit()
-    {
-        hp = 10;
-        atk = 10;
-        def = 0;
-        experience = 1;
-        moveSpeed = 2.0f;
-    }
+
     protected override void Attack()
     {
 

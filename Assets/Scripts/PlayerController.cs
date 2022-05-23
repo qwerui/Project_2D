@@ -47,6 +47,9 @@ public class PlayerController : MonoBehaviour
     private bool isDamaged = false;
     private bool isDead = false;
 
+    //기타 변수
+    private float noDamage = 0.1f;
+
     private void Awake() 
     {
         stat  = new PlayerStatus();
@@ -92,7 +95,8 @@ public class PlayerController : MonoBehaviour
         stat.setRedBall(0);
         stat.setBlueBall(0);
         stat.setYellowBall(0);
-        stat.setNoDamage(0.1f);
+        stat.setMaxExperience(10);
+        stat.setExperience(0);
     }
 
     //플레이어 상태 전달 (주로 UI에 사용 ex: 체력 바 등)
@@ -358,7 +362,7 @@ public class PlayerController : MonoBehaviour
             else
                 spriteRenderer.color = new Color32(255,255,255,255);
 
-            yield return new WaitForSeconds(stat.getNoDamage()); // 무적시간은 noDamage의 10배
+            yield return new WaitForSeconds(noDamage); // 무적시간은 noDamage의 10배
             count++;
         }
         spriteRenderer.color = new Color32(255,255,255,255); //투명도 원상 복귀

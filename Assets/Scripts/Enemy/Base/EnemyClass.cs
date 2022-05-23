@@ -31,12 +31,18 @@ public abstract class EnemyClass : MonoBehaviour
     protected bool isMoving;
     protected bool isDead = false;
 
-    protected abstract void EnemyInit();
+    
     protected abstract void Move(); //적 이동
     protected abstract void Attack(); //적 공격
     protected abstract void Think(); //적 이동 AI
     protected abstract void Chase(); //적 추적
     protected abstract IEnumerator PosDiff(); //적 추적시 방향 전환 속도 조절 (적과 캐릭터의 좌표 차이)
+
+    protected void EnemyInit()
+    {
+        player = GameObject.Find("Player");
+        CreateItem();
+    }
 
     protected void Hit(int damage)
     {
@@ -49,6 +55,8 @@ public abstract class EnemyClass : MonoBehaviour
         ani.SetTrigger("Death");
         isDead = true;
         moveSpeed = 0;
+        PlayerStatus stat = player.GetComponent<PlayerController>().GetStat();
+        stat.setExperience(stat.getExperience() + experience);
         Destroy(GetComponent<BoxCollider2D>());
         Destroy(GetComponent<Rigidbody2D>());
         yield return new WaitForSeconds(1.0f);
@@ -57,7 +65,6 @@ public abstract class EnemyClass : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision) 
     {
-        
         if(collision.gameObject.tag == "Player"){
             player.GetComponent<PlayerController>().Damaged(this.transform.position, this.atk);
         }

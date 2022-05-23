@@ -60,6 +60,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5fa4b9b8a58580046badc9131daf2bba, type: 3}
   - {fileID: 21300000, guid: b93ad659505c40541bf204f86cd7f22b, type: 3}
   - {fileID: 21300000, guid: ae02891a989e5f04b9fbf2d07c4ddf14, type: 3}
+  - {fileID: 21300000, guid: ddd1d6ba334eaf34fa9c0f613f8c3c02, type: 3}
   - {fileID: 21300000, guid: 08e77aca7712e054482ac39fd9a9cf8b, type: 3}
   - {fileID: 21300000, guid: 5f698fab9c809644c835ef276bbd45e4, type: 3}
   - {fileID: 21300000, guid: 0f744decdc51c6b44ae4f04812d3b1d0, type: 3}
@@ -78,6 +79,7 @@ SpriteAtlas:
   - blueBall
   - weapon
   - InventoryBackground
+  - DialogBackground
   - MenuButton
   - arrow
   - hungerBar

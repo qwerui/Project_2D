@@ -17,9 +17,9 @@ TagManager:
   - 
   - Ground
   - 
-  - 
+  - InteractableObject
   - Item
-  - ChaseCircle
+  - 
   - Enemy
   - WeaponEffect
   - 

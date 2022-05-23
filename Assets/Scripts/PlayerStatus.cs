@@ -15,9 +15,9 @@ public class PlayerStatus
     int redBall;
     int blueBall;
     int yellowBall;
-	int level;
+	int level = 0;
 	int experience;
-    float noDamage;
+	int maxExperience;
 
     //Getter, Setter
 	public int getHp() 
@@ -119,22 +119,8 @@ public class PlayerStatus
     {
 		this.yellowBall = yellowBall;
 	}
-
-	public float getNoDamage() 
-    {
-		return this.noDamage;
-	}
-
-	public void setNoDamage(float noDamage) 
-    {
-		this.noDamage = noDamage;
-	}
 	public int getLevel() {
 		return this.level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
 	}
 
 	public int getExperience() {
@@ -142,6 +128,31 @@ public class PlayerStatus
 	}
 
 	public void setExperience(int experience) {
-		this.experience = experience;
+		while(this.experience + experience >= this.maxExperience)
+		{
+			LevelUp();
+		}
+		this.experience = Mathf.Clamp(experience,0,this.maxExperience);
+	}
+
+	public int getMaxExperience() {
+		return this.maxExperience;
+	}
+
+	public void setMaxExperience(int maxExperience) {
+		this.maxExperience = maxExperience;
+	}
+
+	private void LevelUp()
+	{
+		this.level += 1;
+		this.atk += 1;
+		this.maxHp += 5;
+		if(this.level % 5 == 0)
+		{
+			this.maxHunger += 5;
+			this.def += 1;
+		}
+		this.maxExperience = level*(level + 2) + 10;
 	}
 }
