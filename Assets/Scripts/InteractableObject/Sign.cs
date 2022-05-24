@@ -32,4 +32,12 @@ public class Sign : InteractableObject
             }
         }
     }
+    protected override void UpdateAction()
+    {
+        if(!isOnPlayer)
+        {
+            isReading = false;
+            Destroy(dialogPopup);
+        }
+    }
 }

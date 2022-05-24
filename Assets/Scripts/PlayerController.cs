@@ -16,8 +16,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject GameDirector;
     [SerializeField] private GameObject Weapon;
     [SerializeField] private GameObject WeaponSlot;
+    [SerializeField] private GameObject damageText;
+    [SerializeField] private GameObject LevelUpText;
     PlayerStatus stat;
     GameObject weaponRoot; //손의 위치
+    GameObject damageInstance;
+    GameObject levelUpInstance;
 
     //플레이어 이동 관련 수치(Inspector에서 조정)
     [SerializeField] private float moveSpeed = 5.0f;
@@ -53,6 +57,7 @@ public class PlayerController : MonoBehaviour
     private void Awake() 
     {
         stat  = new PlayerStatus();
+        PlayerInit();
     }
 
     private void Start()
@@ -62,7 +67,6 @@ public class PlayerController : MonoBehaviour
         hitBox = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         weaponRoot = transform.GetChild(0).gameObject;
-        PlayerInit();
         StartCoroutine("Hungry");
         StartCoroutine("DeadCheck");
     }
@@ -95,6 +99,7 @@ public class PlayerController : MonoBehaviour
         stat.setRedBall(0);
         stat.setBlueBall(0);
         stat.setYellowBall(0);
+        stat.setLevel(1);
         stat.setMaxExperience(10);
         stat.setExperience(0);
     }
@@ -113,6 +118,8 @@ public class PlayerController : MonoBehaviour
                 if(!(isJumping&&isAttacking)) //점프 공격 중에는 방향 전환 불가
                     this.transform.localScale = new Vector3(moveDirection,1,1);
                 isMoving = true;
+                if((!isJumping&&!isCrouch)) //점프, 앉기 중에는 대쉬 불가
+                    Dash();
             }
             else
             {
@@ -127,8 +134,7 @@ public class PlayerController : MonoBehaviour
             else
                 rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
             ani.SetBool("Move", isMoving);
-            if((!isJumping&&!isCrouch)) //점프, 앉기 중에는 대쉬 불가
-                Dash();
+            
             if(!isDash&&!isDamaged) //대쉬, 피격 중이 아닐 때 일반 이동
             {
                 if(!isDamaged)
@@ -326,8 +332,15 @@ public class PlayerController : MonoBehaviour
             isDamaged = true; //피격 동작 중 (조작 불능)
 
             //체력 감소
-            int finalDamage = stat.getHp() - (damage - stat.getDef());
-            stat.setHp(finalDamage);
+            int finalDamage = damage - stat.getDef();
+            if(finalDamage<=0)
+                finalDamage = 0;
+            stat.setHp(stat.getHp() - finalDamage);
+
+            //데미지 표기
+            damageInstance = Instantiate(damageText).gameObject;
+            damageInstance.transform.position = transform.position + Vector3.up;
+            damageInstance.GetComponent<DamageText>().damage = finalDamage;
 
             //넉백
             rigid.velocity = Vector2.zero;
@@ -399,6 +412,43 @@ public class PlayerController : MonoBehaviour
                 yield break;
             }
             yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public void GainExprience(int experience)
+    {
+        experience += stat.getExperience();
+        int levelCount = 0;
+        while(experience >= stat.getMaxExperience())
+        {
+            experience-=stat.getMaxExperience();
+            LevelUp();
+            levelCount++;
+        }
+        if(levelCount != 0)
+            StartCoroutine("ShowLevelUp", levelCount);
+        stat.setExperience(experience);
+    }
+    private void LevelUp()
+	{
+        int level = stat.getLevel() + 1;
+		stat.setLevel(level);
+		stat.setAtk(stat.getAtk() + 1);
+		stat.setMaxHp(stat.getMaxHp() + 5);
+		if(level % 5 == 0)
+		{
+			stat.setMaxHunger(stat.getMaxHunger() + 5);
+			stat.setDef(stat.getDef() + 1);
+		}
+		stat.setMaxExperience(level*(level + 2) + 10);
+	}
+    IEnumerator ShowLevelUp(int levelCount)
+    {
+        for(int i=0;i<levelCount;i++)
+        {
+            levelUpInstance = Instantiate(LevelUpText).gameObject;
+            levelUpInstance.transform.position = transform.position + Vector3.up;
+            yield return new WaitForSeconds(0.2f);
         }
     }
 }

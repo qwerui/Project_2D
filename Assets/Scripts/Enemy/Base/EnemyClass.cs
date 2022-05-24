@@ -14,6 +14,7 @@ public abstract class EnemyClass : MonoBehaviour
     [SerializeField] protected LayerMask groundLayer;
     [SerializeField] protected BoxCollider2D hitbox;
     [SerializeField] protected GameObject player;
+    [SerializeField] protected GameObject damageText;
 
     //아이템 확률 입력은 백분율로 입력, 최소 1e-07 (0.00000001), 최대 100
     [SerializeField] protected GameObject[] dropItem; //아이템 객체
@@ -27,6 +28,7 @@ public abstract class EnemyClass : MonoBehaviour
     protected int nextMove;
     protected float posDiff;
     protected GameObject item;
+    protected GameObject damageInstance;
 
     protected bool isMoving;
     protected bool isDead = false;
@@ -46,7 +48,13 @@ public abstract class EnemyClass : MonoBehaviour
 
     protected void Hit(int damage)
     {
-        hp -= damage - def;
+        damageInstance = Instantiate(damageText).gameObject;
+        damageInstance.transform.position = transform.position;
+        int finalDamage = damage - def;
+        if(finalDamage<=0)
+            finalDamage = 0;
+        damageInstance.GetComponent<DamageText>().damage = finalDamage;
+        hp -= finalDamage;
         if(hp<=0)
             StartCoroutine("Dead");
     }
@@ -55,8 +63,7 @@ public abstract class EnemyClass : MonoBehaviour
         ani.SetTrigger("Death");
         isDead = true;
         moveSpeed = 0;
-        PlayerStatus stat = player.GetComponent<PlayerController>().GetStat();
-        stat.setExperience(stat.getExperience() + experience);
+        player.GetComponent<PlayerController>().GainExprience(experience);
         Destroy(GetComponent<BoxCollider2D>());
         Destroy(GetComponent<Rigidbody2D>());
         yield return new WaitForSeconds(1.0f);

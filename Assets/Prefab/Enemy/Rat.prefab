@@ -158,6 +158,7 @@ MonoBehaviour:
     m_Bits: 256
   hitbox: {fileID: 1810556453}
   player: {fileID: 0}
+  damageText: {fileID: 7582739099108354712, guid: 57aa7623a71eaa844a636e52227938b4, type: 3}
   dropItem:
   - {fileID: 3044962466300960756, guid: c832f2eadeb712e4ab0a6ed1b67590d4, type: 3}
   dropChance:

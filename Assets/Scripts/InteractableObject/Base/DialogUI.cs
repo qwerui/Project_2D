@@ -7,7 +7,7 @@ public class DialogUI : MonoBehaviour
 {
     string[] dialogText;
     public float textSpeed;
-    int index = -1;
+    int index = 0;
     Text textSpace;
 
     public void DialogSetting(GameObject dialogObj, string[] dialogString)
@@ -21,14 +21,16 @@ public class DialogUI : MonoBehaviour
     public bool GoNextText()
     {
         StopAllCoroutines();
-        StartCoroutine(TypingText(dialogText[++index]));
         if(index >= dialogText.Length)
         {
             Destroy(gameObject);
             return true;
         }
         else
+        {
+            StartCoroutine(TypingText(dialogText[index++]));
             return false;
+        } 
     }
     IEnumerator TypingText(string message)
     {

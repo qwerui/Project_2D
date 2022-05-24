@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class InteractableObject : MonoBehaviour
 {
-    bool isOnPlayer = false;
+    protected bool isOnPlayer = false;
     private void Update() {
         if(isOnPlayer)
         {
@@ -13,6 +13,9 @@ public abstract class InteractableObject : MonoBehaviour
                 Interaction();
             }
         }
+    }
+    private void FixedUpdate() {
+        UpdateAction();
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Player")
@@ -24,4 +27,5 @@ public abstract class InteractableObject : MonoBehaviour
     }
 
     protected abstract void Interaction();
+    protected abstract void UpdateAction();
 }

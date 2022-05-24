@@ -57,7 +57,7 @@ public class InventoryPopupUI : MonoBehaviour
         DropButton.SetActive(true);
         if(item is SubItem)
         {
-            PopupItemName.text = item.Data.Name+"  (Stock : "+(item as SubItem).Amount+" )";
+            PopupItemName.text = item.Data.Name+"  (개수 : "+(item as SubItem).Amount+" )";
             UseButtonText.text = "USE";
             SlotButton.SetActive(true);
         }
