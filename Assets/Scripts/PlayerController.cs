@@ -10,10 +10,18 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigid;
     private BoxCollider2D hitBox;
     private SpriteRenderer spriteRenderer;
+    private EquipItem WeaponItem;
     [SerializeField] private float slopeCheckDistance;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private GameObject GameDirector;
+    [SerializeField] private GameObject Weapon;
+    [SerializeField] private GameObject WeaponSlot;
+    [SerializeField] private GameObject damageText;
+    [SerializeField] private GameObject LevelUpText;
     PlayerStatus stat;
+    GameObject weaponRoot; //손의 위치
+    GameObject damageInstance;
+    GameObject levelUpInstance;
 
     //플레이어 이동 관련 수치(Inspector에서 조정)
     [SerializeField] private float moveSpeed = 5.0f;
@@ -43,9 +51,13 @@ public class PlayerController : MonoBehaviour
     private bool isDamaged = false;
     private bool isDead = false;
 
+    //기타 변수
+    private float noDamage = 0.1f;
+
     private void Awake() 
     {
         stat  = new PlayerStatus();
+        PlayerInit();
     }
 
     private void Start()
@@ -54,7 +66,7 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         hitBox = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        PlayerInit();
+        weaponRoot = transform.GetChild(0).gameObject;
         StartCoroutine("Hungry");
         StartCoroutine("DeadCheck");
     }
@@ -87,7 +99,9 @@ public class PlayerController : MonoBehaviour
         stat.setRedBall(0);
         stat.setBlueBall(0);
         stat.setYellowBall(0);
-        stat.setNoDamage(0.1f);
+        stat.setLevel(1);
+        stat.setMaxExperience(10);
+        stat.setExperience(0);
     }
 
     //플레이어 상태 전달 (주로 UI에 사용 ex: 체력 바 등)
@@ -104,6 +118,8 @@ public class PlayerController : MonoBehaviour
                 if(!(isJumping&&isAttacking)) //점프 공격 중에는 방향 전환 불가
                     this.transform.localScale = new Vector3(moveDirection,1,1);
                 isMoving = true;
+                if((!isJumping&&!isCrouch)) //점프, 앉기 중에는 대쉬 불가
+                    Dash();
             }
             else
             {
@@ -118,8 +134,7 @@ public class PlayerController : MonoBehaviour
             else
                 rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
             ani.SetBool("Move", isMoving);
-            if((!isJumping&&!isCrouch)) //점프, 앉기 중에는 대쉬 불가
-                Dash();
+            
             if(!isDash&&!isDamaged) //대쉬, 피격 중이 아닐 때 일반 이동
             {
                 if(!isDamaged)
@@ -158,8 +173,15 @@ public class PlayerController : MonoBehaviour
     //공격 기능
     private void Attack()
     {
+        if(WeaponSlot.GetComponent<EquipSlotUI>().GetItem() != null)
+        {
         if(Input.GetKeyDown(KeyCode.Z)&&!isAttacking)
+        {
+            WeaponItem = WeaponSlot.GetComponent<EquipSlotUI>().GetItem();
+            Weapon.GetComponent<SpriteRenderer>().sprite = WeaponItem.equipItemData.WeaponEffect;
+            Weapon.GetComponent<BoxCollider2D>().size = WeaponItem.equipItemData.WeaponHitSize;
             ani.SetTrigger("Attack");
+        }
         if(ani.GetCurrentAnimatorStateInfo(0).IsName("attack")) // 공격 출력 중
             isAttacking=true;
         else if(ani.GetCurrentAnimatorStateInfo(0).IsName("jumpAtk")) // 점프 공격 출력 중
@@ -168,12 +190,26 @@ public class PlayerController : MonoBehaviour
             isAttacking=true;
         else
             isAttacking=false;
+
+        if(isCrouch)
+        {
+            Weapon.transform.localPosition = new Vector3(1.1f,0.75f,0);
+        }
+        else if(isJumping)
+        {
+            Weapon.transform.localPosition = new Vector3(1.1f,1.75f,0);
+        }
+        else
+        {
+            Weapon.transform.localPosition = new Vector3(1.1f,1.7f,0);
+        }
+        }
     }
 
     //앉기 기능
     private void Crouch()
     {
-        if(!isJumping){
+        if(!isJumping&&!isAttacking){
             if(Input.GetKey(KeyCode.DownArrow))
             {   
                 moveSpeed = 0.0f; // 이동 속도 0, 방향 전환 가능 하도록 함
@@ -223,11 +259,11 @@ public class PlayerController : MonoBehaviour
         {
             rigid.velocity = transform.right * moveDirection * dashSpeed;
             currentDashTimer -= Time.deltaTime;
-            Physics2D.IgnoreLayerCollision(13,14, true);
+            Physics2D.IgnoreLayerCollision(13,25, true);
             if(currentDashTimer <= 0)
             {
                 rigid.velocity = Vector2.zero;
-                Physics2D.IgnoreLayerCollision(13,14, false);
+                Physics2D.IgnoreLayerCollision(13,25, false);
                 isDash=false;
             }
         }
@@ -296,8 +332,15 @@ public class PlayerController : MonoBehaviour
             isDamaged = true; //피격 동작 중 (조작 불능)
 
             //체력 감소
-            int finalDamage = stat.getHp() - (damage - stat.getDef());
-            stat.setHp(finalDamage);
+            int finalDamage = damage - stat.getDef();
+            if(finalDamage<=0)
+                finalDamage = 0;
+            stat.setHp(stat.getHp() - finalDamage);
+
+            //데미지 표기
+            damageInstance = Instantiate(damageText).gameObject;
+            damageInstance.transform.position = transform.position + Vector3.up;
+            damageInstance.GetComponent<DamageText>().damage = finalDamage;
 
             //넉백
             rigid.velocity = Vector2.zero;
@@ -307,12 +350,12 @@ public class PlayerController : MonoBehaviour
                 rigid.AddForce(new Vector2(5.0f,10.0f), ForceMode2D.Impulse);
         
             //적과 충돌 방지로 무적 구현
-            Physics2D.IgnoreLayerCollision(13,14, true);
+            Physics2D.IgnoreLayerCollision(13,25, true);
             StartCoroutine("Unbeatable");
         }
         else
         {
-            Physics2D.IgnoreLayerCollision(13,14, true); //플레이어가 죽었을 때 적과 충돌 방지
+            Physics2D.IgnoreLayerCollision(13,25, true); //플레이어가 죽었을 때 적과 충돌 방지
         }
     }
 
@@ -332,11 +375,11 @@ public class PlayerController : MonoBehaviour
             else
                 spriteRenderer.color = new Color32(255,255,255,255);
 
-            yield return new WaitForSeconds(stat.getNoDamage()); // 무적시간은 noDamage의 10배
+            yield return new WaitForSeconds(noDamage); // 무적시간은 noDamage의 10배
             count++;
         }
         spriteRenderer.color = new Color32(255,255,255,255); //투명도 원상 복귀
-        Physics2D.IgnoreLayerCollision(13,14, false); //피격 가능
+        Physics2D.IgnoreLayerCollision(13,25, false); //피격 가능
         yield return null;
     }
 
@@ -369,6 +412,43 @@ public class PlayerController : MonoBehaviour
                 yield break;
             }
             yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public void GainExprience(int experience)
+    {
+        experience += stat.getExperience();
+        int levelCount = 0;
+        while(experience >= stat.getMaxExperience())
+        {
+            experience-=stat.getMaxExperience();
+            LevelUp();
+            levelCount++;
+        }
+        if(levelCount != 0)
+            StartCoroutine("ShowLevelUp", levelCount);
+        stat.setExperience(experience);
+    }
+    private void LevelUp()
+	{
+        int level = stat.getLevel() + 1;
+		stat.setLevel(level);
+		stat.setAtk(stat.getAtk() + 1);
+		stat.setMaxHp(stat.getMaxHp() + 5);
+		if(level % 5 == 0)
+		{
+			stat.setMaxHunger(stat.getMaxHunger() + 5);
+			stat.setDef(stat.getDef() + 1);
+		}
+		stat.setMaxExperience(level*(level + 2) + 10);
+	}
+    IEnumerator ShowLevelUp(int levelCount)
+    {
+        for(int i=0;i<levelCount;i++)
+        {
+            levelUpInstance = Instantiate(LevelUpText).gameObject;
+            levelUpInstance.transform.position = transform.position + Vector3.up;
+            yield return new WaitForSeconds(0.2f);
         }
     }
 }

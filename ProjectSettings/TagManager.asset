@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -16,22 +17,22 @@ TagManager:
   - 
   - Ground
   - 
-  - 
+  - InteractableObject
   - Item
-  - ChaseCircle
+  - 
   - Enemy
+  - WeaponEffect
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - Player
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   - 
   - 
   - 

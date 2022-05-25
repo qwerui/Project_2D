@@ -1,22 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class EquipItem : Item
 {
     public EquipItemData equipItemData { get; private set; }
-    public UnityEvent itemEvent;
 
-    public EquipItem(EquipItemData data, UnityEvent eventFunc = null) : base(data)
+    public EquipItem(EquipItemData data) : base(data)
     {
-        itemEvent = eventFunc;
         equipItemData = data;
     }
 
+
+    //UnityEvent에 increase 메소드는 앞에 decrease 메소드는 뒤에 넣어야함
     public bool Equip()
     {
-        itemEvent.Invoke();
+        equipItemData.DropItemPrefab.GetComponent<ItemPrefab>().ItemEffect(true);
+        return true;
+    }
+    public bool UnEquip()
+    {
+        equipItemData.DropItemPrefab.GetComponent<ItemPrefab>().ItemEffect(false);
         return true;
     }
 }

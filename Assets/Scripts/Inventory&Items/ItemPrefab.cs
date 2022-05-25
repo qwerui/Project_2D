@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class ItemPrefab : MonoBehaviour
+public abstract class ItemPrefab : MonoBehaviour
 {
     public ItemData data;
     public InventoryController inventory;
-    public UnityEvent itemEvent;
     public Rigidbody2D rigid;
     public int amount;
+
+    public GameObject player;
 
     private void Awake() {
         rigid = GetComponent<Rigidbody2D>();
@@ -23,21 +23,32 @@ public class ItemPrefab : MonoBehaviour
     {
         amount = Amount;
     }
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.tag=="Ground")
+        {
+            rigid.velocity = Vector2.zero;
+        }
         if(other.gameObject.tag=="Player")
         {
             if(data.ItemType == ItemType.Passive)
             {
-                itemEvent.Invoke();
+                ItemEffect();
                 Destroy(gameObject);
             }
             else
             {
-                int remain = inventory.Add(data, itemEvent,amount);
+                int remain = inventory.Add(data,amount);
                 if(remain == 0)
                     Destroy(gameObject);
             }
             
         }
     }
+    public PlayerStatus LinkPlayer()
+    {
+        if(player == null)
+            player = GameObject.Find("Player");
+        return player.GetComponent<PlayerController>().GetStat();
+    }
+    public abstract void ItemEffect(bool equip = true);
 }

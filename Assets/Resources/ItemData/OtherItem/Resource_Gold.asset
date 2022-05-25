@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde740442a9816a40b71dd33f34b90ff, type: 3}
+  m_Name: Resource_Gold
+  m_EditorClassIdentifier: 
+  _id: 3
+  _name: Gold
+  _tooltip: Resource Gold
+  _iconSprite: {fileID: 21300000, guid: 660d6c305798dd249b47a112f535ae63, type: 3}
+  _itemType: 5
+  _dropItemPrefab: {fileID: 571018063848305265, guid: 221b52bf272f0024d84115c164aa4b6c, type: 3}

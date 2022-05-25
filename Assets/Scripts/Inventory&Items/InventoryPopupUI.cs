@@ -52,12 +52,12 @@ public class InventoryPopupUI : MonoBehaviour
         Index = index;
         item = inventory.ReturnItem(index);
         PopupImage.sprite = item.Data.IconSprite;
-        UseButtonText.fontSize = 14;
+        UseButtonText.fontSize = 20;
         PopupText.text = item.Data.Tooltip;
         DropButton.SetActive(true);
         if(item is SubItem)
         {
-            PopupItemName.text = item.Data.Name+"  (Stock : "+(item as SubItem).Amount+" )";
+            PopupItemName.text = item.Data.Name+"  (개수 : "+(item as SubItem).Amount+" )";
             UseButtonText.text = "USE";
             SlotButton.SetActive(true);
         }
@@ -82,7 +82,9 @@ public class InventoryPopupUI : MonoBehaviour
                 equipSlot = acessorySlot.GetComponent<EquipSlotUI>();
             successfulAdd = inventory.AddUnequipItem(item);
             if(successfulAdd)
+            {
                 equipSlot.RemoveItem();
+            }
             HidePanel();
             return;
         }
@@ -112,8 +114,12 @@ public class InventoryPopupUI : MonoBehaviour
                 item = equipSlot.SwapItem(item);
                 inventory.SetItem(Index,item);
             }
+            else
+            {
+                inventory.Remove(Index);
+            }
         }
-        inventory.Remove(Index);
+        
         HidePanel();
         inventory.UpdateSlot(Index);
     }

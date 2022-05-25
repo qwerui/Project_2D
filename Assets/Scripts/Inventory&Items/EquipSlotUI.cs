@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EquipSlotUI : MonoBehaviour
 {
     [SerializeField] private Image _iconImage;
-    [SerializeField] private Item item;
+    [SerializeField] private EquipItem item;
     [SerializeField] private ItemType type;
     [SerializeField] private GameObject player;
 
@@ -31,22 +31,28 @@ public class EquipSlotUI : MonoBehaviour
     {
         if(item != null)
             return true;
-        item = inventoryItem;
+        item = inventoryItem as EquipItem;
         _iconImage.sprite = inventoryItem.Data.IconSprite;
+        item.Equip();
         ShowIcon();
         return false;
     }
     public void RemoveItem()
     {
         _iconImage.sprite = null;
+        item.UnEquip();
         item = null;
         HideIcon();
     }
     public Item SwapItem(Item newItem)
     {
         Item tempItem = item;
-        item = newItem;
+        item = newItem as EquipItem;
         _iconImage.sprite = newItem.Data.IconSprite;
         return tempItem;
+    }
+    public EquipItem GetItem()
+    {
+        return item as EquipItem;
     }
 }
