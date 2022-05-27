@@ -32,23 +32,24 @@ public abstract class ItemPrefab : MonoBehaviour
         {
             if(data.ItemType == ItemType.Passive)
             {
+                player = other.gameObject;
                 ItemEffect();
                 Destroy(gameObject);
             }
             else
             {
-                int remain = inventory.Add(data,amount);
+                int remain = inventory.Add(data,other.gameObject,amount);
                 if(remain == 0)
                     Destroy(gameObject);
             }
             
         }
     }
-    public PlayerStatus LinkPlayer()
+    // 아이템 효과 구현할 때 가장 먼저 호출해야함
+    public PlayerStatus LinkPlayer(Item item = null)
     {
-        if(player == null)
-            player = GameObject.Find("Player");
+        player = item.GetPlayer();
         return player.GetComponent<PlayerController>().GetStat();
     }
-    public abstract void ItemEffect(bool equip = true);
+    public abstract void ItemEffect(Item item = null, bool equip = true);
 }

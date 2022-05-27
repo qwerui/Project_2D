@@ -35,7 +35,7 @@ public class SubItem : Item
     public bool Use()
     {
         Amount--;
-        subItemData.DropItemPrefab.GetComponent<ItemPrefab>().ItemEffect();
+        subItemData.DropItemPrefab.GetComponent<ItemPrefab>().ItemEffect(this);
         return true;
     }
 }

@@ -19,11 +19,17 @@ public abstract class InteractableObject : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Player")
+        {
+            other.gameObject.transform.GetChild(1).gameObject.SetActive(true);
             isOnPlayer = true;
+        }
     }
     private void OnTriggerExit2D(Collider2D other) {
         if(other.gameObject.tag == "Player")
+        {
+            other.gameObject.transform.GetChild(1).gameObject.SetActive(false);
             isOnPlayer = false;
+        }
     }
 
     protected abstract void Interaction();

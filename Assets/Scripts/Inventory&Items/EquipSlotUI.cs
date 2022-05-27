@@ -8,7 +8,7 @@ public class EquipSlotUI : MonoBehaviour
     [SerializeField] private Image _iconImage;
     [SerializeField] private EquipItem item;
     [SerializeField] private ItemType type;
-    [SerializeField] private GameObject player;
+    [SerializeField] private ItemData FirstItem;
 
     private InventoryPopupUI _inventoryPopupUI;
     private GameObject _iconGo;
@@ -20,6 +20,14 @@ public class EquipSlotUI : MonoBehaviour
         _inventoryPopupUI = GameObject.Find("ItemPopup").GetComponent<InventoryPopupUI>();
         _iconGo = transform.GetChild(0).gameObject;
         HideIcon();
+    }
+    private void Start() {
+        if(FirstItem != null)
+        {
+            EquipItem tempItem = FirstItem.CreateItem() as EquipItem;
+            tempItem.SetPlayer(GameObject.Find("Player"));
+            SetItem(tempItem); 
+        }
     }
 
     public void OpenItemPopup()

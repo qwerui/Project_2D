@@ -6,9 +6,9 @@ public class Knife : ItemPrefab
 {
     PlayerStatus stat;
 
-    public override void ItemEffect(bool equip)
+    public override void ItemEffect(Item item, bool equip)
     {
-        stat = LinkPlayer();
+        stat = LinkPlayer(item);
         if(equip == true)
         {
             stat.setAtk(stat.getAtk() + 5);

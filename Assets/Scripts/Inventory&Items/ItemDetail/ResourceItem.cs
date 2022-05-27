@@ -6,9 +6,9 @@ public class ResourceItem : ItemPrefab
 {
     PlayerStatus stat;
 
-    public override void ItemEffect(bool equip)
+    public override void ItemEffect(Item item, bool equip)
     {
-        stat = LinkPlayer();
+        stat = LinkPlayer(item);
         if(this.data.ID == 0)
         {
             stat.setRedBall(stat.getRedBall() + amount);
