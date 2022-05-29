@@ -8,8 +8,9 @@ public class EquipItemData : ItemData
 {
     public int Value => _value;
     public int Red => _red;
-    public int blue => _blue;
-    public int yellow => _yellow;
+    public int Blue => _blue;
+    public int Yellow => _yellow;
+    public int Rarity => _rarity;
     public Sprite WeaponEffect => _weaponEffect;
     public Vector2 WeaponHitSize => _weaponHitSize;
 
@@ -19,6 +20,7 @@ public class EquipItemData : ItemData
     [SerializeField] private int _yellow;
     [SerializeField] private Sprite _weaponEffect;
     [SerializeField] private Vector2 _weaponHitSize;
+    [SerializeField] private int _rarity;
     
     public override Item CreateItem()
     {
