@@ -8,4 +8,5 @@ public class InteractionDirector : MonoBehaviour
     public GameObject Inventory;
     public GameObject MainUI;
     public GameObject shopController;
+    public GameObject Gacha;
 }
