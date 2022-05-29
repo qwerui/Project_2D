@@ -120,7 +120,7 @@ public class InventoryController : MonoBehaviour
     }
 
     // 아이템 획득
-    public int Add(ItemData itemData, int amount = 1)
+    public int Add(ItemData itemData, GameObject player, int amount = 1)
     {
         int index;
 
@@ -166,6 +166,7 @@ public class InventoryController : MonoBehaviour
                     {
                         // 새로운 아이템 생성
                         SubItem ci = ciData.CreateItem() as SubItem;
+                        ci.SetPlayer(player);
                         ci.SetAmount(amount);
                         // 슬롯에 추가
                         _items[index] = ci;
@@ -186,6 +187,7 @@ public class InventoryController : MonoBehaviour
                 {
                     // 아이템을 생성하여 슬롯에 추가
                     _items[index] = itemData.CreateItem();
+                    _items[index].SetPlayer(player);
                     amount = 0;
 
                     UpdateSlot(index);

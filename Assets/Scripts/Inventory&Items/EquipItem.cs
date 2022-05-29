@@ -11,16 +11,14 @@ public class EquipItem : Item
         equipItemData = data;
     }
 
-
-    //UnityEvent에 increase 메소드는 앞에 decrease 메소드는 뒤에 넣어야함
     public bool Equip()
     {
-        equipItemData.DropItemPrefab.GetComponent<ItemPrefab>().ItemEffect(true);
+        equipItemData.DropItemPrefab.GetComponent<ItemPrefab>().ItemEffect(this, true);
         return true;
     }
     public bool UnEquip()
     {
-        equipItemData.DropItemPrefab.GetComponent<ItemPrefab>().ItemEffect(false);
+        equipItemData.DropItemPrefab.GetComponent<ItemPrefab>().ItemEffect(this, false);
         return true;
     }
 }

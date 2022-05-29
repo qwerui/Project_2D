@@ -64,6 +64,9 @@ public class GameDirector : MonoBehaviour
 
             hpBar.fillAmount = Mathf.Lerp(hpBar.fillAmount, hpPercent, Time.deltaTime * 5);
             hungerBar.fillAmount = Mathf.Lerp(hungerBar.fillAmount, hungerPercent, Time.deltaTime * 5);
+
+            hpBar.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Text>().text = "Hp : "+player.getHp()+" / "+player.getMaxHp();
+            hungerBar.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Text>().text = "Hunger : "+player.getHunger()+" / "+player.getMaxHunger();
     }
     private IEnumerator HealthTextController()
     {

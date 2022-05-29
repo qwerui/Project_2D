@@ -118,8 +118,6 @@ public class PlayerController : MonoBehaviour
                 if(!(isJumping&&isAttacking)) //점프 공격 중에는 방향 전환 불가
                     this.transform.localScale = new Vector3(moveDirection,1,1);
                 isMoving = true;
-                if((!isJumping&&!isCrouch)) //점프, 앉기 중에는 대쉬 불가
-                    Dash();
             }
             else
             {
@@ -129,6 +127,8 @@ public class PlayerController : MonoBehaviour
                     isMoving = false;
                 } 
             }
+            if((!isJumping&&!isCrouch)) //점프, 앉기 중에는 대쉬 불가
+                Dash();
             if(isOnSlope&&!isMoving)
                 rigid.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
             else
@@ -248,16 +248,19 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.C)&&!isDash)
         {
-            currentDashTimer = startDashTimer;
-            rigid.velocity = Vector2.zero;
-            isDash = true;
+            if(Input.GetAxisRaw("Horizontal")!=0) //정지 중에는 대쉬 불가
+            {
+                currentDashTimer = startDashTimer;
+                rigid.velocity = Vector2.zero;
+                isDash = true;
 
-            //대쉬 하면 공복치 감소
-            stat.setHunger(stat.getHunger()-5);
+                //대쉬 하면 공복치 감소
+                stat.setHunger(stat.getHunger()-5);
+            }
         }
         if(isDash)
         {
-            rigid.velocity = transform.right * moveDirection * dashSpeed;
+            rigid.velocity = new Vector2(transform.localScale.x,0) * dashSpeed;
             currentDashTimer -= Time.deltaTime;
             Physics2D.IgnoreLayerCollision(13,25, true);
             if(currentDashTimer <= 0)
