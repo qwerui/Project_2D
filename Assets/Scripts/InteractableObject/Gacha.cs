@@ -8,6 +8,13 @@ public class Gacha : InteractableObject
     GameObject MainUI;
     GameObject GachaPopup;
     public GachaController Gacha_ctl;
+    BoxCollider2D hitBox;
+    SpriteRenderer sprite;
+
+    private void Start() {
+        hitBox = GetComponent<BoxCollider2D>();
+        sprite = GetComponent<SpriteRenderer>();
+    }
 
     protected override void Interaction()
     {
@@ -25,5 +32,10 @@ public class Gacha : InteractableObject
     protected override void ExitAction()
     {
         Destroy(GachaPopup);
+    }
+    public void DisableGacha()
+    {
+        sprite.color = new Color(0.7f, 0.5f, 0.5f);
+        Destroy(hitBox);
     }
 }
