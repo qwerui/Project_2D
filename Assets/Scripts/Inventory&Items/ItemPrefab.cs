@@ -48,7 +48,8 @@ public abstract class ItemPrefab : MonoBehaviour
     // 아이템 효과 구현할 때 가장 먼저 호출해야함
     public PlayerStatus LinkPlayer(Item item = null)
     {
-        player = item.GetPlayer();
+        if(player == null)
+            player = item.GetPlayer();
         return player.GetComponent<PlayerController>().GetStat();
     }
     public abstract void ItemEffect(Item item = null, bool equip = true);

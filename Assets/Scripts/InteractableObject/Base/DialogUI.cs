@@ -9,13 +9,17 @@ public class DialogUI : MonoBehaviour
     public float textSpeed;
     int index = 0;
     Text textSpace;
+    Vector3 pos;
 
     public void DialogSetting(GameObject dialogObj, string[] dialogString)
     {
-        GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(dialogObj.transform.position+Vector3.up * 2.2f);
+        pos = dialogObj.transform.position;
         dialogText = dialogString;
         textSpace = transform.GetChild(0).GetComponent<Text>();
         GoNextText();
+    }
+    private void FixedUpdate() {
+        GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(pos+Vector3.up * 2.2f);
     }
 
     public bool GoNextText()

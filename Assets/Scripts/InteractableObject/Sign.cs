@@ -16,7 +16,7 @@ public class Sign : InteractableObject
     {
         if(canvas == null)
         {
-            canvas = GameObject.Find("Canvas");
+            canvas = interactionDirector.MainUI;
         }
         if(!isReading)
         {
@@ -32,12 +32,9 @@ public class Sign : InteractableObject
             }
         }
     }
-    protected override void UpdateAction()
+    protected override void ExitAction()
     {
-        if(!isOnPlayer)
-        {
-            isReading = false;
-            Destroy(dialogPopup);
-        }
+        isReading = false;
+        Destroy(dialogPopup);
     }
 }

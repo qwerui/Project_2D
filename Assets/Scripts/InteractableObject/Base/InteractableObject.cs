@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class InteractableObject : MonoBehaviour
 {
     protected bool isOnPlayer = false;
+    protected InteractionDirector interactionDirector;
     private void Update() {
         if(isOnPlayer)
         {
@@ -14,13 +15,13 @@ public abstract class InteractableObject : MonoBehaviour
             }
         }
     }
-    private void FixedUpdate() {
-        UpdateAction();
-    }
+
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Player")
         {
             other.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            if(interactionDirector == null)
+                interactionDirector = other.gameObject.transform.GetChild(1).GetChild(0).gameObject.GetComponent<InteractionDirector>();
             isOnPlayer = true;
         }
     }
@@ -28,10 +29,11 @@ public abstract class InteractableObject : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             other.gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            ExitAction();
             isOnPlayer = false;
         }
     }
 
     protected abstract void Interaction();
-    protected abstract void UpdateAction();
+    protected abstract void ExitAction();
 }
