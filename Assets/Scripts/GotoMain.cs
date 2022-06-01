@@ -15,6 +15,11 @@ public class GotoMain : MonoBehaviour
     {
         SceneManager.LoadScene("MainScene");
     }
+
+    public void gotoProlouge()
+    {
+        SceneManager.LoadScene("PrologueScene");
+    }
     // Update is called once per frame
     void Update()
     {
