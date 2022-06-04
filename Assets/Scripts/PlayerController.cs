@@ -418,6 +418,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //프롤로그에서 책과 만나면 워프
+    public void Warf()
+    {
+        transform.position += new Vector3(0,50.0f,0);
+    }
+
     public void GainExprience(int experience)
     {
         experience += stat.getExperience();

@@ -36,5 +36,8 @@ public class Sign : InteractableObject
     {
         isReading = false;
         Destroy(dialogPopup);
+        Destroy(gameObject);
+
+
     }
 }
