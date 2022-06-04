@@ -13,6 +13,6 @@ public class anold : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject.Find("Player").GetComponent<PlayerController>().Warf();
+        // GameObject.Find("Player").GetComponent<PlayerController>().Warf();
     }
 }
