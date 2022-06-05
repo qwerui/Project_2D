@@ -92,8 +92,8 @@ public class PlayerController : MonoBehaviour
     {
         stat.setMaxHp(100);
         stat.setHp(100);
-        stat.setAtk(0);
-        stat.setDef(0);
+        stat.setAtk(10);
+        stat.setDef(5);
         stat.setMaxHunger(100);
         stat.setHunger(100);
         stat.setGold(0);

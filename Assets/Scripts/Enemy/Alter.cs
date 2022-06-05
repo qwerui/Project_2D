@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Alter : EnemyClass
 {
-
+    [SerializeField] private GameObject Weapon;
     [SerializeField] private GameObject WeaponSlot;
     GameObject weaponRoot; 
   private void Awake() 
@@ -54,7 +54,7 @@ public class Alter : EnemyClass
             isMoving=false;
         }
         rigid.velocity= new Vector2(moveSpeed*nextMove, 0);
-        ani.SetBool("Run", isMoving);
+        ani.SetBool("move", isMoving);
     }
     protected override void Think()
     {
@@ -71,7 +71,7 @@ public class Alter : EnemyClass
             nextMove = -1;
         transform.localScale = new Vector3(nextMove,1,1);
         rigid.velocity= new Vector2(moveSpeed*nextMove, 0);
-        ani.SetBool("Run", isMoving);
+        ani.SetBool("move", isMoving);
     }
     protected override IEnumerator PosDiff()
     {
