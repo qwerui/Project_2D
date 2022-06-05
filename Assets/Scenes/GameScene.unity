@@ -11861,7 +11861,7 @@ PrefabInstance:
     - target: {fileID: 2442998530794531762, guid: 44e5fed52c5c5354b873e249122ef492, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1388685148}
+      objectReference: {fileID: 0}
     - target: {fileID: 3660432646478907096, guid: 44e5fed52c5c5354b873e249122ef492, type: 3}
       propertyPath: m_Name
       value: Rat
@@ -12133,7 +12133,7 @@ PrefabInstance:
     - target: {fileID: 26268954, guid: c3f7efe981b5c214a91f6df41fb218e1, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1388685148}
+      objectReference: {fileID: 0}
     - target: {fileID: 4427375828903075558, guid: c3f7efe981b5c214a91f6df41fb218e1, type: 3}
       propertyPath: m_Name
       value: Bat

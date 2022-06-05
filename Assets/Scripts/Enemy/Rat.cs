@@ -7,12 +7,12 @@ public class Rat : EnemyClass
     private void Awake() 
     {
         Think();
-        StartCoroutine("PosDiff");
     }
     // Start is called before the first frame update
     void Start()
     {
         EnemyInit();
+        StartCoroutine("PosDiff");
     }
 
     // Update is called once per frame
