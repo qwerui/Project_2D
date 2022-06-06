@@ -29,7 +29,7 @@ public class GachaUI : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        rect.position = Camera.main.WorldToScreenPoint(pos+Vector3.up * 2.2f);
+        rect.position = Camera.main.WorldToScreenPoint(pos+Vector3.up * 1.8f);
         redText.text = Mathf.Clamp(int.Parse(redText.text),0,redMax).ToString();
         blueText.text = Mathf.Clamp(int.Parse(blueText.text),0,blueMax).ToString();
         yellowText.text = Mathf.Clamp(int.Parse(yellowText.text),0,yellowMax).ToString();
