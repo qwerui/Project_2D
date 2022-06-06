@@ -9,15 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1842656997400064305, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_Size.x
-      value: 2.5
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1842656997400064305, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
+      propertyPath: m_Size.y
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 1842656997400064305, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 2.48
+      value: 15.5
       objectReference: {fileID: 0}
     - target: {fileID: 1842656997400064305, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 3.68
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_RootOrder
@@ -25,19 +29,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.163383
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5980745
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -49,15 +53,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -71,13 +75,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4917698369189919575, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
+      propertyPath: dialogText.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917698369189919575, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
+      propertyPath: dialogText.Array.data[0]
+      value: "\uC798 \uC62C\uB77C\uC654\uB124..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917698369189919575, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
+      propertyPath: dialogText.Array.data[1]
+      value: "\uC774\uACF3\uC740 \uB108\uB97C \uB178\uB9AC\uB294\n\uC801\uB4E4\uC774
+        \uC874\uC7AC\uD558\uC9C0.."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917698369189919575, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
+      propertyPath: dialogText.Array.data[2]
+      value: "\uB108\uC5D0\uAC8C\uB294 \uC791\uC740 \uCE7C\n\uD55C \uC790\uB8E8\uAC00
+        \uC788\uC744\uAC70\uB2E4..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917698369189919575, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
+      propertyPath: dialogText.Array.data[3]
+      value: "Z\uD0A4\uB97C \uB20C\uB7EC \uC55E\uC5D0 \uC788\uB294\n\uC950\uB97C
+        \uACF5\uACA9\uD574\uBCF4\uAC8C.."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917698369189919575, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
+      propertyPath: dialogText.Array.data[4]
+      value: "\uC950\uAC00 \uB108\uBB34 \uC791\uC544\uC11C\n\uACF5\uACA9\uC774 \uB9DE\uC9C0
+        \uC54A\uB294\uB2E4\uBA74\n\uC544\uB798 \uBC29\uD5A5\uD0A4\uB97C \uB20C\uB7EC\n\uBAB8\uC744
+        \uC219\uC774\uAC8C..."
+      objectReference: {fileID: 0}
     - target: {fileID: 6465559695997018150, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_Name
-      value: Stranger (1)
+      value: Stranger
       objectReference: {fileID: 0}
     - target: {fileID: 7862760924061776456, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 10d9ad51dced6cd489b4b6aa9d6eecca, type: 3}
+    - target: {fileID: 7862760924061776456, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}

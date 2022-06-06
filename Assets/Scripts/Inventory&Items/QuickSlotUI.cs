@@ -70,7 +70,11 @@ public class QuickSlotUI : MonoBehaviour
     }
     public void QuickItemUse()
     {
-        (item as SubItem).Use();
-        inventory.UpdateSlot(Index);
+        if(item != null)
+        {
+            (item as SubItem).Use();
+            inventory.UpdateSlot(Index);
+            UpdateQuickSlot();
+        }
     }
 }

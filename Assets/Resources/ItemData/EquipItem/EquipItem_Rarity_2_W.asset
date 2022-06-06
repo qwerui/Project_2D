@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630971a39630ec74db31e9135a42ea2f, type: 3}
+  m_Name: EquipItem_Rarity_2_W
+  m_EditorClassIdentifier: 
+  _id: 9908
+  _name: "\uB808\uC5B43 \uBB34\uAE30"
+  _tooltip: "\uC5B4\uC9F8\uC120\uC9C0 \uB098\uC774\uD504\uBAA8\uC591\uC774\uB2E4"
+  _iconSprite: {fileID: 0}
+  _itemType: 0
+  _dropItemPrefab: {fileID: 2007104930933416071, guid: 5e67b362fc5f276448afb4ff01310571, type: 3}
+  _value: 0
+  _red: 0
+  _blue: 0
+  _yellow: 0
+  _weaponEffect: {fileID: 2737840414567516762, guid: c240f731f6faa7340972a0dbb9d2f2e0, type: 3}
+  _weaponHitSize: {x: 0, y: 0}
+  _rarity: 2

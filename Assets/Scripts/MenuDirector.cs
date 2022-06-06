@@ -7,6 +7,7 @@ public class MenuDirector : MonoBehaviour
 {
     int sceneIndex;
     [SerializeField] GameObject arrow;
+    [SerializeField] GameObject TutorialPopup;
     RectTransform arrowPos;
 
     void Start()
@@ -17,6 +18,7 @@ public class MenuDirector : MonoBehaviour
 
     private void Update() {
         GetKeyboard();
+        GetKeyPopup();
     }
     private void FixedUpdate() {
         ArrowMove();
@@ -46,10 +48,20 @@ public class MenuDirector : MonoBehaviour
         
     }
 
+    void GetKeyPopup()
+    {
+        if(TutorialPopup.activeSelf == true)
+        {
+            if(Input.GetKeyDown(KeyCode.Y))
+                LoadTutorial();
+            else if(Input.GetKeyDown(KeyCode.N))
+                LoadGame();
+        }
+    }
 
     public void StartBtnDown()
     {
-        SceneManager.LoadScene("GameScene");
+        TutorialPopup.SetActive(true);
     }
 
     public void SetBtnDown()
@@ -62,5 +74,13 @@ public class MenuDirector : MonoBehaviour
     {
         SceneManager.LoadScene("RecordScene");
 
+    }
+    public void LoadTutorial()
+    {
+        SceneManager.LoadScene("PrologueScene");
+    }
+    public void LoadGame()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }
