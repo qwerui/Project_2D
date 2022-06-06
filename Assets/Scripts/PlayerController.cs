@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D hitBox;
     private SpriteRenderer spriteRenderer;
     private EquipItem WeaponItem;
+
     [SerializeField] private float slopeCheckDistance;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private GameObject GameDirector;
@@ -18,10 +19,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject WeaponSlot;
     [SerializeField] private GameObject damageText;
     [SerializeField] private GameObject LevelUpText;
+    [SerializeField] private GameObject QuickSlotPotion;
+    [SerializeField] private GameObject QuickSlotWeapon;
+    [SerializeField] private GameObject inventory;
+
     PlayerStatus stat;
     GameObject weaponRoot; //손의 위치
     GameObject damageInstance;
     GameObject levelUpInstance;
+
+    QuickSlotUI quickSlotPotion;
+    QuickSlotUI quickSlotWeapon;
 
     //플레이어 이동 관련 수치(Inspector에서 조정)
     [SerializeField] private float moveSpeed = 5.0f;
@@ -66,6 +74,8 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         hitBox = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        quickSlotPotion = QuickSlotPotion.GetComponent<QuickSlotUI>();
+        quickSlotWeapon = QuickSlotWeapon.GetComponent<QuickSlotUI>();
         weaponRoot = transform.GetChild(0).gameObject;
         StartCoroutine("Hungry");
         StartCoroutine("DeadCheck");
@@ -78,8 +88,9 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         Crouch();
-        Attack();    
-        
+        Attack();
+        UseQuickSlot();
+        UIControll();
     }
     private void FixedUpdate() 
     {
@@ -92,8 +103,8 @@ public class PlayerController : MonoBehaviour
     {
         stat.setMaxHp(100);
         stat.setHp(100);
-        stat.setAtk(10);
-        stat.setDef(5);
+        stat.setAtk(0);
+        stat.setDef(0);
         stat.setMaxHunger(100);
         stat.setHunger(100);
         stat.setGold(0);
@@ -174,7 +185,14 @@ public class PlayerController : MonoBehaviour
     //공격 기능
     private void Attack()
     {
-        if(WeaponSlot.GetComponent<EquipSlotUI>().GetItem() != null)
+        if(Input.GetKeyDown(KeyCode.Z)&&Input.GetKey(KeyCode.UpArrow))
+        {
+            if(!isAttacking)
+            {
+                quickSlotWeapon.QuickItemUse();
+            }
+        }
+        else if(WeaponSlot.GetComponent<EquipSlotUI>().GetItem() != null)
         {
         if(Input.GetKeyDown(KeyCode.Z)&&!isAttacking)
         {
@@ -281,6 +299,7 @@ public class PlayerController : MonoBehaviour
 
         SlopeCheckHorizontal(checkPos);
         SlopeCheckVertical(checkPos);
+
     }
     //경사로의 각도를 구함
     private void SlopeCheckHorizontal(Vector2 checkPos)
@@ -425,7 +444,6 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(30,-4, 0);
     }
 
-
     public void GainExprience(int experience)
     {
         experience += stat.getExperience();
@@ -460,6 +478,31 @@ public class PlayerController : MonoBehaviour
             levelUpInstance = Instantiate(LevelUpText).gameObject;
             levelUpInstance.transform.position = transform.position + Vector3.up;
             yield return new WaitForSeconds(0.2f);
+        }
+    }
+    private void UseQuickSlot()
+    {
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            quickSlotPotion.QuickItemUse();
+        }
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            quickSlotWeapon.QuickItemUse();
+        }
+    }
+    private void UIControll()
+    {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            if(inventory.activeSelf == true)
+            {
+                inventory.SetActive(false);
+            }
+            else
+            {
+                inventory.SetActive(true);
+            }
         }
     }
 }

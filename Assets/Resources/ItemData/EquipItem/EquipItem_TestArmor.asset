@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630971a39630ec74db31e9135a42ea2f, type: 3}
   m_Name: EquipItem_TestArmor
   m_EditorClassIdentifier: 
-  _id: 99999
-  _name: TestArmor
-  _tooltip: testArmor
+  _id: 9900
+  _name: "\uC758\uBB38\uC758 \uAC11\uC637"
+  _tooltip: "\uC5B4\uC9F8\uC120\uC9C0 \uB098\uC774\uD504 \uBAA8\uC591\uC774\uB2E4"
   _iconSprite: {fileID: -8860268116576817079, guid: e2dc6465bf18d5f499e9def715ae2b33, type: 3}
   _itemType: 1
   _dropItemPrefab: {fileID: 7045410537952516587, guid: 846b0d92527c30643b4a7a185fa221bd, type: 3}

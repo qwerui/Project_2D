@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Alter : EnemyClass
 {
-    [SerializeField] private GameObject Weapon;
-    [SerializeField] private GameObject WeaponSlot;
-    GameObject weaponRoot; 
   private void Awake() 
     {
         Think();
@@ -47,14 +44,14 @@ public class Alter : EnemyClass
         if(nextMove != 0)
         {
             isMoving = true;
-            transform.localScale = new Vector3(nextMove,1,1);
+            transform.localScale = new Vector3(-nextMove,1,1);
         }
         else
         {
             isMoving=false;
         }
         rigid.velocity= new Vector2(moveSpeed*nextMove, 0);
-        ani.SetBool("move", isMoving);
+        ani.SetBool("Move", isMoving);
     }
     protected override void Think()
     {
@@ -69,9 +66,9 @@ public class Alter : EnemyClass
             nextMove = 1;
         else
             nextMove = -1;
-        transform.localScale = new Vector3(nextMove,1,1);
+        transform.localScale = new Vector3(-nextMove,1,1);
         rigid.velocity= new Vector2(moveSpeed*nextMove, 0);
-        ani.SetBool("move", isMoving);
+        ani.SetBool("Move", isMoving);
     }
     protected override IEnumerator PosDiff()
     {

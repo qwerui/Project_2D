@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4416863161734529731}
   - component: {fileID: 3233079200676396751}
   - component: {fileID: 1915579955703751888}
-  m_Layer: 0
+  - component: {fileID: 1094853999}
+  m_Layer: 13
   m_Name: Alter
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,9 +147,45 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &1094853999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752426599532508047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974c790e809e3d84b905ecc3e79b217a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  atk: 5
+  def: 1
+  moveSpeed: 3
+  experience: 10
+  ani: {fileID: 4416863161734529731}
+  rigid: {fileID: 1915579955703751888}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  hitbox: {fileID: 3233079200676396751}
+  player: {fileID: 0}
+  damageText: {fileID: 7582739099108354712, guid: 57aa7623a71eaa844a636e52227938b4, type: 3}
+  dropItem:
+  - {fileID: 7503361679374208725, guid: fec2bfff340ced140a66c9a82515b10f, type: 3}
+  dropChance:
+  - 100
+  resourceItem: {fileID: 0}
+  rangeOfResource: 0000000000000000000000000000000000000000000000000000000000000000
+  chanceOfResource:
+  - 0
+  - 0
+  - 0
+  - 0
