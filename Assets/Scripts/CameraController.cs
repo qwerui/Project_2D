@@ -25,4 +25,12 @@ public class CameraController : MonoBehaviour
             -10);                                                                                                  // Z
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * smoothSpeed);
     }
+    public void SetCameraLimit(RoomInfo room)
+    {
+
+        limitMinX = (room.pos.x-5)*50-25;
+        limitMaxX = (room.pos.x-5)*50+25;
+        limitMaxY = (room.pos.y-5)*50+25;
+        limitMinY = (room.pos.y-5)*50-25;
+    }
 }

@@ -164,12 +164,15 @@ public class PlayerController : MonoBehaviour
     //점프 기능
     private void Jump()
     {
-        if(!isAttacking&&!isCrouch) //공격, 앉기 중에는 점프 불가
+        if(Input.GetKeyDown(KeyCode.X)&&!isJumping)//점프 시간으로 높낮이 조절
         {
-            if(Input.GetKeyDown(KeyCode.X)&&!isJumping)//점프 시간으로 높낮이 조절
                 jumpCounter = jumpTime;
-            else
-                jumpCounter-=Time.deltaTime;
+                ani.SetBool("Jump",isJumping);
+        }
+        else
+            jumpCounter-=Time.deltaTime;
+        if((!isAttacking&&!isCrouch)&&!isDash) //공격, 앉기, 대시 중에는 점프 불가
+        {
             if(Input.GetKey(KeyCode.X))
             {
                 if(jumpCounter>0)
@@ -177,7 +180,6 @@ public class PlayerController : MonoBehaviour
                     rigid.velocity = new Vector2(rigid.velocity.x, jumpSpeed);
                 }
             }
-            ani.SetBool("Jump",isJumping);
             ani.SetFloat("Velocity_y", rigid.velocity.y);
         }
     }
@@ -374,11 +376,8 @@ public class PlayerController : MonoBehaviour
         
             //적과 충돌 방지로 무적 구현
             Physics2D.IgnoreLayerCollision(13,25, true);
-            StartCoroutine("Unbeatable");
-        }
-        else
-        {
-            Physics2D.IgnoreLayerCollision(13,25, true); //플레이어가 죽었을 때 적과 충돌 방지
+            if(!isDead)
+                StartCoroutine("Unbeatable");
         }
     }
 

@@ -26,10 +26,13 @@ public class Rat : EnemyClass
         {
             PlatformCheck();
             WallCheck();
-            if(SetOnChase(4.0f))
-                Chase();
-            else
-                Move();
+            if(!isHit)
+            {
+                if(SetOnChase(4.0f))
+                    Chase();
+                else
+                    Move();
+            }
         }
     }
 

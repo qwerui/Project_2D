@@ -33,6 +33,7 @@ public abstract class EnemyClass : MonoBehaviour
 
     protected bool isMoving;
     protected bool isDead = false;
+    protected bool isHit = false;
 
     
     protected abstract void Move(); //적 이동
@@ -58,6 +59,12 @@ public abstract class EnemyClass : MonoBehaviour
         hp -= finalDamage;
         if(hp<=0)
             StartCoroutine("Dead");
+        else
+        {
+            rigid.velocity = Vector2.zero;
+            isHit = true;
+            StartCoroutine("FalseHit");
+        }
     }
     protected IEnumerator Dead()
     {
@@ -156,5 +163,11 @@ public abstract class EnemyClass : MonoBehaviour
             transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-2.0f,2.0f),10.0f),ForceMode2D.Impulse);
         }
         transform.DetachChildren();
+    }
+    IEnumerator FalseHit()
+    {
+        yield return new WaitForSeconds(0.3f);
+        isHit = false;
+        yield return null;
     }
 }
