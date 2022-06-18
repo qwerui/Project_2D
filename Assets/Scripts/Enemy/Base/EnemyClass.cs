@@ -48,7 +48,7 @@ public abstract class EnemyClass : MonoBehaviour
         CreateItem();
     }
 
-    protected void Hit(int damage)
+    public void Hit(int damage)
     {
         damageInstance = Instantiate(damageText).gameObject;
         damageInstance.transform.position = transform.position;

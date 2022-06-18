@@ -124,3 +124,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialog: {fileID: 4677635347144995348, guid: f80fea143f35d8946a7d783bb3668277, type: 3}
+  dialogText: []

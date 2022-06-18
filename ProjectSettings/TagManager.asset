@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Enemy
   - Ground
+  - WeakMonster
+  - NormalMonster
+  - StrongMonster
+  - BossMonster
   layers:
   - Default
   - TransparentFX

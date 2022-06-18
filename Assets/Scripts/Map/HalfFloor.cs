@@ -22,7 +22,7 @@ public class HalfFloor : MonoBehaviour
             if(Input.GetKey(KeyCode.DownArrow)&&Input.GetKeyDown(KeyCode.X))
             {
                 tileCollider.enabled = false;
-                Invoke("ColliderOn", 1f);
+                Invoke("ColliderOn", 0.3f);
                 break;
             }
             yield return null;

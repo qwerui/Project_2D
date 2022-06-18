@@ -13,7 +13,8 @@ public class RoomController : MonoBehaviour
     CameraController cameraCtl;
     RoomGenerator generator;
     Room currentRoom;
-    
+    Room nextRoom;
+
     private void Awake() {
         roomList = new List<RoomInfo>();
     }
@@ -39,9 +40,14 @@ public class RoomController : MonoBehaviour
             tempMap.GetComponent<Room>().SetRoomInfo(roomList[i], this);
         }
     }
-    public void SetCurrentRoom(Room current)
+    public void SetCurrentRoom()
     {
-        currentRoom = current;
+        currentRoom = nextRoom;
+        currentRoom.RoomInit();
         cameraCtl.SetCameraLimit(currentRoom.roomInfo);
+    }
+    public void SetNextRoom(Room next)
+    {
+        nextRoom = next;
     }
 }

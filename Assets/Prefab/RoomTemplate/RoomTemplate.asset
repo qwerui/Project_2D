@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: RoomTemplate
   m_EditorClassIdentifier: 
   NormalRoom:
-  - {fileID: 617433206935356515, guid: bbd41b3cf9fa8e242bacaa7954549ba0, type: 3}
+  - {fileID: 6125115656593520840, guid: 865e93976e72ec34c9eaaeb83d8ed814, type: 3}
   BossRoom:
-  - {fileID: 617433206935356515, guid: bbd41b3cf9fa8e242bacaa7954549ba0, type: 3}
+  - {fileID: 5488488008880461357, guid: 7f5e30b12ea3a3141a9fd9e3ec973b5e, type: 3}
   StartRoom:
-  - {fileID: 617433206935356515, guid: bbd41b3cf9fa8e242bacaa7954549ba0, type: 3}
+  - {fileID: 9118885049964970822, guid: 38b9ffcc56f11944abc755a409e00ad9, type: 3}
+  ItemRoom:
+  - {fileID: 2712960445519477349, guid: 875842ff6e1adc24c84f65f9e3125f79, type: 3}

@@ -43,6 +43,10 @@ public class RoomGenerator : MonoBehaviour
             endRoomList.Clear();
             CreateDungeon();
         }
+        if(endRoomList.Count <= 1)
+        {
+            CreateEndRoom();
+        }
         SetPath();
         endRoomList.Sort((r1, r2) => r2.distance.CompareTo(r1.distance));
         InputRoomTemplate();
@@ -118,6 +122,23 @@ public class RoomGenerator : MonoBehaviour
             return false;
     }
 
+    void CreateEndRoom()
+    {
+        bool isCreated = false;
+        RoomInfo pivotRoom = roomList[Random.Range(0,roomList.Count-1)];
+        roomCount--;
+        while(!isCreated)
+        {
+            CreateRoom(pivotRoom.pos+Vector2Int.left, RoomType.Normal, pivotRoom.distance);
+            CreateRoom(pivotRoom.pos+Vector2Int.up, RoomType.Normal, pivotRoom.distance);
+            CreateRoom(pivotRoom.pos+Vector2Int.right, RoomType.Normal, pivotRoom.distance);
+            CreateRoom(pivotRoom.pos+Vector2Int.down, RoomType.Normal, pivotRoom.distance);
+            if(roomCount == makeRoomCount)
+                isCreated = true;
+        }
+        roomCount++;
+    }
+
     void SetPath()
     {
         for(int i=0;i<roomList.Count;i++)
@@ -142,6 +163,7 @@ public class RoomGenerator : MonoBehaviour
     {
         endRoomList[0].roomType = RoomType.Boss;
         endRoomList[1].roomType = RoomType.ItemShop;
+
         for(int i = 0;i<roomList.Count;i++)
         {
             if(roomList[i].roomType == RoomType.Boss)
@@ -151,6 +173,10 @@ public class RoomGenerator : MonoBehaviour
             else if(roomList[i].roomType == RoomType.Start)
             {
                 roomList[i].roomPrefab = template.StartRoom[Random.Range(0,template.StartRoom.Length)];
+            }
+            else if(roomList[i].roomType == RoomType.ItemShop)
+            {
+                roomList[i].roomPrefab = template.ItemRoom[Random.Range(0,template.ItemRoom.Length)];
             }
             else
             {

@@ -236,7 +236,7 @@ public class PlayerController : MonoBehaviour
                 moveSpeed = 0.0f; // 이동 속도 0, 방향 전환 가능 하도록 함
                 isCrouch = true;
                 hitBox.offset = new Vector2(0,0.5f);
-                hitBox.size = new Vector2(1,0.9f);
+                hitBox.size = new Vector2(0.9f,0.9f);
             }
             else
             {   
@@ -245,7 +245,7 @@ public class PlayerController : MonoBehaviour
                     moveSpeed = 5.0f; // 키를 떼면 속도 원상 복귀
                     isCrouch = false;
                     hitBox.offset = new Vector2(0,1.0f);
-                    hitBox.size = new Vector2(1,1.9f);
+                    hitBox.size = new Vector2(0.9f,1.9f);
                 }
             }
             ani.SetBool("Crouch", isCrouch);
@@ -256,9 +256,11 @@ public class PlayerController : MonoBehaviour
     private void onGround()
     {
         float extraHeightText = 0.1f;
-        RaycastHit2D raycastHit = Physics2D.BoxCast(transform.position, new Vector2(1f, 0.1f), 0f, Vector2.down,extraHeightText, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(transform.position, new Vector2(0.9f, 0.1f), 0f, Vector2.down,extraHeightText, groundLayer);
         if(raycastHit.collider != null) // 감지 시
+        {
             isJumping = false;
+        }
         else
             isJumping = true;
         ani.SetBool("Jump", isJumping); // 이거 없으면 착지 후 애니메이션이 안 넘어감

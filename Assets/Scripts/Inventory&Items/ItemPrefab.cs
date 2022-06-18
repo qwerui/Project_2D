@@ -53,4 +53,5 @@ public abstract class ItemPrefab : MonoBehaviour
         return player.GetComponent<PlayerController>().GetStat();
     }
     public abstract void ItemEffect(Item item = null, bool equip = true);
+    public virtual void WeaponUse(){}
 }

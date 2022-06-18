@@ -2034,7 +2034,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &536118450
 PrefabInstance:
@@ -4734,7 +4734,7 @@ RectTransform:
   - {fileID: 1609400758}
   - {fileID: 2116702933}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5346,7 +5346,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &819697014
 MonoBehaviour:
@@ -5895,7 +5895,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1006535552
 PrefabInstance:
@@ -7378,10 +7378,10 @@ MonoBehaviour:
   target: {fileID: 1388685152}
   smoothSpeed: 3
   offset: {x: 0, y: 0}
-  limitMinX: -15
-  limitMaxX: 30
-  limitMinY: -5
-  limitMaxY: 5
+  limitMinX: -25
+  limitMaxX: 25
+  limitMinY: -25
+  limitMaxY: 25
 --- !u!1 &1298902047
 GameObject:
   m_ObjectHideFlags: 0
@@ -7609,7 +7609,7 @@ MonoBehaviour:
   QuickSlotWeapon: {fileID: 660885793}
   inventory: {fileID: 890413849}
   moveSpeed: 5
-  jumpSpeed: 11
+  jumpSpeed: 11.5
   jumpTime: 0.2
   dashSpeed: 20
   startDashTimer: 0.15
@@ -7673,7 +7673,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7152930139536384079, guid: 468e3598a5b681341a2fea0448176bf7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -7699,7 +7699,7 @@ Transform:
   - {fileID: 351959821}
   - {fileID: 1826478878}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1388685153
 Rigidbody2D:
@@ -7746,7 +7746,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.9}
+  m_Size: {x: 0.9, y: 1.9}
   m_EdgeRadius: 0
 --- !u!1 &1395412753
 GameObject:
@@ -7872,7 +7872,7 @@ Transform:
   m_Children:
   - {fileID: 77898536}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1451947252
 GameObject:
@@ -8913,7 +8913,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1617020487
 PrefabInstance:
@@ -9546,7 +9546,7 @@ Transform:
   m_Children:
   - {fileID: 581698766}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1719999351
 PrefabInstance:
@@ -10705,84 +10705,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978094834}
   m_CullTransparentMesh: 1
---- !u!1001 &2012746896
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318861054372116002, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917698369189919575, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: dialogText.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917698369189919575, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: dialogText.Array.data[0]
-      value: "\uC548\uB155\uD558\uC138\uC694\n\uD45C\uC9C0\uD310\uC774\uC5D0\uC694\n\uB9CC\uB098\uC11C
-        \uBC18\uAC00\uC6CC\uC694"
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917698369189919575, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: dialogText.Array.data[1]
-      value: "\uD29C\uD1A0\uB9AC\uC5BC\uC740\n\uC5EC\uAE30\uAE4C\uC9C0\uC5D0\uC694"
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917698369189919575, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: dialogText.Array.data[2]
-      value: "\uBA54\uC778 \uAC8C\uC784\uC740\n\uC544\uC9C1 \uAC1C\uBC1C \uC911\uC774\uC5D0\uC694"
-      objectReference: {fileID: 0}
-    - target: {fileID: 6465559695997018150, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: m_Name
-      value: Sign
-      objectReference: {fileID: 0}
-    - target: {fileID: 7862760924061776456, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: ade14418ad4413a41bf24dfa89924232, type: 2}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d3a400c4135b7ce45a46c5bc6cdfebf5, type: 3}
 --- !u!1 &2024598895
 GameObject:
   m_ObjectHideFlags: 0
