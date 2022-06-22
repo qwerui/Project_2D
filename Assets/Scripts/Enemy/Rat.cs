@@ -15,11 +15,6 @@ public class Rat : EnemyClass
         StartCoroutine("PosDiff");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void FixedUpdate() 
     {
         if(!isDead)

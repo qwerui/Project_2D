@@ -34,6 +34,7 @@ public abstract class EnemyClass : MonoBehaviour
     protected bool isMoving;
     protected bool isDead = false;
     protected bool isHit = false;
+    protected bool isAttack = false;
 
     
     protected abstract void Move(); //적 이동
@@ -157,6 +158,8 @@ public abstract class EnemyClass : MonoBehaviour
     }
     void DropItem()
     {
+        if(transform.GetChild(0).gameObject.tag=="EnemyAttack")
+                Destroy(transform.GetChild(0).gameObject);
         for(int i=0;i<transform.childCount;i++)
         {
             transform.GetChild(i).gameObject.SetActive(true);
@@ -169,5 +172,9 @@ public abstract class EnemyClass : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         isHit = false;
         yield return null;
+    }
+    void AttackEnd()
+    {
+        isAttack=false;
     }
 }

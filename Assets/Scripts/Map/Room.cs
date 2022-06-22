@@ -5,7 +5,7 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     public RoomInfo roomInfo;
-    RoomController controller;
+    public RoomController controller;
 
     public GameObject EnemySpawn;
     public EnemyGroup enemyGroup;
@@ -68,20 +68,8 @@ public class Room : MonoBehaviour
         roomInfo.Height = 50;
         controller = ctl;
     }
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag == "Player")
-        {
-            controller.SetNextRoom(this);
-        }
-    }
-    private void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.tag == "Player")
-        {
-            controller.SetCurrentRoom();
-            HideAll();
-        }
-    }
-    void HideAll()
+    
+    public void HideAll()
     {
         for(int i=0;i<EnemySpawn.transform.childCount;i++)
         {

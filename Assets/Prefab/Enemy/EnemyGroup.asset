@@ -19,4 +19,5 @@ MonoBehaviour:
   - {fileID: 7791597816345312600, guid: 525e20c937eb0f04a80f10ee2428accf, type: 3}
   StrongMonster:
   - {fileID: 4457892681998964424, guid: b0b9b41cffb5db44e8817f4743699c5e, type: 3}
-  BossMonster: []
+  BossMonster:
+  - {fileID: 3673168341888841314, guid: 803ece5cac4268045ba550e146a47fd2, type: 3}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 155658655}
   - component: {fileID: 155658657}
   - component: {fileID: 155658656}
+  - component: {fileID: 4979751670656232866}
   m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
@@ -110,6 +111,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4979751670656232866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155658654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d13bff942af0745a87a100ffd8093b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &498622904394241326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2256,6 +2269,7 @@ MonoBehaviour:
     path: 
   EnemySpawn: {fileID: 7411892785013830906}
   enemyGroup: {fileID: 11400000, guid: 465d9d293c297954791ece60d79e7093, type: 2}
+  Background: {fileID: 155658654}
 --- !u!1 &3900465649598507219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3545,28 +3559,20 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 5698092883939983565}
     m_ColliderPaths:
-    - - X: -20000100
-        Y: -239999959
-      - X: -20000100
-        Y: -240625033
-      - X: -20000041
-        Y: -240625092
-      - X: 20000041
-        Y: -240625092
-      - X: 20000100
-        Y: -240625033
-      - X: 20000100
-        Y: -239999959
-      - X: 20000041
-        Y: -239999900
-      - X: -20000041
-        Y: -239999900
+    - - X: -20000000
+        Y: -240624992
+      - X: 20000000
+        Y: -240624992
+      - X: 20000000
+        Y: -240000000
+      - X: -20000000
+        Y: -240000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 1.9999748, y: -24.06251}
-      - {x: 1.9999748, y: -23.99999}
-      - {x: -2.00001, y: -24.000027}
-      - {x: -1.9999748, y: -24.06251}
+    - - {x: 1.9999708, y: -24.0625}
+      - {x: 1.9999708, y: -24}
+      - {x: -2, y: -24.000029}
+      - {x: -1.9999708, y: -24.0625}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!251 &95278773257828152
