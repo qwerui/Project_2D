@@ -164,12 +164,15 @@ public class PlayerController : MonoBehaviour
     //점프 기능
     private void Jump()
     {
-        if(!isAttacking&&!isCrouch) //공격, 앉기 중에는 점프 불가
+        if(Input.GetKeyDown(KeyCode.X)&&!isJumping)//점프 시간으로 높낮이 조절
         {
-            if(Input.GetKeyDown(KeyCode.X)&&!isJumping)//점프 시간으로 높낮이 조절
                 jumpCounter = jumpTime;
-            else
-                jumpCounter-=Time.deltaTime;
+                ani.SetBool("Jump",isJumping);
+        }
+        else
+            jumpCounter-=Time.deltaTime;
+        if((!isAttacking&&!isCrouch)&&!isDash) //공격, 앉기, 대시 중에는 점프 불가
+        {
             if(Input.GetKey(KeyCode.X))
             {
                 if(jumpCounter>0)
@@ -177,7 +180,6 @@ public class PlayerController : MonoBehaviour
                     rigid.velocity = new Vector2(rigid.velocity.x, jumpSpeed);
                 }
             }
-            ani.SetBool("Jump",isJumping);
             ani.SetFloat("Velocity_y", rigid.velocity.y);
         }
     }
@@ -234,7 +236,7 @@ public class PlayerController : MonoBehaviour
                 moveSpeed = 0.0f; // 이동 속도 0, 방향 전환 가능 하도록 함
                 isCrouch = true;
                 hitBox.offset = new Vector2(0,0.5f);
-                hitBox.size = new Vector2(1,0.9f);
+                hitBox.size = new Vector2(0.9f,0.9f);
             }
             else
             {   
@@ -243,7 +245,7 @@ public class PlayerController : MonoBehaviour
                     moveSpeed = 5.0f; // 키를 떼면 속도 원상 복귀
                     isCrouch = false;
                     hitBox.offset = new Vector2(0,1.0f);
-                    hitBox.size = new Vector2(1,1.9f);
+                    hitBox.size = new Vector2(0.9f,1.9f);
                 }
             }
             ani.SetBool("Crouch", isCrouch);
@@ -254,9 +256,11 @@ public class PlayerController : MonoBehaviour
     private void onGround()
     {
         float extraHeightText = 0.1f;
-        RaycastHit2D raycastHit = Physics2D.BoxCast(transform.position, new Vector2(1f, 0.1f), 0f, Vector2.down,extraHeightText, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(transform.position, new Vector2(0.9f, 0.1f), 0f, Vector2.down,extraHeightText, groundLayer);
         if(raycastHit.collider != null) // 감지 시
+        {
             isJumping = false;
+        }
         else
             isJumping = true;
         ani.SetBool("Jump", isJumping); // 이거 없으면 착지 후 애니메이션이 안 넘어감
@@ -282,10 +286,12 @@ public class PlayerController : MonoBehaviour
             rigid.velocity = new Vector2(transform.localScale.x,0) * dashSpeed;
             currentDashTimer -= Time.deltaTime;
             Physics2D.IgnoreLayerCollision(13,25, true);
+            Physics2D.IgnoreLayerCollision(12,25, true);
             if(currentDashTimer <= 0)
             {
                 rigid.velocity = Vector2.zero;
                 Physics2D.IgnoreLayerCollision(13,25, false);
+                Physics2D.IgnoreLayerCollision(12,25, false);
                 isDash=false;
             }
         }
@@ -374,11 +380,9 @@ public class PlayerController : MonoBehaviour
         
             //적과 충돌 방지로 무적 구현
             Physics2D.IgnoreLayerCollision(13,25, true);
-            StartCoroutine("Unbeatable");
-        }
-        else
-        {
-            Physics2D.IgnoreLayerCollision(13,25, true); //플레이어가 죽었을 때 적과 충돌 방지
+            Physics2D.IgnoreLayerCollision(12,25, true);
+            if(!isDead)
+                StartCoroutine("Unbeatable");
         }
     }
 
@@ -403,6 +407,7 @@ public class PlayerController : MonoBehaviour
         }
         spriteRenderer.color = new Color32(255,255,255,255); //투명도 원상 복귀
         Physics2D.IgnoreLayerCollision(13,25, false); //피격 가능
+        Physics2D.IgnoreLayerCollision(12,25, false);
         yield return null;
     }
 

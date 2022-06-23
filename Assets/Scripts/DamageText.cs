@@ -8,8 +8,11 @@ public class DamageText : MonoBehaviour
     private float alphaSpeed;
     private float destroyTime;
     TextMesh textMesh;
+    MeshRenderer mesh;
     Color alpha;
     public int damage;
+    public string sortingLayerName;
+    public int sortingOrder;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +21,12 @@ public class DamageText : MonoBehaviour
         alphaSpeed = 2.0f;
         destroyTime = 2.0f;
 
+        mesh = GetComponent<MeshRenderer>();
         textMesh = GetComponent<TextMesh>();
+
+        mesh.sortingLayerName = sortingLayerName;
+        mesh.sortingOrder = sortingOrder;
+
         alpha = textMesh.color;
         if(damage >= 0)
             textMesh.text = damage.ToString();

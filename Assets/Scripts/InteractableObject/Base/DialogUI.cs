@@ -19,7 +19,7 @@ public class DialogUI : MonoBehaviour
         GoNextText();
     }
     private void FixedUpdate() {
-        GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(pos+Vector3.up * 2.2f);
+        GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(pos+Vector3.up * 2.5f);
     }
 
     public bool GoNextText()

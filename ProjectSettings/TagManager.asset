@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Enemy
   - Ground
+  - WeakMonster
+  - NormalMonster
+  - StrongMonster
+  - BossMonster
+  - EquipDrop
+  - SubItemDrop
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX
@@ -14,12 +21,12 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Background
   - Ground
   - 
   - InteractableObject
   - Item
-  - 
+  - FlyingEnemy
   - Enemy
   - WeaponEffect
   - 
@@ -42,4 +49,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: TextLayer
+    uniqueID: 4044022251
+    locked: 0
+  - name: EffectLayer
+    uniqueID: 3243420777
+    locked: 0
+  - name: Player
+    uniqueID: 2110096015
     locked: 0
