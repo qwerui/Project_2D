@@ -171,6 +171,8 @@ MonoBehaviour:
   - 100
   - 100
   laserObj: {fileID: 7061210123290950763}
+  bombPos: {fileID: 7168023161786135697}
+  bomb: {fileID: 1127275048686942990, guid: 8490c14356411a34395f460796c33751, type: 3}
 --- !u!1 &4337085088175306866
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +308,7 @@ GameObject:
   - component: {fileID: 3603054972027092922}
   m_Layer: 0
   m_Name: AttackObject
-  m_TagString: Untagged
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
