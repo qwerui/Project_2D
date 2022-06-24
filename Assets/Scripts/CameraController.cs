@@ -27,7 +27,6 @@ public class CameraController : MonoBehaviour
     }
     public void SetCameraLimit(RoomInfo room)
     {
-
         limitMinX = (room.pos.x-5)*50-25;
         limitMaxX = (room.pos.x-5)*50+25;
         limitMaxY = (room.pos.y-5)*50+25;

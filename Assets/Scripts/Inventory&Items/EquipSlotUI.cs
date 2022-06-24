@@ -9,6 +9,7 @@ public class EquipSlotUI : MonoBehaviour
     [SerializeField] private EquipItem item;
     [SerializeField] private ItemType type;
     [SerializeField] private ItemData FirstItem;
+    [SerializeField] private GameObject _inventoryPopupObj;
 
     private InventoryPopupUI _inventoryPopupUI;
     private GameObject _iconGo;
@@ -17,7 +18,7 @@ public class EquipSlotUI : MonoBehaviour
     private void HideIcon() => _iconGo.SetActive(false);
 
     private void Awake() {
-        _inventoryPopupUI = GameObject.Find("ItemPopup").GetComponent<InventoryPopupUI>();
+        _inventoryPopupUI = _inventoryPopupObj.GetComponent<InventoryPopupUI>();
         _iconGo = transform.GetChild(0).gameObject;
         HideIcon();
     }

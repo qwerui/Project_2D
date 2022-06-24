@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpTime = 0.1f;
     [SerializeField] private float dashSpeed = 8.0f;
     [SerializeField] private float startDashTimer = 0.25f;
-    [SerializeField] private float maxSlopeAngle = 45.0f;
+    [SerializeField] private float maxSlopeAngle = 45.01f;
 
     //이동 관련 변수
     private float jumpCounter;
@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     private float slopeSideAngle;
     private float lastSlopeAngle;
     private Vector2 slopeNormalPerp;
+    private ContactPoint2D[] contacts;
     
     
     //상태 bool
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        contacts = new ContactPoint2D[10];
         ani = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         hitBox = GetComponent<BoxCollider2D>();
@@ -152,9 +154,11 @@ public class PlayerController : MonoBehaviour
                 if(!isDamaged)
                 {
                     if(isOnSlope&&!isJumping) //경사로 이동
+                    {
                         rigid.velocity = new Vector2(moveSpeed*slopeNormalPerp.x*-moveDirection,moveSpeed*slopeNormalPerp.y*-moveDirection);
+                    }
                     else
-                        rigid.velocity = new Vector2(moveSpeed * moveDirection, rigid.velocity.y);
+                        rigid.velocity = new Vector2(moveSpeed *moveDirection, rigid.velocity.y);
                 }
                 else
                     rigid.velocity = new Vector2(rigid.velocity.x,rigid.velocity.y);
@@ -259,11 +263,13 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(transform.position, new Vector2(0.9f, 0.1f), 0f, Vector2.down,extraHeightText, groundLayer);
         if(raycastHit.collider != null) // 감지 시
         {
-            isJumping = false;
+            if(rigid.velocity.y <= 0)
+                isJumping = false;
         }
         else
             isJumping = true;
-        ani.SetBool("Jump", isJumping); // 이거 없으면 착지 후 애니메이션이 안 넘어감
+
+        ani.SetBool("Jump", isJumping);
     }
 
     //대쉬 기능
@@ -301,8 +307,7 @@ public class PlayerController : MonoBehaviour
     //경사로 체크
     private void SlopeCheck()
     {
-        Vector2 checkPos = transform.position; 
-
+        Vector2 checkPos = transform.position;
         SlopeCheckHorizontal(checkPos);
         SlopeCheckVertical(checkPos);
 
@@ -319,11 +324,14 @@ public class PlayerController : MonoBehaviour
             slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
         else
             slopeSideAngle = 0.0f;
-
+         
         if(slopeSideAngle<=maxSlopeAngle&&slopeSideAngle!=0)
+        {
             isOnSlope = true;
+        }
         else
             isOnSlope = false;
+
     }
 
 

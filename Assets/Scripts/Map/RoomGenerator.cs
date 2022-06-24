@@ -188,4 +188,11 @@ public class RoomGenerator : MonoBehaviour
     {
         return roomList;
     }
+    public void NextStageCreate()
+    {
+        roomList.Clear();
+        endRoomList.Clear();
+        roomCount=0;
+        RoomInit();
+    }
 }

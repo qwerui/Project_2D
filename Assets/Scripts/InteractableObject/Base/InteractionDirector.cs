@@ -9,4 +9,5 @@ public class InteractionDirector : MonoBehaviour
     public GameObject MainUI;
     public GameObject shopController;
     public GameObject Gacha;
+    public GameObject roomDirector;
 }

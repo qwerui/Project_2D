@@ -377,6 +377,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -491,6 +495,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -1763,6 +1771,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -2043,6 +2055,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -2165,6 +2181,10 @@ PrefabInstance:
       propertyPath: FirstItem
       value: 
       objectReference: {fileID: 11400000, guid: 0205586b36bd75b4ca4c978e435f9e29, type: 2}
+    - target: {fileID: 1371784606258195644, guid: 5de8d999238a0ca48afe48ef771a2e86, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2537879798483600988, guid: 5de8d999238a0ca48afe48ef771a2e86, type: 3}
       propertyPath: m_Name
       value: WeaponSlot
@@ -2666,7 +2686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &581698766
 Transform:
   m_ObjectHideFlags: 0
@@ -4026,7 +4046,7 @@ CompositeCollider2D:
       - {x: 11.99997, y: 3}
       - {x: 11, y: 3.0000293}
       - {x: 10.99997, y: 5}
-      - {x: 10.00001, y: 4.999971}
+      - {x: 10, y: 4.999971}
       - {x: 10.00003, y: 2}
       - {x: 13, y: 2.0000293}
       - {x: 13.00003, y: 6}
@@ -4036,8 +4056,8 @@ CompositeCollider2D:
       - {x: 7.999989, y: -3}
       - {x: -8.000008, y: -2.9999924}
       - {x: -10.000011, y: -1}
-      - {x: -29.00001, y: -1.0000252}
-      - {x: -28.999975, y: -2.00001}
+      - {x: -29, y: -1.0000293}
+      - {x: -28.999971, y: -2}
       - {x: -11, y: -2.0000293}
       - {x: -10.99997, y: -5}
   m_VertexDistance: 0.0005
@@ -4078,6 +4098,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1388685148}
+    - target: {fileID: 1371784606258195644, guid: 5de8d999238a0ca48afe48ef771a2e86, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2537879798483600988, guid: 5de8d999238a0ca48afe48ef771a2e86, type: 3}
       propertyPath: m_Name
       value: AccesorySlot
@@ -4590,6 +4614,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -4783,6 +4811,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -4976,6 +5008,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -5429,6 +5465,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -5670,6 +5710,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -5794,6 +5838,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -5984,6 +6032,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -6098,6 +6150,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -6291,6 +6347,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -6485,6 +6545,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -6704,6 +6768,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1388685148}
+    - target: {fileID: 1371784606258195644, guid: 5de8d999238a0ca48afe48ef771a2e86, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2537879798483600988, guid: 5de8d999238a0ca48afe48ef771a2e86, type: 3}
       propertyPath: m_Name
       value: ArmorSlot
@@ -7379,7 +7447,7 @@ MonoBehaviour:
   jumpTime: 0.2
   dashSpeed: 20
   startDashTimer: 0.15
-  maxSlopeAngle: 45
+  maxSlopeAngle: 45.01
 --- !u!95 &1388685150
 Animator:
   serializedVersion: 3
@@ -7483,10 +7551,10 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a3f48572f6228834b8eff63f69030800, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &1388685154
 BoxCollider2D:
@@ -7497,7 +7565,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1388685148}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a3f48572f6228834b8eff63f69030800, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -8944,6 +9012,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -9099,6 +9171,7 @@ MonoBehaviour:
   MainUI: {fileID: 696821535}
   shopController: {fileID: 410009111}
   Gacha: {fileID: 540688590}
+  roomDirector: {fileID: 1423442379}
 --- !u!1 &1691028456
 GameObject:
   m_ObjectHideFlags: 0
@@ -9287,7 +9360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!156049354 &1717447710
 Grid:
   m_ObjectHideFlags: 0
@@ -9322,6 +9395,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -9691,6 +9768,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 5999510185239654045, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10168,6 +10249,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -11002,6 +11087,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 2147064684095768603, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -11539,6 +11628,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 566015217}
     m_Modifications:
+    - target: {fileID: 1605904922721037674, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+      propertyPath: _inventoryPopupObj
+      value: 
+      objectReference: {fileID: 1609400757}
     - target: {fileID: 5999510185239654045, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

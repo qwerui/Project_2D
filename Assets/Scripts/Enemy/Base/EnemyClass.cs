@@ -158,9 +158,13 @@ public abstract class EnemyClass : MonoBehaviour
     }
     void DropItem()
     {
+        int childIndex = 0;
         if(transform.GetChild(0).gameObject.tag=="EnemyAttack")
+        {
                 Destroy(transform.GetChild(0).gameObject);
-        for(int i=0;i<transform.childCount;i++)
+                childIndex++;
+        }
+        for(int i=childIndex;i<transform.childCount;i++)
         {
             transform.GetChild(i).gameObject.SetActive(true);
             transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-2.0f,2.0f),10.0f),ForceMode2D.Impulse);

@@ -50,4 +50,15 @@ public class RoomController : MonoBehaviour
     {
         nextRoom = next;
     }
+    public void NextStage()
+    {
+        for(int i=0;i<MapTile.transform.childCount;i++)
+        {
+            Destroy(MapTile.transform.GetChild(i).gameObject);
+        }
+        roomList.Clear();
+        generator.NextStageCreate();
+        ArrangeRooms();
+        cameraCtl.SetCameraLimit(roomList[0]);
+    }
 }
