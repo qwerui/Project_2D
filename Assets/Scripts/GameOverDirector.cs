@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +29,7 @@ public class GameOverDirector : MonoBehaviour
             score[i]=0;
         }
         ScoreInit();
+        SaveLocalRanking();
         StartCoroutine("ScorePrint");
     }
     private void Update() {
@@ -63,8 +64,8 @@ public class GameOverDirector : MonoBehaviour
                 yield return null;
             }
             scoreText[i].text = scoreEnd[i].ToString();
+            yield return new WaitForSeconds(countingDuration);
         }
-        yield return new WaitForSeconds(countingDuration);
         returnObj.SetActive(true);
         activeReturn=true;
     }
@@ -81,5 +82,32 @@ public class GameOverDirector : MonoBehaviour
             sum*=scoreEnd[i];
         }
         scoreEnd[4] = (int)(sum / 10000);
+    }
+    void SaveLocalRanking()
+    {
+        LocalRanking localRank = new LocalRanking();
+        localRank = JsonDirector.LoadRanking();
+        if(localRank.score == null)
+        {
+            localRank.score = new int[10];
+            localRank.rank = new int[10];
+        }
+
+        int[] localScore = new int[11];
+        int[] rankNum = new int[10];
+        for(int i=0;i<10;i++)
+        {
+            rankNum[i]=i+1;
+            localScore[i]=localRank.score[i];
+        }
+        localScore[10] = scoreEnd[4];
+        System.Array.Sort(localScore);
+        System.Array.Reverse(localScore);
+        System.Array.Resize(ref localScore,10);
+
+        localRank.rank = rankNum;
+        localRank.score = localScore;
+
+        JsonDirector.SaveRanking(localRank);
     }
 }

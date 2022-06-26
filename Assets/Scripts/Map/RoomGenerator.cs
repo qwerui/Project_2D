@@ -131,10 +131,10 @@ public class RoomGenerator : MonoBehaviour
     {
         int loopNum = 0;
         bool isCreated = false;
-        RoomInfo pivotRoom = roomList[Random.Range(0,roomList.Count-1)];
         roomCount--;
         while(!isCreated)
         {
+            RoomInfo pivotRoom = roomList[Random.Range(0,roomList.Count-1)];
             CreateRoom(pivotRoom.pos+Vector2Int.left, RoomType.Normal, pivotRoom.distance);
             CreateRoom(pivotRoom.pos+Vector2Int.up, RoomType.Normal, pivotRoom.distance);
             CreateRoom(pivotRoom.pos+Vector2Int.right, RoomType.Normal, pivotRoom.distance);
