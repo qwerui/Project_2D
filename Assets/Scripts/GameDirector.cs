@@ -11,7 +11,6 @@ public class GameDirector : MonoBehaviour
     Text healthText;
     Image hpBar;
     Image hungerBar;
-    RectTransform gameOverScreenPos;
 
     Text redBall;
     Text blueBall;
@@ -29,6 +28,7 @@ public class GameDirector : MonoBehaviour
         7    플레이어
         8~10 상태창 (체력 숫자, 체력 바, 공복치 바)
         11   게임오버 화면 전환을 위한 이미지
+        12   세이브 팝업
     */
 
     private void Awake() {
@@ -46,7 +46,6 @@ public class GameDirector : MonoBehaviour
         healthText = Objects[8].GetComponent<Text>();
         hpBar = Objects[9].GetComponent<Image>();
         hungerBar = Objects[10].GetComponent<Image>();
-        gameOverScreenPos = Objects[11].GetComponent<Image>().GetComponent<RectTransform>();
         StartCoroutine("HealthTextController");
     }
 
@@ -85,14 +84,30 @@ public class GameDirector : MonoBehaviour
     public void GameOver()
     {
         Objects[11].SetActive(true); //게임 오버 스크린 활성화
-        StartCoroutine("ScreenDown");
+        Objects[11].transform.GetChild(0).gameObject.SetActive(true);//게임오버 텍스트 활성화
+        StartCoroutine("GameOverFadeIn");
     }
 
-    public IEnumerator ScreenDown()
+    public IEnumerator GameOverFadeIn()
     {
-        while(gameOverScreenPos.anchoredPosition.y > -180)
+        Image sr;
+        Text tx;
+
+        sr = Objects[11].GetComponent<Image>();
+        tx = Objects[11].transform.GetChild(0).gameObject.GetComponent<Text>();
+
+        for(int i=0;i<100;i++)
         {
-            gameOverScreenPos.anchoredPosition = new Vector2(gameOverScreenPos.anchoredPosition.x, gameOverScreenPos.anchoredPosition.y-10);
+            float f = i / 100.0f;
+
+            var tempColor = sr.color;
+            tempColor.a = f;
+            sr.color = tempColor;
+
+            tempColor = tx.color;
+            tempColor.a = f;
+            tx.color = tempColor;
+            
             yield return new WaitForSeconds(0.01f);
         }
         yield return new WaitForSeconds(1f);

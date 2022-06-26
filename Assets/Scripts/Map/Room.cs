@@ -100,7 +100,7 @@ public class Room : MonoBehaviour
             {
                 for(int j=0;j<tempTrans.childCount;i++)
                 {
-                    Destroy(tempTrans.GetChild(0).gameObject);
+                    Destroy(tempTrans.GetChild(j).gameObject);
                 }
                 Instantiate(enemyList[i],tempTrans);
             }

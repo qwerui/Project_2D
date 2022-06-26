@@ -7,6 +7,7 @@ public class ItemSlotUI : MonoBehaviour
 {
     [SerializeField] private Image _iconImage;
     [SerializeField] private Text _amountText;
+    [SerializeField] private GameObject _inventoryPopupObj;
 
     public int Index { get; private set; }
     public bool HasItem => _iconImage.sprite != null;
@@ -34,7 +35,7 @@ public class ItemSlotUI : MonoBehaviour
 
     private void InitComponents()
     {
-        _inventoryPopupUI = GameObject.Find("ItemPopup").GetComponent<InventoryPopupUI>();
+        _inventoryPopupUI = _inventoryPopupObj.GetComponent<InventoryPopupUI>();
 
         // Game Objects
         _iconGo = transform.GetChild(0).gameObject;

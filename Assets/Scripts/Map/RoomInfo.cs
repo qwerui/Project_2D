@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class RoomInfo
 {
+    public int roomId;
+
     public int Width;
     public int Height;
     public int distance;
@@ -22,7 +23,6 @@ public class RoomInfo
         this.distance = distance;
         this.path = new bool[4];
     }
-    
 }
 public enum RoomType
 {

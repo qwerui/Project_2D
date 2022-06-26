@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8561413695737726034}
   - component: {fileID: 2293872545661887952}
   - component: {fileID: 1290032588135186402}
+  - component: {fileID: 4776763434475490780}
   m_Layer: 13
   m_Name: CastleBoss
   m_TagString: Enemy
@@ -146,12 +147,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c8df1d5f1ef1445801796603f0d24d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 200
+  hp: 10
   atk: 150
-  def: 5
+  def: 0
   moveSpeed: 0
   experience: 300
-  ani: {fileID: 0}
+  ani: {fileID: 4776763434475490780}
   rigid: {fileID: 8561413695737726034}
   groundLayer:
     serializedVersion: 2
@@ -173,6 +174,25 @@ MonoBehaviour:
   laserObj: {fileID: 7061210123290950763}
   bombPos: {fileID: 7168023161786135697}
   bomb: {fileID: 1127275048686942990, guid: 8490c14356411a34395f460796c33751, type: 3}
+--- !u!95 &4776763434475490780
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3673168341888841314}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fc640d18835c5644593cf80eade9c0d3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4337085088175306866
 GameObject:
   m_ObjectHideFlags: 0

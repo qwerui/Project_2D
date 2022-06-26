@@ -170,6 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _iconImage: {fileID: 5999510186058893685}
   _amountText: {fileID: 4703854030675546902}
+  _inventoryPopupObj: {fileID: 0}
 --- !u!1 &5999510186058893687
 GameObject:
   m_ObjectHideFlags: 0

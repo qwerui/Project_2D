@@ -48,7 +48,7 @@ public class Bat : EnemyClass
             nextMove = 1;
         else
             nextMove = -1;
-        transform.localScale = new Vector3(nextMove,1,1);
+        transform.localScale = new Vector3(nextMove*0.7f,0.7f,1);
         rigid.velocity= new Vector2(moveSpeed*nextMove, -posDiff_y+2);
         ani.SetBool("Run", isMoving);
     }

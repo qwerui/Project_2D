@@ -52,12 +52,14 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 10d9ad51dced6cd489b4b6aa9d6eecca, type: 3}
   - {fileID: 21300000, guid: cc294cc2d7e18ce48bd0edc6bac64947, type: 3}
+  - {fileID: 21300000, guid: b8d013988b639154686c0b47df241853, type: 3}
   - {fileID: 21300000, guid: 160703caafd6fa34cb1a5ce806ae6b0f, type: 3}
   - {fileID: 21300000, guid: 3930989b79bd7f14c86a6a460ca838f6, type: 3}
   - {fileID: 21300000, guid: 8c85f90d55aa57f478cc38e5d882a99a, type: 3}
   m_PackedSpriteNamesToIndex:
   - abef08b02ea29e6f0f243154d0eb4909-removebg-preview
   - Gacha
+  - NextStage
   - oldbook-removebg-preview
   - Shop
   - Sign
