@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     QuickSlotUI quickSlotPotion;
     QuickSlotUI quickSlotWeapon;
 
+    DataDirector data;
+
     //플레이어 이동 관련 수치(Inspector에서 조정)
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private float jumpSpeed = 5.0f;
@@ -79,6 +81,7 @@ public class PlayerController : MonoBehaviour
         quickSlotPotion = QuickSlotPotion.GetComponent<QuickSlotUI>();
         quickSlotWeapon = QuickSlotWeapon.GetComponent<QuickSlotUI>();
         weaponRoot = transform.GetChild(0).gameObject;
+        data = GameObject.Find("DataDirector").GetComponent<DataDirector>();
         StartCoroutine("Hungry");
         StartCoroutine("DeadCheck");
     }
@@ -98,6 +101,8 @@ public class PlayerController : MonoBehaviour
     {
         SlopeCheck();
         onGround();
+        if(data != null)
+            DataUpdate();
     }
 
     //플레이어 상태 변수 초기화
@@ -451,12 +456,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //프롤로그에서 책과 만나면 워프
-    public void Warf()
-    {
-        transform.position = new Vector3(30,-4, 0);
-    }
-
     public void GainExprience(int experience)
     {
         experience += stat.getExperience();
@@ -517,5 +516,10 @@ public class PlayerController : MonoBehaviour
                 inventory.SetActive(true);
             }
         }
+    }
+    private void DataUpdate()
+    {
+        data.level = stat.getLevel();
+        data.resourceItem = stat.getRedBall() + stat.getBlueBall() + stat.getYellowBall() + stat.getGold();
     }
 }

@@ -30,6 +30,7 @@ public abstract class EnemyClass : MonoBehaviour
     protected float posDiff;
     protected GameObject item;
     protected GameObject damageInstance;
+    protected DataDirector data;
 
     protected bool isMoving;
     protected bool isDead = false;
@@ -46,6 +47,7 @@ public abstract class EnemyClass : MonoBehaviour
     protected void EnemyInit()
     {
         player = GameObject.Find("Player");
+        data = GameObject.Find("DataDirector").GetComponent<DataDirector>();
         CreateItem();
     }
 
@@ -72,6 +74,7 @@ public abstract class EnemyClass : MonoBehaviour
         ani.SetTrigger("Death");
         isDead = true;
         moveSpeed = 0;
+        data.enemySlain += 1;
         player.GetComponent<PlayerController>().GainExprience(experience);
         Destroy(GetComponent<BoxCollider2D>());
         Destroy(GetComponent<Rigidbody2D>());

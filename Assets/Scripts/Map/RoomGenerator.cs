@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class RoomGenerator : MonoBehaviour
 {
 
@@ -16,8 +17,9 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] RoomTemplate template;
     
     GameObject temp;
+    public GameObject ex;
 
-    const int maxTile = 11;
+    const int maxTile = 15;
     bool[,] isCreated;
 
     int roomCount;
@@ -32,7 +34,8 @@ public class RoomGenerator : MonoBehaviour
 
     public void RoomInit()
     {
-        makeRoomCount = Random.Range(maxRoom-4, maxRoom);
+        int loopNum = 0;
+        makeRoomCount = Random.Range(maxRoom-2, maxRoom);
         while(roomCount < makeRoomCount)
         {
             roomCount = 0;
@@ -42,6 +45,8 @@ public class RoomGenerator : MonoBehaviour
             roomList.Clear();
             endRoomList.Clear();
             CreateDungeon();
+            if(loopNum++ > 1000)
+                ex.GetComponent<DebugScript>().MyException("RoomInit Loop");
         }
         if(endRoomList.Count <= 1)
         {
@@ -124,6 +129,7 @@ public class RoomGenerator : MonoBehaviour
 
     void CreateEndRoom()
     {
+        int loopNum = 0;
         bool isCreated = false;
         RoomInfo pivotRoom = roomList[Random.Range(0,roomList.Count-1)];
         roomCount--;
@@ -133,8 +139,10 @@ public class RoomGenerator : MonoBehaviour
             CreateRoom(pivotRoom.pos+Vector2Int.up, RoomType.Normal, pivotRoom.distance);
             CreateRoom(pivotRoom.pos+Vector2Int.right, RoomType.Normal, pivotRoom.distance);
             CreateRoom(pivotRoom.pos+Vector2Int.down, RoomType.Normal, pivotRoom.distance);
-            if(roomCount == makeRoomCount)
+            if(roomCount >= makeRoomCount)
                 isCreated = true;
+            if(loopNum++ > 10000)
+                ex.GetComponent<DebugScript>().MyException("EndRoom Loop");
         }
         roomCount++;
     }
@@ -162,31 +170,42 @@ public class RoomGenerator : MonoBehaviour
     void InputRoomTemplate()
     {
         endRoomList[0].roomType = RoomType.Boss;
-        endRoomList[1].roomType = RoomType.ItemShop;
+        for(int i=1;i<(int)(roomCount/10)+2;i++)
+        {
+            if(i>=endRoomList.Count)
+                break;
+            else
+                endRoomList[i].roomType = RoomType.ItemShop;
+        }
+            
 
         for(int i = 0;i<roomList.Count;i++)
         {
             if(roomList[i].roomType == RoomType.Boss)
             {
-                roomList[i].roomPrefab = template.BossRoom[Random.Range(0,template.BossRoom.Length)];
+                roomList[i].roomPrefab = template.BossRoom[roomList[i].roomId = Random.Range(0,template.BossRoom.Length)];
             }
             else if(roomList[i].roomType == RoomType.Start)
             {
-                roomList[i].roomPrefab = template.StartRoom[Random.Range(0,template.StartRoom.Length)];
+                roomList[i].roomPrefab = template.StartRoom[roomList[i].roomId = Random.Range(0,template.StartRoom.Length)];
             }
             else if(roomList[i].roomType == RoomType.ItemShop)
             {
-                roomList[i].roomPrefab = template.ItemRoom[Random.Range(0,template.ItemRoom.Length)];
+                roomList[i].roomPrefab = template.ItemRoom[roomList[i].roomId = Random.Range(0,template.ItemRoom.Length)];
             }
             else
             {
-                roomList[i].roomPrefab = template.NormalRoom[Random.Range(0,template.NormalRoom.Length)];
+                roomList[i].roomPrefab = template.NormalRoom[roomList[i].roomId = Random.Range(0,template.NormalRoom.Length)];
             }
         }
     }
     public List<RoomInfo> GetRoomList()
     {
         return roomList;
+    }
+    public int GetMaxTile()
+    {
+        return maxTile;
     }
     public void NextStageCreate()
     {
