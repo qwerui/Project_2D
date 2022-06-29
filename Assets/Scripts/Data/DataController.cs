@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SaveGame : MonoBehaviour
+public class DataController : MonoBehaviour
 {
     GameData gameData;
 
@@ -16,28 +16,40 @@ public class SaveGame : MonoBehaviour
     DataDirector data;
     List<RoomInfo> roomList;
 
-    private void Start() {
+    private void Awake()
+    {
         gameData = new GameData();
+        data = DataDirector.Instance;
+        if(data.isLoadedGame == true)
+        {
+            gameData = JsonDirector.LoadGameData();
+            data.stage = gameData.stage;
+            data.level = gameData.level;
+            data.enemySlain = gameData.enemySlain;
+            data.resourceItem = gameData.resourceItem;
+        }
+    }
+    private void Start() {
         stat = player.GetComponent<PlayerController>().GetStat();
-        data = GameObject.Find("DataDirector").GetComponent<DataDirector>();
         roomList = new List<RoomInfo>();
     }
     public void SaveGameData()
     {
+        GameData saveData = new GameData();
         roomList = room.GetComponent<RoomController>().GetRoomList();
-        SaveDataDirector();
-        SaveStat();
-        SaveRoom();
-        JsonDirector.SaveGameData(gameData);
+        SaveDataDirector(saveData);
+        SaveStat(saveData);
+        SaveRoom(saveData);
+        JsonDirector.SaveGameData(saveData);
         StartCoroutine("FadeIn");
     }
-    void SaveDataDirector()
+    void SaveDataDirector(GameData gameData)
     {
         gameData.stage = data.stage;
         gameData.enemySlain = data.enemySlain;
         gameData.resourceItem = data.resourceItem;
     }
-    void SaveStat()
+    void SaveStat(GameData gameData)
     {
         gameData.hp = stat.getHp();
         gameData.maxHp = stat.getMaxHp();
@@ -53,7 +65,7 @@ public class SaveGame : MonoBehaviour
 	    gameData.experience = stat.getExperience();
 	    gameData.maxExperience = stat.getMaxExperience();
     }
-    void SaveRoom()
+    void SaveRoom(GameData gameData)
     {
         int[] roomId = new int[roomList.Count];
         int[] roomType = new int[roomList.Count];
@@ -104,5 +116,22 @@ public class SaveGame : MonoBehaviour
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("MainScene");
         yield return null;
+    }
+    public void GetLoadPlayer(PlayerStatus player)
+    {
+
+        player.setHp(gameData.hp);
+        player.setMaxHp(gameData.maxHp);
+        player.setHunger(gameData.hunger);
+        player.setMaxHunger(gameData.maxHunger);
+        player.setAtk(gameData.atk);
+        player.setDef(gameData.def);
+        player.setGold(gameData.gold);
+        player.setRedBall(gameData.redBall);
+        player.setBlueBall(gameData.blueBall);
+        player.setYellowBall(gameData.yellowBall);
+        player.setLevel(gameData.level);
+        player.setExperience(gameData.experience);
+        player.setMaxExperience(gameData.maxExperience);
     }
 }

@@ -2,22 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DataDirector : MonoBehaviour
+public class DataDirector
 {
-    public static DataDirector Instance;
+    private static DataDirector instance;
+    public static DataDirector Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new DataDirector();
+
+            }
+            return instance;
+        }
+    }
     
     public int stage;
     public int level;
     public int resourceItem;
     public int enemySlain;
 
-    private void Awake() {
-        if(Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+    public bool isLoadedGame;
+
+    public DataDirector()
+    {
+        stage = 1;
+        level = 1;
+        resourceItem = 0;
+        enemySlain = 0;
+
+        isLoadedGame = false;
     }
+
 }

@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject QuickSlotPotion;
     [SerializeField] private GameObject QuickSlotWeapon;
     [SerializeField] private GameObject inventory;
+    [SerializeField] private GameObject DataCtl;
 
     PlayerStatus stat;
     GameObject weaponRoot; //손의 위치
@@ -67,12 +68,14 @@ public class PlayerController : MonoBehaviour
 
     private void Awake() 
     {
+        data = DataDirector.Instance;
         stat  = new PlayerStatus();
-        PlayerInit();
     }
 
     private void Start()
     {
+        if (data.isLoadedGame == true)
+            DataCtl.GetComponent<DataController>().GetLoadPlayer(stat);
         contacts = new ContactPoint2D[10];
         ani = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
@@ -80,8 +83,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         quickSlotPotion = QuickSlotPotion.GetComponent<QuickSlotUI>();
         quickSlotWeapon = QuickSlotWeapon.GetComponent<QuickSlotUI>();
-        weaponRoot = transform.GetChild(0).gameObject;
-        data = GameObject.Find("DataDirector").GetComponent<DataDirector>();
+        weaponRoot = transform.GetChild(0).gameObject;;
         StartCoroutine("Hungry");
         StartCoroutine("DeadCheck");
     }
@@ -103,24 +105,6 @@ public class PlayerController : MonoBehaviour
         onGround();
         if(data != null)
             DataUpdate();
-    }
-
-    //플레이어 상태 변수 초기화
-    private void PlayerInit()
-    {
-        stat.setMaxHp(100);
-        stat.setHp(100);
-        stat.setAtk(0);
-        stat.setDef(0);
-        stat.setMaxHunger(100);
-        stat.setHunger(100);
-        stat.setGold(0);
-        stat.setRedBall(0);
-        stat.setBlueBall(0);
-        stat.setYellowBall(0);
-        stat.setLevel(1);
-        stat.setMaxExperience(10);
-        stat.setExperience(0);
     }
 
     //플레이어 상태 전달 (주로 UI에 사용 ex: 체력 바 등)
