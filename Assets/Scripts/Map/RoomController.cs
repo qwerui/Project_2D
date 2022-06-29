@@ -9,13 +9,16 @@ public class RoomController : MonoBehaviour
     [SerializeField] GameObject roomGenerator;
     [SerializeField] GameObject MapTile;
     [SerializeField] GameObject cameraObj;
+    [SerializeField] GameObject Minimap;
 
     CameraController cameraCtl;
     RoomGenerator generator;
+    MinimapGenerator minimapCtl;
     Room currentRoom;
     Room nextRoom;
 
     int maxTile;
+    int currentRoomIndex;
 
     private void Awake() {
         roomList = new List<RoomInfo>();
@@ -25,6 +28,7 @@ public class RoomController : MonoBehaviour
     {
         generator = roomGenerator.GetComponent<RoomGenerator>();
         cameraCtl = cameraObj.GetComponent<CameraController>();
+        minimapCtl = Minimap.GetComponent<MinimapGenerator>();
         ArrangeRooms();
     }
 
@@ -43,11 +47,18 @@ public class RoomController : MonoBehaviour
             tempMap.transform.position = new Vector2(roomList[i].pos.x-(int)(maxTile/2),roomList[i].pos.y-(int)(maxTile/2))*50;
             tempMap.GetComponent<Room>().SetRoomInfo(roomList[i], this);
         }
+        minimapCtl.SetMinimap(roomList, maxTile);
+        currentRoomIndex = 0;
     }
     public void SetCurrentRoom()
     {
+        
+        minimapCtl.MinimapDark(currentRoomIndex);
         currentRoom = nextRoom;
         currentRoom.RoomInit();
+        currentRoomIndex = roomList.IndexOf(currentRoom.roomInfo);
+        minimapCtl.ShowMinimap(currentRoomIndex);
+        currentRoom.roomInfo.isVisited = true;
         cameraCtl.SetCameraLimit(currentRoom.roomInfo, maxTile);
     }
     public void SetNextRoom(Room next)

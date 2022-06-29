@@ -57,6 +57,8 @@ public class SaveGame : MonoBehaviour
     {
         int[] roomId = new int[roomList.Count];
         int[] roomType = new int[roomList.Count];
+        Vector2[] roomPos = new Vector2[roomList.Count];
+        bool[] roomVisited = new bool[roomList.Count];
         for(int i=0;i<roomList.Count;i++)
         {
             roomId[i] = roomList[i].roomId;
@@ -75,9 +77,13 @@ public class SaveGame : MonoBehaviour
                     roomType[i] = 0;
                     break;
             }
+            roomPos[i] = roomList[i].pos;
+            roomVisited[i] = roomList[i].isVisited;
         }
         gameData.roomId = roomId;
         gameData.roomType = roomType;
+        gameData.roomPos = roomPos;
+        gameData.roomVisited = roomVisited;
     }
     IEnumerator FadeIn()
     {

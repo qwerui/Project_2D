@@ -25,4 +25,6 @@ public class GameData
     
     public int[] roomId;
     public int[] roomType;
+    public Vector2[] roomPos;
+    public bool[] roomVisited;
 }
