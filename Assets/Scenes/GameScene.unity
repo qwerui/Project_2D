@@ -5731,7 +5731,7 @@ GameObject:
   - component: {fileID: 860935641}
   - component: {fileID: 860935640}
   m_Layer: 0
-  m_Name: SaveData
+  m_Name: DataController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5786,7 +5786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &890413850
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8032,6 +8032,7 @@ MonoBehaviour:
   QuickSlotPotion: {fileID: 1465344363}
   QuickSlotWeapon: {fileID: 660885793}
   inventory: {fileID: 890413849}
+  DataCtl: {fileID: 860935639}
   moveSpeed: 5
   jumpSpeed: 11.5
   jumpTime: 0.2
@@ -9317,7 +9318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1609400758
 RectTransform:
   m_ObjectHideFlags: 0

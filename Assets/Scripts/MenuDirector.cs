@@ -8,12 +8,18 @@ public class MenuDirector : MonoBehaviour
     int sceneIndex;
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject TutorialPopup;
+    [SerializeField] GameObject LoadGamePopup;
     RectTransform arrowPos;
 
+    bool onTutorial;
     void Start()
     {
         arrowPos = arrow.GetComponent<RectTransform>();
         sceneIndex = 0;
+        if (PlayerPrefs.GetInt("Tutorial") == 1)
+            onTutorial = true;
+        else
+            onTutorial = false;
     }
 
     private void Update() {
@@ -55,13 +61,32 @@ public class MenuDirector : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Y))
                 LoadTutorial();
             else if(Input.GetKeyDown(KeyCode.N))
+                GameStart();
+        }
+        if(LoadGamePopup.activeSelf == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Y))
                 LoadGame();
+            else if (Input.GetKeyDown(KeyCode.N))
+                GameStart();
         }
     }
 
     public void StartBtnDown()
     {
-        TutorialPopup.SetActive(true);
+        if (onTutorial)
+            TutorialPopup.SetActive(true);
+        else
+        {
+            if(JsonDirector.CheckSaveFile())
+            {
+                LoadGamePopup.SetActive(true);
+            }
+            else
+            {
+                GameStart();
+            }
+        }
     }
 
     public void SetBtnDown()
@@ -81,6 +106,23 @@ public class MenuDirector : MonoBehaviour
     }
     public void LoadGame()
     {
+        DataDirector.Instance.isLoadedGame = true;
+        GameStart();
+    }
+    public void GameStart()
+    {
         SceneManager.LoadScene("GameScene");
+    }
+    public void NotGoTutorial()
+    {
+        TutorialPopup.SetActive(false);
+        if(JsonDirector.CheckSaveFile())
+        {
+            LoadGamePopup.SetActive(true);
+        }
+        else
+        {
+            GameStart();
+        }
     }
 }

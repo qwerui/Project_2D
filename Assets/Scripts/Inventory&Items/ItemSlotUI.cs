@@ -7,7 +7,6 @@ public class ItemSlotUI : MonoBehaviour
 {
     [SerializeField] private Image _iconImage;
     [SerializeField] private Text _amountText;
-    [SerializeField] private GameObject _inventoryPopupObj;
 
     public int Index { get; private set; }
     public bool HasItem => _iconImage.sprite != null;
@@ -29,13 +28,13 @@ public class ItemSlotUI : MonoBehaviour
     private void ShowText() => _textGo.SetActive(true);
     private void HideText() => _textGo.SetActive(false);
 
-    private void Awake() {
+    private void Start() {
         InitComponents();
     }
 
     private void InitComponents()
     {
-        _inventoryPopupUI = _inventoryPopupObj.GetComponent<InventoryPopupUI>();
+        _inventoryPopupUI = GameObject.Find("InventorySlot").GetComponent<InventoryPopupUI>();
 
         // Game Objects
         _iconGo = transform.GetChild(0).gameObject;

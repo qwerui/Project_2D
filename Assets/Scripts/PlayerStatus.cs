@@ -19,6 +19,23 @@ public class PlayerStatus
 	int experience;
 	int maxExperience;
 
+	public PlayerStatus()
+    {
+		setMaxHp(100);
+		setHp(100);
+		setAtk(0);
+		setDef(0);
+		setMaxHunger(100);
+		setHunger(100);
+		setGold(0);
+		setRedBall(0);
+		setBlueBall(0);
+		setYellowBall(0);
+		setLevel(1);
+		setMaxExperience(10);
+		setExperience(0);
+	}
+
     //Getter, Setter
 	public int getHp() 
     {

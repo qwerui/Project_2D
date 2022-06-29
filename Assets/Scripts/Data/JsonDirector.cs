@@ -144,4 +144,21 @@ public static class JsonDirector
         byte[] plainText = Encoding.UTF8.GetBytes(textToEncrypt);
         return Convert.ToBase64String(transform.TransformFinalBlock(plainText, 0, plainText.Length));
     }
+
+    public static bool CheckSaveFile()
+    {
+        string saveFilePath = SavePath + "gamesave" + ".json";
+        if (!Directory.Exists(SavePath))
+        {
+            return false;
+        }
+        else if(!File.Exists(saveFilePath))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }

@@ -47,7 +47,7 @@ public abstract class EnemyClass : MonoBehaviour
     protected void EnemyInit()
     {
         player = GameObject.Find("Player");
-        data = GameObject.Find("DataDirector").GetComponent<DataDirector>();
+        data = DataDirector.Instance;
         CreateItem();
     }
 
