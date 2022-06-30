@@ -37,4 +37,12 @@ public class ItemLoader
     {
         return SubItemList;
     }
+    public ItemData GetEquipItem(int id)
+    {
+        return EquipItemList.Find(x => x.ID == id);
+    }
+    public ItemData GetSubItem(int id)
+    {
+        return SubItemList.Find(x => x.ID == id);
+    }
 }

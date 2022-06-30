@@ -30,4 +30,7 @@ public class GameData
     public int[] roomType;
     public Vector2[] roomPos;
     public bool[] roomVisited;
+
+    public Vector2[] item; //x = itemId, y = item amount
+    public int[] equip;
 }

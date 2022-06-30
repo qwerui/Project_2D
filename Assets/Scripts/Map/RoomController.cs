@@ -109,6 +109,10 @@ public class RoomController : MonoBehaviour
     {
         return this.roomList;
     }
+    public RoomInfo GetRoomInfo(int index)
+    {
+        return this.roomList[index];
+    }
     void LoadRoomList()
     {
         for(int i=0;i<data.GetLoadedRoomCount();i++)

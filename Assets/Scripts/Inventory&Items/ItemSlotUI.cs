@@ -34,7 +34,7 @@ public class ItemSlotUI : MonoBehaviour
 
     private void InitComponents()
     {
-        _inventoryPopupUI = GameObject.Find("InventorySlot").GetComponent<InventoryPopupUI>();
+        _inventoryPopupUI = GameObject.Find("ItemPopup").GetComponent<InventoryPopupUI>();
 
         // Game Objects
         _iconGo = transform.GetChild(0).gameObject;

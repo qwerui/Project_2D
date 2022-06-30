@@ -11,9 +11,15 @@ public class DataController : MonoBehaviour
     public GameObject player;
     public GameObject room;
     public GameObject FadeScreen;
+    public GameObject Inventory;
+
+    public EquipSlotUI weapon;
+    public EquipSlotUI armor;
+    public EquipSlotUI accesory;
 
     PlayerStatus stat;
     DataDirector data;
+    InventoryController inventory;
     List<RoomInfo> roomList;
 
     private void Awake()
@@ -34,6 +40,7 @@ public class DataController : MonoBehaviour
     }
     private void Start() {
         stat = player.GetComponent<PlayerController>().GetStat();
+        inventory = Inventory.GetComponent<InventoryController>();
         roomList = new List<RoomInfo>();
     }
     public void SaveGameData()
@@ -41,6 +48,7 @@ public class DataController : MonoBehaviour
         GameData saveData = new GameData();
         roomList = room.GetComponent<RoomController>().GetRoomList();
         SaveDataDirector(saveData);
+        SaveItem(saveData);
         SaveStat(saveData);
         SaveRoom(saveData);
         JsonDirector.SaveGameData(saveData);
@@ -101,6 +109,38 @@ public class DataController : MonoBehaviour
         gameData.roomType = roomType;
         gameData.roomPos = roomPos;
         gameData.roomVisited = roomVisited;
+    }
+    void SaveItem(GameData gameData)
+    {
+        Vector2[] item = new Vector2[inventory.GetExistItemCount()];
+        for(int i=0;i<item.Length;i++)
+        {
+            Item tempItem = inventory.ReturnItem(i);
+            if(tempItem.Data.ItemType==ItemType.Potion || tempItem.Data.ItemType==ItemType.Subweapon)
+            {
+                item[i] = new Vector2(tempItem.Data.ID, (tempItem as SubItem).Amount);
+            }
+            else
+            {
+                item[i] = new Vector2(tempItem.Data.ID, 0);
+            }
+        }
+        gameData.item = item;
+
+        int[] equip = new int[3];
+        EquipSlotUI[] slot = {weapon, armor, accesory};
+        for(int i=0;i<3;i++)
+        {
+            if(slot[i].GetItem() != null)
+            {
+                equip[i] = slot[i].GetItem().Data.ID;
+                slot[i].RemoveItem();
+            }
+            else
+                equip[i] = 0;
+        }
+        
+        gameData.equip = equip;
     }
     IEnumerator FadeIn()
     {
@@ -165,5 +205,53 @@ public class DataController : MonoBehaviour
         info.isVisited = gameData.roomVisited[index];
         info.path = new bool[4];
         return info;
+    }
+    public ItemData LoadEquipItem(ItemType type)
+    {
+        if(type == ItemType.Weapon)
+        {
+            if(gameData.equip[0] == 0)
+                return null;
+            else
+                return ItemLoader.Instance.GetEquipItem((int)gameData.equip[0]);
+        }
+        else if(type == ItemType.Armor)
+        {
+            if(gameData.equip[1] == 0)
+                return null;
+            else
+                return ItemLoader.Instance.GetEquipItem((int)gameData.equip[1]);
+        }
+        else if(type == ItemType.Accesory)
+        {
+            if(gameData.equip[2] == 0)
+                return null;
+            else
+                return ItemLoader.Instance.GetEquipItem((int)gameData.equip[2]);
+        }
+        else
+        {
+            return null;
+        }
+    }
+    public int GetLoadedItemCount()
+    {
+        return gameData.item.Length;
+    }
+    public Item LoadItem(int index)
+    {
+        if(gameData.item[index].y != 0)
+        {
+            SubItem subitem = ItemLoader.Instance.GetSubItem((int)gameData.item[index].x).CreateItem() as SubItem;
+            subitem.SetAmount((int)gameData.item[index].y);
+            subitem.SetPlayer(player);
+            return subitem;
+        }
+        else
+        {
+            EquipItem equipitem = ItemLoader.Instance.GetEquipItem((int)gameData.item[index].x).CreateItem() as EquipItem;
+            equipitem.SetPlayer(player);
+            return equipitem;
+        }
     }
 }

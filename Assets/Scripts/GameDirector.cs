@@ -18,6 +18,7 @@ public class GameDirector : MonoBehaviour
     Text atk;
     Text def;
     Text gold;
+    Text SavePopupText;
 
     [SerializeField] GameObject[] Objects;
     /*
@@ -29,6 +30,7 @@ public class GameDirector : MonoBehaviour
         8~10 상태창 (체력 숫자, 체력 바, 공복치 바)
         11   게임오버 화면 전환을 위한 이미지
         12   세이브 팝업
+        23   RoomController
     */
 
     private void Awake() {
@@ -38,6 +40,7 @@ public class GameDirector : MonoBehaviour
         atk = Objects[3].GetComponent<Text>();
         def = Objects[4].GetComponent<Text>();
         gold = Objects[5].GetComponent<Text>();
+        SavePopupText = Objects[12].transform.GetChild(0).GetComponent<Text>();
     }
     private void Start() 
     {
@@ -123,5 +126,26 @@ public class GameDirector : MonoBehaviour
         gold.text = player.getGold().ToString();
         atk.text = "ATK : "+player.getAtk().ToString();
         def.text = "DEF : "+player.getDef().ToString();
+    }
+    public void ShowSavePopup()
+    {
+        if(Objects[13].GetComponent<RoomController>().GetRoomInfo(DataDirector.Instance.playerPosIndex).roomType == RoomType.Boss)
+        {
+            SavePopupText.text = "보스 방에서는 저장할 수 없습니다";
+            Objects[12].transform.GetChild(1).gameObject.SetActive(false);
+            Objects[12].transform.GetChild(2).gameObject.SetActive(false);
+            Invoke("CloseSavePopup", 0.5f);
+        }
+        else
+        {
+            SavePopupText.text = "게임을 저장하고 메인화면으로 돌아가시겠습니까?";
+            Objects[12].transform.GetChild(1).gameObject.SetActive(true);
+            Objects[12].transform.GetChild(2).gameObject.SetActive(true);
+        }
+        Objects[12].SetActive(true);
+    }
+    void CloseSavePopup()
+    {
+        Objects[12].SetActive(false);
     }
 }

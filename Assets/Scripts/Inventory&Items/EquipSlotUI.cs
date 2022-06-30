@@ -10,9 +10,12 @@ public class EquipSlotUI : MonoBehaviour
     [SerializeField] private ItemType type;
     [SerializeField] private ItemData FirstItem;
     [SerializeField] private GameObject _inventoryPopupObj;
+    [SerializeField] private GameObject DataCtl;
+    [SerializeField] private GameObject player;
 
     private InventoryPopupUI _inventoryPopupUI;
     private GameObject _iconGo;
+    private DataController data;
     
     private void ShowIcon() => _iconGo.SetActive(true);
     private void HideIcon() => _iconGo.SetActive(false);
@@ -20,13 +23,25 @@ public class EquipSlotUI : MonoBehaviour
     private void Awake() {
         _inventoryPopupUI = _inventoryPopupObj.GetComponent<InventoryPopupUI>();
         _iconGo = transform.GetChild(0).gameObject;
+        data = DataCtl.GetComponent<DataController>();
         HideIcon();
     }
     private void Start() {
-        if(FirstItem != null)
+        if(DataDirector.Instance.isLoadedGame)
+        {
+            ItemData tempData = data.LoadEquipItem(type);
+            if(tempData != null)
+            {
+                EquipItem tempItem = tempData.CreateItem() as EquipItem;
+
+                tempItem.SetPlayer(player);
+                SetItem(tempItem);
+            }
+        }
+        else if(FirstItem != null)
         {
             EquipItem tempItem = FirstItem.CreateItem() as EquipItem;
-            tempItem.SetPlayer(GameObject.Find("Player"));
+            tempItem.SetPlayer(player);
             SetItem(tempItem); 
         }
     }

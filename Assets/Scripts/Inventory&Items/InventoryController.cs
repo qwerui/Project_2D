@@ -8,6 +8,7 @@ public class InventoryController : MonoBehaviour
     public int Capacity { get; private set; }
     [SerializeField] private Item[] _items;
     [SerializeField] private InventoryUI _inventoryUI;
+    [SerializeField] private DataController data;
 
     private readonly HashSet<int> _indexSetForUpdate = new HashSet<int>();
 
@@ -15,6 +16,16 @@ public class InventoryController : MonoBehaviour
         Capacity = 20;
         _items = new Item[Capacity];
         _inventoryUI.SetInventoryReference(this);
+    }
+    private void Start() {
+        if(DataDirector.Instance.isLoadedGame)
+        {
+            for(int i=0;i<data.GetLoadedItemCount();i++)
+            {
+                _items[i] = data.LoadItem(i);
+            }
+            UpdateAllSlot();
+        }
     }
     
     private bool IsValidIndex(int index)
@@ -283,7 +294,7 @@ public class InventoryController : MonoBehaviour
 
     public Item ReturnItem(int index)
     {
-        return _items[index];
+            return _items[index];
     }
     public void SetItem(int index, Item item)
     {
@@ -298,5 +309,14 @@ public class InventoryController : MonoBehaviour
         _items[index] = item;
         UpdateSlot(index);
         return true;
+    }
+    public int GetExistItemCount()
+    {
+        for(int i=0;i<20;i++)
+        {
+            if(_items[i] == null)
+                return i;
+        }
+        return 20;
     }
 }
