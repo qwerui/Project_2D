@@ -10,15 +10,19 @@ public class RoomController : MonoBehaviour
     [SerializeField] GameObject MapTile;
     [SerializeField] GameObject cameraObj;
     [SerializeField] GameObject Minimap;
+    [SerializeField] GameObject DataCtl;
 
     CameraController cameraCtl;
     RoomGenerator generator;
     MinimapGenerator minimapCtl;
     Room currentRoom;
     Room nextRoom;
+    DataController data;
 
     int maxTile;
     int currentRoomIndex;
+
+    bool isLoaded;
 
     private void Awake() {
         roomList = new List<RoomInfo>();
@@ -26,9 +30,15 @@ public class RoomController : MonoBehaviour
 
     void Start()
     {
+        isLoaded = DataDirector.Instance.isLoadedGame;
         generator = roomGenerator.GetComponent<RoomGenerator>();
         cameraCtl = cameraObj.GetComponent<CameraController>();
         minimapCtl = Minimap.GetComponent<MinimapGenerator>();
+        if(isLoaded)
+        {
+            data = DataCtl.GetComponent<DataController>();
+            LoadRoomList();
+        }
         ArrangeRooms();
     }
 
@@ -48,11 +58,29 @@ public class RoomController : MonoBehaviour
             tempMap.GetComponent<Room>().SetRoomInfo(roomList[i], this);
         }
         minimapCtl.SetMinimap(roomList, maxTile);
-        currentRoomIndex = 0;
+        if(isLoaded)
+        {
+            for(int i=0;i<roomList.Count;i++)
+            {
+                if(roomList[i].isVisited == true)
+                {
+                    minimapCtl.ShowMinimap(i);
+                    minimapCtl.MinimapDark(i);
+                }
+            }
+            currentRoomIndex = DataDirector.Instance.playerPosIndex;
+            minimapCtl.ShowMinimap(currentRoomIndex);
+            cameraCtl.SetCameraLimit(roomList[currentRoomIndex], maxTile);
+            cameraCtl.SetCameraPosition();
+        }
+        else
+        {
+            currentRoomIndex = 0;
+            DataDirector.Instance.playerPosIndex = 0;
+        }
     }
     public void SetCurrentRoom()
     {
-        
         minimapCtl.MinimapDark(currentRoomIndex);
         currentRoom = nextRoom;
         currentRoom.RoomInit();
@@ -60,6 +88,7 @@ public class RoomController : MonoBehaviour
         minimapCtl.ShowMinimap(currentRoomIndex);
         currentRoom.roomInfo.isVisited = true;
         cameraCtl.SetCameraLimit(currentRoom.roomInfo, maxTile);
+        DataDirector.Instance.playerPosIndex = currentRoomIndex;
     }
     public void SetNextRoom(Room next)
     {
@@ -79,5 +108,13 @@ public class RoomController : MonoBehaviour
     public List<RoomInfo> GetRoomList()
     {
         return this.roomList;
+    }
+    void LoadRoomList()
+    {
+        for(int i=0;i<data.GetLoadedRoomCount();i++)
+        {
+            roomList.Add(generator.LoadRoomPrefab(data.LoadRoomInfo(i)));
+        }
+        generator.SetLoadedRoomPath(roomList);
     }
 }

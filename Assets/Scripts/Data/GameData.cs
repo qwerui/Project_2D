@@ -22,6 +22,9 @@ public class GameData
 	public int level;
 	public int experience;
 	public int maxExperience;
+
+    public Vector3 playerPos;
+    public int playerPosIndex;
     
     public int[] roomId;
     public int[] roomType;

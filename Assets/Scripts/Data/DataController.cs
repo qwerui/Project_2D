@@ -18,6 +18,7 @@ public class DataController : MonoBehaviour
 
     private void Awake()
     {
+        
         gameData = new GameData();
         data = DataDirector.Instance;
         if(data.isLoadedGame == true)
@@ -27,6 +28,8 @@ public class DataController : MonoBehaviour
             data.level = gameData.level;
             data.enemySlain = gameData.enemySlain;
             data.resourceItem = gameData.resourceItem;
+            data.playerPos = gameData.playerPos;
+            data.playerPosIndex = gameData.playerPosIndex;
         }
     }
     private void Start() {
@@ -48,6 +51,8 @@ public class DataController : MonoBehaviour
         gameData.stage = data.stage;
         gameData.enemySlain = data.enemySlain;
         gameData.resourceItem = data.resourceItem;
+        gameData.playerPos = player.transform.position;
+        gameData.playerPosIndex = data.playerPosIndex;
     }
     void SaveStat(GameData gameData)
     {
@@ -119,7 +124,6 @@ public class DataController : MonoBehaviour
     }
     public void GetLoadPlayer(PlayerStatus player)
     {
-
         player.setHp(gameData.hp);
         player.setMaxHp(gameData.maxHp);
         player.setHunger(gameData.hunger);
@@ -133,5 +137,33 @@ public class DataController : MonoBehaviour
         player.setLevel(gameData.level);
         player.setExperience(gameData.experience);
         player.setMaxExperience(gameData.maxExperience);
+    }
+    public int GetLoadedRoomCount()
+    {
+        return gameData.roomId.Length;
+    }
+    public RoomInfo LoadRoomInfo(int index)
+    {
+        RoomInfo info = new RoomInfo();
+        info.roomId = gameData.roomId[index];
+        switch(gameData.roomType[index])
+        {
+            case 1:
+                info.roomType = RoomType.Start;
+                break;
+            case 2:
+                info.roomType = RoomType.ItemShop;
+                break;
+            case 3:
+                info.roomType = RoomType.Boss;
+                break;
+            default:
+                info.roomType = RoomType.Normal;
+                break;
+        }
+        info.pos = new Vector2Int((int)gameData.roomPos[index].x, (int)gameData.roomPos[index].y);
+        info.isVisited = gameData.roomVisited[index];
+        info.path = new bool[4];
+        return info;
     }
 }

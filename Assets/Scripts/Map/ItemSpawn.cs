@@ -7,12 +7,10 @@ public class ItemSpawn : MonoBehaviour
     public int[] existPercent;
     private List<ItemData> SubItemList;
     private List<ItemData> EquipItemList;
-
     private void Awake() {
-        SubItemList = new List<ItemData>(Resources.LoadAll<ItemData>("ItemData/SubItem"));
-        EquipItemList = new List<ItemData>(Resources.LoadAll<ItemData>("ItemData/EquipItem"));
+        EquipItemList = ItemLoader.Instance.GetEquipItemList();
+        SubItemList = ItemLoader.Instance.GetSubItemList();
     }
-
     void Start()
     {
         for(int i=0;i<transform.childCount;i++)

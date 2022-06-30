@@ -214,4 +214,32 @@ public class RoomGenerator : MonoBehaviour
         roomCount=0;
         RoomInit();
     }
+    public RoomInfo LoadRoomPrefab(RoomInfo info)
+    {
+        switch(info.roomType)
+        {
+            case RoomType.Start:
+                info.roomPrefab = template.StartRoom[info.roomId];
+                break;
+            case RoomType.Boss:
+                info.roomPrefab = template.BossRoom[info.roomId];
+                break;
+            case RoomType.ItemShop:
+                info.roomPrefab = template.ItemRoom[info.roomId];
+                break;
+            default:
+                info.roomPrefab = template.NormalRoom[info.roomId];
+                break;
+        }
+        return info;
+    }
+    public void SetLoadedRoomPath(List<RoomInfo> infoList)
+    {
+        roomList = infoList;
+        for(int i=0;i<roomList.Count;i++)
+        {
+            isCreated[roomList[i].pos.y, roomList[i].pos.x] = true;
+        }
+        SetPath();
+    }
 }

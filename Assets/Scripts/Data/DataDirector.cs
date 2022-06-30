@@ -23,6 +23,9 @@ public class DataDirector
     public int resourceItem;
     public int enemySlain;
 
+    public Vector3 playerPos;
+    public int playerPosIndex;
+
     public bool isLoadedGame;
 
     public DataDirector()

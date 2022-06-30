@@ -162,10 +162,13 @@ public abstract class EnemyClass : MonoBehaviour
     void DropItem()
     {
         int childIndex = 0;
-        if(transform.GetChild(0).gameObject.tag=="EnemyAttack")
+        if(transform.childCount != 0)
         {
-                Destroy(transform.GetChild(0).gameObject);
-                childIndex++;
+            if(transform.GetChild(0).gameObject.tag=="EnemyAttack")
+            {
+                    Destroy(transform.GetChild(0).gameObject);
+                    childIndex++;
+            }
         }
         for(int i=childIndex;i<transform.childCount;i++)
         {

@@ -21,7 +21,7 @@ public class GachaController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AllItemData = new List<ItemData>(Resources.LoadAll<ItemData>("ItemData/EquipItem"));
+        AllItemData = ItemLoader.Instance.GetEquipItemList();
         InitPercentage();
     }
 

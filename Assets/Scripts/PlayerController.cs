@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject QuickSlotWeapon;
     [SerializeField] private GameObject inventory;
     [SerializeField] private GameObject DataCtl;
+    [SerializeField] private GameObject MiniMap;
 
     PlayerStatus stat;
     GameObject weaponRoot; //손의 위치
@@ -75,7 +76,10 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         if (data.isLoadedGame == true)
+        {
             DataCtl.GetComponent<DataController>().GetLoadPlayer(stat);
+            transform.position = data.playerPos;
+        }
         contacts = new ContactPoint2D[10];
         ani = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
@@ -83,7 +87,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         quickSlotPotion = QuickSlotPotion.GetComponent<QuickSlotUI>();
         quickSlotWeapon = QuickSlotWeapon.GetComponent<QuickSlotUI>();
-        weaponRoot = transform.GetChild(0).gameObject;;
+        weaponRoot = transform.GetChild(0).gameObject;
         StartCoroutine("Hungry");
         StartCoroutine("DeadCheck");
     }
@@ -499,6 +503,11 @@ public class PlayerController : MonoBehaviour
             {
                 inventory.SetActive(true);
             }
+        }
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            MinimapController mini = MiniMap.GetComponent<MinimapController>();
+            mini.MinimapOnOff(!mini.minimapOn);
         }
     }
     private void DataUpdate()
