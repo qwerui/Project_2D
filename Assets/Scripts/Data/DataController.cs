@@ -48,8 +48,8 @@ public class DataController : MonoBehaviour
         GameData saveData = new GameData();
         roomList = room.GetComponent<RoomController>().GetRoomList();
         SaveDataDirector(saveData);
-        SaveItem(saveData);
         SaveStat(saveData);
+        SaveItem(saveData);
         SaveRoom(saveData);
         JsonDirector.SaveGameData(saveData);
         StartCoroutine("FadeIn");

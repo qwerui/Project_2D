@@ -33,7 +33,6 @@ public class EquipSlotUI : MonoBehaviour
             if(tempData != null)
             {
                 EquipItem tempItem = tempData.CreateItem() as EquipItem;
-
                 tempItem.SetPlayer(player);
                 SetItem(tempItem);
             }
