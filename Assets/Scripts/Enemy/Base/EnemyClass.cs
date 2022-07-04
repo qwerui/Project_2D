@@ -44,10 +44,13 @@ public abstract class EnemyClass : MonoBehaviour
     protected abstract void Chase(); //적 추적
     protected abstract IEnumerator PosDiff(); //적 추적시 방향 전환 속도 조절 (적과 캐릭터의 좌표 차이)
 
+    protected virtual void StatusInit(){}
+
     protected void EnemyInit()
     {
         player = GameObject.Find("Player");
         data = DataDirector.Instance;
+        StatusInit();
         CreateItem();
     }
 

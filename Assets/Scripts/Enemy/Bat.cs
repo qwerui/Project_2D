@@ -61,4 +61,24 @@ public class Bat : EnemyClass
             yield return new WaitForSeconds(1f);
         }
     }
+    protected override void StatusInit()
+    {
+        hp = 3 * data.stage + 5;
+        def = (int)(data.stage/5);
+        if(gameObject.name.Contains("Normal"))
+        {
+            atk = 5 * (int)(data.stage / 3) + 8;
+            experience = data.stage * 7;
+        }
+        else if(gameObject.name.Contains("Strong"))
+        {
+            atk = 3 * data.stage + 7;
+            experience = data.stage * 12;
+        }
+        else
+        {
+            atk = 5  * (int)(data.stage / 5) + 5;
+            experience = data.stage * 5;
+        }
+    }
 }

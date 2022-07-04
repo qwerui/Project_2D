@@ -50,6 +50,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: GroundLayer
+    uniqueID: 1589103387
+    locked: 0
+  - name: EnemyLayer
+    uniqueID: 3946116155
+    locked: 0
   - name: TextLayer
     uniqueID: 4044022251
     locked: 0

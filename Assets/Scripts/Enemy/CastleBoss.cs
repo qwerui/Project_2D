@@ -9,6 +9,9 @@ public class CastleBoss : EnemyClass
     [SerializeField] GameObject bomb;
     LaserCharge laser;
 
+    int laserDamage;
+    int bombDamage;
+
     void Start()
     {
         EnemyInit();
@@ -64,7 +67,7 @@ public class CastleBoss : EnemyClass
     void LaserAttack()
     {
         isAttack = true;
-        laser.ChargeLaser();
+        laser.ChargeLaser(laserDamage);
         Invoke("AttackEnd", 5.0f);
     }
     IEnumerator BombAttack()
@@ -73,11 +76,21 @@ public class CastleBoss : EnemyClass
         while(bombCount<5)
         {
             GameObject bombObj = Instantiate(bomb, bombPos.transform) as GameObject;
-            bombObj.GetComponent<Bomb>().SetBomb(10, new Vector2(Random.Range(-5,-25),Random.Range(2,20)));
+            bombObj.GetComponent<Bomb>().SetBomb(bombDamage, new Vector2(Random.Range(-5,-25),Random.Range(2,20)));
             bombCount++;
             yield return new WaitForSeconds(0.5f);
         }
         Invoke("AttackEnd", 2.0f);
         yield return null;
+    }
+    protected override void StatusInit()
+    {
+        hp = 10 * (data.stage + 10) + data.stage * data.stage;
+        atk = data.stage * 20;
+        def = (int)(data.stage / 5) * 3;
+        experience = data.stage * 50;
+
+        laserDamage = data.stage * 5 + 5;
+        bombDamage = data.stage * 2 + 3;
     }
 }

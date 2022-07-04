@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class RecordDirector : MonoBehaviour
 {
     LocalRanking localRank;
-    [Header("∑©≈∑¿ª ≥÷¿ª ø¿∫Í¡ß∆Æ")]
+    [Header("Îû≠ÌÇπ ÏúÑÏπò Ïò§Î∏åÏ†ùÌä∏")]
     public GameObject localRankObj;
     public GameObject worldRankObj;
-    [Header("∑©≈∑ «— ¡Ÿ «¡∏Æ∆’")]
+    [Header("Îû≠ÌÇπ ÌîÑÎ¶¨Ìåπ")]
     public GameObject localRankPrefab;
     public GameObject worldRankPrefab;
     void Start()
@@ -31,9 +31,9 @@ public class RecordDirector : MonoBehaviour
     {
         for(int i=0;i<10;i++)
         {
-            GameObject rankingLine = Instantiate(localRankPrefab, localRankObj.transform);
-            rankingLine.transform.position = new Vector2(0, i * 20);
-            rankingLine.transform.GetChild(0).GetComponent<Text>().text = i.ToString();
+            GameObject rankingLine = Instantiate(localRankPrefab, localRankObj.transform.GetChild(0).GetChild(0));
+            rankingLine.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -(i * 25)-20);
+            rankingLine.transform.GetChild(0).GetComponent<Text>().text = (i+1).ToString();
             rankingLine.transform.GetChild(1).GetComponent<Text>().text = localRank.score[i].ToString();
         }
     }
@@ -42,5 +42,17 @@ public class RecordDirector : MonoBehaviour
         localRankObj.SetActive(false);
         worldRankObj.SetActive(false);
     }
-
+    void ContentChange(int index)
+    {
+        if(index == 0)
+        {
+            localRankObj.SetActive(true);
+            worldRankObj.SetActive(false);
+        }
+        else if(index == 1)
+        {
+            localRankObj.SetActive(false);
+            worldRankObj.SetActive(true);
+        }
+    }
 }

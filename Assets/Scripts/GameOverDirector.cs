@@ -81,7 +81,7 @@ public class GameOverDirector : MonoBehaviour
         {
             sum*=scoreEnd[i];
         }
-        scoreEnd[4] = (int)(sum / 10000);
+        scoreEnd[4] = (int)(sum / 1000);
     }
     void SaveLocalRanking()
     {

@@ -5,9 +5,11 @@ using UnityEngine;
 public class LaserCharge : MonoBehaviour
 {
     public GameObject beam;
+    int damage;
 
-    public void ChargeLaser()
+    public void ChargeLaser(int damage)
     {
+        this.damage = damage;
         gameObject.SetActive(true);
         Invoke("Fire",0.8f);
     }
@@ -15,6 +17,6 @@ public class LaserCharge : MonoBehaviour
     {
         gameObject.SetActive(false);
         beam.SetActive(true);
-        beam.GetComponent<Laser>().ShootBeam();
+        beam.GetComponent<Laser>().ShootBeam(this.damage);
     }
 }
