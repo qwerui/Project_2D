@@ -107,8 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         SlopeCheck();
         onGround();
-        if(data != null)
-            DataUpdate();
+        DataUpdate();
     }
 
     //플레이어 상태 전달 (주로 UI에 사용 ex: 체력 바 등)
