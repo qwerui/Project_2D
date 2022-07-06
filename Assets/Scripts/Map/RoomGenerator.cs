@@ -12,7 +12,7 @@ public class RoomGenerator : MonoBehaviour
     List<RoomInfo> roomList;
     List<RoomInfo> endRoomList;
 
-    [SerializeField] int maxRoom;
+    int maxRoom;
     [SerializeField] GameObject testMap;
     [SerializeField] RoomTemplate template;
     
@@ -35,6 +35,7 @@ public class RoomGenerator : MonoBehaviour
     public void RoomInit()
     {
         int loopNum = 0;
+        maxRoom = DataDirector.Instance.stage / 3 + 6;
         makeRoomCount = Random.Range(maxRoom-2, maxRoom);
         while(roomCount < makeRoomCount)
         {

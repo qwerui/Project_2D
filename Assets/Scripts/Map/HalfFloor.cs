@@ -5,32 +5,35 @@ using UnityEngine.Tilemaps;
 
 public class HalfFloor : MonoBehaviour
 {
-    TilemapCollider2D tileCollider;
+    PlatformEffector2D effector;
+    const int exceptPlayer = 1073774007;
+    const int includePlayer = 2147483647;
     private void Start() {
-        tileCollider = GetComponent<TilemapCollider2D>();
+        effector = GetComponent<PlatformEffector2D>();
     }
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Player")
         {
-            StartCoroutine("DownFloor");
+                StartCoroutine("DownFloor");
         }
     }
+
     IEnumerator DownFloor()
     {
         while(true)
         {
             if(Input.GetKey(KeyCode.DownArrow)&&Input.GetKeyDown(KeyCode.X))
             {
-                tileCollider.enabled = false;
-                Invoke("ColliderOn", 0.3f);
+                effector.colliderMask = exceptPlayer;
+                Invoke("RestoreEffector", 0.3f);
                 break;
             }
             yield return null;
         }
     }
-    void ColliderOn()
+    void RestoreEffector()
     {
-        tileCollider.enabled = true;
+        effector.colliderMask = includePlayer;
         StopAllCoroutines();
     }
 }

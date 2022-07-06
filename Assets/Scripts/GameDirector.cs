@@ -20,6 +20,8 @@ public class GameDirector : MonoBehaviour
     Text gold;
     Text SavePopupText;
 
+    ScreenController fadeScreen;
+
     [SerializeField] GameObject[] Objects;
     /*
         0~2  빨, 파, 노 구슬
@@ -30,7 +32,7 @@ public class GameDirector : MonoBehaviour
         8~10 상태창 (체력 숫자, 체력 바, 공복치 바)
         11   게임오버 화면 전환을 위한 이미지
         12   세이브 팝업
-        23   RoomController
+        13   RoomController
     */
 
     private void Awake() {
@@ -41,6 +43,7 @@ public class GameDirector : MonoBehaviour
         def = Objects[4].GetComponent<Text>();
         gold = Objects[5].GetComponent<Text>();
         SavePopupText = Objects[12].transform.GetChild(0).GetComponent<Text>();
+        fadeScreen = Objects[11].GetComponent<ScreenController>();
     }
     private void Start() 
     {
@@ -147,5 +150,17 @@ public class GameDirector : MonoBehaviour
     void CloseSavePopup()
     {
         Objects[12].SetActive(false);
+    }
+    public void ScreenFadeIn(float startAlpha)
+    {
+        Objects[11].SetActive(true);
+        fadeScreen.SetAlpha(startAlpha);
+        Objects[11].GetComponent<ScreenController>().FadeIn();
+    }
+    public void ScreenFadeOut(float startAlpha)
+    {
+        Objects[11].SetActive(true);
+        fadeScreen.SetAlpha(startAlpha);
+        fadeScreen.FadeOut();
     }
 }

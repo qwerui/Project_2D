@@ -12,6 +12,7 @@ public class DataController : MonoBehaviour
     public GameObject room;
     public GameObject FadeScreen;
     public GameObject Inventory;
+    public GameDirector director;
 
     public EquipSlotUI weapon;
     public EquipSlotUI armor;
@@ -52,7 +53,8 @@ public class DataController : MonoBehaviour
         SaveItem(saveData);
         SaveRoom(saveData);
         JsonDirector.SaveGameData(saveData);
-        StartCoroutine("FadeIn");
+        director.ScreenFadeIn(0);
+        Invoke("ReturnMainMenu", 2.0f);
     }
     void SaveDataDirector(GameData gameData)
     {
@@ -142,26 +144,7 @@ public class DataController : MonoBehaviour
         
         gameData.equip = equip;
     }
-    IEnumerator FadeIn()
-    {
-        FadeScreen.SetActive(true);
-        Image sr;
-        sr = FadeScreen.GetComponent<Image>();
-
-        for(int i=0;i<100;i++)
-        {
-            float f = i / 100.0f;
-
-            var tempColor = sr.color;
-            tempColor.a = f;
-            sr.color = tempColor;
-            
-            yield return new WaitForSeconds(0.01f);
-        }
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("MainScene");
-        yield return null;
-    }
+    
     public void GetLoadPlayer(PlayerStatus player)
     {
         player.setHp(gameData.hp);
@@ -253,5 +236,9 @@ public class DataController : MonoBehaviour
             equipitem.SetPlayer(player);
             return equipitem;
         }
+    }
+    void ReturnMainMenu()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }

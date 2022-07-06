@@ -256,8 +256,21 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(transform.position, new Vector2(0.9f, 0.1f), 0f, Vector2.down,extraHeightText, groundLayer);
         if(raycastHit.collider != null) // 감지 시
         {
-            if(rigid.velocity.y <= 0)
+            if (raycastHit.collider.name == "HalfFloor")
+            {
+                if (rigid.velocity.y > 0)
+                {
+                    isJumping = true;
+                }
+                else
+                {
+                    isJumping = false;
+                }
+            }
+            else
+            {
                 isJumping = false;
+            }
         }
         else
             isJumping = true;
@@ -282,7 +295,14 @@ public class PlayerController : MonoBehaviour
         }
         if(isDash)
         {
-            rigid.velocity = new Vector2(transform.localScale.x,0) * dashSpeed;
+            if(isOnSlope)
+            {
+                rigid.velocity = new Vector2(slopeNormalPerp.x * -moveDirection, slopeNormalPerp.y * -moveDirection) * dashSpeed;
+            }
+            else
+            {
+                rigid.velocity = new Vector2(transform.localScale.x, 0) * dashSpeed;
+            }
             currentDashTimer -= Time.deltaTime;
             Physics2D.IgnoreLayerCollision(13,25, true);
             Physics2D.IgnoreLayerCollision(12,25, true);

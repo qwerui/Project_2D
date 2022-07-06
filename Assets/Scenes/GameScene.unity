@@ -348,7 +348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d289a804cb786d349bb191eda3878118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRoom: 6
   testMap: {fileID: 617433206935356515, guid: bbd41b3cf9fa8e242bacaa7954549ba0, type: 3}
   template: {fileID: 11400000, guid: f7922a270b9845c4a952d363eac6060f, type: 2}
   ex: {fileID: 253161650}
@@ -1402,8 +1401,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1051546519
+  m_SortingLayer: 4
   m_SortingOrder: 3
   m_Sprite: {fileID: 2737840414567516762, guid: c240f731f6faa7340972a0dbb9d2f2e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1722,6 +1721,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4687271}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &414950460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1933,6 +1944,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4687271}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &451717281
 MonoBehaviour:
@@ -5785,6 +5808,7 @@ MonoBehaviour:
   room: {fileID: 1423442379}
   FadeScreen: {fileID: 2116702932}
   Inventory: {fileID: 519452766}
+  director: {fileID: 819697014}
   weapon: {fileID: 538566531}
   armor: {fileID: 1231021091}
   accesory: {fileID: 598353921}
@@ -8149,7 +8173,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2110096015
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 3
   m_Sprite: {fileID: 7152930139536384079, guid: 468e3598a5b681341a2fea0448176bf7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -10020,7 +10044,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -155, y: 130}
+  m_AnchoredPosition: {x: -25, y: 10}
   m_SizeDelta: {x: 50, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1692096333
@@ -12073,6 +12097,7 @@ GameObject:
   - component: {fileID: 2116702933}
   - component: {fileID: 2116702935}
   - component: {fileID: 2116702934}
+  - component: {fileID: 2116702936}
   m_Layer: 5
   m_Name: GameOverScreen
   m_TagString: Untagged
@@ -12138,6 +12163,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116702932}
   m_CullTransparentMesh: 1
+--- !u!114 &2116702936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116702932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 063ed151be883954a8a1626e8d2c5124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2118715745
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -67,12 +67,12 @@ public class Bat : EnemyClass
         def = (int)(data.stage/5);
         if(gameObject.name.Contains("Normal"))
         {
-            atk = 5 * (int)(data.stage / 3) + 8;
+            atk = 5 * (int)(data.stage / 3) + 5;
             experience = data.stage * 7;
         }
         else if(gameObject.name.Contains("Strong"))
         {
-            atk = 3 * data.stage + 7;
+            atk = 3 * data.stage + 5;
             experience = data.stage * 12;
         }
         else
