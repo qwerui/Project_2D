@@ -37,12 +37,14 @@ public class DataController : MonoBehaviour
             data.resourceItem = gameData.resourceItem;
             data.playerPos = gameData.playerPos;
             data.playerPosIndex = gameData.playerPosIndex;
+            JsonDirector.DeleteSaveFile();
         }
     }
     private void Start() {
         stat = player.GetComponent<PlayerController>().GetStat();
         inventory = Inventory.GetComponent<InventoryController>();
         roomList = new List<RoomInfo>();
+
     }
     public void SaveGameData()
     {
@@ -111,6 +113,13 @@ public class DataController : MonoBehaviour
         gameData.roomType = roomType;
         gameData.roomPos = roomPos;
         gameData.roomVisited = roomVisited;
+
+        gameData.roomItem = new string[roomList.Count];
+
+        for(int i=0;i<roomList.Count;i++)
+        {
+            gameData.roomItem[i]=room.GetComponent<RoomController>().GetRoomItemList(i).ToString();
+        }
     }
     void SaveItem(GameData gameData)
     {
@@ -240,5 +249,10 @@ public class DataController : MonoBehaviour
     void ReturnMainMenu()
     {
         SceneManager.LoadScene("MainScene");
+    }
+
+    public string LoadRoomItem(int index)
+    {
+            return gameData.roomItem[index];
     }
 }

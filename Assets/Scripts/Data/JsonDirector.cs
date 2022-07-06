@@ -8,41 +8,41 @@ using System;
 
 public static class JsonDirector
 {
-    private static string SavePath => Application.persistentDataPath+"/saves/";
+    private static string SavePath => Application.persistentDataPath + "/saves/";
     private static string SecurityKey = "dongyangmiraeuniversityproject2d";
 
     public static void SaveGameData(GameData data)
     {
-        if(!Directory.Exists(SavePath))
-        {
-            Directory.CreateDirectory(SavePath);
-        }
-        string saveJson = JsonUtility.ToJson(data);
-        
-        saveJson = Encrypt(saveJson, SecurityKey);
-		string saveFilePath = SavePath + "gamesave" + ".json";
-		File.WriteAllText(saveFilePath, saveJson);
-    }
-    public static void SaveRanking(LocalRanking data)
-    {
-        if(!Directory.Exists(SavePath))
+        if (!Directory.Exists(SavePath))
         {
             Directory.CreateDirectory(SavePath);
         }
         string saveJson = JsonUtility.ToJson(data);
 
         saveJson = Encrypt(saveJson, SecurityKey);
-		string saveFilePath = SavePath + "ranking" + ".json";
-		File.WriteAllText(saveFilePath, saveJson);
+        string saveFilePath = SavePath + "gamesave" + ".json";
+        File.WriteAllText(saveFilePath, saveJson);
+    }
+    public static void SaveRanking(LocalRanking data)
+    {
+        if (!Directory.Exists(SavePath))
+        {
+            Directory.CreateDirectory(SavePath);
+        }
+        string saveJson = JsonUtility.ToJson(data);
+
+        saveJson = Encrypt(saveJson, SecurityKey);
+        string saveFilePath = SavePath + "ranking" + ".json";
+        File.WriteAllText(saveFilePath, saveJson);
     }
     public static GameData LoadGameData()
     {
         string saveFilePath = SavePath + "gamesave" + ".json";
-        if(!Directory.Exists(SavePath))
+        if (!Directory.Exists(SavePath))
         {
             return null;
         }
-        else if(!File.Exists(saveFilePath))
+        else if (!File.Exists(saveFilePath))
         {
             return null;
         }
@@ -52,12 +52,12 @@ public static class JsonDirector
             {
                 string saveFile = File.ReadAllText(saveFilePath);
                 saveFile = Decrypt(saveFile, SecurityKey);
-			    GameData saveData = JsonUtility.FromJson<GameData>(saveFile);
-			    return saveData;
+                GameData saveData = JsonUtility.FromJson<GameData>(saveFile);
+                return saveData;
             }
             catch (System.Exception)
             {
-                
+
                 throw new System.Exception("GameData Load Fail");
             }
         }
@@ -65,11 +65,11 @@ public static class JsonDirector
     public static LocalRanking LoadRanking()
     {
         string saveFilePath = SavePath + "ranking" + ".json";
-        if(!Directory.Exists(SavePath))
+        if (!Directory.Exists(SavePath))
         {
             return new LocalRanking();
         }
-        else if(!File.Exists(saveFilePath))
+        else if (!File.Exists(saveFilePath))
         {
             return new LocalRanking();
         }
@@ -79,12 +79,12 @@ public static class JsonDirector
             {
                 string saveFile = File.ReadAllText(saveFilePath);
                 saveFile = Decrypt(saveFile, SecurityKey);
-			    LocalRanking saveData = JsonUtility.FromJson<LocalRanking>(saveFile);
-			    return saveData;
+                LocalRanking saveData = JsonUtility.FromJson<LocalRanking>(saveFile);
+                return saveData;
             }
             catch (System.Exception)
             {
-                
+
                 throw new System.Exception("Ranking Load Fail");
             }
         }
@@ -152,13 +152,36 @@ public static class JsonDirector
         {
             return false;
         }
-        else if(!File.Exists(saveFilePath))
+        else if (!File.Exists(saveFilePath))
         {
             return false;
         }
         else
         {
             return true;
+        }
+    }
+    public static void DeleteSaveFile()
+    {
+        string saveFilePath = SavePath + "gamesave" + ".json";
+        if(!Directory.Exists(SavePath))
+        {
+            return;
+        }
+        else if(!File.Exists(saveFilePath))
+        {
+            return;
+        }
+        else
+        {
+            try
+            {
+                File.Delete(saveFilePath);
+            }
+            catch (System.Exception)
+            {
+                throw new System.Exception("Delete File Fail");
+            }
         }
     }
 }

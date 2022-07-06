@@ -55,7 +55,7 @@ public class RoomController : MonoBehaviour
         {
             GameObject tempMap = Instantiate(roomList[i].roomPrefab, MapTile.transform) as GameObject;
             tempMap.transform.position = new Vector2(roomList[i].pos.x-(int)(maxTile/2),roomList[i].pos.y-(int)(maxTile/2))*50;
-            tempMap.GetComponent<Room>().SetRoomInfo(roomList[i], this);
+            tempMap.GetComponent<Room>().SetRoomInfo(roomList[i], this, i);
         }
         minimapCtl.SetMinimap(roomList, maxTile);
         if(isLoaded)
@@ -121,5 +121,9 @@ public class RoomController : MonoBehaviour
             roomList.Add(generator.LoadRoomPrefab(data.LoadRoomInfo(i)));
         }
         generator.SetLoadedRoomPath(roomList);
+    }
+    public string GetRoomItemList(int index)
+    {
+        return MapTile.transform.GetChild(index).gameObject.GetComponent<Room>().GetRoomItemId();
     }
 }

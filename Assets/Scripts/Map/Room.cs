@@ -11,6 +11,8 @@ public class Room : MonoBehaviour
     public EnemyGroup enemyGroup;
     private List<GameObject> enemyList;
 
+    public int roomIndex;
+
     private void Awake() {
         enemyList = new List<GameObject>();
     }
@@ -61,12 +63,13 @@ public class Room : MonoBehaviour
         else
             RoomInit();
     }
-    public void SetRoomInfo(RoomInfo info, RoomController ctl)
+    public void SetRoomInfo(RoomInfo info, RoomController ctl, int index)
     {
         roomInfo = info;
         roomInfo.Width = 50;
         roomInfo.Height = 50;
         controller = ctl;
+        roomIndex = index;
     }
     
     public void HideAll()
@@ -105,5 +108,32 @@ public class Room : MonoBehaviour
                 Instantiate(enemyList[i],tempTrans);
             }
         }
+    }
+    public string GetRoomItemId()
+    {
+        Transform itemPosGroup = transform.GetChild(2).GetChild(1);
+        if(itemPosGroup.childCount == 0)
+        {
+            return "0,0";
+        }
+        string roomItem = "";
+        
+        for(int i=0;i<itemPosGroup.childCount;i++)
+        {
+            if(itemPosGroup.GetChild(i).childCount != 0)
+            {
+                roomItem+=itemPosGroup.GetChild(i).GetChild(0).GetComponent<ItemPrefab>().data.ID.ToString();
+            }
+            else
+            {
+                roomItem += "0";
+            }
+            if(i==itemPosGroup.childCount-1)
+            {
+                break;
+            }
+            roomItem += ",";
+        }
+        return roomItem;
     }
 }
