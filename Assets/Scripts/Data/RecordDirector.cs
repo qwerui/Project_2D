@@ -12,11 +12,27 @@ public class RecordDirector : MonoBehaviour
     [Header("랭킹 프리팹")]
     public GameObject localRankPrefab;
     public GameObject worldRankPrefab;
+
+    public GameObject uploadButton;
+    public DynamoDBManager DynamoDB;
+
     void Start()
     {
         localRank = new LocalRanking();
         localRank = JsonDirector.LoadRanking();
+        localRankObj.SetActive(true);
+
+        UserSessionCache session = UserSessionCache.Instance;
+        if(session.GetCredentials() == null)
+        {
+            uploadButton.SetActive(false);
+        }
+        else
+        {
+            uploadButton.SetActive(true);
+        }
         LoadLocal();
+        LoadWorld();
     }
 
     public void RecordLoading(int option)
@@ -26,7 +42,12 @@ public class RecordDirector : MonoBehaviour
         {
             localRankObj.SetActive(true);
         }
+        else if(option == 1)
+        {
+            worldRankObj.SetActive(true);
+        }
     }
+
     void LoadLocal()
     {
         for(int i=0;i<10;i++)
@@ -37,22 +58,13 @@ public class RecordDirector : MonoBehaviour
             rankingLine.transform.GetChild(1).GetComponent<Text>().text = localRank.score[i].ToString();
         }
     }
+    void LoadWorld()
+    {
+
+    }
     void RecordObjInit()
     {
         localRankObj.SetActive(false);
         worldRankObj.SetActive(false);
-    }
-    void ContentChange(int index)
-    {
-        if(index == 0)
-        {
-            localRankObj.SetActive(true);
-            worldRankObj.SetActive(false);
-        }
-        else if(index == 1)
-        {
-            localRankObj.SetActive(false);
-            worldRankObj.SetActive(true);
-        }
     }
 }
