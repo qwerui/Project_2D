@@ -22,15 +22,17 @@ public class UserSessionCache
    public string _accessToken;
    public string _refreshToken;
    public string _userId;
+   public string _username;
    private CognitoAWSCredentials _cognitoAWSCredentials;
    private CognitoUser _user;
 
-   public void SetUserSessionCache(string idToken, string accessToken, string refreshToken, string userId)
+   public void SetUserSessionCache(string idToken, string accessToken, string refreshToken, string userId, string username)
    {
       _idToken = idToken;
       _accessToken = accessToken;
       _refreshToken = refreshToken;
       _userId = userId;
+      _username = username;
    }
    public void SetCredentials(CognitoAWSCredentials credentials)
    {
@@ -67,5 +69,9 @@ public class UserSessionCache
    public string getUserId()
    {
       return _userId;
+   }
+   public string getUserName()
+   {
+      return _username;
    }
 }

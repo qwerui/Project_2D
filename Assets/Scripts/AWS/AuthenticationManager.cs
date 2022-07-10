@@ -45,15 +45,16 @@ public class AuthenticationManager : MonoBehaviour
       {
          AuthFlowResponse authFlowResponse = await user.StartWithSrpAuthAsync(authRequest).ConfigureAwait(false);
 
-         _userid = await GetUserIdFromProvider(authFlowResponse.AuthenticationResult.AccessToken);
-         // Debug.Log("Users unique ID from cognito: " + _userid);
+         _userid = await GetAttributeFromProvider(authFlowResponse.AuthenticationResult.AccessToken, "sub");
+         string _username = await GetAttributeFromProvider(authFlowResponse.AuthenticationResult.AccessToken, "preferred_username");
 
          UserSessionCache userSessionCache = UserSessionCache.Instance;
          userSessionCache.SetUserSessionCache(
             authFlowResponse.AuthenticationResult.IdToken,
             authFlowResponse.AuthenticationResult.AccessToken,
             authFlowResponse.AuthenticationResult.RefreshToken,
-            _userid);
+            _userid,
+            _username);
 
          // This how you get credentials to use for accessing other services.
          // This IdentityPool is your Authorization, so if you tried to access using an
@@ -115,10 +116,9 @@ public class AuthenticationManager : MonoBehaviour
          return false;
       }
    }
-   private async Task<string> GetUserIdFromProvider(string accessToken)
+   private async Task<string> GetAttributeFromProvider(string accessToken, string attr)
    {
-      // Debug.Log("Getting user's id...");
-      string subId = "";
+      string returnAttr = "";
 
       Task<GetUserResponse> responseTask =
          _provider.GetUserAsync(new GetUserRequest
@@ -131,13 +131,13 @@ public class AuthenticationManager : MonoBehaviour
       // set the user id
       foreach (var attribute in responseObject.UserAttributes)
       {
-         if (attribute.Name == "sub")
+         if (attribute.Name == attr)
          {
-            subId = attribute.Value;
+            returnAttr = attribute.Value;
             break;
          }
       }
 
-      return subId;
+      return returnAttr;
    }
 }

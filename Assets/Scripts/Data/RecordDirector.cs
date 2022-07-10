@@ -60,11 +60,24 @@ public class RecordDirector : MonoBehaviour
     }
     void LoadWorld()
     {
-
+        List<WorldRank> worldRankList = DynamoDB.LoadRanking();
+        worldRankList.Sort((a, b) => b.Score.CompareTo(a.Score)); //내림차순
+        for(int i=0;i<worldRankList.Count;i++)
+        {
+            GameObject rankingLine = Instantiate(worldRankPrefab, worldRankObj.transform.GetChild(0).GetChild(0));
+            rankingLine.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -(i * 25));
+            rankingLine.transform.GetChild(0).GetComponent<Text>().text = (i+1).ToString();
+            rankingLine.transform.GetChild(1).GetComponent<Text>().text = worldRankList[i].Username;
+            rankingLine.transform.GetChild(2).GetComponent<Text>().text = worldRankList[i].Score.ToString();
+        }
     }
     void RecordObjInit()
     {
         localRankObj.SetActive(false);
         worldRankObj.SetActive(false);
+    }
+    public void UploadRanking()
+    {
+        DynamoDB.UploadRanking();
     }
 }
