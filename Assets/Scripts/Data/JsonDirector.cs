@@ -184,4 +184,47 @@ public static class JsonDirector
             }
         }
     }
+    public static string LoadEncryptedSave()
+    {
+        string saveFilePath = SavePath + "gamesave" + ".json";
+        if (!Directory.Exists(SavePath))
+        {
+            return null;
+        }
+        else if (!File.Exists(saveFilePath))
+        {
+            return null;
+        }
+        else
+        {
+            try
+            {
+                string saveFile = File.ReadAllText(saveFilePath);
+                return saveFile;
+            }
+            catch (System.Exception)
+            {
+
+                throw new System.Exception("GameData String Load Fail");
+            }
+        }
+    }
+    public static bool SaveEncryptedSave(string encryptedData)
+    {
+        try
+        {
+            if (!Directory.Exists(SavePath))
+            {
+                Directory.CreateDirectory(SavePath);
+            }
+            string saveFilePath = SavePath + "gamesave" + ".json";
+            File.WriteAllText(saveFilePath, encryptedData);
+            return true;
+        }
+        catch(System.Exception)
+        {
+            return false;
+        }
+        
+    }
 }

@@ -107,10 +107,11 @@ public class MenuDirector : MonoBehaviour
     public void LoadGame()
     {
         DataDirector.Instance.isLoadedGame = true;
-        GameStart();
+        SceneManager.LoadScene("GameScene");
     }
     public void GameStart()
     {
+        DataDirector.Instance.isLoadedGame = false;
         SceneManager.LoadScene("GameScene");
     }
     public void NotGoTutorial()

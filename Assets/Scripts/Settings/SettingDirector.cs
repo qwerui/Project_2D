@@ -9,8 +9,13 @@ public class SettingDirector : MonoBehaviour
 
     public GameObject LoginPanel;
     public GameObject LogoutPanel;
+    
+    public UploadManager uploadManager;
 
     public Text loginText;
+
+    public GameObject serverObject;
+
     bool isLogin;
 
     private void Start()
@@ -37,11 +42,15 @@ public class SettingDirector : MonoBehaviour
         {
             isLogin=true;
             loginText.text = "logout";
+            uploadManager.SetDyanmoDB(true);
+            serverObject.SetActive(true);
         }
         else
         {
             isLogin=false;
             loginText.text = "login";
+            uploadManager.SetDyanmoDB(false);
+            serverObject.SetActive(false);
         }
     }
     public void ShowLogInOutPanel()
