@@ -8,6 +8,9 @@ public class ItemSlotUI : MonoBehaviour
     [SerializeField] private Image _iconImage;
     [SerializeField] private Text _amountText;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip clip;
+
     public int Index { get; private set; }
     public bool HasItem => _iconImage.sprite != null;
 
@@ -74,5 +77,9 @@ public class ItemSlotUI : MonoBehaviour
     {
         _inventoryPopupUI.ShowPanel();
         _inventoryPopupUI.SetPopupItem(Index);
+    }
+    public void OpenSound()
+    {
+        audioSource.PlayOneShot(clip);
     }
 }

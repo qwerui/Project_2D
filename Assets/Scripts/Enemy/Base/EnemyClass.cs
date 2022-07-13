@@ -15,7 +15,12 @@ public abstract class EnemyClass : MonoBehaviour
     [SerializeField] protected BoxCollider2D hitbox;
     [SerializeField] protected GameObject player;
     [SerializeField] protected GameObject damageText;
-    
+    [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected AudioClip[] clip;
+    /*
+     * 0 : 피격음
+     * 1 : 사망음
+     */
 
     //아이템 확률 입력은 백분율로 입력, 최소 1e-07 (0.00000001), 최대 100
     [SerializeField] protected GameObject[] dropItem; //아이템 객체
@@ -68,6 +73,7 @@ public abstract class EnemyClass : MonoBehaviour
         else
         {
             rigid.velocity = Vector2.zero;
+            audioSource.PlayOneShot(clip[0]);
             isHit = true;
             StartCoroutine("FalseHit");
         }
@@ -75,6 +81,7 @@ public abstract class EnemyClass : MonoBehaviour
     protected IEnumerator Dead()
     {
         ani.SetTrigger("Death");
+        audioSource.PlayOneShot(clip[1]);
         isDead = true;
         moveSpeed = 0;
         data.enemySlain += 1;

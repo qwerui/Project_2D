@@ -181,6 +181,8 @@ public class GameDirector : MonoBehaviour
     IEnumerator ShowItemName()
     {
         Objects[14].SetActive(true);
+        AudioSource audio = Objects[14].GetComponent<AudioSource>();
+        audio.PlayOneShot(audio.clip);
         yield return new WaitForSeconds(1.0f);
         Objects[14].SetActive(false);
     }

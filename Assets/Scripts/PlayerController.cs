@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject inventory;
     [SerializeField] private GameObject DataCtl;
     [SerializeField] private GameObject MiniMap;
+    [SerializeField] private SoundDirector sound;
 
     PlayerStatus stat;
     GameObject damageInstance;
@@ -513,16 +514,19 @@ public class PlayerController : MonoBehaviour
             if(inventory.activeSelf == true)
             {
                 inventory.SetActive(false);
+                sound.FxPlay(1);
             }
             else
             {
                 inventory.SetActive(true);
+                sound.FxPlay(0);
             }
         }
         if(Input.GetKeyDown(KeyCode.M))
         {
             MinimapController mini = MiniMap.GetComponent<MinimapController>();
             mini.MinimapOnOff(!mini.minimapOn);
+            sound.FxPlay(0);
         }
     }
     private void DataUpdate()

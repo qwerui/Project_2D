@@ -12,6 +12,8 @@ public class EquipSlotUI : MonoBehaviour
     [SerializeField] private GameObject _inventoryPopupObj;
     [SerializeField] private GameObject DataCtl;
     [SerializeField] private GameObject player;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip clip;
 
     private InventoryPopupUI _inventoryPopupUI;
     private GameObject _iconGo;
@@ -78,5 +80,9 @@ public class EquipSlotUI : MonoBehaviour
     public EquipItem GetItem()
     {
         return item as EquipItem;
+    }
+    public void OpenSound()
+    {
+        audioSource.PlayOneShot(clip);
     }
 }
