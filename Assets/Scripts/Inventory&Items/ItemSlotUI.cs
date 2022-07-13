@@ -10,15 +10,11 @@ public class ItemSlotUI : MonoBehaviour
 
     public int Index { get; private set; }
     public bool HasItem => _iconImage.sprite != null;
-    public bool IsAccessible => _isAccessibleSlot && _isAccessibleItem;
 
     private InventoryPopupUI _inventoryPopupUI;
 
     private GameObject _iconGo;
     private GameObject _textGo;
-
-    private bool _isAccessibleSlot = true; // 슬롯 접근가능 여부
-    private bool _isAccessibleItem = true; // 아이템 접근가능 여부
 
     public void SetSlotIndex(int index) => Index = index;
 
@@ -34,7 +30,7 @@ public class ItemSlotUI : MonoBehaviour
 
     private void InitComponents()
     {
-        _inventoryPopupUI = GameObject.Find("ItemPopup").GetComponent<InventoryPopupUI>();
+        _inventoryPopupUI = transform.parent.parent.parent.GetChild(1).gameObject.GetComponent<InventoryPopupUI>();
 
         // Game Objects
         _iconGo = transform.GetChild(0).gameObject;

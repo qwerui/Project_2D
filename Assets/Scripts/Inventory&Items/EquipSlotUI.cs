@@ -21,9 +21,10 @@ public class EquipSlotUI : MonoBehaviour
     private void HideIcon() => _iconGo.SetActive(false);
 
     private void Awake() {
-        _inventoryPopupUI = _inventoryPopupObj.GetComponent<InventoryPopupUI>();
+        _inventoryPopupUI = transform.parent.parent.parent.GetChild(1).gameObject.GetComponent<InventoryPopupUI>();
         _iconGo = transform.GetChild(0).gameObject;
-        data = DataCtl.GetComponent<DataController>();
+        if(DataCtl != null)
+            data = DataCtl.GetComponent<DataController>();
         HideIcon();
     }
     private void Start() {

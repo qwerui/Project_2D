@@ -16,7 +16,7 @@ public class MenuDirector : MonoBehaviour
     {
         arrowPos = arrow.GetComponent<RectTransform>();
         sceneIndex = 0;
-        if (PlayerPrefs.GetInt("Tutorial") == 1)
+        if (PlayerPrefs.GetInt("Tutorial", 1) == 1)
             onTutorial = true;
         else
             onTutorial = false;

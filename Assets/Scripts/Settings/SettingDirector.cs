@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class SettingDirector : MonoBehaviour
 {
@@ -16,6 +15,11 @@ public class SettingDirector : MonoBehaviour
 
     public GameObject serverObject;
 
+    [Header("사운드 오브젝트")]
+    public Slider BackgroundMusic;
+    public Slider SoundFX;
+    public AudioMixer mixer;
+
     bool isLogin;
 
     private void Start()
@@ -24,10 +28,12 @@ public class SettingDirector : MonoBehaviour
         {
             ToggleLogInOut(true);
         }
-        if (PlayerPrefs.GetInt("Tutorial") == 1)
+        if (PlayerPrefs.GetInt("Tutorial", 1) == 1)
             Tutorialtoggle.isOn = true;
         else
             Tutorialtoggle.isOn = false;
+        BackgroundMusic.value = PlayerPrefs.GetFloat("BGM", 0);
+        SoundFX.value = PlayerPrefs.GetFloat("SoundFX",0);
     }
     public void TutorialSetting(bool toggle)
     {
@@ -63,5 +69,15 @@ public class SettingDirector : MonoBehaviour
         {
             LoginPanel.SetActive(true);
         }
+    }
+    public void SetBackgroundMusic(float value)
+    {
+        mixer.SetFloat("BGM", value);
+        PlayerPrefs.SetFloat("BGM", value);
+    }
+    public void SetSoundFX(float value)
+    {
+        mixer.SetFloat("SFX", value);
+        PlayerPrefs.SetFloat("SoundFX", value);
     }
 }

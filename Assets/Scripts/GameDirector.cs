@@ -19,8 +19,11 @@ public class GameDirector : MonoBehaviour
     Text def;
     Text gold;
     Text SavePopupText;
+    Text ItemName;
 
     ScreenController fadeScreen;
+
+    IEnumerator itemShowCoroutine;
 
     [SerializeField] GameObject[] Objects;
     /*
@@ -33,6 +36,7 @@ public class GameDirector : MonoBehaviour
         11   게임오버 화면 전환을 위한 이미지
         12   세이브 팝업
         13   RoomController
+        14   아이템 습득 팝업
     */
 
     private void Awake() {
@@ -44,6 +48,7 @@ public class GameDirector : MonoBehaviour
         gold = Objects[5].GetComponent<Text>();
         SavePopupText = Objects[12].transform.GetChild(0).GetComponent<Text>();
         fadeScreen = Objects[11].GetComponent<ScreenController>();
+        ItemName = Objects[14].transform.GetChild(0).gameObject.GetComponent<Text>();
     }
     private void Start() 
     {
@@ -162,5 +167,21 @@ public class GameDirector : MonoBehaviour
         Objects[11].SetActive(true);
         fadeScreen.SetAlpha(startAlpha);
         fadeScreen.FadeOut();
+    }
+    public void GetItemName(string name)
+    {
+        if(itemShowCoroutine != null)
+        {
+            StopCoroutine(itemShowCoroutine);
+        }
+        ItemName.text = name;
+        itemShowCoroutine = ShowItemName();
+        StartCoroutine(itemShowCoroutine);
+    }
+    IEnumerator ShowItemName()
+    {
+        Objects[14].SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        Objects[14].SetActive(false);
     }
 }

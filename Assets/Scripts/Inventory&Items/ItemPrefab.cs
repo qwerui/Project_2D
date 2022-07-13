@@ -30,6 +30,10 @@ public abstract class ItemPrefab : MonoBehaviour
         }
         if(other.gameObject.tag=="Player")
         {
+            if(data.ID > 3)
+            {
+                GameObject.Find("GameDirector").GetComponent<GameDirector>().GetItemName(data.Name);
+            }
             if(data.ItemType == ItemType.Passive)
             {
                 player = other.gameObject;

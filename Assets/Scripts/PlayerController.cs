@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject MiniMap;
 
     PlayerStatus stat;
-    GameObject weaponRoot; //손의 위치
     GameObject damageInstance;
     GameObject levelUpInstance;
 
@@ -51,7 +50,6 @@ public class PlayerController : MonoBehaviour
     private float slopeSideAngle;
     private float lastSlopeAngle;
     private Vector2 slopeNormalPerp;
-    private ContactPoint2D[] contacts;
     
     
     //상태 bool
@@ -80,14 +78,12 @@ public class PlayerController : MonoBehaviour
             DataCtl.GetComponent<DataController>().GetLoadPlayer(stat);
             transform.position = data.playerPos;
         }
-        contacts = new ContactPoint2D[10];
         ani = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         hitBox = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         quickSlotPotion = QuickSlotPotion.GetComponent<QuickSlotUI>();
         quickSlotWeapon = QuickSlotWeapon.GetComponent<QuickSlotUI>();
-        weaponRoot = transform.GetChild(0).gameObject;
         StartCoroutine("Hungry");
         StartCoroutine("DeadCheck");
     }

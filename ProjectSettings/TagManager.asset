@@ -59,6 +59,9 @@ TagManager:
   - name: TextLayer
     uniqueID: 4044022251
     locked: 0
+  - name: ItemLayer
+    uniqueID: 3552649521
+    locked: 0
   - name: EffectLayer
     uniqueID: 3243420777
     locked: 0
