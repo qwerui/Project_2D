@@ -15,9 +15,6 @@ public class RoomGenerator : MonoBehaviour
     int maxRoom;
     [SerializeField] GameObject testMap;
     [SerializeField] RoomTemplate template;
-    
-    GameObject temp;
-    public GameObject ex;
 
     const int maxTile = 15;
     bool[,] isCreated;
@@ -36,6 +33,8 @@ public class RoomGenerator : MonoBehaviour
     {
         int loopNum = 0;
         maxRoom = DataDirector.Instance.stage / 3 + 6;
+        if (maxRoom >= 70)
+            maxRoom = 70;
         makeRoomCount = Random.Range(maxRoom-2, maxRoom);
         while(roomCount < makeRoomCount)
         {
@@ -47,7 +46,7 @@ public class RoomGenerator : MonoBehaviour
             endRoomList.Clear();
             CreateDungeon();
             if(loopNum++ > 1000)
-                ex.GetComponent<DebugScript>().MyException("RoomInit Loop");
+                throw new System.Exception("RoomInit Loop");
         }
         if(endRoomList.Count <= 1)
         {
@@ -143,7 +142,7 @@ public class RoomGenerator : MonoBehaviour
             if(roomCount >= makeRoomCount)
                 isCreated = true;
             if(loopNum++ > 10000)
-                ex.GetComponent<DebugScript>().MyException("EndRoom Loop");
+                throw new System.Exception("EndRoom Loop");
         }
         roomCount++;
     }

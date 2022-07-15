@@ -14,15 +14,15 @@ public class SoundDirector : MonoBehaviour
     public AudioClip[] playerClip;
     /*
      * 플레이어 효과음 리스트
-     * 0 : 이동
-     * 1 : 점프
-     * 2 : 공격
-     * 3 : 피격
-     * 4 : 사망
-     * 5 : 대쉬
+     * 0 : 점프, 대쉬
+     * 1 : 피격
+     * 2 : 사망
+     * 3 : 착지
+     * 4 : 레벨업
      */
     AudioSource fx;
     AudioSource bgm;
+
     public AudioMixer mixer;
     private void Awake()
     {
@@ -34,5 +34,13 @@ public class SoundDirector : MonoBehaviour
     public void FxPlay(int index)
     {
         fx.PlayOneShot(fxClip[index]);
+    }
+    public void PlayerSoundPlay(int index)
+    {
+        fx.PlayOneShot(playerClip[index]);
+    }
+    public void FxPlayWithClip(AudioClip clip)
+    {
+        fx.PlayOneShot(clip);
     }
 }

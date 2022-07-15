@@ -67,7 +67,7 @@ public class CastleBoss : EnemyClass
     void LaserAttack()
     {
         isAttack = true;
-        laser.ChargeLaser(laserDamage);
+        laser.ChargeLaser(laserDamage, this, 2);
         Invoke("AttackEnd", 5.0f);
     }
     IEnumerator BombAttack()

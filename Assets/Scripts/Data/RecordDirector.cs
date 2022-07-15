@@ -78,6 +78,18 @@ public class RecordDirector : MonoBehaviour
     }
     public void UploadRanking()
     {
-        DynamoDB.UploadRanking();
+        if(DynamoDB.UploadRanking())
+        {
+            uploadButton.transform.GetChild(0).GetComponent<Text>().text = "upload success";
+        }
+        else
+        {
+            uploadButton.transform.GetChild(0).GetComponent<Text>().text = "upload fail";
+        }
+        Invoke("UploadText",1.0f);
+    }
+    void UploadText()
+    {
+        uploadButton.transform.GetChild(0).GetComponent<Text>().text = "upload ranking";
     }
 }

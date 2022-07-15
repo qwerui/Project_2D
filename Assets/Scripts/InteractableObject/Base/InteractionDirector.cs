@@ -10,4 +10,5 @@ public class InteractionDirector : MonoBehaviour
     public GameObject shopController;
     public GameObject Gacha;
     public GameObject roomDirector;
+    public GameDirector gameDirector;
 }

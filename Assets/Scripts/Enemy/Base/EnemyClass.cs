@@ -197,4 +197,8 @@ public abstract class EnemyClass : MonoBehaviour
     {
         isAttack=false;
     }
+    public void PlaySound(int index)
+    {
+        audioSource.PlayOneShot(clip[index]);
+    }
 }

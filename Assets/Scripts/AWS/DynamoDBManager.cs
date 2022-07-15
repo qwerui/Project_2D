@@ -25,11 +25,11 @@ public class DynamoDBManager : MonoBehaviour
         DBclient = new AmazonDynamoDBClient(credentials, Amazon.RegionEndpoint.APNortheast2);
         context = new DynamoDBContext(DBclient);
     }
-    public void UploadRanking()
+    public bool UploadRanking()
     {
         LocalRanking myRank = JsonDirector.LoadRanking();
         if(myRank == null)
-            return;
+            return false;
         WorldRank uploadRank = new WorldRank
         {
             UserID = session.getUserId(),
@@ -40,10 +40,12 @@ public class DynamoDBManager : MonoBehaviour
         {
             context.SaveAsync(uploadRank);
             Debug.Log("Upload Success");
+            return true;
         }
         catch(Exception e)
         {
             Debug.Log("Upload Fail : " + e);
+            return false;
         }
         
     }

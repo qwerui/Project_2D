@@ -162,7 +162,11 @@ MonoBehaviour:
   player: {fileID: 0}
   damageText: {fileID: 7582739099108354712, guid: 57aa7623a71eaa844a636e52227938b4, type: 3}
   audioSource: {fileID: -4051966527524390708}
-  clip: []
+  clip:
+  - {fileID: 8300000, guid: e34e5de4fb6f0405987dc922e27778b9, type: 3}
+  - {fileID: 8300000, guid: 74add305a869846f9bb1d896720cbd0f, type: 3}
+  - {fileID: 8300000, guid: 78419f98379502c4dbfb2774bc94e7c1, type: 3}
+  - {fileID: 8300000, guid: e87f4c339e74f48a7ac8e289c4b26872, type: 3}
   dropItem:
   - {fileID: 3044962466300960756, guid: c832f2eadeb712e4ab0a6ed1b67590d4, type: 3}
   dropChance:

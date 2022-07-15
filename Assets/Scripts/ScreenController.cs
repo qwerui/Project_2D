@@ -34,7 +34,7 @@ public class ScreenController : MonoBehaviour
     }
     IEnumerator ScreenFadeOut()
     {
-        for (int i = 100; i > 0; i++)
+        for (int i = 100; i > 0; i--)
         {
             float f = i / 100.0f;
 

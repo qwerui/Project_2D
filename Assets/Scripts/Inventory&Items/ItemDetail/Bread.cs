@@ -11,5 +11,6 @@ public class Bread : ItemPrefab
     {
         stat = LinkPlayer(item);
         stat.setHunger(stat.getHunger() + 10);
+        sound.FxPlayWithClip(clip[0]);
     }
 }

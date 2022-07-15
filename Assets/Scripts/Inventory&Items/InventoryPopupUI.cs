@@ -42,12 +42,6 @@ public class InventoryPopupUI : MonoBehaviour
         GetComponent<RectTransform>().anchoredPosition = new Vector2(-transform.parent.parent.gameObject.GetComponent<RectTransform>().sizeDelta.x / 2, 0);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        HidePanel();
-    }
-
     public void SetPopupItem(int index)
     {
         Index = index;

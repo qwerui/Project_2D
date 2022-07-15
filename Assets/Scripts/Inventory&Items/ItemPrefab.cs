@@ -11,6 +11,9 @@ public abstract class ItemPrefab : MonoBehaviour
 
     public GameObject player;
 
+    protected SoundDirector sound;
+    public AudioClip[] clip;
+
     private void Awake() {
         rigid = GetComponent<Rigidbody2D>();
     }
@@ -54,6 +57,7 @@ public abstract class ItemPrefab : MonoBehaviour
     {
         if(player == null)
             player = item.GetPlayer();
+        sound = player.GetComponent<PlayerController>().sound;
         return player.GetComponent<PlayerController>().GetStat();
     }
     public abstract void ItemEffect(Item item = null, bool equip = true);

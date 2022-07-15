@@ -9,7 +9,8 @@ public class SpawnBossMonster : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Player")
         {
-            bossSpawner.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+            if (bossSpawner.transform.GetChild(0).childCount != 0)
+                Invoke("BossSpawn", 1.0f);
         }
     }
     private void OnTriggerExit2D(Collider2D other) {
@@ -18,5 +19,8 @@ public class SpawnBossMonster : MonoBehaviour
             nextStage.SetActive(true);
         }
     }
-    
+    void BossSpawn()
+    {
+        bossSpawner.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+    }
 }

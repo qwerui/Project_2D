@@ -10,6 +10,10 @@ public class DialogUI : MonoBehaviour
     int index = 0;
     Text textSpace;
     Vector3 pos;
+    public AudioSource audioSource;
+    public AudioClip[] clip;
+
+    bool isTyping;
 
     public void DialogSetting(GameObject dialogObj, string[] dialogString)
     {
@@ -33,16 +37,29 @@ public class DialogUI : MonoBehaviour
         else
         {
             StartCoroutine(TypingText(dialogText[index++]));
+            StartCoroutine(TextSound());
             return false;
         } 
     }
     IEnumerator TypingText(string message)
     {
+        isTyping = true;
         textSpace.text = "";
         for(int i=0;i<message.Length;i++)
         {
             textSpace.text += message[i];
             yield return new WaitForSeconds(textSpeed);
+        }
+        isTyping = false;
+    }
+    IEnumerator TextSound()
+    {
+        while(isTyping)
+        {
+            audioSource.PlayOneShot(clip[0]);
+            yield return new WaitForSeconds(0.875f);
+            audioSource.PlayOneShot(clip[1]);
+            yield return new WaitForSeconds(1.25f);
         }
     }
 }
