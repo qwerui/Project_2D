@@ -39,12 +39,7 @@ public class InventoryPopupUI : MonoBehaviour
         DropButton = transform.GetChild(3).gameObject;
         SlotButton = transform.GetChild(4).gameObject;
         UseButtonText = transform.GetChild(5).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        HidePanel();
+        GetComponent<RectTransform>().anchoredPosition = new Vector2(-transform.parent.parent.gameObject.GetComponent<RectTransform>().sizeDelta.x / 2, 0);
     }
 
     public void SetPopupItem(int index)

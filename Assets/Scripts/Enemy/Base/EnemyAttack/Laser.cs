@@ -6,13 +6,10 @@ public class Laser : MonoBehaviour
 {
     [SerializeField] BoxCollider2D hitBox;
     int damage;
-    void Start()
-    {
-        damage = 10;
-    }
 
-    public void ShootBeam()
+    public void ShootBeam(int damage)
     {
+        this.damage = damage;
         transform.localScale = new Vector3(-20,1,1);
         hitBox.size = new Vector2(0.75f, 0.785f);
         StartCoroutine("Beam");

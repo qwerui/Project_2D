@@ -75,4 +75,28 @@ public class Rat : EnemyClass
             yield return new WaitForSeconds(1f);
         }
     }
+    protected override void StatusInit()
+    {
+        if(gameObject.name.Contains("Normal"))
+        {
+            hp =  7 * data.stage + 8;
+            atk = 5 * (int)(data.stage / 3) + 10;
+            def = (int)(data.stage/8);
+            experience = data.stage * 5;
+        }
+        else if(gameObject.name.Contains("Strong"))
+        {
+            hp = 10 * data.stage + 5;
+            atk = 3 * data.stage + 12;
+            def = (int)(data.stage/5);
+            experience = data.stage * 10;
+        }
+        else
+        {
+            hp = 5 * data.stage + 5;
+            atk = 5  * (int)(data.stage / 5) + 10;
+            def = (int)(data.stage/10);
+            experience = data.stage * 3;
+        }
+    }
 } 

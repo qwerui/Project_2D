@@ -32,4 +32,11 @@ public class CameraController : MonoBehaviour
         limitMaxY = (room.pos.y-(int)(maxTile/2))*50+25;
         limitMinY = (room.pos.y-(int)(maxTile/2))*50-25;
     }
+    public void SetCameraPosition()
+    {
+        transform.position = new Vector3(
+            Mathf.Clamp(target.position.x + offset.x, limitMinX + cameraHalfWidth, limitMaxX - cameraHalfWidth),   // X
+            Mathf.Clamp(target.position.y + offset.y, limitMinY + cameraHalfHeight, limitMaxY - cameraHalfHeight), // Y
+            -10);
+    }
 }

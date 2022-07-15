@@ -23,7 +23,7 @@ public class GameOverDirector : MonoBehaviour
     public GameObject returnObj;
 
     private void Start() {
-        data = GameObject.Find("DataDirector").GetComponent<DataDirector>();
+        data = DataDirector.Instance;
         for(int i=0;i<score.Length;i++)
         {
             score[i]=0;
@@ -81,7 +81,7 @@ public class GameOverDirector : MonoBehaviour
         {
             sum*=scoreEnd[i];
         }
-        scoreEnd[4] = (int)(sum / 10000);
+        scoreEnd[4] = (int)(sum / 1000);
     }
     void SaveLocalRanking()
     {

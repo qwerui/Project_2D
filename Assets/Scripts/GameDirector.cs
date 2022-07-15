@@ -18,6 +18,12 @@ public class GameDirector : MonoBehaviour
     Text atk;
     Text def;
     Text gold;
+    Text SavePopupText;
+    Text ItemName;
+
+    ScreenController fadeScreen;
+
+    IEnumerator itemShowCoroutine;
 
     [SerializeField] GameObject[] Objects;
     /*
@@ -29,6 +35,8 @@ public class GameDirector : MonoBehaviour
         8~10 상태창 (체력 숫자, 체력 바, 공복치 바)
         11   게임오버 화면 전환을 위한 이미지
         12   세이브 팝업
+        13   RoomController
+        14   아이템 습득 팝업
     */
 
     private void Awake() {
@@ -38,6 +46,9 @@ public class GameDirector : MonoBehaviour
         atk = Objects[3].GetComponent<Text>();
         def = Objects[4].GetComponent<Text>();
         gold = Objects[5].GetComponent<Text>();
+        SavePopupText = Objects[12].transform.GetChild(0).GetComponent<Text>();
+        fadeScreen = Objects[11].GetComponent<ScreenController>();
+        ItemName = Objects[14].transform.GetChild(0).gameObject.GetComponent<Text>();
     }
     private void Start() 
     {
@@ -123,5 +134,56 @@ public class GameDirector : MonoBehaviour
         gold.text = player.getGold().ToString();
         atk.text = "ATK : "+player.getAtk().ToString();
         def.text = "DEF : "+player.getDef().ToString();
+    }
+    public void ShowSavePopup()
+    {
+        if(Objects[13].GetComponent<RoomController>().GetRoomInfo(DataDirector.Instance.playerPosIndex).roomType == RoomType.Boss)
+        {
+            SavePopupText.text = "보스 방에서는 저장할 수 없습니다";
+            Objects[12].transform.GetChild(1).gameObject.SetActive(false);
+            Objects[12].transform.GetChild(2).gameObject.SetActive(false);
+            Invoke("CloseSavePopup", 0.5f);
+        }
+        else
+        {
+            SavePopupText.text = "게임을 저장하고 메인화면으로 돌아가시겠습니까?";
+            Objects[12].transform.GetChild(1).gameObject.SetActive(true);
+            Objects[12].transform.GetChild(2).gameObject.SetActive(true);
+        }
+        Objects[12].SetActive(true);
+    }
+    void CloseSavePopup()
+    {
+        Objects[12].SetActive(false);
+    }
+    public void ScreenFadeIn(float startAlpha)
+    {
+        Objects[11].SetActive(true);
+        fadeScreen.SetAlpha(startAlpha);
+        Objects[11].GetComponent<ScreenController>().FadeIn();
+    }
+    public void ScreenFadeOut(float startAlpha)
+    {
+        Objects[11].SetActive(true);
+        fadeScreen.SetAlpha(startAlpha);
+        fadeScreen.FadeOut();
+    }
+    public void GetItemName(string name)
+    {
+        if(itemShowCoroutine != null)
+        {
+            StopCoroutine(itemShowCoroutine);
+        }
+        ItemName.text = name;
+        itemShowCoroutine = ShowItemName();
+        StartCoroutine(itemShowCoroutine);
+    }
+    IEnumerator ShowItemName()
+    {
+        Objects[14].SetActive(true);
+        AudioSource audio = Objects[14].GetComponent<AudioSource>();
+        audio.PlayOneShot(audio.clip);
+        yield return new WaitForSeconds(1.0f);
+        Objects[14].SetActive(false);
     }
 }

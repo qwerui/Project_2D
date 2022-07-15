@@ -11,6 +11,8 @@ public class ShopSlot : MonoBehaviour
     [SerializeField] RectTransform imageRect;
     [SerializeField] Text canBuyText;
     [SerializeField] Text itemPrice;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip clip;
 
     ShopController shop_ctl;
 
@@ -26,6 +28,10 @@ public class ShopSlot : MonoBehaviour
 
     public void Buy()
     {
+        if(shopItem == null)
+        {
+            return;
+        }
         if(shop_ctl.BuyProcess(shopItem))
         {
             shopItem = null;
@@ -33,6 +39,7 @@ public class ShopSlot : MonoBehaviour
             imageRect.localRotation = Quaternion.Euler(0,0,20);
             itemPrice.text = "-";
             canBuyText.text="X";
+            audioSource.PlayOneShot(clip);
         }
     }
 }

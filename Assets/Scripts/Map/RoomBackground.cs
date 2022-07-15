@@ -20,6 +20,7 @@ public class RoomBackground : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             room.controller.SetCurrentRoom();
+            room.roomInfo.isVisited = true;
             room.HideAll();
         }
     }

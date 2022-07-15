@@ -7,19 +7,17 @@ public class ItemSlotUI : MonoBehaviour
 {
     [SerializeField] private Image _iconImage;
     [SerializeField] private Text _amountText;
-    [SerializeField] private GameObject _inventoryPopupObj;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip clip;
 
     public int Index { get; private set; }
     public bool HasItem => _iconImage.sprite != null;
-    public bool IsAccessible => _isAccessibleSlot && _isAccessibleItem;
 
     private InventoryPopupUI _inventoryPopupUI;
 
     private GameObject _iconGo;
     private GameObject _textGo;
-
-    private bool _isAccessibleSlot = true; // 슬롯 접근가능 여부
-    private bool _isAccessibleItem = true; // 아이템 접근가능 여부
 
     public void SetSlotIndex(int index) => Index = index;
 
@@ -29,13 +27,13 @@ public class ItemSlotUI : MonoBehaviour
     private void ShowText() => _textGo.SetActive(true);
     private void HideText() => _textGo.SetActive(false);
 
-    private void Awake() {
+    private void Start() {
         InitComponents();
     }
 
     private void InitComponents()
     {
-        _inventoryPopupUI = _inventoryPopupObj.GetComponent<InventoryPopupUI>();
+        _inventoryPopupUI = transform.parent.parent.parent.GetChild(1).gameObject.GetComponent<InventoryPopupUI>();
 
         // Game Objects
         _iconGo = transform.GetChild(0).gameObject;
@@ -79,5 +77,9 @@ public class ItemSlotUI : MonoBehaviour
     {
         _inventoryPopupUI.ShowPanel();
         _inventoryPopupUI.SetPopupItem(Index);
+    }
+    public void OpenSound()
+    {
+        audioSource.PlayOneShot(clip);
     }
 }

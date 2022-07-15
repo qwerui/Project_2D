@@ -22,9 +22,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject QuickSlotPotion;
     [SerializeField] private GameObject QuickSlotWeapon;
     [SerializeField] private GameObject inventory;
+    [SerializeField] private GameObject DataCtl;
+    [SerializeField] private GameObject MiniMap;
+    public SoundDirector sound;
 
     PlayerStatus stat;
-    GameObject weaponRoot; //손의 위치
     GameObject damageInstance;
     GameObject levelUpInstance;
 
@@ -49,7 +51,6 @@ public class PlayerController : MonoBehaviour
     private float slopeSideAngle;
     private float lastSlopeAngle;
     private Vector2 slopeNormalPerp;
-    private ContactPoint2D[] contacts;
     
     
     //상태 bool
@@ -64,24 +65,27 @@ public class PlayerController : MonoBehaviour
 
     //기타 변수
     private float noDamage = 0.1f;
+    private int attackPos;
 
     private void Awake() 
     {
+        data = DataDirector.Instance;
         stat  = new PlayerStatus();
-        PlayerInit();
     }
 
     private void Start()
     {
-        contacts = new ContactPoint2D[10];
+        if (data.isLoadedGame == true)
+        {
+            DataCtl.GetComponent<DataController>().GetLoadPlayer(stat);
+            transform.position = data.playerPos;
+        }
         ani = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         hitBox = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         quickSlotPotion = QuickSlotPotion.GetComponent<QuickSlotUI>();
         quickSlotWeapon = QuickSlotWeapon.GetComponent<QuickSlotUI>();
-        weaponRoot = transform.GetChild(0).gameObject;
-        data = GameObject.Find("DataDirector").GetComponent<DataDirector>();
         StartCoroutine("Hungry");
         StartCoroutine("DeadCheck");
     }
@@ -101,26 +105,7 @@ public class PlayerController : MonoBehaviour
     {
         SlopeCheck();
         onGround();
-        if(data != null)
-            DataUpdate();
-    }
-
-    //플레이어 상태 변수 초기화
-    private void PlayerInit()
-    {
-        stat.setMaxHp(100);
-        stat.setHp(100);
-        stat.setAtk(0);
-        stat.setDef(0);
-        stat.setMaxHunger(100);
-        stat.setHunger(100);
-        stat.setGold(0);
-        stat.setRedBall(0);
-        stat.setBlueBall(0);
-        stat.setYellowBall(0);
-        stat.setLevel(1);
-        stat.setMaxExperience(10);
-        stat.setExperience(0);
+        DataUpdate();
     }
 
     //플레이어 상태 전달 (주로 UI에 사용 ex: 체력 바 등)
@@ -135,7 +120,9 @@ public class PlayerController : MonoBehaviour
             if((moveDirection = Input.GetAxisRaw("Horizontal"))!=0&&!isAttacking)
             {
                 if(!(isJumping&&isAttacking)) //점프 공격 중에는 방향 전환 불가
-                    this.transform.localScale = new Vector3(moveDirection,1,1);
+                {
+                    this.transform.localScale = new Vector3(moveDirection, 1, 1);
+                }
                 isMoving = true;
             }
             else
@@ -173,16 +160,18 @@ public class PlayerController : MonoBehaviour
     //점프 기능
     private void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.X)&&!isJumping)//점프 시간으로 높낮이 조절
-        {
-                jumpCounter = jumpTime;
-                ani.SetBool("Jump",isJumping);
-        }
-        else
-            jumpCounter-=Time.deltaTime;
+
         if((!isAttacking&&!isCrouch)&&!isDash) //공격, 앉기, 대시 중에는 점프 불가
         {
-            if(Input.GetKey(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.X) && !isJumping)//점프 시간으로 높낮이 조절
+            {
+                jumpCounter = jumpTime;
+                ani.SetBool("Jump", isJumping);
+                sound.PlayerSoundPlay(0);
+            }
+            else
+                jumpCounter -= Time.deltaTime;
+            if (Input.GetKey(KeyCode.X))
             {
                 if(jumpCounter>0)
                 {
@@ -196,43 +185,48 @@ public class PlayerController : MonoBehaviour
     //공격 기능
     private void Attack()
     {
-        if(Input.GetKeyDown(KeyCode.Z)&&Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.Z) && Input.GetKey(KeyCode.UpArrow))
         {
-            if(!isAttacking)
+            if (!isAttacking)
             {
                 quickSlotWeapon.QuickItemUse();
             }
         }
-        else if(WeaponSlot.GetComponent<EquipSlotUI>().GetItem() != null)
+        else if (WeaponSlot.GetComponent<EquipSlotUI>().GetItem() != null)
         {
-        if(Input.GetKeyDown(KeyCode.Z)&&!isAttacking)
-        {
-            WeaponItem = WeaponSlot.GetComponent<EquipSlotUI>().GetItem();
-            Weapon.GetComponent<SpriteRenderer>().sprite = WeaponItem.equipItemData.WeaponEffect;
-            Weapon.GetComponent<BoxCollider2D>().size = WeaponItem.equipItemData.WeaponHitSize;
-            ani.SetTrigger("Attack");
-        }
-        if(ani.GetCurrentAnimatorStateInfo(0).IsName("attack")) // 공격 출력 중
-            isAttacking=true;
-        else if(ani.GetCurrentAnimatorStateInfo(0).IsName("jumpAtk")) // 점프 공격 출력 중
-            isAttacking=true;
-        else if(ani.GetCurrentAnimatorStateInfo(0).IsName("crouchAtk")) // 앉아 공격 출력 중
-            isAttacking=true;
-        else
-            isAttacking=false;
-
-        if(isCrouch)
-        {
-            Weapon.transform.localPosition = new Vector3(1.1f,0.75f,0);
-        }
-        else if(isJumping)
-        {
-            Weapon.transform.localPosition = new Vector3(1.1f,1.75f,0);
-        }
-        else
-        {
-            Weapon.transform.localPosition = new Vector3(1.1f,1.7f,0);
-        }
+            if (Input.GetKeyDown(KeyCode.Z) && !isAttacking)
+            {
+                WeaponItem = WeaponSlot.GetComponent<EquipSlotUI>().GetItem();
+                Weapon.GetComponent<SpriteRenderer>().sprite = WeaponItem.equipItemData.WeaponEffect;
+                Weapon.GetComponent<BoxCollider2D>().size = WeaponItem.equipItemData.WeaponHitSize;
+                ani.SetTrigger("Attack");
+                if (isJumping)
+                    attackPos = 2;
+                else if (isCrouch)
+                    attackPos = 1;
+                else
+                    attackPos = 0;
+            }
+            if (ani.GetCurrentAnimatorStateInfo(0).IsName("attack")) // 공격 출력 중
+                isAttacking = true;
+            else if (ani.GetCurrentAnimatorStateInfo(0).IsName("jumpAtk")) // 점프 공격 출력 중
+                isAttacking = true;
+            else if (ani.GetCurrentAnimatorStateInfo(0).IsName("crouchAtk")) // 앉아 공격 출력 중
+                isAttacking = true;
+            else
+                isAttacking = false;
+            switch (attackPos)
+            {
+                case 2:
+                    Weapon.transform.localPosition = new Vector3(1.1f, 1.75f, 0);
+                    break;
+                case 1:
+                    Weapon.transform.localPosition = new Vector3(1.1f, 0.75f, 0);
+                    break;
+                default:
+                    Weapon.transform.localPosition = new Vector3(1.1f, 1.7f, 0);
+                    break;
+            }
         }
     }
 
@@ -264,15 +258,33 @@ public class PlayerController : MonoBehaviour
     //플레이어가 바닥 혹은 경사에 있는지 감지
     private void onGround()
     {
+        bool lastJump = isJumping;
         float extraHeightText = 0.1f;
-        RaycastHit2D raycastHit = Physics2D.BoxCast(transform.position, new Vector2(0.9f, 0.1f), 0f, Vector2.down,extraHeightText, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(transform.position, new Vector2(0.9f, 0.07f), 0f, Vector2.down,extraHeightText, groundLayer);
         if(raycastHit.collider != null) // 감지 시
         {
-            if(rigid.velocity.y <= 0)
+            if (raycastHit.collider.name == "HalfFloor")
+            {
+                if (rigid.velocity.y > 0)
+                {
+                    isJumping = true;
+                }
+                else
+                {
+                    isJumping = false;
+                }
+            }
+            else
+            {
                 isJumping = false;
+            }
         }
         else
             isJumping = true;
+        if(lastJump == true && lastJump != isJumping)
+        {
+            sound.PlayerSoundPlay(3);
+        }
 
         ani.SetBool("Jump", isJumping);
     }
@@ -290,11 +302,19 @@ public class PlayerController : MonoBehaviour
 
                 //대쉬 하면 공복치 감소
                 stat.setHunger(stat.getHunger()-5);
+                sound.PlayerSoundPlay(0);
             }
         }
         if(isDash)
         {
-            rigid.velocity = new Vector2(transform.localScale.x,0) * dashSpeed;
+            if(isOnSlope)
+            {
+                rigid.velocity = new Vector2(slopeNormalPerp.x * -moveDirection, slopeNormalPerp.y * -moveDirection) * dashSpeed;
+            }
+            else
+            {
+                rigid.velocity = new Vector2(transform.localScale.x, 0) * dashSpeed;
+            }
             currentDashTimer -= Time.deltaTime;
             Physics2D.IgnoreLayerCollision(13,25, true);
             Physics2D.IgnoreLayerCollision(12,25, true);
@@ -372,6 +392,7 @@ public class PlayerController : MonoBehaviour
         {
             ani.SetTrigger("Damaged"); //피격 애니메이션 트리거
             isDamaged = true; //피격 동작 중 (조작 불능)
+            sound.PlayerSoundPlay(1);
 
             //체력 감소
             int finalDamage = damage - stat.getDef();
@@ -448,6 +469,9 @@ public class PlayerController : MonoBehaviour
                 
                 rigid.velocity = Vector2.zero;
                 ani.SetTrigger("Dead");
+                Physics2D.IgnoreLayerCollision(13, 25, true);
+                Physics2D.IgnoreLayerCollision(12, 25, true);
+                sound.PlayerSoundPlay(2);
                 yield return new WaitForSeconds(2);
                 GameDirector.GetComponent<GameDirector>().GameOver();
                 yield break;
@@ -489,6 +513,7 @@ public class PlayerController : MonoBehaviour
         {
             levelUpInstance = Instantiate(LevelUpText).gameObject;
             levelUpInstance.transform.position = transform.position + Vector3.up;
+            sound.PlayerSoundPlay(4);
             yield return new WaitForSeconds(0.2f);
         }
     }
@@ -510,11 +535,19 @@ public class PlayerController : MonoBehaviour
             if(inventory.activeSelf == true)
             {
                 inventory.SetActive(false);
+                sound.FxPlay(1);
             }
             else
             {
                 inventory.SetActive(true);
+                sound.FxPlay(0);
             }
+        }
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            MinimapController mini = MiniMap.GetComponent<MinimapController>();
+            mini.MinimapOnOff(!mini.minimapOn);
+            sound.FxPlay(0);
         }
     }
     private void DataUpdate()

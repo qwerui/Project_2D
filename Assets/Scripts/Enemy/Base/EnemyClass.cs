@@ -15,7 +15,12 @@ public abstract class EnemyClass : MonoBehaviour
     [SerializeField] protected BoxCollider2D hitbox;
     [SerializeField] protected GameObject player;
     [SerializeField] protected GameObject damageText;
-    
+    [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected AudioClip[] clip;
+    /*
+     * 0 : 피격음
+     * 1 : 사망음
+     */
 
     //아이템 확률 입력은 백분율로 입력, 최소 1e-07 (0.00000001), 최대 100
     [SerializeField] protected GameObject[] dropItem; //아이템 객체
@@ -44,10 +49,13 @@ public abstract class EnemyClass : MonoBehaviour
     protected abstract void Chase(); //적 추적
     protected abstract IEnumerator PosDiff(); //적 추적시 방향 전환 속도 조절 (적과 캐릭터의 좌표 차이)
 
+    protected virtual void StatusInit(){}
+
     protected void EnemyInit()
     {
         player = GameObject.Find("Player");
-        data = GameObject.Find("DataDirector").GetComponent<DataDirector>();
+        data = DataDirector.Instance;
+        StatusInit();
         CreateItem();
     }
 
@@ -65,6 +73,7 @@ public abstract class EnemyClass : MonoBehaviour
         else
         {
             rigid.velocity = Vector2.zero;
+            audioSource.PlayOneShot(clip[0]);
             isHit = true;
             StartCoroutine("FalseHit");
         }
@@ -72,6 +81,7 @@ public abstract class EnemyClass : MonoBehaviour
     protected IEnumerator Dead()
     {
         ani.SetTrigger("Death");
+        audioSource.PlayOneShot(clip[1]);
         isDead = true;
         moveSpeed = 0;
         data.enemySlain += 1;
@@ -162,10 +172,13 @@ public abstract class EnemyClass : MonoBehaviour
     void DropItem()
     {
         int childIndex = 0;
-        if(transform.GetChild(0).gameObject.tag=="EnemyAttack")
+        if(transform.childCount != 0)
         {
-                Destroy(transform.GetChild(0).gameObject);
-                childIndex++;
+            if(transform.GetChild(0).gameObject.tag=="EnemyAttack")
+            {
+                    Destroy(transform.GetChild(0).gameObject);
+                    childIndex++;
+            }
         }
         for(int i=childIndex;i<transform.childCount;i++)
         {
@@ -176,12 +189,16 @@ public abstract class EnemyClass : MonoBehaviour
     }
     IEnumerator FalseHit()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.7f);
         isHit = false;
         yield return null;
     }
     void AttackEnd()
     {
         isAttack=false;
+    }
+    public void PlaySound(int index)
+    {
+        audioSource.PlayOneShot(clip[index]);
     }
 }

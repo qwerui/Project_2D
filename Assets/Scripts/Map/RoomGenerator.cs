@@ -12,12 +12,9 @@ public class RoomGenerator : MonoBehaviour
     List<RoomInfo> roomList;
     List<RoomInfo> endRoomList;
 
-    [SerializeField] int maxRoom;
+    int maxRoom;
     [SerializeField] GameObject testMap;
     [SerializeField] RoomTemplate template;
-    
-    GameObject temp;
-    public GameObject ex;
 
     const int maxTile = 15;
     bool[,] isCreated;
@@ -35,6 +32,9 @@ public class RoomGenerator : MonoBehaviour
     public void RoomInit()
     {
         int loopNum = 0;
+        maxRoom = DataDirector.Instance.stage / 3 + 6;
+        if (maxRoom >= 70)
+            maxRoom = 70;
         makeRoomCount = Random.Range(maxRoom-2, maxRoom);
         while(roomCount < makeRoomCount)
         {
@@ -46,7 +46,7 @@ public class RoomGenerator : MonoBehaviour
             endRoomList.Clear();
             CreateDungeon();
             if(loopNum++ > 1000)
-                ex.GetComponent<DebugScript>().MyException("RoomInit Loop");
+                throw new System.Exception("RoomInit Loop");
         }
         if(endRoomList.Count <= 1)
         {
@@ -142,7 +142,7 @@ public class RoomGenerator : MonoBehaviour
             if(roomCount >= makeRoomCount)
                 isCreated = true;
             if(loopNum++ > 10000)
-                ex.GetComponent<DebugScript>().MyException("EndRoom Loop");
+                throw new System.Exception("EndRoom Loop");
         }
         roomCount++;
     }
@@ -213,5 +213,33 @@ public class RoomGenerator : MonoBehaviour
         endRoomList.Clear();
         roomCount=0;
         RoomInit();
+    }
+    public RoomInfo LoadRoomPrefab(RoomInfo info)
+    {
+        switch(info.roomType)
+        {
+            case RoomType.Start:
+                info.roomPrefab = template.StartRoom[info.roomId];
+                break;
+            case RoomType.Boss:
+                info.roomPrefab = template.BossRoom[info.roomId];
+                break;
+            case RoomType.ItemShop:
+                info.roomPrefab = template.ItemRoom[info.roomId];
+                break;
+            default:
+                info.roomPrefab = template.NormalRoom[info.roomId];
+                break;
+        }
+        return info;
+    }
+    public void SetLoadedRoomPath(List<RoomInfo> infoList)
+    {
+        roomList = infoList;
+        for(int i=0;i<roomList.Count;i++)
+        {
+            isCreated[roomList[i].pos.y, roomList[i].pos.x] = true;
+        }
+        SetPath();
     }
 }
