@@ -10080,6 +10080,7 @@ MonoBehaviour:
   Gacha: {fileID: 540688590}
   roomDirector: {fileID: 1423442379}
   gameDirector: {fileID: 819697014}
+  soundDirector: {fileID: 1945148468}
 --- !u!1 &1691028456
 GameObject:
   m_ObjectHideFlags: 0
@@ -11662,6 +11663,7 @@ MonoBehaviour:
   fxClip:
   - {fileID: 8300000, guid: 9289402c65e76b048a9610d28e263054, type: 3}
   - {fileID: 8300000, guid: b6c18ab7ca2ef2e4db48ebd36b040958, type: 3}
+  - {fileID: 8300000, guid: 221f5b953d4f149aa8482aa1b7e3d577, type: 3}
   playerClip:
   - {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
   - {fileID: 8300000, guid: a37f44cbf8c2a7443a3c361efa2f233a, type: 3}

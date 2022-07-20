@@ -11,4 +11,5 @@ public class InteractionDirector : MonoBehaviour
     public GameObject Gacha;
     public GameObject roomDirector;
     public GameDirector gameDirector;
+    public SoundDirector soundDirector;
 }

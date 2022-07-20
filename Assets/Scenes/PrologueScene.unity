@@ -59869,6 +59869,7 @@ MonoBehaviour:
   Gacha: {fileID: 540688590}
   roomDirector: {fileID: 0}
   gameDirector: {fileID: 0}
+  soundDirector: {fileID: 0}
 --- !u!1 &1691028456
 GameObject:
   m_ObjectHideFlags: 0
@@ -62716,11 +62717,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3044962466300960754, guid: c832f2eadeb712e4ab0a6ed1b67590d4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3044962466300960756, guid: c832f2eadeb712e4ab0a6ed1b67590d4, type: 3}
       propertyPath: m_Name
       value: Bread
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: c832f2eadeb712e4ab0a6ed1b67590d4, type: 3}
 --- !u!1 &2116702932
 GameObject:
