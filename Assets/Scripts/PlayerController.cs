@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                     {
-                        rigid.velocity = new Vector2(moveSpeed * moveDirection, rigid.velocity.y<=-40?-40:rigid.velocity.y);
+                        rigid.velocity = new Vector2(moveSpeed * moveDirection, rigid.velocity.y<=-20?-20:rigid.velocity.y);
                     }
                 }
                 else

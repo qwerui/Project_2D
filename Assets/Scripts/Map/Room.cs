@@ -58,10 +58,24 @@ public class Room : MonoBehaviour
                 BossSpawn.SetActive(false);
             }
         }
-        if(roomInfo.roomType != RoomType.Start)
-            transform.GetChild(2).gameObject.SetActive(false);
+        if(DataDirector.Instance.isLoadedGame)
+        {
+            if(roomIndex == DataDirector.Instance.playerPosIndex)
+            {
+                RoomInit();
+            }
+            else
+            {
+                transform.GetChild(2).gameObject.SetActive(false);
+            }
+        }
         else
-            RoomInit();
+        {
+            if (roomInfo.roomType != RoomType.Start)
+                transform.GetChild(2).gameObject.SetActive(false);
+            else
+                RoomInit();
+        }
     }
     public void SetRoomInfo(RoomInfo info, RoomController ctl, int index)
     {
