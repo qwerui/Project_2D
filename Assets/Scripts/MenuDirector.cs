@@ -120,24 +120,24 @@ public class MenuDirector : MonoBehaviour
     public void RecBtnDown()
     {
         sound.FxPlay(0);
-        SceneManager.LoadScene("RecordScene");
+        LoadingSceneManager.LoadScene("RecordScene");
     }
     public void LoadTutorial()
     {
         sound.FxPlay(0);
-        SceneManager.LoadScene("PrologueScene");
+        LoadingSceneManager.LoadScene("PrologueScene");
     }
     public void LoadGame()
     {
         sound.FxPlay(0);
         DataDirector.Instance.isLoadedGame = true;
-        SceneManager.LoadScene("GameScene");
+        LoadingSceneManager.LoadScene("GameScene");
     }
     public void GameStart()
     {
         sound.FxPlay(0);
         DataDirector.Instance.isLoadedGame = false;
-        SceneManager.LoadScene("GameScene");
+        LoadingSceneManager.LoadScene("GameScene");
     }
     public void NotGoTutorial()
     {

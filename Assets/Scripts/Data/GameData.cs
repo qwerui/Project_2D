@@ -35,4 +35,7 @@ public class GameData
 
     public Vector2[] item; //x = itemId, y = item amount
     public int[] equip;
+
+    public bool[] gachaUsed;
+    public string[] shopList;
 }

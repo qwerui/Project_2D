@@ -14,6 +14,7 @@ public class NextStage : InteractableObject
     protected override void ExitAction(){}
     protected override void Interaction()
     {
+        data.isLoadedGame = false;
         interactionDirector.gameDirector.ScreenFadeOut(100);
         interactionDirector.gameObject.transform.parent.parent.position = Vector2.zero;
         room = interactionDirector.roomDirector.GetComponent<RoomController>();

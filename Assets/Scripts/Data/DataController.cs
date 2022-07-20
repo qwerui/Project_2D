@@ -18,6 +18,8 @@ public class DataController : MonoBehaviour
     public EquipSlotUI armor;
     public EquipSlotUI accesory;
 
+    public GameObject roomObject;
+
     PlayerStatus stat;
     DataDirector data;
     InventoryController inventory;
@@ -54,6 +56,7 @@ public class DataController : MonoBehaviour
         SaveStat(saveData);
         SaveItem(saveData);
         SaveRoom(saveData);
+        SaveItemRoom(saveData);
         JsonDirector.SaveGameData(saveData);
         director.ScreenFadeIn(0);
         Invoke("ReturnMainMenu", 2.0f);
@@ -254,5 +257,61 @@ public class DataController : MonoBehaviour
     public string LoadRoomItem(int index)
     {
             return gameData.roomItem[index];
+    }
+    void SaveItemRoom(GameData gameData)
+    {
+        List<bool> gachaUsed = new List<bool>();
+        List<string> shopList = new List<string>();
+        for(int i=0;i<roomObject.transform.childCount;i++)
+        {
+            Transform tempTrans = roomObject.transform.GetChild(i);
+            if (tempTrans.gameObject.name.Contains("Item"))
+            {
+                bool isUsed = false;
+                foreach(Gacha g in tempTrans.GetChild(2).GetChild(2).GetComponentsInChildren<Gacha>())
+                {
+                    if(g.GetGachaUsed())
+                    {
+                        
+                        isUsed = true;
+                    }
+                }
+                gachaUsed.Add(isUsed);
+                foreach (Shop s in tempTrans.GetChild(2).GetChild(2).GetComponentsInChildren<Shop>())
+                {
+                    string shopItem = "";
+                    for (int k=0;k<8;k++)
+                    {
+                        if(s.shopItem[k]==null)
+                        {
+                            shopItem += "0";
+                        }
+                        else
+                        {
+                            shopItem += s.shopItem[k].ID;
+                        }
+                        shopItem += ",";
+                    }
+                    shopList.Add(shopItem.Substring(0, shopItem.Length - 1));
+                }
+            }
+        }
+        gameData.gachaUsed = gachaUsed.ToArray();
+        gameData.shopList = shopList.ToArray();
+    }
+    public bool GetGachaUsed(GameObject createdRoom)
+    {
+        /*
+        int index = -1;
+        for(int i=0;i<roomObject.transform.childCount;i++)
+        {
+            if(roomObject.transform.GetChild(i).gameObject.name.Contains("Item"))
+            {
+                index++;
+                if(roomObject.transform.GetChild(i))
+            }
+        }
+        */
+        return gameData.gachaUsed[0];
     }
 }

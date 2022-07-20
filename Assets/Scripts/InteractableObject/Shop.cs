@@ -14,11 +14,13 @@ public class Shop : InteractableObject
         {
             shop_ctl = interactionDirector.shopController.GetComponent<ShopController>();
             shop_UI = interactionDirector.shopUI.GetComponent<ShopUI>();
-
-            for(int i=0;i<8;i++)
+            if(!DataDirector.Instance.isLoadedGame)
             {
-            shopItem[i] = shop_ctl.GetRandomSubItem();
-            }
+                for (int i = 0; i < 8; i++)
+                {
+                    shopItem[i] = shop_ctl.GetRandomSubItem();
+                }
+            }  
         }
         shop_ctl.SetShopSlots(shopItem);
         interactionDirector.MainUI.SetActive(false);

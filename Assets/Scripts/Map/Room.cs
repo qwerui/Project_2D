@@ -60,6 +60,10 @@ public class Room : MonoBehaviour
         }
         if(DataDirector.Instance.isLoadedGame)
         {
+            if(roomInfo.roomType == RoomType.ItemShop)
+            {
+                SetItem();
+            }
             if(roomIndex == DataDirector.Instance.playerPosIndex)
             {
                 RoomInit();
@@ -142,5 +146,10 @@ public class Room : MonoBehaviour
             roomItem += ",";
         }
         return roomItem;
+    }
+    void SetItem()
+    {
+        DataController data = GameObject.Find("DataController").GetComponent<DataController>();
+        data.GetGachaUsed(this.gameObject);
     }
 }

@@ -5022,6 +5022,7 @@ MonoBehaviour:
   weapon: {fileID: 538566531}
   armor: {fileID: 1231021091}
   accesory: {fileID: 598353921}
+  roomObject: {fileID: 1002305429}
 --- !u!4 &860935641
 Transform:
   m_ObjectHideFlags: 0
