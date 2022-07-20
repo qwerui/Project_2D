@@ -277,9 +277,9 @@ public class DataController : MonoBehaviour
                     }
                 }
                 gachaUsed.Add(isUsed);
+                string shopItem = "";
                 foreach (Shop s in tempTrans.GetChild(2).GetChild(2).GetComponentsInChildren<Shop>())
                 {
-                    string shopItem = "";
                     for (int k=0;k<8;k++)
                     {
                         if(s.shopItem[k]==null)
@@ -290,28 +290,52 @@ public class DataController : MonoBehaviour
                         {
                             shopItem += s.shopItem[k].ID;
                         }
-                        shopItem += ",";
+                        if(k==7)
+                        {
+                            shopItem += "/";
+                        }
+                        else
+                        {
+                            shopItem += ",";
+                        }
                     }
-                    shopList.Add(shopItem.Substring(0, shopItem.Length - 1));
                 }
+                shopList.Add(shopItem.Substring(0,shopItem.Length-1));
             }
         }
         gameData.gachaUsed = gachaUsed.ToArray();
         gameData.shopList = shopList.ToArray();
     }
-    public bool GetGachaUsed(GameObject createdRoom)
+    public bool GetGachaUsed(int roomIndex)
     {
-        /*
         int index = -1;
         for(int i=0;i<roomObject.transform.childCount;i++)
         {
             if(roomObject.transform.GetChild(i).gameObject.name.Contains("Item"))
             {
                 index++;
-                if(roomObject.transform.GetChild(i))
+                if(i==roomIndex)
+                {
+                    return gameData.gachaUsed[index];
+                }
             }
         }
-        */
-        return gameData.gachaUsed[0];
+        return false;
+    }
+    public string GetShopList(int roomIndex)
+    {
+        int index = -1;
+        for(int i=0;i<roomObject.transform.childCount;i++)
+        {
+            if(roomObject.transform.GetChild(i).gameObject.name.Contains("Item"))
+            {
+                index++;
+                if(i==roomIndex)
+                {
+                    return gameData.shopList[index];
+                }
+            }
+        }
+        return null;
     }
 }

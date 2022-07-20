@@ -150,6 +150,32 @@ public class Room : MonoBehaviour
     void SetItem()
     {
         DataController data = GameObject.Find("DataController").GetComponent<DataController>();
-        data.GetGachaUsed(this.gameObject);
+        if(data.GetGachaUsed(roomIndex))
+        {
+            foreach(Gacha g in transform.GetChild(2).GetChild(2).GetComponentsInChildren<Gacha>())
+            {
+                g.DisableLoadedGacha();
+            }
+        }
+        string shopStr = data.GetShopList(roomIndex);
+        string[] shopList = shopStr.Split('/');
+        int index = 0;
+        foreach(Shop s in transform.GetChild(2).GetChild(2).GetComponentsInChildren<Shop>())
+        {
+            string[] shopItem = shopList[index].Split(',');
+            for(int i=0;i<8;i++)
+            {
+                int itemId = int.Parse(shopItem[i]);
+                if(itemId == 0)
+                {
+                    s.shopItem[i]=null;
+                }
+                else
+                {
+                    s.shopItem[i]=ItemLoader.Instance.GetSubItem(itemId);
+                }
+            }
+        }
+        
     }
 }

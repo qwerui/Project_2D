@@ -15,8 +15,9 @@ public class ShopSlot : MonoBehaviour
     [SerializeField] AudioClip clip;
 
     ShopController shop_ctl;
+    int index;
 
-    public void SetShopItem(ItemData item, ShopController _shop)
+    public void SetShopItem(ItemData item, ShopController _shop, int i)
     {
         shop_ctl = _shop;
         shopItem = item;
@@ -24,6 +25,12 @@ public class ShopSlot : MonoBehaviour
         imageRect.localRotation = Quaternion.Euler(Vector3.zero);
         itemPrice.text = (item as SubItemData).Price.ToString();
         canBuyText.text = "●";
+        index = i;
+    }
+    public void SetNullItem()
+    {
+        itemPrice.text = "-";
+        canBuyText.text="X";
     }
 
     public void Buy()
@@ -32,7 +39,7 @@ public class ShopSlot : MonoBehaviour
         {
             return;
         }
-        if(shop_ctl.BuyProcess(shopItem))
+        if(shop_ctl.BuyProcess(shopItem, index))
         {
             shopItem = null;
             slotImage.sprite = soldOut;

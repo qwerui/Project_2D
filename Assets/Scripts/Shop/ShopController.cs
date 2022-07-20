@@ -13,6 +13,7 @@ public class ShopController : MonoBehaviour
     ShopUI shopUI;
     PlayerStatus stat;
     InventoryController inventory;
+    Shop shop;
     
     void Start()
     {
@@ -25,22 +26,28 @@ public class ShopController : MonoBehaviour
     {
         return subItemList[Random.Range(0,subItemList.Length)];
     }
-    public void SetShopSlots(ItemData[] item)
+    public void SetShopSlots(ItemData[] item, Shop shop)
     {
+        this.shop = shop;
         shopUI.SetPlayerGold(stat.getGold());
         for(int i=0;i<8;i++)
         {
             if(item[i] != null)
             {
-                shopSlotGroup.transform.GetChild(i).gameObject.GetComponent<ShopSlot>().SetShopItem(item[i], this);
+                shopSlotGroup.transform.GetChild(i).gameObject.GetComponent<ShopSlot>().SetShopItem(item[i], this, i);
+            }
+            else
+            {
+                shopSlotGroup.transform.GetChild(i).gameObject.GetComponent<ShopSlot>().SetNullItem();
             }
         }
     }
-    public bool BuyProcess(ItemData item)
+    public bool BuyProcess(ItemData item, int index)
     {
         int gold = stat.getGold() - (item as SubItemData).Price;
         if(gold < 0)
             return false;
+        shop.shopItem[index] = null;
         stat.setGold(gold);
         shopUI.SetPlayerGold(gold);
         inventory.Add(item, player);

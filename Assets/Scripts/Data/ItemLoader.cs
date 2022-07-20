@@ -45,4 +45,12 @@ public class ItemLoader
     {
         return SubItemList.Find(x => x.ID == id);
     }
+    public int GetSubItemCount()
+    {
+        return SubItemList.Count;
+    }
+    public int GetEquipItemCount()
+    {
+        return EquipItemList.Count;
+    }
 }
