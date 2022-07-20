@@ -10,6 +10,7 @@ public class SoundDirector : MonoBehaviour
      * 효과음 리스트
      * 0 : UI 선택
      * 1 : UI 닫기
+     * 2 : 다음 스테이지
      */
     public AudioClip[] playerClip;
     /*
@@ -42,5 +43,13 @@ public class SoundDirector : MonoBehaviour
     public void FxPlayWithClip(AudioClip clip)
     {
         fx.PlayOneShot(clip);
+    }
+    public void SetFxPitch(float pitch)
+    {
+        fx.pitch = pitch;
+    }
+    public void SetFxVolume(float volume)
+    {
+        fx.volume = volume;
     }
 }

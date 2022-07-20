@@ -21,6 +21,7 @@ public class GameOverDirector : MonoBehaviour
     public Text[] scoreText = new Text[5];
     float countingDuration = 1f;
     public GameObject returnObj;
+    public AudioSource sfxAudio;
 
     private void Start() {
         data = DataDirector.Instance;
@@ -57,10 +58,17 @@ public class GameOverDirector : MonoBehaviour
         {
             scoreText[i].transform.parent.gameObject.SetActive(true);
             float offset = (scoreEnd[i] - score[i]) / countingDuration;
+            int soundCount = 0;
+            
             while(score[i] < scoreEnd[i])
             {
                 score[i] += offset * Time.deltaTime;
                 scoreText[i].text = ((int)score[i]).ToString();
+                if((int)score[i]>soundCount)
+                {
+                    sfxAudio.PlayOneShot(sfxAudio.clip);
+                    soundCount++;
+                }
                 yield return null;
             }
             scoreText[i].text = scoreEnd[i].ToString();

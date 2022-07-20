@@ -94,8 +94,9 @@ public class RoomController : MonoBehaviour
     {
         nextRoom = next;
     }
-    public void NextStage()
+    public void NextStage(SoundDirector sound)
     {
+        StartCoroutine(NextStageSound(sound));
         for(int i=0;i<MapTile.transform.childCount;i++)
         {
             Destroy(MapTile.transform.GetChild(i).gameObject);
@@ -126,5 +127,17 @@ public class RoomController : MonoBehaviour
     public string GetRoomItemList(int index)
     {
         return MapTile.transform.GetChild(index).gameObject.GetComponent<Room>().GetRoomItemId();
+    }
+    IEnumerator NextStageSound(SoundDirector sound)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            sound.SetFxPitch(0.8f - (i * 0.2f));
+            sound.SetFxVolume(0.6f - (i * 0.1f));
+            sound.FxPlay(2);
+            yield return new WaitForSeconds(0.25f);
+        }
+        sound.SetFxPitch(1);
+        sound.SetFxVolume(1);
     }
 }
