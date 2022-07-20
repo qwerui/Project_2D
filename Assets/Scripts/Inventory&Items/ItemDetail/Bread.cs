@@ -10,7 +10,7 @@ public class Bread : ItemPrefab
     public override void ItemEffect(Item item, bool used)
     {
         stat = LinkPlayer(item);
-        stat.setHunger(stat.getHunger() + 10);
+        stat.setHunger(stat.getHunger() + stat.getMaxHunger()/10);
         sound.FxPlayWithClip(clip[0]);
     }
 }

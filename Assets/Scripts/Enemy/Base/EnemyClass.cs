@@ -110,8 +110,8 @@ public abstract class EnemyClass : MonoBehaviour
     protected void PlatformCheck()
     {
         Vector2 frontVec = new Vector2(rigid.position.x + nextMove, rigid.position.y);
-        Debug.DrawRay(frontVec, Vector3.down*(hitbox.size.y+0.5f), new Color(0,1,0));
-        RaycastHit2D raycast = Physics2D.Raycast(frontVec, Vector3.down,hitbox.size.y+0.5f,groundLayer);
+        Debug.DrawRay(frontVec, Vector3.down*(transform.localScale.y * 1.5f), new Color(0,1,0));
+        RaycastHit2D raycast = Physics2D.Raycast(frontVec, Vector3.down, transform.localScale.y * 1.5f, groundLayer);
         if(raycast.collider == null){
             nextMove= nextMove*(-1); 
             CancelInvoke(); //think를 잠시 멈춘 후 재실행
@@ -121,8 +121,8 @@ public abstract class EnemyClass : MonoBehaviour
     protected void WallCheck()
     {
         Vector2 frontVec = hitbox.bounds.center;
-        Debug.DrawRay(frontVec,new Vector2(nextMove, 0) * hitbox.size , new Color(0,1,0));
-        RaycastHit2D raycast = Physics2D.Raycast(frontVec, new Vector2(nextMove, 0) ,hitbox.size.x,groundLayer);
+        Debug.DrawRay(frontVec, new Vector2(nextMove * transform.localScale.y, 0) * hitbox.size , new Color(0,1,0));
+        RaycastHit2D raycast = Physics2D.Raycast(frontVec, new Vector2(nextMove*transform.localScale.y, 0) ,hitbox.size.x*transform.localScale.y,groundLayer);
         if(raycast.collider != null){
             nextMove= nextMove*(-1); 
             CancelInvoke();

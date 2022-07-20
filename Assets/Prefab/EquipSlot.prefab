@@ -18,8 +18,8 @@ MonoBehaviour:
   _inventoryPopupObj: {fileID: 0}
   DataCtl: {fileID: 0}
   player: {fileID: 0}
-  audio: {fileID: 0}
-  clip: {fileID: 0}
+  audioSource: {fileID: 6056036335045567458}
+  clip: {fileID: 8300000, guid: 9289402c65e76b048a9610d28e263054, type: 3}
 --- !u!1001 &8105026328791443650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,6 +153,11 @@ PrefabInstance:
 --- !u!1 &2537879798483600988 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5999510185239654046, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
+  m_PrefabInstance: {fileID: 8105026328791443650}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6056036335045567458 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2626032293251287840, guid: b88176c5d8c14af4e9025134ea164ccd, type: 3}
   m_PrefabInstance: {fileID: 8105026328791443650}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2537879797635064247 stripped

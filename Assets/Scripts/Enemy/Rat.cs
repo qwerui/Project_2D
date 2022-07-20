@@ -41,7 +41,7 @@ public class Rat : EnemyClass
         if(nextMove != 0)
         {
             isMoving = true;
-            transform.localScale = new Vector3(nextMove,1,1);
+            transform.localScale = new Vector3(nextMove*transform.localScale.y,transform.localScale.y,1);
         }
         else
         {
@@ -63,7 +63,7 @@ public class Rat : EnemyClass
             nextMove = 1;
         else
             nextMove = -1;
-        transform.localScale = new Vector3(nextMove,1,1);
+        transform.localScale = new Vector3(nextMove*transform.localScale.y,transform.localScale.y,1);
         rigid.velocity= new Vector2(moveSpeed*nextMove, 0);
         ani.SetBool("Run", isMoving);
     }
@@ -90,6 +90,10 @@ public class Rat : EnemyClass
             atk = 3 * data.stage + 12;
             def = (int)(data.stage/5);
             experience = data.stage * 10;
+        }
+        else if(gameObject.name.Contains("Tutorial"))
+        {
+            return;
         }
         else
         {
