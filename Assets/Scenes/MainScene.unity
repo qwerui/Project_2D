@@ -578,7 +578,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fxClip:
   - {fileID: 8300000, guid: 9289402c65e76b048a9610d28e263054, type: 3}
-  - {fileID: 0}
   playerClip: []
   mixer: {fileID: 24100000, guid: 20f3da457be8ca3479c57d5508aff841, type: 2}
 --- !u!4 &407056100
