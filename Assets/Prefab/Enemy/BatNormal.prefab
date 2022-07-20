@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4427375828903075558, guid: c3f7efe981b5c214a91f6df41fb218e1, type: 3}
       propertyPath: m_TagString
-      value: NormalMonster
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8142276190757737314, guid: c3f7efe981b5c214a91f6df41fb218e1, type: 3}
       propertyPath: m_RootOrder

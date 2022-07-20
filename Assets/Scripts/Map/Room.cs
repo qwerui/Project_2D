@@ -95,18 +95,11 @@ public class Room : MonoBehaviour
         {
             Transform tempTrans;
             tempTrans = EnemySpawn.transform.GetChild(i);
-            if(tempTrans.childCount == 0)
+            if(tempTrans.childCount != 0)
             {
-                Instantiate(enemyList[i],tempTrans);
+                Destroy(tempTrans.GetChild(0).gameObject);
             }
-            else if(tempTrans.GetChild(0).gameObject.tag != "Enemy")
-            {
-                for(int j=0;j<tempTrans.childCount;i++)
-                {
-                    Destroy(tempTrans.GetChild(j).gameObject);
-                }
-                Instantiate(enemyList[i],tempTrans);
-            }
+            Instantiate(enemyList[i], tempTrans);
         }
     }
     public string GetRoomItemId()
