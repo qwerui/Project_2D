@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bde740442a9816a40b71dd33f34b90ff, type: 3}
-  m_Name: SubItem_Bread
+  m_Name: SubItem_SmallAllPotion
   m_EditorClassIdentifier: 
-  _id: 200
-  _name: "\uBE75"
-  _tooltip: "\uC544\uBB34 \uB9DB\uC774 \uB098\uC9C0 \uC54A\uB294 \uBE75\uC774\uB2E4"
-  _iconSprite: {fileID: -1867991094099903975, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  _id: 209
+  _name: "\uD558\uAE09 \uBE44\uC57D"
+  _tooltip: "\uCCB4\uB825\uACFC \uACF5\uBCF5\uCE58\uB97C \uC57D\uAC04 \uCC44\uC6CC\uC900\uB2E4"
+  _iconSprite: {fileID: -1151306364781142781, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
   _itemType: 3
-  _dropItemPrefab: {fileID: 3044962466300960756, guid: c832f2eadeb712e4ab0a6ed1b67590d4, type: 3}
-  _price: 10
+  _dropItemPrefab: {fileID: 9140027562641804777, guid: 35e5c88f04a207544ac70683814cd761, type: 3}
+  _price: 50

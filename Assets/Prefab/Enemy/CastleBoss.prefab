@@ -169,7 +169,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e87f4c339e74f48a7ac8e289c4b26872, type: 3}
   dropItem:
   - {fileID: 3044962466300960756, guid: c832f2eadeb712e4ab0a6ed1b67590d4, type: 3}
+  - {fileID: 965825867841694568, guid: c50bfd7fae8c28d47b4e49eaf8fd052d, type: 3}
   dropChance:
+  - 80
   - 80
   resourceItem: {fileID: 11400000, guid: 116620f2abad9c141b1f4a16f0b32126, type: 2}
   rangeOfResource: 0a0000001e0000000a0000001e0000000a0000001e0000001e00000096000000

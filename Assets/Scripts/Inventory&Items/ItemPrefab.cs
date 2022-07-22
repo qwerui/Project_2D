@@ -12,10 +12,12 @@ public abstract class ItemPrefab : MonoBehaviour
     public GameObject player;
 
     protected SoundDirector sound;
+    protected PlayerController playerCtl;
     public AudioClip[] clip;
 
     private void Awake() {
         rigid = GetComponent<Rigidbody2D>();
+        GetComponent<SpriteRenderer>().sprite = data.IconSprite;
     }
     void Start()
     {
@@ -33,21 +35,25 @@ public abstract class ItemPrefab : MonoBehaviour
         }
         if(other.gameObject.tag=="Player")
         {
-            if(data.ID > 3)
-            {
-                GameObject.Find("GameDirector").GetComponent<GameDirector>().GetItemName(data.Name);
-            }
+            
             if(data.ItemType == ItemType.Passive)
             {
                 player = other.gameObject;
                 ItemEffect();
+                if(data.ID > 3)
+                {
+                    GameObject.Find("GameDirector").GetComponent<GameDirector>().GetItemName(data.Name, true);
+                }
                 Destroy(gameObject);
             }
             else
             {
                 int remain = inventory.Add(data,other.gameObject,amount);
                 if(remain == 0)
+                {
+                    GameObject.Find("GameDirector").GetComponent<GameDirector>().GetItemName(data.Name, false);
                     Destroy(gameObject);
+                }
             }
             
         }
@@ -57,8 +63,9 @@ public abstract class ItemPrefab : MonoBehaviour
     {
         if(player == null)
             player = item.GetPlayer();
-        sound = player.GetComponent<PlayerController>().sound;
-        return player.GetComponent<PlayerController>().GetStat();
+        playerCtl = player.GetComponent<PlayerController>();
+        sound = playerCtl.sound;
+        return playerCtl.GetStat();
     }
     public abstract void ItemEffect(Item item = null, bool equip = true);
     public virtual void WeaponUse(){}

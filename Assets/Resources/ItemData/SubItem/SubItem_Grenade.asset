@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde740442a9816a40b71dd33f34b90ff, type: 3}
+  m_Name: SubItem_Grenade
+  m_EditorClassIdentifier: 
+  _id: 216
+  _name: "\uC218\uB958\uD0C4"
+  _tooltip: "\uB358\uC9C4 \uC0AC\uB78C\uC740 \uC548 \uB9DE\uB294 \uC548\uC804\uD55C
+    \uC218\uB958\uD0C4\uC774\uB2E4"
+  _iconSprite: {fileID: -8661803058402064859, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  _itemType: 4
+  _dropItemPrefab: {fileID: 4474874016225223396, guid: 57f2c8b1d6c6a304eb21c1bed34a3794, type: 3}
+  _price: 50

@@ -557,4 +557,8 @@ public class PlayerController : MonoBehaviour
         data.level = stat.getLevel();
         data.resourceItem = stat.getRedBall() + stat.getBlueBall() + stat.getYellowBall() + stat.getGold();
     }
+    public void ActiveBuff(IEnumerator buff)
+    {
+        StartCoroutine(buff);
+    }
 }

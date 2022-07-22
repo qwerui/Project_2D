@@ -168,13 +168,21 @@ public class GameDirector : MonoBehaviour
         fadeScreen.SetAlpha(startAlpha);
         fadeScreen.FadeOut();
     }
-    public void GetItemName(string name)
+    public void GetItemName(string name, bool isPassive)
     {
         if(itemShowCoroutine != null)
         {
             StopCoroutine(itemShowCoroutine);
         }
         ItemName.text = name;
+        if(!isPassive)
+        {
+            ItemName.color = new Color(1,1,1);
+        }
+        else
+        {
+            ItemName.color = new Color(0.16f,0.8f,0.16f);
+        }
         itemShowCoroutine = ShowItemName();
         StartCoroutine(itemShowCoroutine);
     }

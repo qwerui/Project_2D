@@ -7,6 +7,6 @@ public class Weapon : MonoBehaviour
     PlayerStatus stat;
     private void OnTriggerEnter2D(Collider2D other) {
         stat = transform.parent.gameObject.GetComponent<PlayerController>().GetStat();
-        other.SendMessage("Hit", stat.getAtk(),SendMessageOptions.DontRequireReceiver);
+        other.GetComponent<EnemyClass>().Hit(stat.getAtk());
     }
 }
