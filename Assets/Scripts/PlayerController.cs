@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpSpeed = 5.0f;
     [SerializeField] private float jumpTime = 0.1f;
     [SerializeField] private float dashSpeed = 8.0f;
-    [SerializeField] private float startDashTimer = 0.25f;
+    [SerializeField] private float startDashTimer = 0.5f;
     [SerializeField] private float maxSlopeAngle = 45.01f;
 
     //이동 관련 변수
@@ -86,8 +86,11 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         quickSlotPotion = QuickSlotPotion.GetComponent<QuickSlotUI>();
         quickSlotWeapon = QuickSlotWeapon.GetComponent<QuickSlotUI>();
-        StartCoroutine("Hungry");
-        StartCoroutine("DeadCheck");
+        if(SceneManager.GetActiveScene().name != "PrologueScene")
+        {
+            StartCoroutine("Hungry");
+            StartCoroutine("DeadCheck");
+        }
     }
 
     private void Update()
@@ -199,8 +202,9 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Z) && !isAttacking)
             {
                 WeaponItem = WeaponSlot.GetComponent<EquipSlotUI>().GetItem();
-                Weapon.GetComponent<SpriteRenderer>().sprite = WeaponItem.equipItemData.WeaponEffect;
-                Weapon.GetComponent<BoxCollider2D>().size = WeaponItem.equipItemData.WeaponHitSize;
+                Weapon.GetComponent<SpriteRenderer>().sprite = (WeaponItem.equipItemData as WeaponItemData).HitBox.WeaponEffect;
+                Weapon.GetComponent<BoxCollider2D>().size = (WeaponItem.equipItemData as WeaponItemData).HitBox.WeaponHitSize;
+                Weapon.GetComponent<BoxCollider2D>().offset = (WeaponItem.equipItemData as WeaponItemData).HitBox.WeaponOffset;
                 ani.SetTrigger("Attack");
                 if (isJumping)
                     attackPos = 2;

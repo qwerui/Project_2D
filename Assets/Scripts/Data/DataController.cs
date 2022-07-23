@@ -20,6 +20,9 @@ public class DataController : MonoBehaviour
 
     public GameObject roomObject;
 
+    public QuickSlotUI quickPotion;
+    public QuickSlotUI quickWeapon;
+
     PlayerStatus stat;
     DataDirector data;
     InventoryController inventory;
@@ -155,6 +158,8 @@ public class DataController : MonoBehaviour
         }
         
         gameData.equip = equip;
+        gameData.quickPotion = quickPotion.Index;
+        gameData.quickWeapon = quickWeapon.Index;
     }
     
     public void GetLoadPlayer(PlayerStatus player)
@@ -337,5 +342,13 @@ public class DataController : MonoBehaviour
             }
         }
         return null;
+    }
+    public int GetPotionIndex()
+    {
+        return gameData.quickPotion;
+    }
+    public int GetWeaponIndex()
+    {
+        return gameData.quickWeapon;
     }
 }

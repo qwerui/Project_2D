@@ -18,3 +18,5 @@ MonoBehaviour:
   _iconSprite: {fileID: 21300000, guid: 660d6c305798dd249b47a112f535ae63, type: 3}
   _itemType: 5
   _dropItemPrefab: {fileID: 571018063848305265, guid: 221b52bf272f0024d84115c164aa4b6c, type: 3}
+  _isPassive: 1
+  _price: 0

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61702f07cd908344fabeedde40d00b93, type: 3}
+  m_Name: WeaponItem_Sabre
+  m_EditorClassIdentifier: 
+  _id: 103
+  _name: "\uC0AC\uBE0C\uB974"
+  _tooltip: "\uAE30\uBCD1\uC6A9 \uC7A5\uAC80\uC774\uB2E4"
+  _iconSprite: {fileID: 8616800865346977898, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  _itemType: 0
+  _dropItemPrefab: {fileID: 5400032466535803251, guid: ab3b2a7e7f1e5034fa98c37886b70133, type: 3}
+  _isPassive: 0
+  _value: 50
+  _red: 0
+  _blue: 0
+  _yellow: 0
+  _rarity: 2
+  _hitBox: {fileID: 11400000, guid: 821a6d43fd3067e43a4ffb2963f82e50, type: 2}

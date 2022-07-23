@@ -9,11 +9,7 @@ public class InventoryUI : MonoBehaviour
     private List<ItemSlotUI> _slotUIList = new List<ItemSlotUI>(20);
     private InventoryController _inventory;
 
-    private void Awake() {
-        InitSlots();
-    }
-
-    private void InitSlots()
+    public void InitSlots()
     {
         for(int i=0;i<20;i++)
         {

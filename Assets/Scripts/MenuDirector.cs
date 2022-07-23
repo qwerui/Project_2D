@@ -152,4 +152,8 @@ public class MenuDirector : MonoBehaviour
             GameStart();
         }
     }
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }

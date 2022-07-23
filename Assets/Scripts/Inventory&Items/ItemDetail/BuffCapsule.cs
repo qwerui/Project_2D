@@ -30,6 +30,6 @@ public class BuffCapsule : ItemPrefab
     {
         stat.setDef(stat.getDef() + 5);
         yield return new WaitForSeconds(30);
-        stat.setAtk(stat.getDef() - 5);
+        stat.setDef(stat.getDef() - 5);
     }
 }

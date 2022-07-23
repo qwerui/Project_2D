@@ -29,24 +29,6 @@ public class EquipSlotUI : MonoBehaviour
             data = DataCtl.GetComponent<DataController>();
         HideIcon();
     }
-    private void Start() {
-        if(DataDirector.Instance.isLoadedGame)
-        {
-            ItemData tempData = data.LoadEquipItem(type);
-            if(tempData != null)
-            {
-                EquipItem tempItem = tempData.CreateItem() as EquipItem;
-                tempItem.SetPlayer(player);
-                SetItem(tempItem);
-            }
-        }
-        else if(FirstItem != null)
-        {
-            EquipItem tempItem = FirstItem.CreateItem() as EquipItem;
-            tempItem.SetPlayer(player);
-            SetItem(tempItem); 
-        }
-    }
 
     public void OpenItemPopup()
     {
@@ -72,9 +54,11 @@ public class EquipSlotUI : MonoBehaviour
     }
     public Item SwapItem(Item newItem)
     {
+        item.UnEquip();
         Item tempItem = item;
         item = newItem as EquipItem;
         _iconImage.sprite = newItem.Data.IconSprite;
+        item.Equip();
         return tempItem;
     }
     public EquipItem GetItem()
@@ -84,5 +68,24 @@ public class EquipSlotUI : MonoBehaviour
     public void OpenSound()
     {
         audioSource.PlayOneShot(clip);
+    }
+    public void LoadEquipItem()
+    {
+        if(DataDirector.Instance.isLoadedGame)
+        {
+            ItemData tempData = data.LoadEquipItem(type);
+            if(tempData != null)
+            {
+                EquipItem tempItem = tempData.CreateItem() as EquipItem;
+                tempItem.SetPlayer(player);
+                SetItem(tempItem);
+            }
+        }
+        else if(FirstItem != null)
+        {
+            EquipItem tempItem = FirstItem.CreateItem() as EquipItem;
+            tempItem.SetPlayer(player);
+            SetItem(tempItem); 
+        }
     }
 }

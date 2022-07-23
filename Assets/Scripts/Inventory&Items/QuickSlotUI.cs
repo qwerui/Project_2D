@@ -8,10 +8,11 @@ public class QuickSlotUI : MonoBehaviour
     [SerializeField] private Image _iconImage;
     [SerializeField] private Text _amountText;
     [SerializeField] private InventoryController inventory;
+    [SerializeField] private DataController data;
 
     Item item;
     public bool HasItem => _iconImage.sprite != null;
-    int Index;
+    public int Index = -1;
 
     private GameObject _iconGo;
     private GameObject _textGo;
@@ -24,6 +25,23 @@ public class QuickSlotUI : MonoBehaviour
 
     private void Awake() {
         InitComponents();
+    }
+    private void Start() {
+        if(DataDirector.Instance.isLoadedGame)
+        {
+            if(gameObject.name.Contains("Potion"))
+            {
+                Index = data.GetPotionIndex();
+            }
+            else
+            {
+                Index = data.GetWeaponIndex();
+            }
+            if(Index != -1)
+            {
+                SetQuickSlot(Index);
+            }
+        }
     }
     private void LateUpdate() {
         if(item != null)

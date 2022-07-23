@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630971a39630ec74db31e9135a42ea2f, type: 3}
+  m_Name: EquipItem_ChainMale
+  m_EditorClassIdentifier: 
+  _id: 106
+  _name: "\uCCB4\uC778 \uBA54\uC77C"
+  _tooltip: "\uC0AC\uC2AC\uC744 \uC5EE\uC5B4 \uB9CC\uB4E0 \uAC11\uC637\uC774\uB2E4"
+  _iconSprite: {fileID: 6551101340904174325, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  _itemType: 1
+  _dropItemPrefab: {fileID: 7240872990739186435, guid: e4500748fe37f934fa94fe0ece4ae51b, type: 3}
+  _isPassive: 0
+  _value: 15
+  _red: 0
+  _blue: 0
+  _yellow: 0
+  _rarity: 1

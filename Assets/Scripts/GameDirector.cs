@@ -37,6 +37,7 @@ public class GameDirector : MonoBehaviour
         12   세이브 팝업
         13   RoomController
         14   아이템 습득 팝업
+        15   무기 슬롯
     */
 
     private void Awake() {
@@ -52,12 +53,13 @@ public class GameDirector : MonoBehaviour
     }
     private void Start() 
     {
-        Objects[6].SetActive(false);
         player = Objects[7].GetComponent<PlayerController>().GetStat();
         healthText = Objects[8].GetComponent<Text>();
         hpBar = Objects[9].GetComponent<Image>();
         hungerBar = Objects[10].GetComponent<Image>();
         StartCoroutine("HealthTextController");
+        Objects[15].GetComponent<EquipSlotUI>().LoadEquipItem();
+        Objects[6].SetActive(false);
     }
 
     private void LateUpdate() {

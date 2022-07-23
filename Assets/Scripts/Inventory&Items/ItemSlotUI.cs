@@ -27,7 +27,7 @@ public class ItemSlotUI : MonoBehaviour
     private void ShowText() => _textGo.SetActive(true);
     private void HideText() => _textGo.SetActive(false);
 
-    private void Start() {
+    private void Awake() {
         InitComponents();
     }
 

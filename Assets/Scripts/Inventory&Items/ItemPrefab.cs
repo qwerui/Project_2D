@@ -36,7 +36,7 @@ public abstract class ItemPrefab : MonoBehaviour
         if(other.gameObject.tag=="Player")
         {
             
-            if(data.ItemType == ItemType.Passive)
+            if(data.IsPassive == true)
             {
                 player = other.gameObject;
                 ItemEffect();

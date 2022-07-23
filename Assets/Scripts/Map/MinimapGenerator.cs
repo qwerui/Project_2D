@@ -17,6 +17,13 @@ public class MinimapGenerator : MonoBehaviour
     }
     public void SetMinimap(List<RoomInfo> roomList, int maxTile)
     {
+        if(transform.childCount!=0)
+        {
+            for(int i=0;i<transform.childCount;i++)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+        }
         this.roomList = roomList;
         this.maxTile = maxTile;
         for (int i = 0; i < roomList.Count; i++)
@@ -30,9 +37,9 @@ public class MinimapGenerator : MonoBehaviour
                     tempMinimap.transform.GetChild(j).gameObject.SetActive(true);
                 }
             }
-            tempMinimap.SetActive(false);
+            if(i!=0)
+                tempMinimap.SetActive(false);
         }
-        transform.GetChild(0).gameObject.SetActive(true);
     }
     public void ShowMinimap(int index)
     {

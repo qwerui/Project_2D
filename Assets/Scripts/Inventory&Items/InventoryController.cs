@@ -16,6 +16,7 @@ public class InventoryController : MonoBehaviour
         Capacity = 20;
         _items = new Item[Capacity];
         _inventoryUI.SetInventoryReference(this);
+        _inventoryUI.InitSlots();
     }
     private void Start() {
         if(DataDirector.Instance.isLoadedGame)

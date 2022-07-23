@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630971a39630ec74db31e9135a42ea2f, type: 3}
+  m_Name: EquipItem_HpRing
+  m_EditorClassIdentifier: 
+  _id: 110
+  _name: "\uCCB4\uB825\uC758 \uBC18\uC9C0"
+  _tooltip: "\uCD5C\uB300 \uCCB4\uB825\uC744 \uC57D\uAC04 \uC62C\uB824\uC900\uB2E4"
+  _iconSprite: {fileID: -5984479240414447609, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  _itemType: 2
+  _dropItemPrefab: {fileID: 6221495625941522353, guid: 0d4f3497319ba034e9968b067af2de11, type: 3}
+  _isPassive: 0
+  _value: 10
+  _red: 0
+  _blue: 0
+  _yellow: 0
+  _rarity: 0

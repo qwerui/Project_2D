@@ -11,7 +11,7 @@ public class GrenadeEffect : MonoBehaviour
     AudioSource sound;
     private void Start() {
         rigid = GetComponent<Rigidbody2D>();
-        rigid.AddForce(new Vector2(3,15), ForceMode2D.Impulse);
+        rigid.AddForce(new Vector2(3*direction,15), ForceMode2D.Impulse);
         sound = GetComponent<AudioSource>();
     }
     public void SetEffect(GameObject player, PlayerStatus stat)

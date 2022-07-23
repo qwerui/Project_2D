@@ -25,6 +25,8 @@ public class GameData
 
     public Vector3 playerPos;
     public int playerPosIndex;
+    public int quickPotion;
+    public int quickWeapon;
     
     public int[] roomId;
     public int[] roomType;
