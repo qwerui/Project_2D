@@ -104,6 +104,7 @@ public class RoomController : MonoBehaviour
         roomList.Clear();
         generator.NextStageCreate();
         ArrangeRooms();
+        minimapCtl.ShowMinimap(0);
         cameraCtl.SetCameraLimit(roomList[0], maxTile);
         cameraCtl.SetCameraPosition();
 
