@@ -12,7 +12,7 @@ public abstract class EnemyClass : MonoBehaviour
     [SerializeField] protected Animator ani;
     [SerializeField] protected Rigidbody2D rigid;
     [SerializeField] protected LayerMask groundLayer;
-    [SerializeField] protected BoxCollider2D hitbox;
+    [SerializeField] protected Collider2D hitbox;
     [SerializeField] protected GameObject player;
     [SerializeField] protected GameObject damageText;
     [SerializeField] protected AudioSource audioSource;
@@ -121,8 +121,8 @@ public abstract class EnemyClass : MonoBehaviour
     protected void WallCheck()
     {
         Vector2 frontVec = hitbox.bounds.center;
-        Debug.DrawRay(frontVec, new Vector2(nextMove * transform.localScale.y, 0) * hitbox.size , new Color(0,1,0));
-        RaycastHit2D raycast = Physics2D.Raycast(frontVec, new Vector2(nextMove*transform.localScale.y, 0) ,hitbox.size.x*transform.localScale.y,groundLayer);
+        Debug.DrawRay(frontVec, new Vector2(nextMove * transform.localScale.y, 0) , new Color(0,1,0));
+        RaycastHit2D raycast = Physics2D.Raycast(frontVec, new Vector2(nextMove*transform.localScale.y, 0) ,transform.localScale.y,groundLayer);
         if(raycast.collider != null){
             nextMove= nextMove*(-1); 
             CancelInvoke();

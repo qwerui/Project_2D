@@ -23,6 +23,7 @@ public abstract class ItemPrefab : MonoBehaviour
     {
         inventory = GameObject.Find("InventoryController").GetComponent<InventoryController>();
         amount = amount==0?1:amount;
+        Destroy(gameObject, 10f);
     }
     public void SetDrop(int Amount)
     {
@@ -55,7 +56,6 @@ public abstract class ItemPrefab : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
-            
         }
     }
     // 아이템 효과 구현할 때 가장 먼저 호출해야함

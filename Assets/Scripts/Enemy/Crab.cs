@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rat : EnemyClass
+public class Crab : EnemyClass
 {
     private void Awake() 
     {
@@ -33,7 +33,7 @@ public class Rat : EnemyClass
 
     protected override void Attack()
     {
-
+        
     }
     
     protected override void Move()
@@ -77,30 +77,9 @@ public class Rat : EnemyClass
     }
     protected override void StatusInit()
     {
-        if(gameObject.name.Contains("Normal"))
-        {
-            hp =  7 * data.stage + 8;
-            atk = 5 * (int)(data.stage / 3) + 10;
-            def = (int)(data.stage/8);
-            experience = data.stage * 5;
-        }
-        else if(gameObject.name.Contains("Strong"))
-        {
-            hp = 10 * data.stage + 5;
-            atk = 3 * data.stage + 12;
-            def = (int)(data.stage/5);
-            experience = data.stage * 10;
-        }
-        else if(gameObject.name.Contains("Tutorial"))
-        {
-            return;
-        }
-        else
-        {
-            hp = 5 * data.stage + 5;
-            atk = 5  * (int)(data.stage / 5) + 10;
-            def = (int)(data.stage/10);
-            experience = data.stage * 3;
-        }
+        hp = 12 * data.stage + 10;
+        atk = 2 * data.stage + 10;
+        def = (int)(data.stage/5);
+        experience = data.stage * 7;
     }
-} 
+}

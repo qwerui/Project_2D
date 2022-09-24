@@ -80,6 +80,7 @@ public class Room : MonoBehaviour
             else
                 RoomInit();
         }
+        
     }
     public void SetRoomInfo(RoomInfo info, RoomController ctl, int index)
     {
@@ -176,6 +177,5 @@ public class Room : MonoBehaviour
                 }
             }
         }
-        
     }
 }
