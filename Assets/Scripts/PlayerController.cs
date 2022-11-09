@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     
     //상태 bool
     private bool isJumping = false;
-    private bool isAttacking = false;
+    public bool isAttacking = false;
     private bool isCrouch = false;
     private bool isDash = false;
     private bool isMoving = false;
@@ -70,7 +70,9 @@ public class PlayerController : MonoBehaviour
     private void Awake() 
     {
         data = DataDirector.Instance;
-        stat  = new PlayerStatus();
+        GameManager.Instance.stat = new PlayerStatus();
+        stat  = GameManager.Instance.stat;
+        GameManager.Instance.controller = this;
     }
 
     private void Start()
@@ -108,7 +110,6 @@ public class PlayerController : MonoBehaviour
     {
         SlopeCheck();
         onGround();
-        DataUpdate();
     }
 
     //플레이어 상태 전달 (주로 UI에 사용 ex: 체력 바 등)
@@ -206,32 +207,6 @@ public class PlayerController : MonoBehaviour
                 Weapon.GetComponent<BoxCollider2D>().size = (WeaponItem.equipItemData as WeaponItemData).HitBox.WeaponHitSize;
                 Weapon.GetComponent<BoxCollider2D>().offset = (WeaponItem.equipItemData as WeaponItemData).HitBox.WeaponOffset;
                 ani.SetTrigger("Attack");
-                if (isJumping)
-                    attackPos = 2;
-                else if (isCrouch)
-                    attackPos = 1;
-                else
-                    attackPos = 0;
-            }
-            if (ani.GetCurrentAnimatorStateInfo(0).IsName("attack")) // 공격 출력 중
-                isAttacking = true;
-            else if (ani.GetCurrentAnimatorStateInfo(0).IsName("jumpAtk")) // 점프 공격 출력 중
-                isAttacking = true;
-            else if (ani.GetCurrentAnimatorStateInfo(0).IsName("crouchAtk")) // 앉아 공격 출력 중
-                isAttacking = true;
-            else
-                isAttacking = false;
-            switch (attackPos)
-            {
-                case 2:
-                    Weapon.transform.localPosition = new Vector3(1.1f, 1.75f, 0);
-                    break;
-                case 1:
-                    Weapon.transform.localPosition = new Vector3(1.1f, 0.75f, 0);
-                    break;
-                default:
-                    Weapon.transform.localPosition = new Vector3(1.1f, 1.7f, 0);
-                    break;
             }
         }
     }
@@ -244,17 +219,13 @@ public class PlayerController : MonoBehaviour
             {   
                 moveSpeed = 0.0f; // 이동 속도 0, 방향 전환 가능 하도록 함
                 isCrouch = true;
-                hitBox.offset = new Vector2(0,0.5f);
-                hitBox.size = new Vector2(0.9f,0.9f);
             }
             else
             {   
-                if(!isAttacking) // 공격 중일 경우 애니메이션과 실제 히트박스의 차이를 없앰
+                if(!isAttacking)
                 {
                     moveSpeed = 5.0f; // 키를 떼면 속도 원상 복귀
                     isCrouch = false;
-                    hitBox.offset = new Vector2(0,1.0f);
-                    hitBox.size = new Vector2(0.9f,1.9f);
                 }
             }
             ani.SetBool("Crouch", isCrouch);
@@ -474,6 +445,7 @@ public class PlayerController : MonoBehaviour
                 isMoving = false;
                 
                 rigid.velocity = Vector2.zero;
+                rigid.bodyType = RigidbodyType2D.Static;
                 ani.SetTrigger("Dead");
                 Physics2D.IgnoreLayerCollision(13, 25, true);
                 Physics2D.IgnoreLayerCollision(12, 25, true);
@@ -506,6 +478,7 @@ public class PlayerController : MonoBehaviour
 		stat.setLevel(level);
 		stat.setAtk(stat.getAtk() + 1);
 		stat.setMaxHp(stat.getMaxHp() + 5);
+        DataDirector.Instance.level++;
 		if(level % 5 == 0)
 		{
 			stat.setMaxHunger(stat.getMaxHunger() + 5);
@@ -555,11 +528,6 @@ public class PlayerController : MonoBehaviour
             mini.MinimapOnOff(!mini.minimapOn);
             sound.FxPlay(0);
         }
-    }
-    private void DataUpdate()
-    {
-        data.level = stat.getLevel();
-        data.resourceItem = stat.getRedBall() + stat.getBlueBall() + stat.getYellowBall() + stat.getGold();
     }
     public void ActiveBuff(IEnumerator buff)
     {

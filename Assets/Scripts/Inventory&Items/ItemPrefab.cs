@@ -23,7 +23,7 @@ public abstract class ItemPrefab : MonoBehaviour
     {
         inventory = GameObject.Find("InventoryController").GetComponent<InventoryController>();
         amount = amount==0?1:amount;
-        Destroy(gameObject, 10f);
+        Identify();
     }
     public void SetDrop(int Amount)
     {
@@ -44,6 +44,10 @@ public abstract class ItemPrefab : MonoBehaviour
                 if(data.ID > 3)
                 {
                     GameObject.Find("GameDirector").GetComponent<GameDirector>().GetItemName(data.Name, true);
+                }
+                else
+                {
+                    DataDirector.Instance.resourceItem+=amount;
                 }
                 Destroy(gameObject);
             }
@@ -69,4 +73,5 @@ public abstract class ItemPrefab : MonoBehaviour
     }
     public abstract void ItemEffect(Item item = null, bool equip = true);
     public virtual void WeaponUse(){}
+    public virtual void Identify(){}
 }

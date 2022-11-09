@@ -125,14 +125,14 @@ public class InventoryPopupUI : MonoBehaviour
         {
             SubItem tempItem = item as SubItem;
             GameObject prefab = Instantiate(tempItem.subItemData.DropItemPrefab) as GameObject;
-            prefab.transform.position = (Vector2)player.transform.position + new Vector2(player.transform.localScale.x*1.2f,1.0f);
+            prefab.transform.position = (Vector2)player.transform.position + new Vector2(player.transform.localScale.x*1.5f,1.0f);
             prefab.GetComponent<ItemPrefab>().SetDrop(tempItem.Amount);
         }
         else
         {
             EquipItem tempItem = item as EquipItem;
             GameObject prefab = Instantiate(tempItem.equipItemData.DropItemPrefab) as GameObject;
-            prefab.transform.position = (Vector2)player.transform.position + new Vector2(player.transform.localScale.x*1.2f,1.0f);
+            prefab.transform.position = (Vector2)player.transform.position + new Vector2(player.transform.localScale.x*1.5f,1.0f);
         }
         inventory.Remove(Index);
         HidePanel();

@@ -37,5 +37,13 @@ public class DataDirector
 
         isLoadedGame = false;
     }
+    public void Init()
+    {
+        stage = 1;
+        level = 1;
+        resourceItem = 0;
+        enemySlain = 0;
 
+        isLoadedGame = false;
+    }
 }

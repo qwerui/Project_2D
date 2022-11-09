@@ -182,8 +182,10 @@ public abstract class EnemyClass : MonoBehaviour
         }
         for(int i=childIndex;i<transform.childCount;i++)
         {
-            transform.GetChild(i).gameObject.SetActive(true);
-            transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-2.0f,2.0f),10.0f),ForceMode2D.Impulse);
+            GameObject tempItem = transform.GetChild(i).gameObject;
+            tempItem.SetActive(true);
+            tempItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-2.0f,2.0f),10.0f),ForceMode2D.Impulse);
+            Destroy(tempItem, 10f);
         }
         transform.DetachChildren();
     }

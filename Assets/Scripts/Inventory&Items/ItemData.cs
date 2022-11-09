@@ -23,7 +23,11 @@ public abstract class ItemData : ScriptableObject{
 
     /// 타입에 맞는 새로운 아이템 생성
     public abstract Item CreateItem();
-    
+    public void ChangeTooltip(string name, string tooltip)
+    {
+        _name = name;
+        _tooltip = tooltip;
+    }
 }
 public enum ItemType
 {

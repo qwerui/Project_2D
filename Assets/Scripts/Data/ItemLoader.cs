@@ -22,7 +22,8 @@ public class ItemLoader
     }
     public ItemLoader()
     {
-        InitItemList();
+        if(SubItemList == null || EquipItemList == null)
+            InitItemList();
     }
     private void InitItemList()
     {

@@ -40,4 +40,7 @@ public class GameData
 
     public bool[] gachaUsed;
     public string[] shopList;
+
+    public int[] capsuleEffect;
+    public bool[] capsuleIdentified;
 }

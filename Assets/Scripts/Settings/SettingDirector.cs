@@ -12,15 +12,19 @@ public class SettingDirector : MonoBehaviour
     public UploadManager uploadManager;
 
     public Text loginText;
+    public Text resolutionText;
 
     public GameObject serverObject;
 
-    [Header("»ç¿îµå ¿ÀºêÁ§Æ®")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®")]
     public Slider BackgroundMusic;
     public Slider SoundFX;
     public AudioMixer mixer;
 
     bool isLogin;
+
+    readonly string[] resolution = {"640x360", "1280x720"};
+    int resolutionIndex = 0;
 
     private void Start()
     {
@@ -34,6 +38,8 @@ public class SettingDirector : MonoBehaviour
             Tutorialtoggle.isOn = false;
         BackgroundMusic.value = PlayerPrefs.GetFloat("BGM", 0);
         SoundFX.value = PlayerPrefs.GetFloat("SoundFX",0);
+        resolutionIndex = PlayerPrefs.GetInt("Resolution",0);
+        resolutionText.text = resolution[resolutionIndex];
     }
     public void TutorialSetting(bool toggle)
     {
@@ -79,5 +85,21 @@ public class SettingDirector : MonoBehaviour
     {
         mixer.SetFloat("SFX", value);
         PlayerPrefs.SetFloat("SoundFX", value);
+    }
+    public void SetResolution(bool isRight)
+    {
+        if(isRight)
+        {
+            resolutionIndex++;
+        }
+        else
+        {
+            resolutionIndex--;
+        }
+        resolutionIndex = Mathf.Clamp(resolutionIndex,0,resolution.Length-1);
+        string[] screenSize = resolution[resolutionIndex].Split('x');
+        resolutionText.text = resolution[resolutionIndex];
+        Screen.SetResolution(int.Parse(screenSize[0]),int.Parse(screenSize[1]),FullScreenMode.Windowed,0);
+        PlayerPrefs.SetInt("Resolution",resolutionIndex);
     }
 }

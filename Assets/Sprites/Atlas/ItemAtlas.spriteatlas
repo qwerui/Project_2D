@@ -84,6 +84,11 @@ SpriteAtlas:
   - {fileID: -6150599571653389027, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
   - {fileID: -8661803058402064859, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
   - {fileID: 5372143390237323444, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: -4456410815380551462, guid: f73c747e8ae6d8c4587aceec84b3f769, type: 3}
+  - {fileID: -9088820333505243525, guid: f73c747e8ae6d8c4587aceec84b3f769, type: 3}
+  - {fileID: -6425430290631861514, guid: f73c747e8ae6d8c4587aceec84b3f769, type: 3}
+  - {fileID: 4214792696944840997, guid: f73c747e8ae6d8c4587aceec84b3f769, type: 3}
+  - {fileID: 7641157568244427150, guid: f73c747e8ae6d8c4587aceec84b3f769, type: 3}
   m_PackedSpriteNamesToIndex:
   - EquipItem 1_13
   - EquipItem 1_12
@@ -119,6 +124,11 @@ SpriteAtlas:
   - SubItem_13
   - SubItem_10
   - SubItem_11
+  - SubItem2 1_0
+  - SubItem2 1_1
+  - SubItem2 1_2
+  - SubItem2 1_3
+  - SubItem2 1_4
   m_RenderDataMap: {}
   m_Tag: ItemAtlas
   m_IsVariant: 0

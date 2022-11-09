@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 4ed502cc5bf07a4419fc2c97aceb8921, type: 2}
   inventory: {fileID: 0}
-  rigid: {fileID: 726777814024239260}
+  rigid: {fileID: 0}
   amount: 0
   player: {fileID: 0}
   clip:
@@ -79,10 +79,5 @@ PrefabInstance:
 --- !u!1 &2891036593402242290 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7560585693059100485, guid: 81b27863f2168734ab8baadd726f4396, type: 3}
-  m_PrefabInstance: {fileID: 4680259086419577783}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &726777814024239260 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: -3826487082241887445, guid: 81b27863f2168734ab8baadd726f4396, type: 3}
   m_PrefabInstance: {fileID: 4680259086419577783}
   m_PrefabAsset: {fileID: 0}

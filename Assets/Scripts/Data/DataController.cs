@@ -27,12 +27,14 @@ public class DataController : MonoBehaviour
     DataDirector data;
     InventoryController inventory;
     List<RoomInfo> roomList;
+    PlayerController controller;
 
     private void Awake()
     {
         
         gameData = new GameData();
         data = DataDirector.Instance;
+        GameManager.Instance.identified = new IdentifiedItem();
         if(data.isLoadedGame == true)
         {
             gameData = JsonDirector.LoadGameData();
@@ -42,24 +44,33 @@ public class DataController : MonoBehaviour
             data.resourceItem = gameData.resourceItem;
             data.playerPos = gameData.playerPos;
             data.playerPosIndex = gameData.playerPosIndex;
+            GameManager.Instance.identified.effect = gameData.capsuleEffect;
+            GameManager.Instance.identified.identified = gameData.capsuleIdentified;
             JsonDirector.DeleteSaveFile();
+        }
+        else
+        {
+            GameManager.Instance.identified.Init();
+            DataDirector.Instance.Init();
         }
     }
     private void Start() {
-        stat = player.GetComponent<PlayerController>().GetStat();
+        controller = player.GetComponent<PlayerController>();
         inventory = Inventory.GetComponent<InventoryController>();
         roomList = new List<RoomInfo>();
-
+        stat = controller.GetStat();
     }
     public void SaveGameData()
     {
         GameData saveData = new GameData();
+        controller.StopAllCoroutines();
         roomList = room.GetComponent<RoomController>().GetRoomList();
         SaveDataDirector(saveData);
         SaveStat(saveData);
         SaveItem(saveData);
         SaveRoom(saveData);
         SaveItemRoom(saveData);
+        SaveIdentify(saveData);
         JsonDirector.SaveGameData(saveData);
         director.ScreenFadeIn(0);
         Invoke("ReturnMainMenu", 2.0f);
@@ -71,6 +82,11 @@ public class DataController : MonoBehaviour
         gameData.resourceItem = data.resourceItem;
         gameData.playerPos = player.transform.position;
         gameData.playerPosIndex = data.playerPosIndex;
+    }
+    void SaveIdentify(GameData gameData)
+    {
+        gameData.capsuleEffect = GameManager.Instance.identified.effect;
+        gameData.capsuleIdentified = GameManager.Instance.identified.identified;
     }
     void SaveStat(GameData gameData)
     {

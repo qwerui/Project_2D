@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class MenuDirector : MonoBehaviour
 {
@@ -14,6 +15,17 @@ public class MenuDirector : MonoBehaviour
 
     bool onTutorial;
     bool PopupOn;
+    private void Awake() {
+        if(!Directory.Exists(Application.persistentDataPath+"/saves/"))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath+"/saves/");
+        }
+        if(!File.Exists(Application.persistentDataPath+"/saves/ranking.json"))
+        {
+            InitRankingFile();
+        }
+
+    }
     void Start()
     {
         arrowPos = arrow.GetComponent<RectTransform>();
@@ -155,5 +167,18 @@ public class MenuDirector : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+    void InitRankingFile()
+    {
+        LocalRanking localRank = new LocalRanking();
+        localRank.rank = new int[10];
+        localRank.score = new int[10];
+        for(int i=0;i<10;i++)
+        {
+            localRank.rank[i]=i+1;
+            localRank.score[i]=localRank.score[i];
+        }
+
+        JsonDirector.SaveRanking(localRank);
     }
 }

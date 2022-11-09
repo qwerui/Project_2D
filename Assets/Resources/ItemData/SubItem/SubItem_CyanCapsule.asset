@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde740442a9816a40b71dd33f34b90ff, type: 3}
+  m_Name: SubItem_CyanCapsule
+  m_EditorClassIdentifier: 
+  _id: 305
+  _name: "\uC9C4\uD1B5\uC81C"
+  _tooltip: "\uC544\uD514\uC774 \uC904\uC5B4\uB4E0\uB2E4"
+  _iconSprite: {fileID: -9088820333505243525, guid: f73c747e8ae6d8c4587aceec84b3f769, type: 3}
+  _itemType: 3
+  _dropItemPrefab: {fileID: 6576930959981134518, guid: 1e2e60f7e924a8d4b801a538dae5259c, type: 3}
+  _isPassive: 0
+  _price: 50

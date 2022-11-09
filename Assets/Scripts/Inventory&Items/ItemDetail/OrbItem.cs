@@ -8,7 +8,7 @@ public class OrbItem : ItemPrefab
 
     public override void ItemEffect(Item item, bool used)
     {
-        stat = LinkPlayer(item);
+        stat = GameManager.Instance.stat;
         switch(item.Data.ID)
         {
             case 112:

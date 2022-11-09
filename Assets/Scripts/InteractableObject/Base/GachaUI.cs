@@ -89,6 +89,10 @@ public class GachaUI : MonoBehaviour
     public void GachaItem()
     {
         itemOutput = Gacha.Gacha_ctl.ItemGacha(int.Parse(goldText.text),int.Parse(redText.text),int.Parse(blueText.text),int.Parse(yellowText.text));
+        GameManager.Instance.stat.setBlueBall(GameManager.Instance.stat.getBlueBall()-int.Parse(blueText.text));
+        GameManager.Instance.stat.setRedBall(GameManager.Instance.stat.getRedBall()-int.Parse(redText.text));
+        GameManager.Instance.stat.setYellowBall(GameManager.Instance.stat.getYellowBall()-int.Parse(yellowText.text));
+        GameManager.Instance.stat.setGold(GameManager.Instance.stat.getGold()-int.Parse(goldText.text));
         GameObject output = Instantiate(itemOutput.DropItemPrefab).gameObject;
         output.transform.position = Gacha.gameObject.transform.position+Vector3.up;
         output.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-2.0f,2.0f), 10.0f), ForceMode2D.Impulse);

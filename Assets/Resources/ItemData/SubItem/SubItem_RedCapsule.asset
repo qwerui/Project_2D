@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde740442a9816a40b71dd33f34b90ff, type: 3}
+  m_Name: SubItem_RedCapsule
+  m_EditorClassIdentifier: 
+  _id: 300
+  _name: "\uBE68\uAC04 \uC54C\uC57D"
+  _tooltip: "\uBA39\uC5B4\uBCF4\uC9C0 \uC54A\uC73C\uBA74 \uD6A8\uACFC\uB97C \uC54C
+    \uC218 \uC5C6\uB2E4"
+  _iconSprite: {fileID: 7042978564917053088, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  _itemType: 3
+  _dropItemPrefab: {fileID: 6576930959981134518, guid: 4f6ac97b9203f284bab702338d471a0a, type: 3}
+  _isPassive: 0
+  _price: 50
