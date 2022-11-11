@@ -12,6 +12,8 @@ public class GameManager
             if(instance == null)
             {
                 instance = new GameManager();
+                instance.stat = new PlayerStatus();
+                instance.identified = new IdentifiedItem();
             }
             return instance;
         }

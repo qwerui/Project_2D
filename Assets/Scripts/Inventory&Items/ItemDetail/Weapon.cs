@@ -8,7 +8,7 @@ public class Weapon : ItemPrefab
 
     public override void ItemEffect(Item item, bool equip)
     {
-        stat = LinkPlayer(item);
+        stat = GameManager.Instance.stat;
         if(equip == true)
         {
             stat.setAtk(stat.getAtk()+(item.Data as EquipItemData).Value);

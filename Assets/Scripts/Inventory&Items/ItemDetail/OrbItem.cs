@@ -9,19 +9,19 @@ public class OrbItem : ItemPrefab
     public override void ItemEffect(Item item, bool used)
     {
         stat = GameManager.Instance.stat;
-        switch(item.Data.ID)
+        switch(this.data.ID)
         {
             case 112:
-                stat.setAtk(stat.getAtk()+(item.Data as EquipItemData).Value);
+                stat.setAtk(stat.getAtk()+(this.data as EquipItemData).Value);
                 break;
             case 113:
-                stat.setDef(stat.getDef()+(item.Data as EquipItemData).Value);
+                stat.setDef(stat.getDef()+(this.data as EquipItemData).Value);
                 break;
             case 114:
-                stat.setMaxHp(stat.getMaxHp()+(item.Data as EquipItemData).Value);
+                stat.setMaxHp(stat.getMaxHp()+(this.data as EquipItemData).Value);
                 break;
             case 115:
-                stat.setMaxHunger(stat.getMaxHunger()+(item.Data as EquipItemData).Value);
+                stat.setMaxHunger(stat.getMaxHunger()+(this.data as EquipItemData).Value);
                 break;
         }
     }

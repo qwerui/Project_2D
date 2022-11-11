@@ -30,6 +30,10 @@ public class EquipSlotUI : MonoBehaviour
         HideIcon();
     }
 
+    private void Start() {
+        LoadEquipItem();
+    }
+
     public void OpenItemPopup()
     {
         _inventoryPopupUI.ShowPanel();

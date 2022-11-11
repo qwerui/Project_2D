@@ -70,8 +70,6 @@ public class PlayerController : MonoBehaviour
     private void Awake() 
     {
         data = DataDirector.Instance;
-        GameManager.Instance.stat = new PlayerStatus();
-        stat  = GameManager.Instance.stat;
         GameManager.Instance.controller = this;
     }
 
@@ -79,9 +77,9 @@ public class PlayerController : MonoBehaviour
     {
         if (data.isLoadedGame == true)
         {
-            DataCtl.GetComponent<DataController>().GetLoadPlayer(stat);
             transform.position = data.playerPos;
         }
+        stat = GameManager.Instance.stat;
         ani = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         hitBox = GetComponent<BoxCollider2D>();

@@ -19,7 +19,7 @@ public class ShopController : MonoBehaviour
     {
         subItemList = Resources.LoadAll<ItemData>("ItemData/SubItem");
         shopUI = Shop_UI.GetComponent<ShopUI>();
-        stat = player.GetComponent<PlayerController>().GetStat();
+        stat = GameManager.Instance.stat;
         inventory = Inventory.GetComponent<InventoryController>();
     }
     public ItemData GetRandomSubItem()

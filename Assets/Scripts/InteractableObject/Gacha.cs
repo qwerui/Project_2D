@@ -14,7 +14,7 @@ public class Gacha : InteractableObject
 
     bool isUsed = false;
 
-    private void Start() {
+    private void Awake() {
         hitBox = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
     }

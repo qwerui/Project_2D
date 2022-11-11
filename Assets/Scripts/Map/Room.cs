@@ -163,7 +163,7 @@ public class Room : MonoBehaviour
         int index = 0;
         foreach(Shop s in transform.GetChild(2).GetChild(2).GetComponentsInChildren<Shop>())
         {
-            string[] shopItem = shopList[index].Split(',');
+            string[] shopItem = shopList[index++].Split(',');
             for(int i=0;i<8;i++)
             {
                 int itemId = int.Parse(shopItem[i]);

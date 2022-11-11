@@ -19,7 +19,7 @@ public static class JsonDirector
         }
         string saveJson = JsonUtility.ToJson(data);
 
-        saveJson = Encrypt(saveJson, SecurityKey);
+        //saveJson = Encrypt(saveJson, SecurityKey);
         string saveFilePath = SavePath + "gamesave" + ".json";
         File.WriteAllText(saveFilePath, saveJson);
     }
@@ -51,7 +51,7 @@ public static class JsonDirector
             try
             {
                 string saveFile = File.ReadAllText(saveFilePath);
-                saveFile = Decrypt(saveFile, SecurityKey);
+                //saveFile = Decrypt(saveFile, SecurityKey);
                 GameData saveData = JsonUtility.FromJson<GameData>(saveFile);
                 return saveData;
             }

@@ -53,12 +53,11 @@ public class GameDirector : MonoBehaviour
     }
     private void Start() 
     {
-        player = Objects[7].GetComponent<PlayerController>().GetStat();
+        player = GameManager.Instance.stat;
         healthText = Objects[8].GetComponent<Text>();
         hpBar = Objects[9].GetComponent<Image>();
         hungerBar = Objects[10].GetComponent<Image>();
         StartCoroutine("HealthTextController");
-        Objects[15].GetComponent<EquipSlotUI>().LoadEquipItem();
         Objects[6].SetActive(false);
     }
 

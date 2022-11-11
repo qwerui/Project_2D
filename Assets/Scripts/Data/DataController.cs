@@ -31,7 +31,7 @@ public class DataController : MonoBehaviour
 
     private void Awake()
     {
-        
+        GameManager.Instance.stat = new PlayerStatus();
         gameData = new GameData();
         data = DataDirector.Instance;
         GameManager.Instance.identified = new IdentifiedItem();
@@ -46,6 +46,7 @@ public class DataController : MonoBehaviour
             data.playerPosIndex = gameData.playerPosIndex;
             GameManager.Instance.identified.effect = gameData.capsuleEffect;
             GameManager.Instance.identified.identified = gameData.capsuleIdentified;
+            GetLoadPlayer(GameManager.Instance.stat);
             JsonDirector.DeleteSaveFile();
         }
         else
@@ -55,10 +56,10 @@ public class DataController : MonoBehaviour
         }
     }
     private void Start() {
+        stat = GameManager.Instance.stat;
         controller = player.GetComponent<PlayerController>();
         inventory = Inventory.GetComponent<InventoryController>();
         roomList = new List<RoomInfo>();
-        stat = controller.GetStat();
     }
     public void SaveGameData()
     {
@@ -66,8 +67,8 @@ public class DataController : MonoBehaviour
         controller.StopAllCoroutines();
         roomList = room.GetComponent<RoomController>().GetRoomList();
         SaveDataDirector(saveData);
-        SaveStat(saveData);
         SaveItem(saveData);
+        SaveStat(saveData);
         SaveRoom(saveData);
         SaveItemRoom(saveData);
         SaveIdentify(saveData);
