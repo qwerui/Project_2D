@@ -6,7 +6,7 @@ public class Weapon : ItemPrefab
 {
     PlayerStatus stat;
 
-    public override void ItemEffect(Item item, bool equip)
+    public override void ItemEffect(Item item, bool equip)//무기류 효과
     {
         stat = GameManager.Instance.stat;
         if(equip == true)

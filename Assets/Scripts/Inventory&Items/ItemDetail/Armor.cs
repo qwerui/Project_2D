@@ -6,7 +6,7 @@ public class Armor : ItemPrefab
 {
     PlayerStatus stat;
 
-    public override void ItemEffect(Item item, bool equip)
+    public override void ItemEffect(Item item, bool equip) //갑옷류 효과
     {
         stat = LinkPlayer(item);
         if(equip == true)

@@ -6,11 +6,12 @@ using System.Security.Cryptography;
 using System.Text;
 using System;
 
-public static class JsonDirector
+public static class JsonDirector //Json활용 데이터 저장
 {
-    private static string SavePath => Application.persistentDataPath + "/saves/";
-    private static string SecurityKey = "dongyangmiraeuniversityproject2d";
+    private static string SavePath => Application.persistentDataPath + "/saves/"; //저장 경로
+    private static string SecurityKey = "dongyangmiraeuniversityproject2d"; //암호화 키
 
+    //게임 데이터 저장
     public static void SaveGameData(GameData data)
     {
         if (!Directory.Exists(SavePath))
@@ -23,6 +24,7 @@ public static class JsonDirector
         string saveFilePath = SavePath + "gamesave" + ".json";
         File.WriteAllText(saveFilePath, saveJson);
     }
+    //게임 랭킹 저장
     public static void SaveRanking(LocalRanking data)
     {
         if (!Directory.Exists(SavePath))
@@ -35,6 +37,7 @@ public static class JsonDirector
         string saveFilePath = SavePath + "ranking" + ".json";
         File.WriteAllText(saveFilePath, saveJson);
     }
+    //게임 데이터 불러오기
     public static GameData LoadGameData()
     {
         string saveFilePath = SavePath + "gamesave" + ".json";
@@ -62,6 +65,7 @@ public static class JsonDirector
             }
         }
     }
+    //랭킹 불러오기
     public static LocalRanking LoadRanking()
     {
         string saveFilePath = SavePath + "ranking" + ".json";
@@ -89,7 +93,7 @@ public static class JsonDirector
             }
         }
     }
-
+    //데이터 복호화
     public static string Decrypt(string textToDecrypt, string key)
     {
         RijndaelManaged rijndaelCipher = new RijndaelManaged();
@@ -118,7 +122,7 @@ public static class JsonDirector
 
         return Encoding.UTF8.GetString(plainText);
     }
-
+    //데이터 암호화
     public static string Encrypt(string textToEncrypt, string key)
     {
         RijndaelManaged rijndaelCipher = new RijndaelManaged();
@@ -144,7 +148,7 @@ public static class JsonDirector
         byte[] plainText = Encoding.UTF8.GetBytes(textToEncrypt);
         return Convert.ToBase64String(transform.TransformFinalBlock(plainText, 0, plainText.Length));
     }
-
+    //세이브 파일 존재 여부 확인
     public static bool CheckSaveFile()
     {
         string saveFilePath = SavePath + "gamesave" + ".json";
@@ -161,6 +165,7 @@ public static class JsonDirector
             return true;
         }
     }
+    //세이브 파일 삭제
     public static void DeleteSaveFile()
     {
         string saveFilePath = SavePath + "gamesave" + ".json";
@@ -184,6 +189,7 @@ public static class JsonDirector
             }
         }
     }
+    //암호화 상태 파일 불러오기(서버와 통신에 사용)
     public static string LoadEncryptedSave()
     {
         string saveFilePath = SavePath + "gamesave" + ".json";
@@ -209,6 +215,7 @@ public static class JsonDirector
             }
         }
     }
+    //암호화 상태 파일 저장(서버와 통신에 사용)
     public static bool SaveEncryptedSave(string encryptedData)
     {
         try

@@ -17,7 +17,7 @@ public class Room : MonoBehaviour
         enemyList = new List<GameObject>();
     }
 
-    // Start is called before the first frame update
+    //방 인스턴스화 할 때 초기화할 것들
     void Start()
     {
         if(roomInfo.path[0] != true)
@@ -82,6 +82,7 @@ public class Room : MonoBehaviour
         }
         
     }
+    //방 정보 입력
     public void SetRoomInfo(RoomInfo info, RoomController ctl, int index)
     {
         roomInfo = info;
@@ -90,7 +91,7 @@ public class Room : MonoBehaviour
         controller = ctl;
         roomIndex = index;
     }
-    
+    //오브젝트 숨기기(약간의 최적화를 위함)
     public void HideAll()
     {
         for(int i=0;i<EnemySpawn.transform.childCount;i++)
@@ -107,6 +108,7 @@ public class Room : MonoBehaviour
         }
         transform.GetChild(2).gameObject.SetActive(false);
     }
+    //방 초기화(주로 숨긴 오브젝트 활성화)
     public void RoomInit()
     {
         transform.GetChild(2).gameObject.SetActive(true);
@@ -121,6 +123,7 @@ public class Room : MonoBehaviour
             Instantiate(enemyList[i], tempTrans);
         }
     }
+    //방 id불러오기
     public string GetRoomItemId()
     {
         Transform itemPosGroup = transform.GetChild(2).GetChild(1);
@@ -148,6 +151,7 @@ public class Room : MonoBehaviour
         }
         return roomItem;
     }
+    //방 최초 생성 아이템 불러오기
     void SetItem()
     {
         DataController data = GameObject.Find("DataController").GetComponent<DataController>();

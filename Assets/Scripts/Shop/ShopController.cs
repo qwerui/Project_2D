@@ -8,7 +8,7 @@ public class ShopController : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject Shop_UI;
     [SerializeField] private GameObject Inventory;
-    private ItemData[] subItemList;
+    private ItemData[] subItemList; //전체 소비 아이템 목록
 
     ShopUI shopUI;
     PlayerStatus stat;
@@ -26,6 +26,7 @@ public class ShopController : MonoBehaviour
     {
         return subItemList[Random.Range(0,subItemList.Length)];
     }
+    //상점 아이템 초기화
     public void SetShopSlots(ItemData[] item, Shop shop)
     {
         this.shop = shop;
@@ -42,6 +43,7 @@ public class ShopController : MonoBehaviour
             }
         }
     }
+    //아이템 실제 구매 과정
     public bool BuyProcess(ItemData item, int index)
     {
         int gold = stat.getGold() - (item as SubItemData).Price;

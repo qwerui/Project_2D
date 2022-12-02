@@ -5,6 +5,7 @@ using System;
 
 public class RandomCapsule : ItemPrefab
 {
+    //알약 식별 확인
     public override void Identify() {
         int index = Array.IndexOf<int>(GameManager.Instance.identified.dataID, data.ID);
         if(GameManager.Instance.identified.identified[index] == false)
@@ -34,6 +35,7 @@ public class RandomCapsule : ItemPrefab
             data.ChangeTooltip(temp,"먹어보지 않으면 효과를 알 수 없다");
         }
     }
+    //알약류 효과
     public override void ItemEffect(Item item = null, bool equip = true)
     {
         int index = Array.IndexOf<int>(GameManager.Instance.identified.dataID, item.Data.ID);

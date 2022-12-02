@@ -9,7 +9,7 @@ public class HpPotion : ItemPrefab
     public override void ItemEffect(Item item, bool used)
     {
         stat = LinkPlayer(item);
-        switch(item.Data.ID)
+        switch(item.Data.ID) //hp포션류 효과
         {
             case 205:
                 stat.setHp(stat.getHp()+stat.getMaxHp()/10);

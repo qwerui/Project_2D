@@ -25,6 +25,7 @@ public class DynamoDBManager : MonoBehaviour
         DBclient = new AmazonDynamoDBClient(credentials, Amazon.RegionEndpoint.APNortheast2);
         context = new DynamoDBContext(DBclient);
     }
+    //랭킹 업로드
     public bool UploadRanking()
     {
         LocalRanking myRank = JsonDirector.LoadRanking();
@@ -49,6 +50,7 @@ public class DynamoDBManager : MonoBehaviour
         }
         
     }
+    //랭킹 불러오기
     public List<WorldRank> LoadRanking()
     {
         AsyncSearch<WorldRank> worldRankData = context.ScanAsync<WorldRank>(null);

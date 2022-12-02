@@ -5,7 +5,7 @@ using UnityEngine;
 public class ResourceItem : ItemPrefab
 {
     PlayerStatus stat;
-
+    //자원 아이템 효과
     public override void ItemEffect(Item item, bool equip)
     {
         stat = LinkPlayer(item);

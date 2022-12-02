@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyClass : MonoBehaviour
+public abstract class EnemyClass : MonoBehaviour //적 기본 클래스
 {
     [SerializeField] protected int hp;
     [SerializeField] protected int atk;
@@ -58,7 +58,7 @@ public abstract class EnemyClass : MonoBehaviour
         StatusInit();
         CreateItem();
     }
-
+    //피격
     public void Hit(int damage)
     {
         damageInstance = Instantiate(damageText).gameObject;
@@ -78,6 +78,7 @@ public abstract class EnemyClass : MonoBehaviour
             StartCoroutine("FalseHit");
         }
     }
+    //사망
     protected IEnumerator Dead()
     {
         ani.SetTrigger("Death");
@@ -92,6 +93,7 @@ public abstract class EnemyClass : MonoBehaviour
         DropItem();
         Destroy(gameObject);
     }
+    //몸통박치기 공격
     private void OnCollisionEnter2D(Collision2D collision) 
     {
         if(collision.gameObject.tag == "Player"){
@@ -99,6 +101,7 @@ public abstract class EnemyClass : MonoBehaviour
         }
 
     }
+    //플레이어 추적
     protected bool SetOnChase(float radius)
     {
         if(Physics2D.OverlapCircle((Vector2)transform.position + hitbox.offset,radius,LayerMask.GetMask("Player")))
@@ -106,7 +109,7 @@ public abstract class EnemyClass : MonoBehaviour
         else
             return false;
     }
-    
+    //바닥 체크
     protected void PlatformCheck()
     {
         Vector2 frontVec = new Vector2(rigid.position.x + nextMove, rigid.position.y);
@@ -118,6 +121,7 @@ public abstract class EnemyClass : MonoBehaviour
             Invoke("Think",2); 
         }
     }
+    //벽 체크
     protected void WallCheck()
     {
         Vector2 frontVec = hitbox.bounds.center;
@@ -128,6 +132,7 @@ public abstract class EnemyClass : MonoBehaviour
             CancelInvoke();
         }
     }
+    //드랍 아이템 생성
     protected virtual void CreateItem()
     {
         BallAndGold();
@@ -142,6 +147,7 @@ public abstract class EnemyClass : MonoBehaviour
             }
         }
     }
+    //아이템 드랍 결정
     bool Chance(float chance)
     {
         int chanceInt = (int)Mathf.Round(chance * 10000000);
@@ -150,6 +156,7 @@ public abstract class EnemyClass : MonoBehaviour
         else
             return false;
     }
+    //자원 드랍 양 결정
     void BallAndGold()
     {
         int resourceAmount;
@@ -169,6 +176,7 @@ public abstract class EnemyClass : MonoBehaviour
             }
         }
     }
+    //아이템 드랍
     void DropItem()
     {
         int childIndex = 0;
@@ -189,16 +197,19 @@ public abstract class EnemyClass : MonoBehaviour
         }
         transform.DetachChildren();
     }
+    //피격 상태 OFF
     IEnumerator FalseHit()
     {
         yield return new WaitForSeconds(0.7f);
         isHit = false;
         yield return null;
     }
+    //공격 끝
     void AttackEnd()
     {
         isAttack=false;
     }
+    //소리 출력
     public void PlaySound(int index)
     {
         audioSource.PlayOneShot(clip[index]);

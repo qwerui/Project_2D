@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadingSceneManager : MonoBehaviour
+public class LoadingSceneManager : MonoBehaviour //로딩화면 클래스
 {
     public static string nextScene;
     [SerializeField] Image progressBar;
@@ -14,7 +14,7 @@ public class LoadingSceneManager : MonoBehaviour
         StartCoroutine(LoadScene());
     }
 
-    public static void LoadScene(string sceneName)
+    public static void LoadScene(string sceneName) //화면 이름을 받아 화면 전환
     {
         nextScene = sceneName;
         SceneManager.LoadScene("LoadingScene");
@@ -23,10 +23,10 @@ public class LoadingSceneManager : MonoBehaviour
     IEnumerator LoadScene()
     {
         yield return null;
-        AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
+        AsyncOperation op = SceneManager.LoadSceneAsync(nextScene); //비동기 방식 불러오기
         op.allowSceneActivation = false;
         float timer = 0.0f;
-        while (!op.isDone)
+        while (!op.isDone) //진행 바 채우기
         {
             yield return null;
             timer += Time.deltaTime;

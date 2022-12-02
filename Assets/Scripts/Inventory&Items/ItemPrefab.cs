@@ -34,7 +34,7 @@ public abstract class ItemPrefab : MonoBehaviour
         {
             rigid.velocity = Vector2.zero;
         }
-        if(other.gameObject.tag=="Player")
+        if(other.gameObject.tag=="Player") //아이템 습득
         {
             
             if(data.IsPassive == true)
@@ -62,7 +62,7 @@ public abstract class ItemPrefab : MonoBehaviour
             }
         }
     }
-    // 아이템 효과 구현할 때 가장 먼저 호출해야함
+    // 아이템 효과 구현할 때 가장 먼저 호출해야함(싱글톤으로 변경후 굳이 쓸 필요 없음)
     public PlayerStatus LinkPlayer(Item item = null)
     {
         if(player == null)
@@ -71,7 +71,7 @@ public abstract class ItemPrefab : MonoBehaviour
         sound = playerCtl.sound;
         return playerCtl.GetStat();
     }
-    public abstract void ItemEffect(Item item = null, bool equip = true);
-    public virtual void WeaponUse(){}
-    public virtual void Identify(){}
+    public abstract void ItemEffect(Item item = null, bool equip = true); //아이템 효과
+    public virtual void WeaponUse(){} //무기 사용
+    public virtual void Identify(){} //알약 식별 여부
 }

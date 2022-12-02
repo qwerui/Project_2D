@@ -19,7 +19,7 @@ public class IdentifiedItem
             effect[i] = i;
         }
     }
-
+    //알약 아이템 초기화
     public void Init()
     {
         for(int i=0;i<100;i++)

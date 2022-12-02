@@ -100,6 +100,7 @@ public class GameDirector : MonoBehaviour
         StartCoroutine("GameOverFadeIn");
     }
 
+    //게임 오버 화면 페이드 인
     public IEnumerator GameOverFadeIn()
     {
         Image sr;
@@ -127,6 +128,7 @@ public class GameDirector : MonoBehaviour
         yield return null;
     }
 
+    //인벤토리의 자원의 양과 공격력, 방어력 출력
     public void InventoryTextController()
     {
         redBall.text = player.getRedBall().ToString();
@@ -136,6 +138,7 @@ public class GameDirector : MonoBehaviour
         atk.text = "ATK : "+player.getAtk().ToString();
         def.text = "DEF : "+player.getDef().ToString();
     }
+    //세이브 팝업창 출력
     public void ShowSavePopup()
     {
         if(Objects[13].GetComponent<RoomController>().GetRoomInfo(DataDirector.Instance.playerPosIndex).roomType == RoomType.Boss)
@@ -157,6 +160,8 @@ public class GameDirector : MonoBehaviour
     {
         Objects[12].SetActive(false);
     }
+
+    //스테이지 변경 및 세이브 시 검은 화면 페이드 인/아웃
     public void ScreenFadeIn(float startAlpha)
     {
         Objects[11].SetActive(true);
@@ -169,6 +174,7 @@ public class GameDirector : MonoBehaviour
         fadeScreen.SetAlpha(startAlpha);
         fadeScreen.FadeOut();
     }
+    //아이템 습득 시 아이템 명 출력
     public void GetItemName(string name, bool isPassive)
     {
         if(itemShowCoroutine != null)

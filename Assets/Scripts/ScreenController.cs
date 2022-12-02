@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ScreenController : MonoBehaviour
 {
+    //페이드 인/아웃 클래스
     Image sr;
     private void Awake()
     {

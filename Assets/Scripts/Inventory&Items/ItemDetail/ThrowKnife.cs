@@ -7,7 +7,7 @@ public class ThrowKnife : ItemPrefab
     PlayerStatus stat;
     public ThrowKnifeEffect effectObj;
 
-    public override void ItemEffect(Item item, bool used)
+    public override void ItemEffect(Item item, bool used)//단검 효과
     {
         stat = LinkPlayer(item);
         ThrowKnifeEffect effect = Instantiate(effectObj.gameObject).GetComponent<ThrowKnifeEffect>();

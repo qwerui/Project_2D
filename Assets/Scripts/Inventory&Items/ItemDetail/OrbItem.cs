@@ -9,7 +9,7 @@ public class OrbItem : ItemPrefab
     public override void ItemEffect(Item item, bool used)
     {
         stat = GameManager.Instance.stat;
-        switch(this.data.ID)
+        switch(this.data.ID) //오브류 아이템 효과
         {
             case 112:
                 stat.setAtk(stat.getAtk()+(this.data as EquipItemData).Value);

@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class RoomInfo
 {
-    public int roomId;
+    //방 정보
+    public int roomId;//방 인덱스
 
     public int Width;
     public int Height;
-    public int distance;
+    public int distance; //중앙 방에서 부터의 거리
 
-    public RoomType roomType;
-    public GameObject roomPrefab;
+    public RoomType roomType; //방 타입
+    public GameObject roomPrefab; //방 프리팹
 
-    public Vector2Int pos;
-    public bool[] path; //0: 왼쪽, 1:위쪽, 2:오른쪽, 3:아래
+    public Vector2Int pos;//방 위치
+    public bool[] path; //0: 왼쪽, 1:위쪽, 2:오른쪽, 3:아래 통로
 
-    public bool isVisited;
+    public bool isVisited;//방문 여부
 
     public void SetRoom(Vector2Int position, RoomType type, int distance)
     {

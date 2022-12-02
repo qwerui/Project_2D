@@ -17,6 +17,7 @@ public class ShopSlot : MonoBehaviour
     ShopController shop_ctl;
     int index;
 
+    //상점의 각 아이템 슬롯 초기화
     public void SetShopItem(ItemData item, ShopController _shop, int i)
     {
         shop_ctl = _shop;
@@ -27,12 +28,13 @@ public class ShopSlot : MonoBehaviour
         canBuyText.text = "●";
         index = i;
     }
+    //아이템이 없는 경우
     public void SetNullItem()
     {
         itemPrice.text = "-";
         canBuyText.text="X";
     }
-
+    //아이템 구매
     public void Buy()
     {
         if(shopItem == null)

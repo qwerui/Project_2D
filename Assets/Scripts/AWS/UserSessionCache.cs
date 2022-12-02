@@ -4,7 +4,7 @@ using UnityEngine;
 using Amazon.CognitoIdentity;
 using Amazon.Extensions.CognitoAuthentication;
 
-public class UserSessionCache
+public class UserSessionCache //로그인 정보 클래스
 {
    private static UserSessionCache instance = null;
    public static UserSessionCache Instance
@@ -18,6 +18,7 @@ public class UserSessionCache
             return instance;
         }
    } 
+   //로그인 정보
    public string _idToken;
    public string _accessToken;
    public string _refreshToken;
@@ -26,6 +27,7 @@ public class UserSessionCache
    private CognitoAWSCredentials _cognitoAWSCredentials;
    private CognitoUser _user;
 
+   //로그인 정보 초기화
    public void SetUserSessionCache(string idToken, string accessToken, string refreshToken, string userId, string username)
    {
       _idToken = idToken;
@@ -34,6 +36,7 @@ public class UserSessionCache
       _userId = userId;
       _username = username;
    }
+   //setter, getter
    public void SetCredentials(CognitoAWSCredentials credentials)
    {
         _cognitoAWSCredentials = credentials;

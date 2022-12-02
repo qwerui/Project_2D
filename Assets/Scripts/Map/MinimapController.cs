@@ -9,6 +9,7 @@ public class MinimapController : MonoBehaviour
     private void Start() {
         rect = GetComponent<RectTransform>();
     }
+    //미니맵 토글
     public void MinimapOnOff(bool toggle)
     {
         if(toggle)

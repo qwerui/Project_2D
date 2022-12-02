@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public abstract class ItemData : ScriptableObject{
+    //아이템 정보
     public int ID => _id;
     public string Name => _name;
     public string Tooltip => _tooltip;

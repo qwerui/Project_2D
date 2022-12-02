@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogUI : MonoBehaviour
+public class DialogUI : MonoBehaviour //대화창
 {
     string[] dialogText;
     public float textSpeed;
@@ -15,6 +15,7 @@ public class DialogUI : MonoBehaviour
 
     bool isTyping;
 
+    //대화창 위치 결정 및 초기화
     public void DialogSetting(GameObject dialogObj, string[] dialogString)
     {
         pos = dialogObj.transform.position;
@@ -22,10 +23,11 @@ public class DialogUI : MonoBehaviour
         textSpace = transform.GetChild(0).GetComponent<Text>();
         GoNextText();
     }
+    //대화창 위치 조절
     private void FixedUpdate() {
         GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(pos+Vector3.up * 2.5f);
     }
-
+    //다음 대화 출력
     public bool GoNextText()
     {
         StopAllCoroutines();
@@ -41,6 +43,7 @@ public class DialogUI : MonoBehaviour
             return false;
         } 
     }
+    //타이핑 효과
     IEnumerator TypingText(string message)
     {
         isTyping = true;
@@ -52,6 +55,7 @@ public class DialogUI : MonoBehaviour
         }
         isTyping = false;
     }
+    //소리 출력
     IEnumerator TextSound()
     {
         while(isTyping)

@@ -23,7 +23,7 @@ public class RecordDirector : MonoBehaviour
         localRankObj.SetActive(true);
 
         UserSessionCache session = UserSessionCache.Instance;
-        if(session.GetCredentials() == null)
+        if(session.GetCredentials() == null) //업로드 버튼 활성화(로그인 시)
         {
             uploadButton.SetActive(false);
         }
@@ -34,20 +34,20 @@ public class RecordDirector : MonoBehaviour
         LoadLocal();
         LoadWorld();
     }
-
+    //랭킹 화면 전환
     public void RecordLoading(int option)
     {
         RecordObjInit();
         if (option == 0)
         {
-            localRankObj.SetActive(true);
+            localRankObj.SetActive(true); //로컬 랭킹
         }
         else if(option == 1)
         {
-            worldRankObj.SetActive(true);
+            worldRankObj.SetActive(true); //서버 랭킹
         }
     }
-
+    //로컬 랭킹 불러오기
     void LoadLocal()
     {
         for(int i=0;i<10;i++)
@@ -58,6 +58,7 @@ public class RecordDirector : MonoBehaviour
             rankingLine.transform.GetChild(1).GetComponent<Text>().text = localRank.score[i].ToString();
         }
     }
+    //월드 랭킹 불러오기
     void LoadWorld()
     {
         List<WorldRank> worldRankList = DynamoDB.LoadRanking();
@@ -71,11 +72,13 @@ public class RecordDirector : MonoBehaviour
             rankingLine.transform.GetChild(2).GetComponent<Text>().text = worldRankList[i].Score.ToString();
         }
     }
+    //랭킹 오브젝트 초기화
     void RecordObjInit()
     {
         localRankObj.SetActive(false);
         worldRankObj.SetActive(false);
     }
+    //업로드 상태 출력
     public void UploadRanking()
     {
         if(DynamoDB.UploadRanking())

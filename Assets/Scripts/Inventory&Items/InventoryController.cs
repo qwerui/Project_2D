@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class InventoryController : MonoBehaviour
 {
     public int Capacity { get; private set; }
-    [SerializeField] private Item[] _items;
+    [SerializeField] private Item[] _items; //실제 인벤토리 객체
     [SerializeField] private InventoryUI _inventoryUI;
     [SerializeField] private DataController data;
 
@@ -301,6 +301,7 @@ public class InventoryController : MonoBehaviour
     {
         _items[index] = item;
     }
+    //장비 해제 아이템 추가
     public bool AddUnequipItem(Item item)
     {
         int index = -1;

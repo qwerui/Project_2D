@@ -16,17 +16,16 @@ public class SettingDirector : MonoBehaviour
 
     public GameObject serverObject;
 
-    [Header("���� ������Ʈ")]
     public Slider BackgroundMusic;
     public Slider SoundFX;
     public AudioMixer mixer;
 
     bool isLogin;
 
-    readonly string[] resolution = {"640x360", "1280x720"};
+    readonly string[] resolution = {"640x360", "1280x720"}; //화면 크기
     int resolutionIndex = 0;
 
-    private void Start()
+    private void Start() //각종 설정 불러오기
     {
         if(UserSessionCache.Instance.GetCredentials() != null)
         {
@@ -41,6 +40,7 @@ public class SettingDirector : MonoBehaviour
         resolutionIndex = PlayerPrefs.GetInt("Resolution",0);
         resolutionText.text = resolution[resolutionIndex];
     }
+    //튜토리얼 활성화
     public void TutorialSetting(bool toggle)
     {
         if (toggle)
@@ -48,6 +48,7 @@ public class SettingDirector : MonoBehaviour
         else
             PlayerPrefs.SetInt("Tutorial", 0);
     }
+    //로그인,로그아웃 토글
     public void ToggleLogInOut(bool status)
     {
         if(status)
@@ -65,6 +66,7 @@ public class SettingDirector : MonoBehaviour
             serverObject.SetActive(false);
         }
     }
+    //로그인,로그아웃 팝업 출력
     public void ShowLogInOutPanel()
     {
         if(isLogin)
@@ -76,6 +78,7 @@ public class SettingDirector : MonoBehaviour
             LoginPanel.SetActive(true);
         }
     }
+    //소리 조절
     public void SetBackgroundMusic(float value)
     {
         mixer.SetFloat("BGM", value);
@@ -86,6 +89,7 @@ public class SettingDirector : MonoBehaviour
         mixer.SetFloat("SFX", value);
         PlayerPrefs.SetFloat("SoundFX", value);
     }
+    //화면 크기 조절
     public void SetResolution(bool isRight)
     {
         if(isRight)

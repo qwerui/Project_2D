@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InteractionDirector : MonoBehaviour
 {
+    //각종 오브젝트 컨테이너
     public GameObject shopUI;
     public GameObject Inventory;
     public GameObject MainUI;

@@ -7,7 +7,7 @@ public class Bread : ItemPrefab
 {
     PlayerStatus stat;
 
-    public override void ItemEffect(Item item, bool used)
+    public override void ItemEffect(Item item, bool used)//빵 효과
     {
         stat = LinkPlayer(item);
         stat.setHunger(stat.getHunger() + stat.getMaxHunger()/10);

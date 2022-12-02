@@ -36,6 +36,7 @@ public class GameOverDirector : MonoBehaviour
     private void Update() {
         ReturnKeyPress();
     }
+    //키보드 입력
     void ReturnKeyPress()
     {
             if(Input.GetKeyDown(KeyCode.Return)||Input.GetKeyDown(KeyCode.KeypadEnter))
@@ -52,6 +53,7 @@ public class GameOverDirector : MonoBehaviour
             SceneManager.LoadScene("MainScene");
         }
     }
+    //점수 출력
     IEnumerator ScorePrint()
     {
         for(int i=0;i<score.Length;i++)
@@ -77,6 +79,7 @@ public class GameOverDirector : MonoBehaviour
         returnObj.SetActive(true);
         activeReturn=true;
     }
+    //점수 초기화
     void ScoreInit()
     {
         int sum = 1;
@@ -91,6 +94,7 @@ public class GameOverDirector : MonoBehaviour
         }
         scoreEnd[4] = (int)(sum / 1000);
     }
+    //랭킹 저장
     void SaveLocalRanking()
     {
         LocalRanking localRank = new LocalRanking();

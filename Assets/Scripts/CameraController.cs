@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
         cameraHalfHeight = Camera.main.orthographicSize;
     }
 
+    //매 프레임 끝 날때 카메라 위치 변경
     private void LateUpdate()
     {
         Vector3 desiredPosition = new Vector3(
@@ -25,6 +26,7 @@ public class CameraController : MonoBehaviour
             -10);                                                                                                  // Z
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * smoothSpeed);
     }
+    //최대 카메라 위치
     public void SetCameraLimit(RoomInfo room, int maxTile)
     {
         limitMinX = (room.pos.x-(int)(maxTile/2))*50-25;
@@ -32,6 +34,7 @@ public class CameraController : MonoBehaviour
         limitMaxY = (room.pos.y-(int)(maxTile/2))*50+25;
         limitMinY = (room.pos.y-(int)(maxTile/2))*50-25;
     }
+    //카메라 위치 초기화
     public void SetCameraPosition()
     {
         transform.position = new Vector3(

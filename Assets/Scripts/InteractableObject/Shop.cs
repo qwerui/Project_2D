@@ -9,7 +9,7 @@ public class Shop : InteractableObject
     ShopUI shop_UI;
 
     private void Start() {
-        if(!DataDirector.Instance.isLoadedGame)
+        if(!DataDirector.Instance.isLoadedGame) //이어하기가 아니면 랜덤 아이템 생성
             {
                 for (int i = 0; i < 8; i++)
                 {
@@ -18,7 +18,7 @@ public class Shop : InteractableObject
             }
     }
 
-    protected override void Interaction()
+    protected override void Interaction() //시간을 멈추고 쇼핑 활성화
     {
         if(shop_ctl == null)
         {

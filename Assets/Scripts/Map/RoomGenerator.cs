@@ -28,7 +28,7 @@ public class RoomGenerator : MonoBehaviour
         endRoomList = new List<RoomInfo>();
         roomCount = 0;
     }
-
+    //맵 초기화
     public void RoomInit()
     {
         int loopNum = 0;
@@ -36,7 +36,7 @@ public class RoomGenerator : MonoBehaviour
         if (maxRoom >= 70)
             maxRoom = 70;
         makeRoomCount = Random.Range(maxRoom-2, maxRoom);
-        while(roomCount < makeRoomCount)
+        while(roomCount < makeRoomCount) //생성 방 개수에 도달할 때 까지 루프
         {
             roomCount = 0;
             for(int i=0;i<maxTile;i++)
@@ -56,7 +56,7 @@ public class RoomGenerator : MonoBehaviour
         endRoomList.Sort((r1, r2) => r2.distance.CompareTo(r1.distance));
         InputRoomTemplate();
     }
-    
+    //방 생성
     public bool CreateRoom(Vector2Int position, RoomType type, int distance)
     {
         bool isNoChildRoom = true;
@@ -80,7 +80,7 @@ public class RoomGenerator : MonoBehaviour
         roomList.Add(room);
         isCreated[position.y,position.x] = true;
         roomCount++;
-
+        //재귀
         if(CreateRoom(roomPos+Vector2Int.left, RoomType.Normal, distance))
             isNoChildRoom = false;
         if(CreateRoom(roomPos+Vector2Int.up, RoomType.Normal, distance))
@@ -95,7 +95,7 @@ public class RoomGenerator : MonoBehaviour
         }
         return true;
     }
-
+    //최초 중앙 방 생성
     public void CreateDungeon()
     {
         Vector2Int roomPos = new Vector2Int(maxTile/2, maxTile/2);
@@ -110,6 +110,7 @@ public class RoomGenerator : MonoBehaviour
         CreateRoom(roomPos+Vector2Int.right, RoomType.Normal, distance);
         CreateRoom(roomPos+Vector2Int.down, RoomType.Normal, distance);
     }
+    //생성하려는 방 상하좌우로 방이 2개 이상 존재하면 방 생성 포기
     bool isNearTwo(int y, int x)
     {
         int nearCount = 0;
@@ -126,7 +127,7 @@ public class RoomGenerator : MonoBehaviour
         else
             return false;
     }
-
+    //막다른 방 개수가 모자를 경우 생성
     void CreateEndRoom()
     {
         int loopNum = 0;
@@ -146,7 +147,7 @@ public class RoomGenerator : MonoBehaviour
         }
         roomCount++;
     }
-
+    //통로 설정
     void SetPath()
     {
         for(int i=0;i<roomList.Count;i++)
@@ -167,6 +168,7 @@ public class RoomGenerator : MonoBehaviour
                     roomList[i].path[3] = true;
         }
     }
+    //방 탬플릿 주입
     void InputRoomTemplate()
     {
         endRoomList[0].roomType = RoomType.Boss;
@@ -207,6 +209,7 @@ public class RoomGenerator : MonoBehaviour
     {
         return maxTile;
     }
+    //다음 스테이지 생성
     public void NextStageCreate()
     {
         roomList.Clear();
@@ -214,6 +217,7 @@ public class RoomGenerator : MonoBehaviour
         roomCount=0;
         RoomInit();
     }
+    //방 템플릿 불러오기
     public RoomInfo LoadRoomPrefab(RoomInfo info)
     {
         switch(info.roomType)
@@ -233,6 +237,7 @@ public class RoomGenerator : MonoBehaviour
         }
         return info;
     }
+    //방 통로 불러오기
     public void SetLoadedRoomPath(List<RoomInfo> infoList)
     {
         roomList = infoList;

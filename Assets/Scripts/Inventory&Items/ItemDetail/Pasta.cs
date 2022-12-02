@@ -6,7 +6,7 @@ public class Pasta : ItemPrefab
 {
     PlayerStatus stat;
 
-    public override void ItemEffect(Item item, bool used)
+    public override void ItemEffect(Item item, bool used) //파스타 효과
     {
         stat = LinkPlayer(item);
         stat.setHunger(stat.getHunger() + stat.getMaxHunger()/4);

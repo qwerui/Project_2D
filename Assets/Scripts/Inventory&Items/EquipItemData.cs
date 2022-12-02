@@ -6,6 +6,7 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "EquipItemData", menuName = "Project_2D/EquipItemData", order = 2)]
 public class EquipItemData : ItemData
 {
+    //장비 아이템 정보
     public int Value => _value;
     public int Red => _red;
     public int Blue => _blue;

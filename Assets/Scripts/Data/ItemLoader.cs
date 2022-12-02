@@ -25,11 +25,12 @@ public class ItemLoader
         if(SubItemList == null || EquipItemList == null)
             InitItemList();
     }
-    private void InitItemList()
+    private void InitItemList() //아이템 리스트 불러오기
     {
         SubItemList = new List<ItemData>(Resources.LoadAll<ItemData>("ItemData/SubItem"));
         EquipItemList = new List<ItemData>(Resources.LoadAll<ItemData>("ItemData/EquipItem"));
     }
+    //아이템 getter
     public List<ItemData> GetEquipItemList()
     {
         return EquipItemList;

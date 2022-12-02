@@ -5,6 +5,7 @@ using System;
 
 public class DebugScript : MonoBehaviour
 {
+    //단순 디버깅용 스크립트 의미없는 코드들
     public AudioSource sound;
     public AudioClip clip;
     private void Update()

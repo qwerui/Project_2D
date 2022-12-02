@@ -17,7 +17,7 @@ public class DataDirector
             return instance;
         }
     }
-    
+    //게임 진행 상황
     public int stage;
     public int level;
     public int resourceItem;

@@ -19,7 +19,7 @@ public class ConnectManager : MonoBehaviour
     public SettingNotice notice;
     public SettingDirector director;
 
-    public async void onSignupClicked()
+    public async void onSignupClicked() //회원 가입 클릭
     {
         bool successfulSignup = await connect.Signup(email.text, password.text, username.text);
 
@@ -33,7 +33,7 @@ public class ConnectManager : MonoBehaviour
         }
     }
 
-    public async void onLoginClicked()
+    public async void onLoginClicked() //로그인 클릭
     {
         bool successfulLogin = await connect.Login(loginEmail.text, loginPassword.text);
         if(successfulLogin)
@@ -46,7 +46,7 @@ public class ConnectManager : MonoBehaviour
             notice.SetNotice("로그인 실패");
         }
     }
-    public void onLogoutClick()
+    public void onLogoutClick() //로그아웃 클릭
     {
         connect.SignOut();
         director.ToggleLogInOut(false);

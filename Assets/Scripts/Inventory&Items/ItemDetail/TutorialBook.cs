@@ -7,7 +7,7 @@ public class TutorialBook : ItemPrefab
 {
     PlayerStatus stat;
 
-    public override void ItemEffect(Item item, bool used)
+    public override void ItemEffect(Item item, bool used) //튜토리얼 책 효과
     {
         SceneManager.LoadScene("GameScene");
     }

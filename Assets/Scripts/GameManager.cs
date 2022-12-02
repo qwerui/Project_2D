@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager
 {
+    //싱글톤 활용, 각종 정보 컨테이너
     private static GameManager instance = null;
     public static GameManager Instance
     {

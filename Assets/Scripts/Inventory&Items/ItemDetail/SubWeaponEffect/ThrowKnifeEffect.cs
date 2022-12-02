@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ThrowKnifeEffect : MonoBehaviour
 {
+    //단검 효과
     Rigidbody2D rigid;
     int damage;
     int direction;
@@ -19,7 +20,7 @@ public class ThrowKnifeEffect : MonoBehaviour
         damage = stat.getAtk()/5;
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag == "Enemy")
+        if(other.gameObject.tag == "Enemy") //적 충돌시 데미지
         {
             other.GetComponent<EnemyClass>().Hit(damage);
             Destroy(gameObject);
@@ -33,6 +34,6 @@ public class ThrowKnifeEffect : MonoBehaviour
         }
     }
     private void FixedUpdate() {
-        rigid.velocity = new Vector2(20*direction,0);
+        rigid.velocity = new Vector2(20*direction,0); //단검 날리기 효과
     }
 }

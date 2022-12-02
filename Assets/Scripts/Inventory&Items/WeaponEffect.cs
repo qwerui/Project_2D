@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponEffect : MonoBehaviour
 {
     PlayerStatus stat;
+    //무기 충돌 판정
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag=="Enemy")
         {

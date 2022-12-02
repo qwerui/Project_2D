@@ -35,7 +35,7 @@ public class DataController : MonoBehaviour
         gameData = new GameData();
         data = DataDirector.Instance;
         GameManager.Instance.identified = new IdentifiedItem();
-        if(data.isLoadedGame == true)
+        if(data.isLoadedGame == true) //게임 이어하기 선택시 데이터 불러오기
         {
             gameData = JsonDirector.LoadGameData();
             data.stage = gameData.stage;
@@ -60,7 +60,11 @@ public class DataController : MonoBehaviour
         controller = player.GetComponent<PlayerController>();
         inventory = Inventory.GetComponent<InventoryController>();
         roomList = new List<RoomInfo>();
+        weapon.LoadEquipItem();
+        armor.LoadEquipItem();
+        accesory.LoadEquipItem();
     }
+    //게임 저장
     public void SaveGameData()
     {
         GameData saveData = new GameData();
@@ -76,6 +80,7 @@ public class DataController : MonoBehaviour
         director.ScreenFadeIn(0);
         Invoke("ReturnMainMenu", 2.0f);
     }
+    //게임 진행 상황 저장
     void SaveDataDirector(GameData gameData)
     {
         gameData.stage = data.stage;
@@ -84,11 +89,13 @@ public class DataController : MonoBehaviour
         gameData.playerPos = player.transform.position;
         gameData.playerPosIndex = data.playerPosIndex;
     }
+    //알약 식별 저장
     void SaveIdentify(GameData gameData)
     {
         gameData.capsuleEffect = GameManager.Instance.identified.effect;
         gameData.capsuleIdentified = GameManager.Instance.identified.identified;
     }
+    //플레이어 상태 저장
     void SaveStat(GameData gameData)
     {
         gameData.hp = stat.getHp();
@@ -105,6 +112,7 @@ public class DataController : MonoBehaviour
 	    gameData.experience = stat.getExperience();
 	    gameData.maxExperience = stat.getMaxExperience();
     }
+    //맵 저장
     void SaveRoom(GameData gameData)
     {
         int[] roomId = new int[roomList.Count];
@@ -144,6 +152,7 @@ public class DataController : MonoBehaviour
             gameData.roomItem[i]=room.GetComponent<RoomController>().GetRoomItemList(i).ToString();
         }
     }
+    //인벤토리, 장비 저장
     void SaveItem(GameData gameData)
     {
         Vector2[] item = new Vector2[inventory.GetExistItemCount()];
@@ -178,7 +187,7 @@ public class DataController : MonoBehaviour
         gameData.quickPotion = quickPotion.Index;
         gameData.quickWeapon = quickWeapon.Index;
     }
-    
+    //플레이어 상태 불러오가
     public void GetLoadPlayer(PlayerStatus player)
     {
         player.setHp(gameData.hp);
@@ -195,6 +204,7 @@ public class DataController : MonoBehaviour
         player.setExperience(gameData.experience);
         player.setMaxExperience(gameData.maxExperience);
     }
+    //맵 불러오기
     public int GetLoadedRoomCount()
     {
         return gameData.roomId.Length;
@@ -223,6 +233,7 @@ public class DataController : MonoBehaviour
         info.path = new bool[4];
         return info;
     }
+    //장비 불러오기
     public ItemData LoadEquipItem(ItemType type)
     {
         if(type == ItemType.Weapon)
@@ -251,6 +262,7 @@ public class DataController : MonoBehaviour
             return null;
         }
     }
+    //인벤토리 불러오기
     public int GetLoadedItemCount()
     {
         return gameData.item.Length;
@@ -271,15 +283,17 @@ public class DataController : MonoBehaviour
             return equipitem;
         }
     }
+    //메인메뉴 이동
     void ReturnMainMenu()
     {
         SceneManager.LoadScene("MainScene");
     }
-
+    //방 아이템 불러오기
     public string LoadRoomItem(int index)
     {
             return gameData.roomItem[index];
     }
+    //아이템 방 저장하기(뽑기 상태, 상점 아이템)
     void SaveItemRoom(GameData gameData)
     {
         List<bool> gachaUsed = new List<bool>();
@@ -328,6 +342,7 @@ public class DataController : MonoBehaviour
         gameData.gachaUsed = gachaUsed.ToArray();
         gameData.shopList = shopList.ToArray();
     }
+    //뽑기 상태 불러오기
     public bool GetGachaUsed(int roomIndex)
     {
         int index = -1;
@@ -344,6 +359,7 @@ public class DataController : MonoBehaviour
         }
         return false;
     }
+    //상점 아이템 불러오기
     public string GetShopList(int roomIndex)
     {
         int index = -1;

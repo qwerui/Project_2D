@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GachaUI : MonoBehaviour
 {
+    //아이템 뽑기 UI
     RectTransform rect;
     Vector3 pos;
     [SerializeField] InputField redText;
@@ -27,7 +28,7 @@ public class GachaUI : MonoBehaviour
     {
         rect = GetComponent<RectTransform>();
     }
-
+    //아이템 수량 감시
     private void FixedUpdate() {
         rect.position = Camera.main.WorldToScreenPoint(pos+Vector3.up * 1.8f);
         redText.text = Mathf.Clamp(int.Parse(redText.text),0,redMax).ToString();
@@ -35,6 +36,7 @@ public class GachaUI : MonoBehaviour
         yellowText.text = Mathf.Clamp(int.Parse(yellowText.text),0,yellowMax).ToString();
         goldText.text = Mathf.Clamp(int.Parse(goldText.text),0,goldMax).ToString();
     }
+    //UI초기화
     public void ShowGachaUI(Gacha _gacha, GameObject _player)
     {
         pos = _gacha.gameObject.transform.position;
@@ -45,6 +47,7 @@ public class GachaUI : MonoBehaviour
         yellowMax = stat.getYellowBall();
         goldMax = stat.getGold();
     }
+    //아이템 수량 증가
     public void IncreaseResources(int txtIndex)
     {
 
@@ -58,6 +61,7 @@ public class GachaUI : MonoBehaviour
             txt = goldText;
         txt.text = (int.Parse(txt.text)+1).ToString();
     }
+    //키보드로 입력시 자원 투입량 설정
     public void SetResourceIndex(int txtIndex)
     {
 
@@ -82,10 +86,12 @@ public class GachaUI : MonoBehaviour
             maxResource = goldMax;
         }
     }
+    //투입 자원 수량 최소,최대치 고정
     public void SetResourceValue(int value)
     {
         txt.text = Mathf.Clamp(int.Parse(txt.text)+value,0,maxResource).ToString();
     }
+    //아이템 뽑기
     public void GachaItem()
     {
         itemOutput = Gacha.Gacha_ctl.ItemGacha(int.Parse(goldText.text),int.Parse(redText.text),int.Parse(blueText.text),int.Parse(yellowText.text));

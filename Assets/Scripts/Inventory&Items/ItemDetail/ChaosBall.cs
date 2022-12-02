@@ -7,7 +7,7 @@ public class ChaosBall : ItemPrefab
     public override void ItemEffect(Item item = null, bool equip = true)
     {
         int index = Random.Range(0,7);
-        switch(index)
+        switch(index) //혼돈의 구슬 랜덤 효과
         {
             case 0:
                 GameManager.Instance.stat.setAtk(GameManager.Instance.stat.getAtk()+Random.Range(-10,11));
