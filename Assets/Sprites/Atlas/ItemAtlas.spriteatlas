@@ -50,13 +50,85 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: -3335544691696494115, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: -8390723089153271481, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: -977882606351870422, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: -5984479240414447609, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: -1688450455214521399, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: -1862730350408777407, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: 728216706329303140, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: -6646656611364609578, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: -7737298923681945738, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: -4971228904400840204, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: -6832371964590026153, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: 8616800865346977898, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: -6040153277615676153, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: -4372613029857948567, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: -4144111093166168923, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: 6551101340904174325, guid: 27f27ef007e46a4499e3c2bf161fa59d, type: 3}
+  - {fileID: -1545937627151305858, guid: c240f731f6faa7340972a0dbb9d2f2e0, type: 3}
   - {fileID: 2737840414567516762, guid: c240f731f6faa7340972a0dbb9d2f2e0, type: 3}
-  - {fileID: -8860268116576817079, guid: e2dc6465bf18d5f499e9def715ae2b33, type: 3}
-  - {fileID: -1867991094099903975, guid: ca9717e69fd0c4e4fb86ecaee01cf859, type: 3}
+  - {fileID: 7042978564917053088, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: -1321794150396166118, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: 5532365924916432569, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: 1942939191646269106, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: 7456632324705552927, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: -1867991094099903975, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: 9202701130767238520, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: -6671431618632143997, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: -5325599173434524982, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: 5373349620657181878, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: 4387542925965010032, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: 4083334946868090175, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: -1151306364781142781, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: -6150599571653389027, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: -8661803058402064859, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: 5372143390237323444, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  - {fileID: -4456410815380551462, guid: f73c747e8ae6d8c4587aceec84b3f769, type: 3}
+  - {fileID: -9088820333505243525, guid: f73c747e8ae6d8c4587aceec84b3f769, type: 3}
+  - {fileID: -6425430290631861514, guid: f73c747e8ae6d8c4587aceec84b3f769, type: 3}
+  - {fileID: 4214792696944840997, guid: f73c747e8ae6d8c4587aceec84b3f769, type: 3}
+  - {fileID: 7641157568244427150, guid: f73c747e8ae6d8c4587aceec84b3f769, type: 3}
   m_PackedSpriteNamesToIndex:
+  - EquipItem 1_13
+  - EquipItem 1_12
+  - EquipItem 1_11
+  - EquipItem 1_10
+  - EquipItem 1_15
+  - EquipItem 1_14
+  - EquipItem 1_8
+  - EquipItem 1_9
+  - EquipItem 1_0
+  - EquipItem 1_1
+  - EquipItem 1_2
+  - EquipItem 1_3
+  - EquipItem 1_4
+  - EquipItem 1_5
+  - EquipItem 1_6
+  - EquipItem 1_7
+  - weaponEffect_1
   - weaponEffect_0
-  - EquipItem_0
+  - SubItem_9
+  - SubItem_8
+  - SubItem_3
+  - SubItem_2
+  - SubItem_1
   - SubItem_0
+  - SubItem_7
+  - SubItem_6
+  - SubItem_5
+  - SubItem_4
+  - SubItem_14
+  - SubItem_15
+  - SubItem_12
+  - SubItem_13
+  - SubItem_10
+  - SubItem_11
+  - SubItem2 1_0
+  - SubItem2 1_1
+  - SubItem2 1_2
+  - SubItem2 1_3
+  - SubItem2 1_4
   m_RenderDataMap: {}
   m_Tag: ItemAtlas
   m_IsVariant: 0

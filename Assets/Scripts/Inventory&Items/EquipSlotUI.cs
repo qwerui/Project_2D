@@ -18,7 +18,7 @@ public class EquipSlotUI : MonoBehaviour
     private InventoryPopupUI _inventoryPopupUI;
     private GameObject _iconGo;
     private DataController data;
-    
+    //아이콘 on/off
     private void ShowIcon() => _iconGo.SetActive(true);
     private void HideIcon() => _iconGo.SetActive(false);
 
@@ -29,7 +29,53 @@ public class EquipSlotUI : MonoBehaviour
             data = DataCtl.GetComponent<DataController>();
         HideIcon();
     }
-    private void Start() {
+    //아이템 정보 출력
+    public void OpenItemPopup()
+    {
+        _inventoryPopupUI.ShowPanel();
+        _inventoryPopupUI.ViewEquipItem(item, type);
+    }
+    //아이템 장비
+    public bool SetItem(Item inventoryItem)
+    {
+        if(item != null)
+            return true;
+        item = inventoryItem as EquipItem;
+        _iconImage.sprite = inventoryItem.Data.IconSprite;
+        item.Equip();
+        ShowIcon();
+        return false;
+    }
+    //아이템 해제
+    public void RemoveItem()
+    {
+        _iconImage.sprite = null;
+        item.UnEquip();
+        item = null;
+        HideIcon();
+    }
+    //아이템 스왑(아이템 장비 상태에서 인벤토리의 장비 아이템을 장비하는 경우)
+    public Item SwapItem(Item newItem)
+    {
+        item.UnEquip();
+        Item tempItem = item;
+        item = newItem as EquipItem;
+        _iconImage.sprite = newItem.Data.IconSprite;
+        item.Equip();
+        return tempItem;
+    }
+    public EquipItem GetItem()
+    {
+        return item as EquipItem;
+    }
+    //소리 출력
+    public void OpenSound()
+    {
+        audioSource.PlayOneShot(clip);
+    }
+    //장비 아이템 불러오기
+    public void LoadEquipItem()
+    {
         if(DataDirector.Instance.isLoadedGame)
         {
             ItemData tempData = data.LoadEquipItem(type);
@@ -46,43 +92,5 @@ public class EquipSlotUI : MonoBehaviour
             tempItem.SetPlayer(player);
             SetItem(tempItem); 
         }
-    }
-
-    public void OpenItemPopup()
-    {
-        _inventoryPopupUI.ShowPanel();
-        _inventoryPopupUI.ViewEquipItem(item, type);
-    }
-    public bool SetItem(Item inventoryItem)
-    {
-        if(item != null)
-            return true;
-        item = inventoryItem as EquipItem;
-        _iconImage.sprite = inventoryItem.Data.IconSprite;
-        item.Equip();
-        ShowIcon();
-        return false;
-    }
-    public void RemoveItem()
-    {
-        _iconImage.sprite = null;
-        item.UnEquip();
-        item = null;
-        HideIcon();
-    }
-    public Item SwapItem(Item newItem)
-    {
-        Item tempItem = item;
-        item = newItem as EquipItem;
-        _iconImage.sprite = newItem.Data.IconSprite;
-        return tempItem;
-    }
-    public EquipItem GetItem()
-    {
-        return item as EquipItem;
-    }
-    public void OpenSound()
-    {
-        audioSource.PlayOneShot(clip);
     }
 }

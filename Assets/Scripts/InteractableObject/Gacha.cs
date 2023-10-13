@@ -10,13 +10,16 @@ public class Gacha : InteractableObject
     public GachaController Gacha_ctl;
     BoxCollider2D hitBox;
     SpriteRenderer sprite;
+    public AudioSource sound;
 
-    private void Start() {
+    bool isUsed = false;
+
+    private void Awake() {
         hitBox = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    protected override void Interaction()
+    protected override void Interaction() //아이템 뽑기 UI출력
     {
         if(MainUI == null)
         {
@@ -33,8 +36,20 @@ public class Gacha : InteractableObject
     {
         Destroy(GachaPopup);
     }
-    public void DisableGacha()
+    public void DisableGacha() //뽑기 비활성화
     {
+        sound.PlayOneShot(sound.clip);
+        isUsed = true;
+        sprite.color = new Color(0.7f, 0.5f, 0.5f);
+        Destroy(hitBox);
+    }
+    public bool GetGachaUsed()
+    {
+        return isUsed;
+    }
+    public void DisableLoadedGacha() //로드시 비활성화
+    {
+        isUsed = true;
         sprite.color = new Color(0.7f, 0.5f, 0.5f);
         Destroy(hitBox);
     }

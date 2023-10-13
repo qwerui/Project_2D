@@ -5,12 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GotoMain : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    //단순한 화면 이동
     public void SceneChange()
     {
         SceneManager.LoadScene("MainScene");

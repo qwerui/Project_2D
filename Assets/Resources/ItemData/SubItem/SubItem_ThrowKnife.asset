@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde740442a9816a40b71dd33f34b90ff, type: 3}
+  m_Name: SubItem_ThrowKnife
+  m_EditorClassIdentifier: 
+  _id: 215
+  _name: "\uD22C\uCC99 \uB2E8\uAC80"
+  _tooltip: "\uD22C\uCC99\uC6A9 \uB098\uC774\uD504\uB2E4"
+  _iconSprite: {fileID: -1321794150396166118, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  _itemType: 4
+  _dropItemPrefab: {fileID: 7113444023722107363, guid: e59dfef31c3204a43a70e78f356af288, type: 3}
+  _price: 10

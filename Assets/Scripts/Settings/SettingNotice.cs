@@ -8,7 +8,7 @@ public class SettingNotice : MonoBehaviour
     public Text notice;
     public Button loginBtn;
     public Button signupBtn;
-
+    //상태 팝업 창 출력
     public void SetNotice(string text)
     {
         notice.text = text;

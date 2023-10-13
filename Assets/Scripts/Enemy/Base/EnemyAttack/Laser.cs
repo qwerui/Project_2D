@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class Laser : MonoBehaviour //레이저 발사
 {
     [SerializeField] BoxCollider2D hitBox;
     int damage;
@@ -14,7 +14,7 @@ public class Laser : MonoBehaviour
         hitBox.size = new Vector2(0.75f, 0.785f);
         StartCoroutine("Beam");
     }
-
+    //가늘어지는 효과
     IEnumerator Beam()
     {
         while(true)

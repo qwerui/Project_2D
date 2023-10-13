@@ -6,21 +6,9 @@ using UnityEngine.Audio;
 public class SoundDirector : MonoBehaviour
 {
     public AudioClip[] fxClip;
-    /*
-     * È¿°úÀ½ ¸®½ºÆ®
-     * 0 : UI ¼±ÅÃ
-     * 1 : UI ´İ±â
-     * 2 : ´ÙÀ½ ½ºÅ×ÀÌÁö
-     */
+    //íš¨ê³¼ìŒ
     public AudioClip[] playerClip;
-    /*
-     * ÇÃ·¹ÀÌ¾î È¿°úÀ½ ¸®½ºÆ®
-     * 0 : Á¡ÇÁ, ´ë½¬
-     * 1 : ÇÇ°İ
-     * 2 : »ç¸Á
-     * 3 : ÂøÁö
-     * 4 : ·¹º§¾÷
-     */
+    //í”Œë ˆì´ì–´ íš¨ê³¼ìŒ
     AudioSource fx;
     AudioSource bgm;
 
@@ -29,9 +17,11 @@ public class SoundDirector : MonoBehaviour
     {
         bgm = transform.GetChild(0).GetComponent<AudioSource>();
         fx = transform.GetChild(1).GetComponent<AudioSource>();
+        //ë³¼ë¥¨ ì„¤ì •
         mixer.SetFloat("BGM", PlayerPrefs.GetFloat("BGM", 0));
         mixer.SetFloat("SFX", PlayerPrefs.GetFloat("SoundFX", 0));
     }
+    //íš¨ê³¼ìŒ ì¶œë ¥
     public void FxPlay(int index)
     {
         fx.PlayOneShot(fxClip[index]);

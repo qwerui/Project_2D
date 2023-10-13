@@ -8,12 +8,8 @@ public class InventoryUI : MonoBehaviour
 {
     private List<ItemSlotUI> _slotUIList = new List<ItemSlotUI>(20);
     private InventoryController _inventory;
-
-    private void Awake() {
-        InitSlots();
-    }
-
-    private void InitSlots()
+    //슬롯 초기화
+    public void InitSlots()
     {
         for(int i=0;i<20;i++)
         {

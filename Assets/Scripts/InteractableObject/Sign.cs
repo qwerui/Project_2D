@@ -18,13 +18,13 @@ public class Sign : InteractableObject
         {
             canvas = interactionDirector.MainUI;
         }
-        if(!isReading)
+        if(!isReading) //최초 상호작용시 대화창 출력
         {
             dialogPopup = Instantiate(dialog, canvas.transform).gameObject;
             dialogPopup.GetComponent<DialogUI>().DialogSetting(this.gameObject, dialogText);
             isReading = true;
         }
-        else
+        else // 이후 상호작용시 다음 대화창 출력
         {
             if(dialogPopup.GetComponent<DialogUI>().GoNextText())
             {
@@ -32,7 +32,7 @@ public class Sign : InteractableObject
             }
         }
     }
-    protected override void ExitAction()
+    protected override void ExitAction() //플레이어 벗어나면 대화창 사라짐
     {
         isReading = false;
         Destroy(dialogPopup);

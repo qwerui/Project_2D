@@ -8,7 +8,7 @@ public class GachaController : MonoBehaviour
     private List<ItemData> AllItemData;
     private List<ItemData> ItemDropPool;
 
-    int[] GachaRarity = new int[3]; 
+    int[] GachaRarity = new int[3]; //아이템 레어도
     int[] GachaItemType = new int[3]; //0:무기, 1:방어구, 2:악세사리
 
     int maxRarityWeight;
@@ -24,7 +24,7 @@ public class GachaController : MonoBehaviour
         AllItemData = ItemLoader.Instance.GetEquipItemList();
         InitPercentage();
     }
-
+    //확률 초기화
     void InitPercentage()
     {
         GachaRarity[0] = 890;
@@ -40,7 +40,7 @@ public class GachaController : MonoBehaviour
         ItemDropPool = null;
         itemOutput = null;
     }
-
+    //아이템 뽑기
     public ItemData ItemGacha(int gold, int red, int blue, int yellow)
     {
         InitPercentage();
@@ -58,7 +58,7 @@ public class GachaController : MonoBehaviour
         int itemTypeWeight = 0;
         int RarityWeight = 0;
 
-        for(int i = 0; i<3; i++)
+        for(int i = 0; i<3; i++) //아이템 종류 결정
         {
             itemTypeWeight+=GachaItemType[i];
             if(RandomItemType <= itemTypeWeight)
@@ -72,7 +72,7 @@ public class GachaController : MonoBehaviour
                 break;
             }
         }
-        for(int i = 0; i<3 ; i++)
+        for(int i = 0; i<3 ; i++) //아이템 레어도 결정
         {
             RarityWeight+=GachaRarity[i];
             if(RandomRarity <= RarityWeight)
@@ -82,8 +82,8 @@ public class GachaController : MonoBehaviour
             }
         }
 
-        ItemDropPool = FilterItem(rarity, itemType, red, blue, yellow);
-        itemOutput = ItemDropPool[Random.Range(0,ItemDropPool.Count)];
+        ItemDropPool = FilterItem(rarity, itemType, red, blue, yellow); //아이템 필터링
+        itemOutput = ItemDropPool[Random.Range(0,ItemDropPool.Count)]; //아이템 결정
 
         return itemOutput;
     }

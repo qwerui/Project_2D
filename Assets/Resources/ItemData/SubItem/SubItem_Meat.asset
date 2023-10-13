@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde740442a9816a40b71dd33f34b90ff, type: 3}
+  m_Name: SubItem_Meat
+  m_EditorClassIdentifier: 
+  _id: 202
+  _name: "\uACE0\uAE30"
+  _tooltip: "\uC798 \uAD6C\uC6CC\uC9C4 \uACE0\uAE30\uB2E4"
+  _iconSprite: {fileID: 5373349620657181878, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  _itemType: 3
+  _dropItemPrefab: {fileID: 3385818852238765762, guid: 68a5a8a37de3aa04ebf5f6cdccd5746a, type: 3}
+  _price: 100

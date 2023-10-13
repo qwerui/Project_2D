@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class SoundPopup : MonoBehaviour
+public class SoundPopup : MonoBehaviour //게임 플레이 중 소리 조절
 {
     public Slider bgm;
     public Slider fx;

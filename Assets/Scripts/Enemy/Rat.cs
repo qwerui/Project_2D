@@ -47,7 +47,7 @@ public class Rat : EnemyClass
         {
             isMoving=false;
         }
-        rigid.velocity= new Vector2(moveSpeed*nextMove, 0);
+        rigid.velocity= new Vector2(moveSpeed*nextMove, 0.001f);
         ani.SetBool("Run", isMoving);
     }
     protected override void Think()

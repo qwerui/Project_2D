@@ -15,8 +15,16 @@ public class MinimapGenerator : MonoBehaviour
     {
         rect = GetComponent<RectTransform>();
     }
+    //미니맵 생성
     public void SetMinimap(List<RoomInfo> roomList, int maxTile)
     {
+        if(transform.childCount!=0)
+        {
+            for(int i=0;i<transform.childCount;i++)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+        }
         this.roomList = roomList;
         this.maxTile = maxTile;
         for (int i = 0; i < roomList.Count; i++)
@@ -30,10 +38,11 @@ public class MinimapGenerator : MonoBehaviour
                     tempMinimap.transform.GetChild(j).gameObject.SetActive(true);
                 }
             }
-            tempMinimap.SetActive(false);
+            if(i!=0)
+                tempMinimap.SetActive(false);
         }
-        transform.GetChild(0).gameObject.SetActive(true);
     }
+    //미니맵 출력
     public void ShowMinimap(int index)
     {
         GameObject tempMinimap = transform.GetChild(index).gameObject;
@@ -41,6 +50,7 @@ public class MinimapGenerator : MonoBehaviour
         tempMinimap.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         rect.anchoredPosition = new Vector2(-(roomList[index].pos.x - (maxTile / 2)), -(roomList[index].pos.y - (maxTile / 2))) * 16;
     }
+    //현재 위치를 제외한 미니맵 어둡게 만듬
     public void MinimapDark(int index)
     {
         transform.GetChild(index).gameObject.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1.0f);

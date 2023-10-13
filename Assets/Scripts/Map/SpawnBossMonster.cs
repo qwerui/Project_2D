@@ -19,6 +19,7 @@ public class SpawnBossMonster : MonoBehaviour
             nextStage.SetActive(true);
         }
     }
+    //보스 소환
     void BossSpawn()
     {
         bossSpawner.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);

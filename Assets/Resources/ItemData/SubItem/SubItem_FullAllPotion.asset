@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde740442a9816a40b71dd33f34b90ff, type: 3}
+  m_Name: SubItem_FullAllPotion
+  m_EditorClassIdentifier: 
+  _id: 212
+  _name: "\uCD5C\uC0C1\uAE09 \uBE44\uC57D"
+  _tooltip: "\uCCB4\uB825\uACFC \uACF5\uBCF5\uCE58\uB97C \uC804\uBD80 \uCC44\uC6CC\uC900\uB2E4"
+  _iconSprite: {fileID: 4083334946868090175, guid: d36289c29b1aeae44ae85b73799f1e02, type: 3}
+  _itemType: 3
+  _dropItemPrefab: {fileID: 5918292212084927435, guid: c2293f35aeb191e44a251248fe8e82df, type: 3}
+  _price: 500

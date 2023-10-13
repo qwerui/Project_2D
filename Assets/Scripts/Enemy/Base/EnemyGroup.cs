@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemyGroup", menuName = "Project_2D/EnemyGroup", order = 7)]
-public class EnemyGroup : ScriptableObject {
+public class EnemyGroup : ScriptableObject { 
+    //적 객체 그룹화
     public GameObject[] WeakMonster;
     public GameObject[] NormalMonster;
     public GameObject[] StrongMonster;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserCharge : MonoBehaviour
+public class LaserCharge : MonoBehaviour //레이저 충전
 {
     public GameObject beam;
     EnemyClass enemy;
@@ -18,6 +18,7 @@ public class LaserCharge : MonoBehaviour
         gameObject.SetActive(true);
         Invoke("Fire",0.8f);
     }
+    //발사 트리거
     void Fire()
     {
         gameObject.SetActive(false);

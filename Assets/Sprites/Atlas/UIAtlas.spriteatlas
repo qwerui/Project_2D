@@ -61,6 +61,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 49e06926d70d3524da33a07323421711, type: 3}
   - {fileID: 21300000, guid: a107c5d6d51615b44b652391ccff5576, type: 3}
   - {fileID: 21300000, guid: e5630bf6042f89e47bb4ed1d21af8043, type: 3}
+  - {fileID: 21300000, guid: f8ad0308693358c44b0e6c5e655f1248, type: 3}
   - {fileID: 21300000, guid: 5fa4b9b8a58580046badc9131daf2bba, type: 3}
   - {fileID: 21300000, guid: b93ad659505c40541bf204f86cd7f22b, type: 3}
   - {fileID: 21300000, guid: ae02891a989e5f04b9fbf2d07c4ddf14, type: 3}
@@ -84,6 +85,7 @@ SpriteAtlas:
   - mapButton
   - armor
   - goldSlot
+  - ProgressBar
   - blueBall
   - weapon
   - InventoryBackground

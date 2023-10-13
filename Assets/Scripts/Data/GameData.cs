@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class GameData
+public class GameData //세이브 데이터
 {
     public int stage;
     public int enemySlain;
@@ -25,6 +25,8 @@ public class GameData
 
     public Vector3 playerPos;
     public int playerPosIndex;
+    public int quickPotion;
+    public int quickWeapon;
     
     public int[] roomId;
     public int[] roomType;
@@ -35,4 +37,10 @@ public class GameData
 
     public Vector2[] item; //x = itemId, y = item amount
     public int[] equip;
+
+    public bool[] gachaUsed;
+    public string[] shopList;
+
+    public int[] capsuleEffect;
+    public bool[] capsuleIdentified;
 }

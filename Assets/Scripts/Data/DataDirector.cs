@@ -17,7 +17,7 @@ public class DataDirector
             return instance;
         }
     }
-    
+    //게임 진행 상황
     public int stage;
     public int level;
     public int resourceItem;
@@ -37,5 +37,13 @@ public class DataDirector
 
         isLoadedGame = false;
     }
+    public void Init()
+    {
+        stage = 1;
+        level = 1;
+        resourceItem = 0;
+        enemySlain = 0;
 
+        isLoadedGame = false;
+    }
 }

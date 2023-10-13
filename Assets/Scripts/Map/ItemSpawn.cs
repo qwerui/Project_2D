@@ -11,6 +11,7 @@ public class ItemSpawn : MonoBehaviour
         EquipItemList = ItemLoader.Instance.GetEquipItemList();
         SubItemList = ItemLoader.Instance.GetSubItemList();
     }
+    //방 안 아이템 드랍 설정
     void Start()
     {
         if(DataDirector.Instance.isLoadedGame)

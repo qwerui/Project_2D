@@ -17,7 +17,7 @@ public class Room : MonoBehaviour
         enemyList = new List<GameObject>();
     }
 
-    // Start is called before the first frame update
+    //방 인스턴스화 할 때 초기화할 것들
     void Start()
     {
         if(roomInfo.path[0] != true)
@@ -58,11 +58,31 @@ public class Room : MonoBehaviour
                 BossSpawn.SetActive(false);
             }
         }
-        if(roomInfo.roomType != RoomType.Start)
-            transform.GetChild(2).gameObject.SetActive(false);
+        if(DataDirector.Instance.isLoadedGame)
+        {
+            if(roomInfo.roomType == RoomType.ItemShop)
+            {
+                SetItem();
+            }
+            if(roomIndex == DataDirector.Instance.playerPosIndex)
+            {
+                RoomInit();
+            }
+            else
+            {
+                transform.GetChild(2).gameObject.SetActive(false);
+            }
+        }
         else
-            RoomInit();
+        {
+            if (roomInfo.roomType != RoomType.Start)
+                transform.GetChild(2).gameObject.SetActive(false);
+            else
+                RoomInit();
+        }
+        
     }
+    //방 정보 입력
     public void SetRoomInfo(RoomInfo info, RoomController ctl, int index)
     {
         roomInfo = info;
@@ -71,7 +91,7 @@ public class Room : MonoBehaviour
         controller = ctl;
         roomIndex = index;
     }
-    
+    //오브젝트 숨기기(약간의 최적화를 위함)
     public void HideAll()
     {
         for(int i=0;i<EnemySpawn.transform.childCount;i++)
@@ -88,6 +108,7 @@ public class Room : MonoBehaviour
         }
         transform.GetChild(2).gameObject.SetActive(false);
     }
+    //방 초기화(주로 숨긴 오브젝트 활성화)
     public void RoomInit()
     {
         transform.GetChild(2).gameObject.SetActive(true);
@@ -95,20 +116,14 @@ public class Room : MonoBehaviour
         {
             Transform tempTrans;
             tempTrans = EnemySpawn.transform.GetChild(i);
-            if(tempTrans.childCount == 0)
+            if(tempTrans.childCount != 0)
             {
-                Instantiate(enemyList[i],tempTrans);
+                Destroy(tempTrans.GetChild(0).gameObject);
             }
-            else if(tempTrans.GetChild(0).gameObject.tag != "Enemy")
-            {
-                for(int j=0;j<tempTrans.childCount;i++)
-                {
-                    Destroy(tempTrans.GetChild(j).gameObject);
-                }
-                Instantiate(enemyList[i],tempTrans);
-            }
+            Instantiate(enemyList[i], tempTrans);
         }
     }
+    //방 id불러오기
     public string GetRoomItemId()
     {
         Transform itemPosGroup = transform.GetChild(2).GetChild(1);
@@ -135,5 +150,36 @@ public class Room : MonoBehaviour
             roomItem += ",";
         }
         return roomItem;
+    }
+    //방 최초 생성 아이템 불러오기
+    void SetItem()
+    {
+        DataController data = GameObject.Find("DataController").GetComponent<DataController>();
+        if(data.GetGachaUsed(roomIndex))
+        {
+            foreach(Gacha g in transform.GetChild(2).GetChild(2).GetComponentsInChildren<Gacha>())
+            {
+                g.DisableLoadedGacha();
+            }
+        }
+        string shopStr = data.GetShopList(roomIndex);
+        string[] shopList = shopStr.Split('/');
+        int index = 0;
+        foreach(Shop s in transform.GetChild(2).GetChild(2).GetComponentsInChildren<Shop>())
+        {
+            string[] shopItem = shopList[index++].Split(',');
+            for(int i=0;i<8;i++)
+            {
+                int itemId = int.Parse(shopItem[i]);
+                if(itemId == 0)
+                {
+                    s.shopItem[i]=null;
+                }
+                else
+                {
+                    s.shopItem[i]=ItemLoader.Instance.GetSubItem(itemId);
+                }
+            }
+        }
     }
 }

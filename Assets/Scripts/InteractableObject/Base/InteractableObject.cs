@@ -4,10 +4,11 @@ using UnityEngine;
 
 public abstract class InteractableObject : MonoBehaviour
 {
+    //상호작용 오브젝트 클래스
     protected bool isOnPlayer = false;
     protected InteractionDirector interactionDirector;
     private void Update() {
-        if(isOnPlayer)
+        if(isOnPlayer) //플레이어와 겹칠 시 상호작용 가능
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {

@@ -37,6 +37,7 @@ public class GameDirector : MonoBehaviour
         12   세이브 팝업
         13   RoomController
         14   아이템 습득 팝업
+        15   무기 슬롯
     */
 
     private void Awake() {
@@ -52,12 +53,12 @@ public class GameDirector : MonoBehaviour
     }
     private void Start() 
     {
-        Objects[6].SetActive(false);
-        player = Objects[7].GetComponent<PlayerController>().GetStat();
+        player = GameManager.Instance.stat;
         healthText = Objects[8].GetComponent<Text>();
         hpBar = Objects[9].GetComponent<Image>();
         hungerBar = Objects[10].GetComponent<Image>();
         StartCoroutine("HealthTextController");
+        Objects[6].SetActive(false);
     }
 
     private void LateUpdate() {
@@ -99,6 +100,7 @@ public class GameDirector : MonoBehaviour
         StartCoroutine("GameOverFadeIn");
     }
 
+    //게임 오버 화면 페이드 인
     public IEnumerator GameOverFadeIn()
     {
         Image sr;
@@ -126,6 +128,7 @@ public class GameDirector : MonoBehaviour
         yield return null;
     }
 
+    //인벤토리의 자원의 양과 공격력, 방어력 출력
     public void InventoryTextController()
     {
         redBall.text = player.getRedBall().ToString();
@@ -135,6 +138,7 @@ public class GameDirector : MonoBehaviour
         atk.text = "ATK : "+player.getAtk().ToString();
         def.text = "DEF : "+player.getDef().ToString();
     }
+    //세이브 팝업창 출력
     public void ShowSavePopup()
     {
         if(Objects[13].GetComponent<RoomController>().GetRoomInfo(DataDirector.Instance.playerPosIndex).roomType == RoomType.Boss)
@@ -156,6 +160,8 @@ public class GameDirector : MonoBehaviour
     {
         Objects[12].SetActive(false);
     }
+
+    //스테이지 변경 및 세이브 시 검은 화면 페이드 인/아웃
     public void ScreenFadeIn(float startAlpha)
     {
         Objects[11].SetActive(true);
@@ -168,13 +174,22 @@ public class GameDirector : MonoBehaviour
         fadeScreen.SetAlpha(startAlpha);
         fadeScreen.FadeOut();
     }
-    public void GetItemName(string name)
+    //아이템 습득 시 아이템 명 출력
+    public void GetItemName(string name, bool isPassive)
     {
         if(itemShowCoroutine != null)
         {
             StopCoroutine(itemShowCoroutine);
         }
         ItemName.text = name;
+        if(!isPassive)
+        {
+            ItemName.color = new Color(1,1,1);
+        }
+        else
+        {
+            ItemName.color = new Color(0.16f,0.8f,0.16f);
+        }
         itemShowCoroutine = ShowItemName();
         StartCoroutine(itemShowCoroutine);
     }

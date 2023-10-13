@@ -20,17 +20,17 @@ public class ItemSlotUI : MonoBehaviour
     private GameObject _textGo;
 
     public void SetSlotIndex(int index) => Index = index;
-
+    //아이템 아이콘 on/off, 수량 on/off
     private void ShowIcon() => _iconGo.SetActive(true);
     private void HideIcon() => _iconGo.SetActive(false);
 
     private void ShowText() => _textGo.SetActive(true);
     private void HideText() => _textGo.SetActive(false);
 
-    private void Start() {
+    private void Awake() {
         InitComponents();
     }
-
+    //아이템 슬롯 초기화
     private void InitComponents()
     {
         _inventoryPopupUI = transform.parent.parent.parent.GetChild(1).gameObject.GetComponent<InventoryPopupUI>();
@@ -72,12 +72,13 @@ public class ItemSlotUI : MonoBehaviour
         HideIcon();
         HideText();
     }
-
+    //아이템 상세 정보 팝업 출력
     public void OpenItemPopup()
     {
         _inventoryPopupUI.ShowPanel();
         _inventoryPopupUI.SetPopupItem(Index);
     }
+    //아이템 확인 소리 출력
     public void OpenSound()
     {
         audioSource.PlayOneShot(clip);

@@ -27,7 +27,7 @@ public class InventoryPopupUI : MonoBehaviour
     [SerializeField] GameObject acessorySlot;
 
     int Index;
-
+    //on/off
     public void ShowPanel() => gameObject.SetActive(true);
     public void HidePanel() => gameObject.SetActive(false);
 
@@ -41,7 +41,7 @@ public class InventoryPopupUI : MonoBehaviour
         UseButtonText = transform.GetChild(5).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         GetComponent<RectTransform>().anchoredPosition = new Vector2(-transform.parent.parent.gameObject.GetComponent<RectTransform>().sizeDelta.x / 2, 0);
     }
-
+    //아이템 설정
     public void SetPopupItem(int index)
     {
         Index = index;
@@ -63,10 +63,10 @@ public class InventoryPopupUI : MonoBehaviour
             SlotButton.SetActive(false);
         }
     }
-
+    //아이템 사용
     public void UseItem()
     {
-        if(Index == -1)
+        if(Index == -1) //장비 해제
         {
             bool successfulAdd;
             if(itemType == ItemType.Weapon)
@@ -83,11 +83,11 @@ public class InventoryPopupUI : MonoBehaviour
             HidePanel();
             return;
         }
-        if(item is SubItem)
+        if(item is SubItem) //소비 아이템 사용
         {
             (item as SubItem).Use();
         }
-        else
+        else //아이템 장비
         {
             bool equipping = false;
             if(item.Data.ItemType == ItemType.Weapon)
@@ -118,26 +118,27 @@ public class InventoryPopupUI : MonoBehaviour
         HidePanel();
         inventory.UpdateSlot(Index);
     }
-
+    //아이템 버리기
     public void DropItem()
     {
         if(item is SubItem)
         {
             SubItem tempItem = item as SubItem;
             GameObject prefab = Instantiate(tempItem.subItemData.DropItemPrefab) as GameObject;
-            prefab.transform.position = (Vector2)player.transform.position + new Vector2(player.transform.localScale.x*1.2f,1.0f);
+            prefab.transform.position = (Vector2)player.transform.position + new Vector2(player.transform.localScale.x*1.5f,1.0f);
             prefab.GetComponent<ItemPrefab>().SetDrop(tempItem.Amount);
         }
         else
         {
             EquipItem tempItem = item as EquipItem;
             GameObject prefab = Instantiate(tempItem.equipItemData.DropItemPrefab) as GameObject;
-            prefab.transform.position = (Vector2)player.transform.position + new Vector2(player.transform.localScale.x*1.2f,1.0f);
+            prefab.transform.position = (Vector2)player.transform.position + new Vector2(player.transform.localScale.x*1.5f,1.0f);
         }
         inventory.Remove(Index);
         HidePanel();
         inventory.UpdateSlot(Index);
     }
+    //퀵슬롯 등록
     public void QuickSlotItem()
     {
         if(item.Data.ItemType == ItemType.Potion)
@@ -151,6 +152,7 @@ public class InventoryPopupUI : MonoBehaviour
         quickSlot.SetQuickSlot(Index);
         HidePanel();
     }
+    //장비 아이템 출력
     public void ViewEquipItem(Item equippedItem, ItemType type)
     {
         Index = -1;

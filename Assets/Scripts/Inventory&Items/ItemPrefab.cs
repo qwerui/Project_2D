@@ -12,15 +12,18 @@ public abstract class ItemPrefab : MonoBehaviour
     public GameObject player;
 
     protected SoundDirector sound;
+    protected PlayerController playerCtl;
     public AudioClip[] clip;
 
     private void Awake() {
         rigid = GetComponent<Rigidbody2D>();
+        GetComponent<SpriteRenderer>().sprite = data.IconSprite;
     }
     void Start()
     {
         inventory = GameObject.Find("InventoryController").GetComponent<InventoryController>();
         amount = amount==0?1:amount;
+        Identify();
     }
     public void SetDrop(int Amount)
     {
@@ -31,35 +34,44 @@ public abstract class ItemPrefab : MonoBehaviour
         {
             rigid.velocity = Vector2.zero;
         }
-        if(other.gameObject.tag=="Player")
+        if(other.gameObject.tag=="Player") //아이템 습득
         {
-            if(data.ID > 3)
-            {
-                GameObject.Find("GameDirector").GetComponent<GameDirector>().GetItemName(data.Name);
-            }
-            if(data.ItemType == ItemType.Passive)
+            
+            if(data.IsPassive == true)
             {
                 player = other.gameObject;
                 ItemEffect();
+                if(data.ID > 3)
+                {
+                    GameObject.Find("GameDirector").GetComponent<GameDirector>().GetItemName(data.Name, true);
+                }
+                else
+                {
+                    DataDirector.Instance.resourceItem+=amount;
+                }
                 Destroy(gameObject);
             }
             else
             {
                 int remain = inventory.Add(data,other.gameObject,amount);
                 if(remain == 0)
+                {
+                    GameObject.Find("GameDirector").GetComponent<GameDirector>().GetItemName(data.Name, false);
                     Destroy(gameObject);
+                }
             }
-            
         }
     }
-    // 아이템 효과 구현할 때 가장 먼저 호출해야함
+    // 아이템 효과 구현할 때 가장 먼저 호출해야함(싱글톤으로 변경후 굳이 쓸 필요 없음)
     public PlayerStatus LinkPlayer(Item item = null)
     {
         if(player == null)
             player = item.GetPlayer();
-        sound = player.GetComponent<PlayerController>().sound;
-        return player.GetComponent<PlayerController>().GetStat();
+        playerCtl = player.GetComponent<PlayerController>();
+        sound = playerCtl.sound;
+        return playerCtl.GetStat();
     }
-    public abstract void ItemEffect(Item item = null, bool equip = true);
-    public virtual void WeaponUse(){}
+    public abstract void ItemEffect(Item item = null, bool equip = true); //아이템 효과
+    public virtual void WeaponUse(){} //무기 사용
+    public virtual void Identify(){} //알약 식별 여부
 }

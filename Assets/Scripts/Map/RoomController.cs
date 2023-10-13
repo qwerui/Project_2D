@@ -41,7 +41,7 @@ public class RoomController : MonoBehaviour
         }
         ArrangeRooms();
     }
-
+    //스테이지 생성
     void ArrangeRooms()
     {
         if(roomList.Count <=0)
@@ -79,6 +79,7 @@ public class RoomController : MonoBehaviour
             DataDirector.Instance.playerPosIndex = 0;
         }
     }
+    //현재 방 설정
     public void SetCurrentRoom()
     {
         minimapCtl.MinimapDark(currentRoomIndex);
@@ -90,10 +91,12 @@ public class RoomController : MonoBehaviour
         cameraCtl.SetCameraLimit(currentRoom.roomInfo, maxTile);
         DataDirector.Instance.playerPosIndex = currentRoomIndex;
     }
+    //다음 방 설정
     public void SetNextRoom(Room next)
     {
         nextRoom = next;
     }
+    //다음 스테이지 진행
     public void NextStage(SoundDirector sound)
     {
         StartCoroutine(NextStageSound(sound));
@@ -104,6 +107,7 @@ public class RoomController : MonoBehaviour
         roomList.Clear();
         generator.NextStageCreate();
         ArrangeRooms();
+        minimapCtl.ShowMinimap(0);
         cameraCtl.SetCameraLimit(roomList[0], maxTile);
         cameraCtl.SetCameraPosition();
 
@@ -116,6 +120,7 @@ public class RoomController : MonoBehaviour
     {
         return this.roomList[index];
     }
+    //맵 불러오기
     void LoadRoomList()
     {
         for(int i=0;i<data.GetLoadedRoomCount();i++)
@@ -128,6 +133,7 @@ public class RoomController : MonoBehaviour
     {
         return MapTile.transform.GetChild(index).gameObject.GetComponent<Room>().GetRoomItemId();
     }
+    //다음 스테이지 소리 출력
     IEnumerator NextStageSound(SoundDirector sound)
     {
         for (int i = 0; i < 4; i++)

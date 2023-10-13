@@ -18,17 +18,24 @@ public class DataController : MonoBehaviour
     public EquipSlotUI armor;
     public EquipSlotUI accesory;
 
+    public GameObject roomObject;
+
+    public QuickSlotUI quickPotion;
+    public QuickSlotUI quickWeapon;
+
     PlayerStatus stat;
     DataDirector data;
     InventoryController inventory;
     List<RoomInfo> roomList;
+    PlayerController controller;
 
     private void Awake()
     {
-        
+        GameManager.Instance.stat = new PlayerStatus();
         gameData = new GameData();
         data = DataDirector.Instance;
-        if(data.isLoadedGame == true)
+        GameManager.Instance.identified = new IdentifiedItem();
+        if(data.isLoadedGame == true) //게임 이어하기 선택시 데이터 불러오기
         {
             gameData = JsonDirector.LoadGameData();
             data.stage = gameData.stage;
@@ -37,27 +44,43 @@ public class DataController : MonoBehaviour
             data.resourceItem = gameData.resourceItem;
             data.playerPos = gameData.playerPos;
             data.playerPosIndex = gameData.playerPosIndex;
+            GameManager.Instance.identified.effect = gameData.capsuleEffect;
+            GameManager.Instance.identified.identified = gameData.capsuleIdentified;
+            GetLoadPlayer(GameManager.Instance.stat);
             JsonDirector.DeleteSaveFile();
+        }
+        else
+        {
+            GameManager.Instance.identified.Init();
+            DataDirector.Instance.Init();
         }
     }
     private void Start() {
-        stat = player.GetComponent<PlayerController>().GetStat();
+        stat = GameManager.Instance.stat;
+        controller = player.GetComponent<PlayerController>();
         inventory = Inventory.GetComponent<InventoryController>();
         roomList = new List<RoomInfo>();
-
+        weapon.LoadEquipItem();
+        armor.LoadEquipItem();
+        accesory.LoadEquipItem();
     }
+    //게임 저장
     public void SaveGameData()
     {
         GameData saveData = new GameData();
+        controller.StopAllCoroutines();
         roomList = room.GetComponent<RoomController>().GetRoomList();
         SaveDataDirector(saveData);
-        SaveStat(saveData);
         SaveItem(saveData);
+        SaveStat(saveData);
         SaveRoom(saveData);
+        SaveItemRoom(saveData);
+        SaveIdentify(saveData);
         JsonDirector.SaveGameData(saveData);
         director.ScreenFadeIn(0);
         Invoke("ReturnMainMenu", 2.0f);
     }
+    //게임 진행 상황 저장
     void SaveDataDirector(GameData gameData)
     {
         gameData.stage = data.stage;
@@ -66,6 +89,13 @@ public class DataController : MonoBehaviour
         gameData.playerPos = player.transform.position;
         gameData.playerPosIndex = data.playerPosIndex;
     }
+    //알약 식별 저장
+    void SaveIdentify(GameData gameData)
+    {
+        gameData.capsuleEffect = GameManager.Instance.identified.effect;
+        gameData.capsuleIdentified = GameManager.Instance.identified.identified;
+    }
+    //플레이어 상태 저장
     void SaveStat(GameData gameData)
     {
         gameData.hp = stat.getHp();
@@ -82,6 +112,7 @@ public class DataController : MonoBehaviour
 	    gameData.experience = stat.getExperience();
 	    gameData.maxExperience = stat.getMaxExperience();
     }
+    //맵 저장
     void SaveRoom(GameData gameData)
     {
         int[] roomId = new int[roomList.Count];
@@ -121,6 +152,7 @@ public class DataController : MonoBehaviour
             gameData.roomItem[i]=room.GetComponent<RoomController>().GetRoomItemList(i).ToString();
         }
     }
+    //인벤토리, 장비 저장
     void SaveItem(GameData gameData)
     {
         Vector2[] item = new Vector2[inventory.GetExistItemCount()];
@@ -152,8 +184,10 @@ public class DataController : MonoBehaviour
         }
         
         gameData.equip = equip;
+        gameData.quickPotion = quickPotion.Index;
+        gameData.quickWeapon = quickWeapon.Index;
     }
-    
+    //플레이어 상태 불러오가
     public void GetLoadPlayer(PlayerStatus player)
     {
         player.setHp(gameData.hp);
@@ -170,6 +204,7 @@ public class DataController : MonoBehaviour
         player.setExperience(gameData.experience);
         player.setMaxExperience(gameData.maxExperience);
     }
+    //맵 불러오기
     public int GetLoadedRoomCount()
     {
         return gameData.roomId.Length;
@@ -198,6 +233,7 @@ public class DataController : MonoBehaviour
         info.path = new bool[4];
         return info;
     }
+    //장비 불러오기
     public ItemData LoadEquipItem(ItemType type)
     {
         if(type == ItemType.Weapon)
@@ -226,6 +262,7 @@ public class DataController : MonoBehaviour
             return null;
         }
     }
+    //인벤토리 불러오기
     public int GetLoadedItemCount()
     {
         return gameData.item.Length;
@@ -246,13 +283,105 @@ public class DataController : MonoBehaviour
             return equipitem;
         }
     }
+    //메인메뉴 이동
     void ReturnMainMenu()
     {
         SceneManager.LoadScene("MainScene");
     }
-
+    //방 아이템 불러오기
     public string LoadRoomItem(int index)
     {
             return gameData.roomItem[index];
+    }
+    //아이템 방 저장하기(뽑기 상태, 상점 아이템)
+    void SaveItemRoom(GameData gameData)
+    {
+        List<bool> gachaUsed = new List<bool>();
+        List<string> shopList = new List<string>();
+        for(int i=0;i<roomObject.transform.childCount;i++)
+        {
+            Transform tempTrans = roomObject.transform.GetChild(i);
+            if (tempTrans.gameObject.name.Contains("Item"))
+            {
+                bool isUsed = false;
+                foreach(Gacha g in tempTrans.GetChild(2).GetChild(2).GetComponentsInChildren<Gacha>())
+                {
+                    if(g.GetGachaUsed())
+                    {
+                        
+                        isUsed = true;
+                    }
+                }
+                gachaUsed.Add(isUsed);
+                string shopItem = "";
+                foreach (Shop s in tempTrans.GetChild(2).GetChild(2).GetComponentsInChildren<Shop>())
+                {
+                    for (int k=0;k<8;k++)
+                    {
+                        if(s.shopItem[k]==null)
+                        {
+                            shopItem += "0";
+                        }
+                        else
+                        {
+                            shopItem += s.shopItem[k].ID;
+                        }
+                        if(k==7)
+                        {
+                            shopItem += "/";
+                        }
+                        else
+                        {
+                            shopItem += ",";
+                        }
+                    }
+                }
+                shopList.Add(shopItem.Substring(0,shopItem.Length-1));
+            }
+        }
+        gameData.gachaUsed = gachaUsed.ToArray();
+        gameData.shopList = shopList.ToArray();
+    }
+    //뽑기 상태 불러오기
+    public bool GetGachaUsed(int roomIndex)
+    {
+        int index = -1;
+        for(int i=0;i<roomObject.transform.childCount;i++)
+        {
+            if(roomObject.transform.GetChild(i).gameObject.name.Contains("Item"))
+            {
+                index++;
+                if(i==roomIndex)
+                {
+                    return gameData.gachaUsed[index];
+                }
+            }
+        }
+        return false;
+    }
+    //상점 아이템 불러오기
+    public string GetShopList(int roomIndex)
+    {
+        int index = -1;
+        for(int i=0;i<roomObject.transform.childCount;i++)
+        {
+            if(roomObject.transform.GetChild(i).gameObject.name.Contains("Item"))
+            {
+                index++;
+                if(i==roomIndex)
+                {
+                    return gameData.shopList[index];
+                }
+            }
+        }
+        return null;
+    }
+    public int GetPotionIndex()
+    {
+        return gameData.quickPotion;
+    }
+    public int GetWeaponIndex()
+    {
+        return gameData.quickWeapon;
     }
 }

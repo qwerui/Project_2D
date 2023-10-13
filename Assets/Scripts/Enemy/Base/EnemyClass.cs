@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyClass : MonoBehaviour
+public abstract class EnemyClass : MonoBehaviour //적 기본 클래스
 {
     [SerializeField] protected int hp;
     [SerializeField] protected int atk;
@@ -12,7 +12,7 @@ public abstract class EnemyClass : MonoBehaviour
     [SerializeField] protected Animator ani;
     [SerializeField] protected Rigidbody2D rigid;
     [SerializeField] protected LayerMask groundLayer;
-    [SerializeField] protected BoxCollider2D hitbox;
+    [SerializeField] protected Collider2D hitbox;
     [SerializeField] protected GameObject player;
     [SerializeField] protected GameObject damageText;
     [SerializeField] protected AudioSource audioSource;
@@ -58,7 +58,7 @@ public abstract class EnemyClass : MonoBehaviour
         StatusInit();
         CreateItem();
     }
-
+    //피격
     public void Hit(int damage)
     {
         damageInstance = Instantiate(damageText).gameObject;
@@ -78,6 +78,7 @@ public abstract class EnemyClass : MonoBehaviour
             StartCoroutine("FalseHit");
         }
     }
+    //사망
     protected IEnumerator Dead()
     {
         ani.SetTrigger("Death");
@@ -92,6 +93,7 @@ public abstract class EnemyClass : MonoBehaviour
         DropItem();
         Destroy(gameObject);
     }
+    //몸통박치기 공격
     private void OnCollisionEnter2D(Collision2D collision) 
     {
         if(collision.gameObject.tag == "Player"){
@@ -99,6 +101,7 @@ public abstract class EnemyClass : MonoBehaviour
         }
 
     }
+    //플레이어 추적
     protected bool SetOnChase(float radius)
     {
         if(Physics2D.OverlapCircle((Vector2)transform.position + hitbox.offset,radius,LayerMask.GetMask("Player")))
@@ -106,7 +109,7 @@ public abstract class EnemyClass : MonoBehaviour
         else
             return false;
     }
-    
+    //바닥 체크
     protected void PlatformCheck()
     {
         Vector2 frontVec = new Vector2(rigid.position.x + nextMove, rigid.position.y);
@@ -118,16 +121,18 @@ public abstract class EnemyClass : MonoBehaviour
             Invoke("Think",2); 
         }
     }
+    //벽 체크
     protected void WallCheck()
     {
         Vector2 frontVec = hitbox.bounds.center;
-        Debug.DrawRay(frontVec, new Vector2(nextMove * transform.localScale.y, 0) * hitbox.size , new Color(0,1,0));
-        RaycastHit2D raycast = Physics2D.Raycast(frontVec, new Vector2(nextMove*transform.localScale.y, 0) ,hitbox.size.x*transform.localScale.y,groundLayer);
+        Debug.DrawRay(frontVec, new Vector2(nextMove * transform.localScale.y, 0) , new Color(0,1,0));
+        RaycastHit2D raycast = Physics2D.Raycast(frontVec, new Vector2(nextMove*transform.localScale.y, 0) ,transform.localScale.y,groundLayer);
         if(raycast.collider != null){
             nextMove= nextMove*(-1); 
             CancelInvoke();
         }
     }
+    //드랍 아이템 생성
     protected virtual void CreateItem()
     {
         BallAndGold();
@@ -142,6 +147,7 @@ public abstract class EnemyClass : MonoBehaviour
             }
         }
     }
+    //아이템 드랍 결정
     bool Chance(float chance)
     {
         int chanceInt = (int)Mathf.Round(chance * 10000000);
@@ -150,6 +156,7 @@ public abstract class EnemyClass : MonoBehaviour
         else
             return false;
     }
+    //자원 드랍 양 결정
     void BallAndGold()
     {
         int resourceAmount;
@@ -169,6 +176,7 @@ public abstract class EnemyClass : MonoBehaviour
             }
         }
     }
+    //아이템 드랍
     void DropItem()
     {
         int childIndex = 0;
@@ -182,21 +190,26 @@ public abstract class EnemyClass : MonoBehaviour
         }
         for(int i=childIndex;i<transform.childCount;i++)
         {
-            transform.GetChild(i).gameObject.SetActive(true);
-            transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-2.0f,2.0f),10.0f),ForceMode2D.Impulse);
+            GameObject tempItem = transform.GetChild(i).gameObject;
+            tempItem.SetActive(true);
+            tempItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-2.0f,2.0f),10.0f),ForceMode2D.Impulse);
+            Destroy(tempItem, 10f);
         }
         transform.DetachChildren();
     }
+    //피격 상태 OFF
     IEnumerator FalseHit()
     {
         yield return new WaitForSeconds(0.7f);
         isHit = false;
         yield return null;
     }
+    //공격 끝
     void AttackEnd()
     {
         isAttack=false;
     }
+    //소리 출력
     public void PlaySound(int index)
     {
         audioSource.PlayOneShot(clip[index]);

@@ -16,6 +16,7 @@ public class UploadManager : MonoBehaviour
 
     public SettingNotice notice;
 
+    //세이브 데이터 업로드
     public void UploadData()
     {
         string localData = JsonDirector.LoadEncryptedSave();
@@ -40,6 +41,7 @@ public class UploadManager : MonoBehaviour
             notice.SetNotice("업로드 실패");
         }
     }
+    //세이브 데이터 다운로드
     public void DownloadData()
     {
         if(JsonDirector.SaveEncryptedSave(context.LoadAsync<GameDataServer>(session.getUserId()).Result.Gamedata))
@@ -52,6 +54,7 @@ public class UploadManager : MonoBehaviour
         }
     }
 
+    //DynamoDB 연결
     public void SetDyanmoDB(bool login)
     {
         if(login)

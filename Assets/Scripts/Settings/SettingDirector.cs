@@ -12,17 +12,20 @@ public class SettingDirector : MonoBehaviour
     public UploadManager uploadManager;
 
     public Text loginText;
+    public Text resolutionText;
 
     public GameObject serverObject;
 
-    [Header("���� ������Ʈ")]
     public Slider BackgroundMusic;
     public Slider SoundFX;
     public AudioMixer mixer;
 
     bool isLogin;
 
-    private void Start()
+    readonly string[] resolution = {"640x360", "1280x720"}; //화면 크기
+    int resolutionIndex = 0;
+
+    private void Start() //각종 설정 불러오기
     {
         if(UserSessionCache.Instance.GetCredentials() != null)
         {
@@ -34,7 +37,10 @@ public class SettingDirector : MonoBehaviour
             Tutorialtoggle.isOn = false;
         BackgroundMusic.value = PlayerPrefs.GetFloat("BGM", 0);
         SoundFX.value = PlayerPrefs.GetFloat("SoundFX",0);
+        resolutionIndex = PlayerPrefs.GetInt("Resolution",0);
+        resolutionText.text = resolution[resolutionIndex];
     }
+    //튜토리얼 활성화
     public void TutorialSetting(bool toggle)
     {
         if (toggle)
@@ -42,6 +48,7 @@ public class SettingDirector : MonoBehaviour
         else
             PlayerPrefs.SetInt("Tutorial", 0);
     }
+    //로그인,로그아웃 토글
     public void ToggleLogInOut(bool status)
     {
         if(status)
@@ -59,6 +66,7 @@ public class SettingDirector : MonoBehaviour
             serverObject.SetActive(false);
         }
     }
+    //로그인,로그아웃 팝업 출력
     public void ShowLogInOutPanel()
     {
         if(isLogin)
@@ -70,6 +78,7 @@ public class SettingDirector : MonoBehaviour
             LoginPanel.SetActive(true);
         }
     }
+    //소리 조절
     public void SetBackgroundMusic(float value)
     {
         mixer.SetFloat("BGM", value);
@@ -79,5 +88,22 @@ public class SettingDirector : MonoBehaviour
     {
         mixer.SetFloat("SFX", value);
         PlayerPrefs.SetFloat("SoundFX", value);
+    }
+    //화면 크기 조절
+    public void SetResolution(bool isRight)
+    {
+        if(isRight)
+        {
+            resolutionIndex++;
+        }
+        else
+        {
+            resolutionIndex--;
+        }
+        resolutionIndex = Mathf.Clamp(resolutionIndex,0,resolution.Length-1);
+        string[] screenSize = resolution[resolutionIndex].Split('x');
+        resolutionText.text = resolution[resolutionIndex];
+        Screen.SetResolution(int.Parse(screenSize[0]),int.Parse(screenSize[1]),FullScreenMode.Windowed,0);
+        PlayerPrefs.SetInt("Resolution",resolutionIndex);
     }
 }

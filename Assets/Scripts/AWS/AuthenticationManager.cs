@@ -11,13 +11,13 @@ using System.Net;
 
 public class AuthenticationManager : MonoBehaviour
 {
-   // the AWS region of where your services live
+   // AWS 리전
    public static Amazon.RegionEndpoint Region = Amazon.RegionEndpoint.APNortheast2;
 
-   // In production, should probably keep these in a config file
-   const string IdentityPool = "ap-northeast-2:7fd7b2e5-c1da-4ad2-9ea5-5033c1d08ef4"; //insert your Cognito User Pool ID, found under General Settings
-   const string AppClientID = "1j1m3jfkr5j6rsis9bi76c595h"; //insert App client ID, found under App Client Settings
-   const string userPoolId = "ap-northeast-2_l9iAkgRJT";
+   // AWS Cognito의 정보 입력
+   const string IdentityPool = "ap-northeast-2:7fd7b2e5-c1da-4ad2-9ea5-5033c1d08ef4"; //자격 증명 풀
+   const string AppClientID = "1j1m3jfkr5j6rsis9bi76c595h"; //앱 클라이언트 ID
+   const string userPoolId = "ap-northeast-2_l9iAkgRJT"; // 사용자 풀
 
    private AmazonCognitoIdentityProviderClient _provider;
    private CognitoAWSCredentials _cognitoAWSCredentials;
@@ -25,14 +25,12 @@ public class AuthenticationManager : MonoBehaviour
    private CognitoUser _user;
 
    private void Awake() {
-      //Amazon.AWSConfigs.HttpClient = Amazon.AWSConfigs.HttpClientOption.UnityWebRequest;
       _provider = new AmazonCognitoIdentityProviderClient(new Amazon.Runtime.AnonymousAWSCredentials(), Region);
    }
 
+   //로그인
    public async Task<bool> Login(string email, string password)
    {
-      // Debug.Log("Login: " + email + ", " + password);
-
       CognitoUserPool userPool = new CognitoUserPool(userPoolId, AppClientID, _provider);
       CognitoUser user = new CognitoUser(email, AppClientID, userPool, _provider);
 
@@ -43,8 +41,9 @@ public class AuthenticationManager : MonoBehaviour
 
       try
       {
+         //로그인 시도
          AuthFlowResponse authFlowResponse = await user.StartWithSrpAuthAsync(authRequest).ConfigureAwait(false);
-
+         //유저 id, 이름 가져오기
          _userid = await GetAttributeFromProvider(authFlowResponse.AuthenticationResult.AccessToken, "sub");
          string _username = await GetAttributeFromProvider(authFlowResponse.AuthenticationResult.AccessToken, "preferred_username");
 
@@ -56,9 +55,6 @@ public class AuthenticationManager : MonoBehaviour
             _userid,
             _username);
 
-         // This how you get credentials to use for accessing other services.
-         // This IdentityPool is your Authorization, so if you tried to access using an
-         // IdentityPool that didn't have the policy to access your target AWS service, it would fail.
          _cognitoAWSCredentials = user.GetCognitoAWSCredentials(IdentityPool, Region);
          userSessionCache.SetCredentials(_cognitoAWSCredentials);
          userSessionCache.SetUser(user);
@@ -71,7 +67,7 @@ public class AuthenticationManager : MonoBehaviour
          return false;
       }
    }
-
+   //로그 아웃
    public async void SignOut()
    {
       UserSessionCache userSessionCache = UserSessionCache.Instance;
@@ -80,19 +76,17 @@ public class AuthenticationManager : MonoBehaviour
       userSessionCache.SetUser(null);
       Debug.Log("user logged out.");
    }
-
+   //회원가입
    public async Task<bool> Signup(string email, string password, string username)
    {
-      // Debug.Log("SignUpRequest: " + username + ", " + email + ", " + password);
-
+      //앱 클라이언트, 이메일, 비밀번호 입력
       SignUpRequest signUpRequest = new SignUpRequest()
       {
          ClientId = AppClientID,
          Username = email,
          Password = password
       };
-
-      // must provide all attributes required by the User Pool that you configured
+      //이메일, 유저 이름 속성 입력(필수속성)
       List<AttributeType> attributes = new List<AttributeType>()
       {
          new AttributeType(){
@@ -106,7 +100,7 @@ public class AuthenticationManager : MonoBehaviour
 
       try
       {
-         SignUpResponse signupResponse = await _provider.SignUpAsync(signUpRequest);
+         SignUpResponse signupResponse = await _provider.SignUpAsync(signUpRequest); //회원 가입 메소드
          Debug.Log("Sign up successful");
          return true;
       }
@@ -116,6 +110,7 @@ public class AuthenticationManager : MonoBehaviour
          return false;
       }
    }
+   //계정 속성 얻기
    private async Task<string> GetAttributeFromProvider(string accessToken, string attr)
    {
       string returnAttr = "";
@@ -128,7 +123,6 @@ public class AuthenticationManager : MonoBehaviour
 
       GetUserResponse responseObject = await responseTask;
 
-      // set the user id
       foreach (var attribute in responseObject.UserAttributes)
       {
          if (attribute.Name == attr)

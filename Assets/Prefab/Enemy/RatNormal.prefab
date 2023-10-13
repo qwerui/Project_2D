@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3660432646478907096, guid: 44e5fed52c5c5354b873e249122ef492, type: 3}
       propertyPath: m_TagString
-      value: NormalMonster
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5641912244436371799, guid: 44e5fed52c5c5354b873e249122ef492, type: 3}
       propertyPath: m_RootOrder
