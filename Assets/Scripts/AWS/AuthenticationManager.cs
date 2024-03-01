@@ -15,9 +15,9 @@ public class AuthenticationManager : MonoBehaviour
    public static Amazon.RegionEndpoint Region = Amazon.RegionEndpoint.APNortheast2;
 
    // AWS Cognito의 정보 입력
-   const string IdentityPool = "ap-northeast-2:7fd7b2e5-c1da-4ad2-9ea5-5033c1d08ef4"; //자격 증명 풀
-   const string AppClientID = "1j1m3jfkr5j6rsis9bi76c595h"; //앱 클라이언트 ID
-   const string userPoolId = "ap-northeast-2_l9iAkgRJT"; // 사용자 풀
+   const string IdentityPool = ""; //자격 증명 풀
+   const string AppClientID = ""; //앱 클라이언트 ID
+   const string userPoolId = ""; // 사용자 풀
 
    private AmazonCognitoIdentityProviderClient _provider;
    private CognitoAWSCredentials _cognitoAWSCredentials;
